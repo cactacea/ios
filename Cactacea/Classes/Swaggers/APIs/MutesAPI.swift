@@ -122,7 +122,7 @@ open class MutesAPI {
     }
 
     /**
-     Mute this account
+     Mute a account
      
      - parameter id: (path) Account Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -134,7 +134,7 @@ open class MutesAPI {
     }
 
     /**
-     Mute this account
+     Mute a account
      
      - parameter id: (path) Account Identifier. 
      - returns: Observable<Void>
@@ -154,7 +154,7 @@ open class MutesAPI {
     }
 
     /**
-     Mute this account
+     Mute a account
      - POST /accounts/{id}/mutes
      - API Key:
        - type: apiKey X-API-KEY 
@@ -182,7 +182,7 @@ open class MutesAPI {
     }
 
     /**
-     UnMute this account
+     UnMute a account
      
      - parameter id: (path) Account identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -194,7 +194,7 @@ open class MutesAPI {
     }
 
     /**
-     UnMute this account
+     UnMute a account
      
      - parameter id: (path) Account identifier. 
      - returns: Observable<Void>
@@ -214,7 +214,7 @@ open class MutesAPI {
     }
 
     /**
-     UnMute this account
+     UnMute a account
      - DELETE /accounts/{id}/mutes
      - API Key:
        - type: apiKey X-API-KEY 

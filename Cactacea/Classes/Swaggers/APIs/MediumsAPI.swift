@@ -13,7 +13,7 @@ import RxSwift
 
 open class MediumsAPI {
     /**
-     Delete this medium
+     Delete a medium
      
      - parameter id: (path) Medium identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -25,7 +25,7 @@ open class MediumsAPI {
     }
 
     /**
-     Delete this medium
+     Delete a medium
      
      - parameter id: (path) Medium identifier. 
      - returns: Observable<Void>
@@ -45,7 +45,7 @@ open class MediumsAPI {
     }
 
     /**
-     Delete this medium
+     Delete a medium
      - DELETE /mediums/{id}
      - API Key:
        - type: apiKey X-API-KEY 

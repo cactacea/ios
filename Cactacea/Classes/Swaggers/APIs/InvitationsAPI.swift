@@ -73,7 +73,7 @@ open class InvitationsAPI {
     }
 
     /**
-     Create a invitation to this account
+     Create a invitation to a account
      
      - parameter accountId: (path) Account Identifier. 
      - parameter groupId: (path) Group Identifier. 
@@ -86,7 +86,7 @@ open class InvitationsAPI {
     }
 
     /**
-     Create a invitation to this account
+     Create a invitation to a account
      
      - parameter accountId: (path) Account Identifier. 
      - parameter groupId: (path) Group Identifier. 
@@ -107,7 +107,7 @@ open class InvitationsAPI {
     }
 
     /**
-     Create a invitation to this account
+     Create a invitation to a account
      - POST /accounts/{account_id}/groups/{group_id}/invitations
      - API Key:
        - type: apiKey X-API-KEY 

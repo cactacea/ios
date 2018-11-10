@@ -27,7 +27,7 @@ open class PutGroupBody: Codable {
     public var byInvitationOnly: Bool?
     /** Which accounts can join in. */
     public var privacyType: PrivacyType?
-    /** Which accounts can manage this group. */
+    /** Which accounts can manage a group. */
     public var authorityType: AuthorityType?
 
 

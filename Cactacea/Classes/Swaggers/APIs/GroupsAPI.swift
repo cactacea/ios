@@ -75,7 +75,7 @@ open class GroupsAPI {
     }
 
     /**
-     Hide this group and delete all messages
+     Hide a group and delete all messages
      
      - parameter id: (path) Group identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -87,7 +87,7 @@ open class GroupsAPI {
     }
 
     /**
-     Hide this group and delete all messages
+     Hide a group and delete all messages
      
      - parameter id: (path) Group identifier. 
      - returns: Observable<Void>
@@ -107,7 +107,7 @@ open class GroupsAPI {
     }
 
     /**
-     Hide this group and delete all messages
+     Hide a group and delete all messages
      - DELETE /groups/{id}
      - API Key:
        - type: apiKey X-API-KEY 
@@ -135,7 +135,7 @@ open class GroupsAPI {
     }
 
     /**
-     Get a direct message group to this account
+     Get a direct message group to a account
      
      - parameter id: (path) Account identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -147,7 +147,7 @@ open class GroupsAPI {
     }
 
     /**
-     Get a direct message group to this account
+     Get a direct message group to a account
      
      - parameter id: (path) Account identifier. 
      - returns: Observable<Group>
@@ -167,7 +167,7 @@ open class GroupsAPI {
     }
 
     /**
-     Get a direct message group to this account
+     Get a direct message group to a account
      - GET /accounts/{id}/group
      - API Key:
        - type: apiKey X-API-KEY 
@@ -267,7 +267,7 @@ open class GroupsAPI {
     }
 
     /**
-     Get groups list this account joined
+     Get groups list a account joined
      
      - parameter id: (path) Account identifier. 
      - parameter since: (query) Filters groups which started on since or later. (optional)
@@ -282,7 +282,7 @@ open class GroupsAPI {
     }
 
     /**
-     Get groups list this account joined
+     Get groups list a account joined
      
      - parameter id: (path) Account identifier. 
      - parameter since: (query) Filters groups which started on since or later. (optional)
@@ -305,7 +305,7 @@ open class GroupsAPI {
     }
 
     /**
-     Get groups list this account joined
+     Get groups list a account joined
      - GET /accounts/{id}/groups
      - API Key:
        - type: apiKey X-API-KEY 
@@ -484,7 +484,7 @@ open class GroupsAPI {
     }
 
     /**
-     Get basic information about this group
+     Get basic information about a group
      
      - parameter id: (path) Group identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -496,7 +496,7 @@ open class GroupsAPI {
     }
 
     /**
-     Get basic information about this group
+     Get basic information about a group
      
      - parameter id: (path) Group identifier. 
      - returns: Observable<Group>
@@ -516,7 +516,7 @@ open class GroupsAPI {
     }
 
     /**
-     Get basic information about this group
+     Get basic information about a group
      - GET /groups/{id}
      - API Key:
        - type: apiKey X-API-KEY 
@@ -616,10 +616,10 @@ open class GroupsAPI {
     }
 
     /**
-     Get accounts list of this group
+     Get accounts list of a group
      
      - parameter id: (path) Group identifier. 
-     - parameter since: (query)  (optional)
+     - parameter since: (query) Filters accounts which started on since or later. (optional)
      - parameter offset: (query) The offset of accounts. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of accounts returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -631,10 +631,10 @@ open class GroupsAPI {
     }
 
     /**
-     Get accounts list of this group
+     Get accounts list of a group
      
      - parameter id: (path) Group identifier. 
-     - parameter since: (query)  (optional)
+     - parameter since: (query) Filters accounts which started on since or later. (optional)
      - parameter offset: (query) The offset of accounts. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of accounts returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: Observable<[Group]>
@@ -654,7 +654,7 @@ open class GroupsAPI {
     }
 
     /**
-     Get accounts list of this group
+     Get accounts list of a group
      - GET /groups/{id}/accounts
      - API Key:
        - type: apiKey X-API-KEY 
@@ -807,7 +807,7 @@ open class GroupsAPI {
 } ]}]
      
      - parameter id: (path) Group identifier. 
-     - parameter since: (query)  (optional)
+     - parameter since: (query) Filters accounts which started on since or later. (optional)
      - parameter offset: (query) The offset of accounts. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of accounts returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
 
@@ -1494,7 +1494,7 @@ open class GroupsAPI {
     }
 
     /**
-     Hide this group
+     Hide a group
      
      - parameter id: (path) Group identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -1506,7 +1506,7 @@ open class GroupsAPI {
     }
 
     /**
-     Hide this group
+     Hide a group
      
      - parameter id: (path) Group identifier. 
      - returns: Observable<Void>
@@ -1526,7 +1526,7 @@ open class GroupsAPI {
     }
 
     /**
-     Hide this group
+     Hide a group
      - POST /groups/{id}/hides
      - API Key:
        - type: apiKey X-API-KEY 
@@ -1554,7 +1554,7 @@ open class GroupsAPI {
     }
 
     /**
-     Join this account in this group
+     Join a account in a group
      
      - parameter accountId: (path) Account Identifier. 
      - parameter groupId: (path) Group Identifier. 
@@ -1567,7 +1567,7 @@ open class GroupsAPI {
     }
 
     /**
-     Join this account in this group
+     Join a account in a group
      
      - parameter accountId: (path) Account Identifier. 
      - parameter groupId: (path) Group Identifier. 
@@ -1588,7 +1588,7 @@ open class GroupsAPI {
     }
 
     /**
-     Join this account in this group
+     Join a account in a group
      - POST /accounts/{account_id}/groups/{group_id}/join
      - API Key:
        - type: apiKey X-API-KEY 
@@ -1618,7 +1618,7 @@ open class GroupsAPI {
     }
 
     /**
-     Join to this group,
+     Join to a group,
      
      - parameter id: (path) Group identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -1630,7 +1630,7 @@ open class GroupsAPI {
     }
 
     /**
-     Join to this group,
+     Join to a group,
      
      - parameter id: (path) Group identifier. 
      - returns: Observable<Void>
@@ -1650,7 +1650,7 @@ open class GroupsAPI {
     }
 
     /**
-     Join to this group,
+     Join to a group,
      - POST /groups/{id}/join
      - API Key:
        - type: apiKey X-API-KEY 
@@ -1678,7 +1678,7 @@ open class GroupsAPI {
     }
 
     /**
-     Leave this account from this group
+     Leave a account from a group
      
      - parameter accountId: (path) Account Identifier. 
      - parameter groupId: (path) Group Identifier. 
@@ -1691,7 +1691,7 @@ open class GroupsAPI {
     }
 
     /**
-     Leave this account from this group
+     Leave a account from a group
      
      - parameter accountId: (path) Account Identifier. 
      - parameter groupId: (path) Group Identifier. 
@@ -1712,7 +1712,7 @@ open class GroupsAPI {
     }
 
     /**
-     Leave this account from this group
+     Leave a account from a group
      - POST /accounts/{account_id}/groups/{group_id}/leave
      - API Key:
        - type: apiKey X-API-KEY 
@@ -1742,7 +1742,7 @@ open class GroupsAPI {
     }
 
     /**
-     Leave from this group
+     Leave from a group
      
      - parameter id: (path) Group invitation identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -1754,7 +1754,7 @@ open class GroupsAPI {
     }
 
     /**
-     Leave from this group
+     Leave from a group
      
      - parameter id: (path) Group invitation identifier. 
      - returns: Observable<Void>
@@ -1774,7 +1774,7 @@ open class GroupsAPI {
     }
 
     /**
-     Leave from this group
+     Leave from a group
      - POST /groups/{id}/leave
      - API Key:
        - type: apiKey X-API-KEY 
@@ -1802,7 +1802,7 @@ open class GroupsAPI {
     }
 
     /**
-     Report this group
+     Report a group
      
      - parameter id: (path) Group identifier. 
      - parameter body: (body)  
@@ -1815,7 +1815,7 @@ open class GroupsAPI {
     }
 
     /**
-     Report this group
+     Report a group
      
      - parameter id: (path) Group identifier. 
      - parameter body: (body)  
@@ -1836,7 +1836,7 @@ open class GroupsAPI {
     }
 
     /**
-     Report this group
+     Report a group
      - POST /groups/{id}/reports
      - API Key:
        - type: apiKey X-API-KEY 
@@ -1865,7 +1865,7 @@ open class GroupsAPI {
     }
 
     /**
-     Show this group
+     Show a group
      
      - parameter id: (path) Group identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -1877,7 +1877,7 @@ open class GroupsAPI {
     }
 
     /**
-     Show this group
+     Show a group
      
      - parameter id: (path) Group identifier. 
      - returns: Observable<Void>
@@ -1897,7 +1897,7 @@ open class GroupsAPI {
     }
 
     /**
-     Show this group
+     Show a group
      - DELETE /groups/{id}/hides
      - API Key:
        - type: apiKey X-API-KEY 
@@ -1925,7 +1925,7 @@ open class GroupsAPI {
     }
 
     /**
-     Update this group
+     Update a group
      
      - parameter id: (path) Group identifier. 
      - parameter body: (body)  
@@ -1938,7 +1938,7 @@ open class GroupsAPI {
     }
 
     /**
-     Update this group
+     Update a group
      
      - parameter id: (path) Group identifier. 
      - parameter body: (body)  
@@ -1959,7 +1959,7 @@ open class GroupsAPI {
     }
 
     /**
-     Update this group
+     Update a group
      - PUT /groups/{id}
      - API Key:
        - type: apiKey X-API-KEY 

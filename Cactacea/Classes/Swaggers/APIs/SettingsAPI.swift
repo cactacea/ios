@@ -13,7 +13,7 @@ import RxSwift
 
 open class SettingsAPI {
     /**
-     Get this push notification settings
+     Get push notification settings
      
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -24,7 +24,7 @@ open class SettingsAPI {
     }
 
     /**
-     Get this push notification settings
+     Get push notification settings
      
      - returns: Observable<PushNotificationSetting>
      */
@@ -43,7 +43,7 @@ open class SettingsAPI {
     }
 
     /**
-     Get this push notification settings
+     Get push notification settings
      - GET /session/push_notification
      - API Key:
        - type: apiKey X-API-KEY 

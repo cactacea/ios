@@ -13,7 +13,7 @@ import RxSwift
 
 open class FeedsAPI {
     /**
-     Delete this feed
+     Delete a feed
      
      - parameter id: (path) Feed identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -25,7 +25,7 @@ open class FeedsAPI {
     }
 
     /**
-     Delete this feed
+     Delete a feed
      
      - parameter id: (path) Feed identifier. 
      - returns: Observable<Void>
@@ -45,7 +45,7 @@ open class FeedsAPI {
     }
 
     /**
-     Delete this feed
+     Delete a feed
      - DELETE /feeds/{id}
      - API Key:
        - type: apiKey X-API-KEY 
@@ -73,7 +73,7 @@ open class FeedsAPI {
     }
 
     /**
-     Get feeds list this account posted
+     Get feeds list a account posted
      
      - parameter id: (path) Account Identifier. 
      - parameter since: (query) Filters feeds which started on since or later. (optional)
@@ -88,7 +88,7 @@ open class FeedsAPI {
     }
 
     /**
-     Get feeds list this account posted
+     Get feeds list a account posted
      
      - parameter id: (path) Account Identifier. 
      - parameter since: (query) Filters feeds which started on since or later. (optional)
@@ -111,7 +111,7 @@ open class FeedsAPI {
     }
 
     /**
-     Get feeds list this account posted
+     Get feeds list a account posted
      - GET /accounts/{id}/feeds
      - API Key:
        - type: apiKey X-API-KEY 
@@ -376,7 +376,7 @@ open class FeedsAPI {
     }
 
     /**
-     Get basic information about this feed
+     Get basic information about a feed
      
      - parameter id: (path) Feed identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -388,7 +388,7 @@ open class FeedsAPI {
     }
 
     /**
-     Get basic information about this feed
+     Get basic information about a feed
      
      - parameter id: (path) Feed identifier. 
      - returns: Observable<Feed>
@@ -408,7 +408,7 @@ open class FeedsAPI {
     }
 
     /**
-     Get basic information about this feed
+     Get basic information about a feed
      - GET /feeds/{id}
      - API Key:
        - type: apiKey X-API-KEY 
@@ -726,7 +726,7 @@ open class FeedsAPI {
     }
 
     /**
-     Report this feed
+     Report a feed
      
      - parameter id: (path) Feed identifier. 
      - parameter body: (body)  
@@ -739,7 +739,7 @@ open class FeedsAPI {
     }
 
     /**
-     Report this feed
+     Report a feed
      
      - parameter id: (path) Feed identifier. 
      - parameter body: (body)  
@@ -760,7 +760,7 @@ open class FeedsAPI {
     }
 
     /**
-     Report this feed
+     Report a feed
      - POST /feeds/{id}/reports
      - API Key:
        - type: apiKey X-API-KEY 
@@ -789,7 +789,7 @@ open class FeedsAPI {
     }
 
     /**
-     Update this feed
+     Update a feed
      
      - parameter id: (path) Feed identifier. 
      - parameter body: (body)  
@@ -802,7 +802,7 @@ open class FeedsAPI {
     }
 
     /**
-     Update this feed
+     Update a feed
      
      - parameter id: (path) Feed identifier. 
      - parameter body: (body)  
@@ -823,7 +823,7 @@ open class FeedsAPI {
     }
 
     /**
-     Update this feed
+     Update a feed
      - PUT /feeds/{id}
      - API Key:
        - type: apiKey X-API-KEY 

@@ -73,7 +73,7 @@ open class RequestsAPI {
     }
 
     /**
-     Create a friend request to this account
+     Create a friend request to a account
      
      - parameter id: (path) Account Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -85,7 +85,7 @@ open class RequestsAPI {
     }
 
     /**
-     Create a friend request to this account
+     Create a friend request to a account
      
      - parameter id: (path) Account Identifier. 
      - returns: Observable<FriendRequestCreated>
@@ -105,7 +105,7 @@ open class RequestsAPI {
     }
 
     /**
-     Create a friend request to this account
+     Create a friend request to a account
      - POST /accounts/{id}/requests
      - API Key:
        - type: apiKey X-API-KEY 
@@ -136,7 +136,7 @@ open class RequestsAPI {
     }
 
     /**
-     Remove a friend request to this account
+     Remove a friend request to a account
      
      - parameter id: (path) Account identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -148,7 +148,7 @@ open class RequestsAPI {
     }
 
     /**
-     Remove a friend request to this account
+     Remove a friend request to a account
      
      - parameter id: (path) Account identifier. 
      - returns: Observable<Void>
@@ -168,7 +168,7 @@ open class RequestsAPI {
     }
 
     /**
-     Remove a friend request to this account
+     Remove a friend request to a account
      - DELETE /accounts/{id}/requests
      - API Key:
        - type: apiKey X-API-KEY 
@@ -199,7 +199,7 @@ open class RequestsAPI {
      Get friend requests list session account created or received
      
      - parameter received: (query) Filters friend requests which you have received or sent. 
-     - parameter since: (query)  (optional)
+     - parameter since: (query) Filters friend requests which started on since or later. (optional)
      - parameter offset: (query) The offset of friend request. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of friend request returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
@@ -214,7 +214,7 @@ open class RequestsAPI {
      Get friend requests list session account created or received
      
      - parameter received: (query) Filters friend requests which you have received or sent. 
-     - parameter since: (query)  (optional)
+     - parameter since: (query) Filters friend requests which started on since or later. (optional)
      - parameter offset: (query) The offset of friend request. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of friend request returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: Observable<[FriendRequest]>
@@ -295,7 +295,7 @@ open class RequestsAPI {
 } ]}]
      
      - parameter received: (query) Filters friend requests which you have received or sent. 
-     - parameter since: (query)  (optional)
+     - parameter since: (query) Filters friend requests which started on since or later. (optional)
      - parameter offset: (query) The offset of friend request. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of friend request returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
 

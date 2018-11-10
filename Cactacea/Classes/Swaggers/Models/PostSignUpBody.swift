@@ -12,7 +12,7 @@ import Foundation
 open class PostSignUpBody: Codable {
 
     /** Account name. */
-    public var name: String?
+    public var accountName: String?
     /** Display name. */
     public var displayName: String?
     /** Account password. */
@@ -30,8 +30,8 @@ open class PostSignUpBody: Codable {
 
 
     
-    public init(name: String?, displayName: String?, password: String?, udid: String?, web: String?, birthday: Int64?, location: String?, bio: String?) {
-        self.name = name
+    public init(accountName: String?, displayName: String?, password: String?, udid: String?, web: String?, birthday: Int64?, location: String?, bio: String?) {
+        self.accountName = accountName
         self.displayName = displayName
         self.password = password
         self.udid = udid
@@ -48,7 +48,7 @@ open class PostSignUpBody: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(name, forKey: "name")
+        try container.encodeIfPresent(accountName, forKey: "account_name")
         try container.encodeIfPresent(displayName, forKey: "display_name")
         try container.encodeIfPresent(password, forKey: "password")
         try container.encodeIfPresent(udid, forKey: "udid")
@@ -63,7 +63,7 @@ open class PostSignUpBody: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        name = try container.decodeIfPresent(String.self, forKey: "name")
+        accountName = try container.decodeIfPresent(String.self, forKey: "account_name")
         displayName = try container.decodeIfPresent(String.self, forKey: "display_name")
         password = try container.decodeIfPresent(String.self, forKey: "password")
         udid = try container.decodeIfPresent(String.self, forKey: "udid")

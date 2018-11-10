@@ -77,7 +77,7 @@ open class AccountsAPI {
     }
 
     /**
-     Get information about this account
+     Get information about a account
      
      - parameter id: (path) Account identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -89,7 +89,7 @@ open class AccountsAPI {
     }
 
     /**
-     Get information about this account
+     Get information about a account
      
      - parameter id: (path) Account identifier. 
      - returns: Observable<Account>
@@ -109,7 +109,7 @@ open class AccountsAPI {
     }
 
     /**
-     Get information about this account
+     Get information about a account
      - GET /accounts/{id}
      - API Key:
        - type: apiKey X-API-KEY 
@@ -334,7 +334,7 @@ open class AccountsAPI {
     }
 
     /**
-     Report this account
+     Report a account
      
      - parameter id: (path) Account Identifier. 
      - parameter body: (body)  
@@ -347,7 +347,7 @@ open class AccountsAPI {
     }
 
     /**
-     Report this account
+     Report a account
      
      - parameter id: (path) Account Identifier. 
      - parameter body: (body)  
@@ -368,7 +368,7 @@ open class AccountsAPI {
     }
 
     /**
-     Report this account
+     Report a account
      - POST /accounts/{id}/reports
      - API Key:
        - type: apiKey X-API-KEY 

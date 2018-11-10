@@ -13,7 +13,7 @@ import RxSwift
 
 open class FollowsAPI {
     /**
-     Get accounts list this account is followed by
+     Get accounts list a account is followed by
      
      - parameter id: (path) Account Identifier. 
      - parameter since: (query) Filters followers which started on since or later. (optional)
@@ -28,7 +28,7 @@ open class FollowsAPI {
     }
 
     /**
-     Get accounts list this account is followed by
+     Get accounts list a account is followed by
      
      - parameter id: (path) Account Identifier. 
      - parameter since: (query) Filters followers which started on since or later. (optional)
@@ -51,7 +51,7 @@ open class FollowsAPI {
     }
 
     /**
-     Get accounts list this account is followed by
+     Get accounts list a account is followed by
      - GET /accounts/{id}/followers
      - API Key:
        - type: apiKey X-API-KEY 
@@ -126,7 +126,7 @@ open class FollowsAPI {
     }
 
     /**
-     Get accounts list this user followed
+     Get accounts list a account followed
      
      - parameter id: (path) Account Identifier. 
      - parameter since: (query) Filters follower which started on since or later. (optional)
@@ -141,7 +141,7 @@ open class FollowsAPI {
     }
 
     /**
-     Get accounts list this user followed
+     Get accounts list a account followed
      
      - parameter id: (path) Account Identifier. 
      - parameter since: (query) Filters follower which started on since or later. (optional)
@@ -164,7 +164,7 @@ open class FollowsAPI {
     }
 
     /**
-     Get accounts list this user followed
+     Get accounts list a account followed
      - GET /accounts/{id}/follows
      - API Key:
        - type: apiKey X-API-KEY 
@@ -239,7 +239,7 @@ open class FollowsAPI {
     }
 
     /**
-     Follow this account
+     Follow a account
      
      - parameter id: (path) Account Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -251,7 +251,7 @@ open class FollowsAPI {
     }
 
     /**
-     Follow this account
+     Follow a account
      
      - parameter id: (path) Account Identifier. 
      - returns: Observable<Void>
@@ -271,7 +271,7 @@ open class FollowsAPI {
     }
 
     /**
-     Follow this account
+     Follow a account
      - POST /accounts/{id}/follows
      - API Key:
        - type: apiKey X-API-KEY 
@@ -299,7 +299,7 @@ open class FollowsAPI {
     }
 
     /**
-     UnFollow this account
+     UnFollow a account
      
      - parameter id: (path) Account Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -311,7 +311,7 @@ open class FollowsAPI {
     }
 
     /**
-     UnFollow this account
+     UnFollow a account
      
      - parameter id: (path) Account Identifier. 
      - returns: Observable<Void>
@@ -331,7 +331,7 @@ open class FollowsAPI {
     }
 
     /**
-     UnFollow this account
+     UnFollow a account
      - DELETE /accounts/{id}/follows
      - API Key:
        - type: apiKey X-API-KEY 

@@ -13,7 +13,7 @@ import RxSwift
 
 open class FriendsAPI {
     /**
-     Remove friendship to this account
+     Remove friendship to a account
      
      - parameter id: (path) Account identifier. 
      - parameter completion: completion handler to receive the data and the error objects
@@ -25,7 +25,7 @@ open class FriendsAPI {
     }
 
     /**
-     Remove friendship to this account
+     Remove friendship to a account
      
      - parameter id: (path) Account identifier. 
      - returns: Observable<Void>
@@ -45,7 +45,7 @@ open class FriendsAPI {
     }
 
     /**
-     Remove friendship to this account
+     Remove friendship to a account
      - DELETE /accounts/{id}/friends
      - API Key:
        - type: apiKey X-API-KEY 
@@ -73,7 +73,7 @@ open class FriendsAPI {
     }
 
     /**
-     Get this account's friends list
+     Get a account's friends list
      
      - parameter id: (path) Account Identifier. 
      - parameter since: (query) Filters friends which started on since or later. (optional)
@@ -88,7 +88,7 @@ open class FriendsAPI {
     }
 
     /**
-     Get this account's friends list
+     Get a account's friends list
      
      - parameter id: (path) Account Identifier. 
      - parameter since: (query) Filters friends which started on since or later. (optional)
@@ -111,7 +111,7 @@ open class FriendsAPI {
     }
 
     /**
-     Get this account's friends list
+     Get a account's friends list
      - GET /accounts/{id}/friends
      - API Key:
        - type: apiKey X-API-KEY 
