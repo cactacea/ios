@@ -21,7 +21,7 @@ pod 'Cactacea'
 
 ## Author
 
-expensivegasprices@gmail.com, expensivegasprices@gmail.com
+expensivegasprices@gmail.com
 
 ## License
 
