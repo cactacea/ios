@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = '9.0'
   s.version = '18.11.0'
   s.source = { :git => 'https://github.com/cactacea/ios.git', :tag => '18.11.0' }
-  s.authors = 'Takeshi Shimada'
+  s.author = { 'Takeshi Shimada' => 'expensivegasprices@gmail.com' }
   s.license = { :type => 'MIT', :file => 'LICENSE.txt' }
   s.homepage = 'https://github.com/cactacea/ios'
   s.summary = 'An iOS library to interface with Cactacea backend API'
