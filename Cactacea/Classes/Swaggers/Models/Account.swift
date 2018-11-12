@@ -22,6 +22,7 @@ open class Account: Codable {
     public var followCount: Int64?
     public var followerCount: Int64?
     public var friendCount: Int64?
+    public var feedsCount: Int64?
     public var mute: Bool
     public var web: String?
     public var birthday: Int64?
@@ -32,7 +33,7 @@ open class Account: Codable {
 
 
     
-    public init(id: Int64, accountName: String, displayName: String?, profileImageUrl: String?, friend: Bool, friendRequestInProgress: Bool, follow: Bool, follower: Bool, followCount: Int64?, followerCount: Int64?, friendCount: Int64?, mute: Bool, web: String?, birthday: Int64?, location: String?, bio: String?, joinedAt: Int64?, next: Int64) {
+    public init(id: Int64, accountName: String, displayName: String?, profileImageUrl: String?, friend: Bool, friendRequestInProgress: Bool, follow: Bool, follower: Bool, followCount: Int64?, followerCount: Int64?, friendCount: Int64?, feedsCount: Int64?, mute: Bool, web: String?, birthday: Int64?, location: String?, bio: String?, joinedAt: Int64?, next: Int64) {
         self.id = id
         self.accountName = accountName
         self.displayName = displayName
@@ -44,6 +45,7 @@ open class Account: Codable {
         self.followCount = followCount
         self.followerCount = followerCount
         self.friendCount = friendCount
+        self.feedsCount = feedsCount
         self.mute = mute
         self.web = web
         self.birthday = birthday
@@ -71,6 +73,7 @@ open class Account: Codable {
         try container.encodeIfPresent(followCount, forKey: "followCount")
         try container.encodeIfPresent(followerCount, forKey: "followerCount")
         try container.encodeIfPresent(friendCount, forKey: "friendCount")
+        try container.encodeIfPresent(feedsCount, forKey: "feedsCount")
         try container.encode(mute, forKey: "mute")
         try container.encodeIfPresent(web, forKey: "web")
         try container.encodeIfPresent(birthday, forKey: "birthday")
@@ -96,6 +99,7 @@ open class Account: Codable {
         followCount = try container.decodeIfPresent(Int64.self, forKey: "followCount")
         followerCount = try container.decodeIfPresent(Int64.self, forKey: "followerCount")
         friendCount = try container.decodeIfPresent(Int64.self, forKey: "friendCount")
+        feedsCount = try container.decodeIfPresent(Int64.self, forKey: "feedsCount")
         mute = try container.decode(Bool.self, forKey: "mute")
         web = try container.decodeIfPresent(String.self, forKey: "web")
         birthday = try container.decodeIfPresent(Int64.self, forKey: "birthday")
