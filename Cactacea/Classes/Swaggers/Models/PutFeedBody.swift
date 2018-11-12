@@ -18,21 +18,21 @@ open class PutFeedBody: Codable {
         case _self = "self"
     }
     /** A feed message will be posted. */
-    public var message: String?
+    public var message: String
     /** Medium identifiers of attached. */
     public var mediumIds: [Int64]?
     /** Tags of feed. */
     public var tags: [String]?
     /** Group privacy type. */
-    public var privacyType: PrivacyType?
+    public var privacyType: PrivacyType
     /** Content warning. */
-    public var contentWarning: Bool?
+    public var contentWarning: Bool
     /** Expiration of a feed. */
     public var expiration: Int64?
 
 
     
-    public init(message: String?, mediumIds: [Int64]?, tags: [String]?, privacyType: PrivacyType?, contentWarning: Bool?, expiration: Int64?) {
+    public init(message: String, mediumIds: [Int64]?, tags: [String]?, privacyType: PrivacyType, contentWarning: Bool, expiration: Int64?) {
         self.message = message
         self.mediumIds = mediumIds
         self.tags = tags
@@ -48,11 +48,11 @@ open class PutFeedBody: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(message, forKey: "message")
+        try container.encode(message, forKey: "message")
         try container.encodeIfPresent(mediumIds, forKey: "medium_ids")
         try container.encodeIfPresent(tags, forKey: "tags")
-        try container.encodeIfPresent(privacyType, forKey: "privacy_type")
-        try container.encodeIfPresent(contentWarning, forKey: "content_warning")
+        try container.encode(privacyType, forKey: "privacy_type")
+        try container.encode(contentWarning, forKey: "content_warning")
         try container.encodeIfPresent(expiration, forKey: "expiration")
     }
 
@@ -61,11 +61,11 @@ open class PutFeedBody: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        message = try container.decodeIfPresent(String.self, forKey: "message")
+        message = try container.decode(String.self, forKey: "message")
         mediumIds = try container.decodeIfPresent([Int64].self, forKey: "medium_ids")
         tags = try container.decodeIfPresent([String].self, forKey: "tags")
-        privacyType = try container.decodeIfPresent(PrivacyType.self, forKey: "privacy_type")
-        contentWarning = try container.decodeIfPresent(Bool.self, forKey: "content_warning")
+        privacyType = try container.decode(PrivacyType.self, forKey: "privacy_type")
+        contentWarning = try container.decode(Bool.self, forKey: "content_warning")
         expiration = try container.decodeIfPresent(Int64.self, forKey: "expiration")
     }
 }

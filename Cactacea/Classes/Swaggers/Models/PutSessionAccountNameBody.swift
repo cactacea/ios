@@ -12,11 +12,11 @@ import Foundation
 open class PutSessionAccountNameBody: Codable {
 
     /** Account name. */
-    public var name: String?
+    public var name: String
 
 
     
-    public init(name: String?) {
+    public init(name: String) {
         self.name = name
     }
     
@@ -27,7 +27,7 @@ open class PutSessionAccountNameBody: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(name, forKey: "name")
+        try container.encode(name, forKey: "name")
     }
 
     // Decodable protocol methods
@@ -35,7 +35,7 @@ open class PutSessionAccountNameBody: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        name = try container.decodeIfPresent(String.self, forKey: "name")
+        name = try container.decode(String.self, forKey: "name")
     }
 }
 

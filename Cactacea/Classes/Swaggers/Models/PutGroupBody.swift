@@ -22,17 +22,17 @@ open class PutGroupBody: Codable {
         case member = "member"
     }
     /** Group name. */
-    public var name: String?
+    public var name: String
     /** Only invited accounts can join in. */
-    public var byInvitationOnly: Bool?
+    public var byInvitationOnly: Bool
     /** Which accounts can join in. */
-    public var privacyType: PrivacyType?
+    public var privacyType: PrivacyType
     /** Which accounts can manage a group. */
-    public var authorityType: AuthorityType?
+    public var authorityType: AuthorityType
 
 
     
-    public init(name: String?, byInvitationOnly: Bool?, privacyType: PrivacyType?, authorityType: AuthorityType?) {
+    public init(name: String, byInvitationOnly: Bool, privacyType: PrivacyType, authorityType: AuthorityType) {
         self.name = name
         self.byInvitationOnly = byInvitationOnly
         self.privacyType = privacyType
@@ -46,10 +46,10 @@ open class PutGroupBody: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(name, forKey: "name")
-        try container.encodeIfPresent(byInvitationOnly, forKey: "by_invitation_only")
-        try container.encodeIfPresent(privacyType, forKey: "privacy_type")
-        try container.encodeIfPresent(authorityType, forKey: "authority_type")
+        try container.encode(name, forKey: "name")
+        try container.encode(byInvitationOnly, forKey: "by_invitation_only")
+        try container.encode(privacyType, forKey: "privacy_type")
+        try container.encode(authorityType, forKey: "authority_type")
     }
 
     // Decodable protocol methods
@@ -57,10 +57,10 @@ open class PutGroupBody: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        name = try container.decodeIfPresent(String.self, forKey: "name")
-        byInvitationOnly = try container.decodeIfPresent(Bool.self, forKey: "by_invitation_only")
-        privacyType = try container.decodeIfPresent(PrivacyType.self, forKey: "privacy_type")
-        authorityType = try container.decodeIfPresent(AuthorityType.self, forKey: "authority_type")
+        name = try container.decode(String.self, forKey: "name")
+        byInvitationOnly = try container.decode(Bool.self, forKey: "by_invitation_only")
+        privacyType = try container.decode(PrivacyType.self, forKey: "privacy_type")
+        authorityType = try container.decode(AuthorityType.self, forKey: "authority_type")
     }
 }
 

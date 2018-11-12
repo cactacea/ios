@@ -12,11 +12,11 @@ import Foundation
 open class DeleteMessagesBody: Codable {
 
     /** Group identifier. */
-    public var id: Int64?
+    public var id: Int64
 
 
     
-    public init(id: Int64?) {
+    public init(id: Int64) {
         self.id = id
     }
     
@@ -27,7 +27,7 @@ open class DeleteMessagesBody: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(id, forKey: "id")
+        try container.encode(id, forKey: "id")
     }
 
     // Decodable protocol methods
@@ -35,7 +35,7 @@ open class DeleteMessagesBody: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        id = try container.decodeIfPresent(Int64.self, forKey: "id")
+        id = try container.decode(Int64.self, forKey: "id")
     }
 }
 

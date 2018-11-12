@@ -861,7 +861,7 @@ open class GroupsAPI {
      - parameter invitationOnly: (query) Filters groups that invited accounts can join in. (optional)
      - parameter privacyType: (query) Filters groups which can join in. (optional)
      - parameter since: (query) Filters groups which started on since or later. (optional)
-     - parameter offset: (query)  (optional)
+     - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of groups returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -878,7 +878,7 @@ open class GroupsAPI {
      - parameter invitationOnly: (query) Filters groups that invited accounts can join in. (optional)
      - parameter privacyType: (query) Filters groups which can join in. (optional)
      - parameter since: (query) Filters groups which started on since or later. (optional)
-     - parameter offset: (query)  (optional)
+     - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of groups returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: Observable<[Group]>
      */
@@ -1057,7 +1057,7 @@ open class GroupsAPI {
      - parameter invitationOnly: (query) Filters groups that invited accounts can join in. (optional)
      - parameter privacyType: (query) Filters groups which can join in. (optional)
      - parameter since: (query) Filters groups which started on since or later. (optional)
-     - parameter offset: (query)  (optional)
+     - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of groups returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
 
      - returns: RequestBuilder<[Group]> 

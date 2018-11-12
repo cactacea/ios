@@ -12,13 +12,13 @@ import Foundation
 open class PutSessionPasswordBody: Codable {
 
     /** Account old password. */
-    public var oldPassword: String?
+    public var oldPassword: String
     /** Account new password. */
-    public var newPassword: String?
+    public var newPassword: String
 
 
     
-    public init(oldPassword: String?, newPassword: String?) {
+    public init(oldPassword: String, newPassword: String) {
         self.oldPassword = oldPassword
         self.newPassword = newPassword
     }
@@ -30,8 +30,8 @@ open class PutSessionPasswordBody: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(oldPassword, forKey: "old_password")
-        try container.encodeIfPresent(newPassword, forKey: "new_password")
+        try container.encode(oldPassword, forKey: "old_password")
+        try container.encode(newPassword, forKey: "new_password")
     }
 
     // Decodable protocol methods
@@ -39,8 +39,8 @@ open class PutSessionPasswordBody: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        oldPassword = try container.decodeIfPresent(String.self, forKey: "old_password")
-        newPassword = try container.decodeIfPresent(String.self, forKey: "new_password")
+        oldPassword = try container.decode(String.self, forKey: "old_password")
+        newPassword = try container.decode(String.self, forKey: "new_password")
     }
 }
 

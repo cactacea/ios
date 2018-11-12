@@ -16,7 +16,9 @@ open class PostAccountReportBody: Codable {
         case spam = "spam"
         case inappropriate = "inappropriate"
     }
+    /** Report type. */
     public var reportType: ReportType
+    /** Description about this report. */
     public var reportContent: String?
 
 

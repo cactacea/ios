@@ -16,12 +16,14 @@ open class PostGroupReportBody: Codable {
         case spam = "spam"
         case inappropriate = "inappropriate"
     }
+    /** Report type. */
     public var reportType: ReportType
-    public var reportContent: String?
+    /** Description about this report. */
+    public var reportContent: String
 
 
     
-    public init(reportType: ReportType, reportContent: String?) {
+    public init(reportType: ReportType, reportContent: String) {
         self.reportType = reportType
         self.reportContent = reportContent
     }
@@ -34,7 +36,7 @@ open class PostGroupReportBody: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encode(reportType, forKey: "report_type")
-        try container.encodeIfPresent(reportContent, forKey: "report_content")
+        try container.encode(reportContent, forKey: "report_content")
     }
 
     // Decodable protocol methods
@@ -43,7 +45,7 @@ open class PostGroupReportBody: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         reportType = try container.decode(ReportType.self, forKey: "report_type")
-        reportContent = try container.decodeIfPresent(String.self, forKey: "report_content")
+        reportContent = try container.decode(String.self, forKey: "report_content")
     }
 }
 

@@ -12,13 +12,13 @@ import Foundation
 open class PostCommentBody: Codable {
 
     /** Feed Identifier. */
-    public var id: Int64?
+    public var id: Int64
     /** A message will be posted. */
-    public var commentMessage: String?
+    public var commentMessage: String
 
 
     
-    public init(id: Int64?, commentMessage: String?) {
+    public init(id: Int64, commentMessage: String) {
         self.id = id
         self.commentMessage = commentMessage
     }
@@ -30,8 +30,8 @@ open class PostCommentBody: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(id, forKey: "id")
-        try container.encodeIfPresent(commentMessage, forKey: "comment_message")
+        try container.encode(id, forKey: "id")
+        try container.encode(commentMessage, forKey: "comment_message")
     }
 
     // Decodable protocol methods
@@ -39,8 +39,8 @@ open class PostCommentBody: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        id = try container.decodeIfPresent(Int64.self, forKey: "id")
-        commentMessage = try container.decodeIfPresent(String.self, forKey: "comment_message")
+        id = try container.decode(Int64.self, forKey: "id")
+        commentMessage = try container.decode(String.self, forKey: "comment_message")
     }
 }
 

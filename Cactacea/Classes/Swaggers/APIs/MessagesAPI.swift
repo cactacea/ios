@@ -75,7 +75,7 @@ open class MessagesAPI {
      Search messages
      
      - parameter id: (query) Group identifier. 
-     - parameter ascending: (query)  
+     - parameter ascending: (query) Order by posted time. 
      - parameter since: (query) Filters messages which started on since or later. (optional)
      - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
@@ -91,7 +91,7 @@ open class MessagesAPI {
      Search messages
      
      - parameter id: (query) Group identifier. 
-     - parameter ascending: (query)  
+     - parameter ascending: (query) Order by posted time. 
      - parameter since: (query) Filters messages which started on since or later. (optional)
      - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
@@ -186,7 +186,7 @@ open class MessagesAPI {
 }}]
      
      - parameter id: (query) Group identifier. 
-     - parameter ascending: (query)  
+     - parameter ascending: (query) Order by posted time. 
      - parameter since: (query) Filters messages which started on since or later. (optional)
      - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)

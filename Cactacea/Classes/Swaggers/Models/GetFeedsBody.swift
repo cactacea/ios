@@ -17,7 +17,7 @@ open class GetFeedsBody: Codable {
         case friends = "friends"
         case _self = "self"
     }
-    /** Feed privacy type. */
+    /** Feed privacy type. By default the value is everyone. */
     public var privacyType: PrivacyType?
 
 

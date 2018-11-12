@@ -12,13 +12,13 @@ import Foundation
 open class PostSignUpBody: Codable {
 
     /** Account name. */
-    public var accountName: String?
+    public var accountName: String
     /** Display name. */
     public var displayName: String?
     /** Account password. */
-    public var password: String?
+    public var password: String
     /** Unique Device Identifier. */
-    public var udid: String?
+    public var udid: String
     /** Profile URL. */
     public var web: String?
     /** Account birthday. */
@@ -30,7 +30,7 @@ open class PostSignUpBody: Codable {
 
 
     
-    public init(accountName: String?, displayName: String?, password: String?, udid: String?, web: String?, birthday: Int64?, location: String?, bio: String?) {
+    public init(accountName: String, displayName: String?, password: String, udid: String, web: String?, birthday: Int64?, location: String?, bio: String?) {
         self.accountName = accountName
         self.displayName = displayName
         self.password = password
@@ -48,10 +48,10 @@ open class PostSignUpBody: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(accountName, forKey: "account_name")
+        try container.encode(accountName, forKey: "account_name")
         try container.encodeIfPresent(displayName, forKey: "display_name")
-        try container.encodeIfPresent(password, forKey: "password")
-        try container.encodeIfPresent(udid, forKey: "udid")
+        try container.encode(password, forKey: "password")
+        try container.encode(udid, forKey: "udid")
         try container.encodeIfPresent(web, forKey: "web")
         try container.encodeIfPresent(birthday, forKey: "birthday")
         try container.encodeIfPresent(location, forKey: "location")
@@ -63,10 +63,10 @@ open class PostSignUpBody: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        accountName = try container.decodeIfPresent(String.self, forKey: "account_name")
+        accountName = try container.decode(String.self, forKey: "account_name")
         displayName = try container.decodeIfPresent(String.self, forKey: "display_name")
-        password = try container.decodeIfPresent(String.self, forKey: "password")
-        udid = try container.decodeIfPresent(String.self, forKey: "udid")
+        password = try container.decode(String.self, forKey: "password")
+        udid = try container.decode(String.self, forKey: "udid")
         web = try container.decodeIfPresent(String.self, forKey: "web")
         birthday = try container.decodeIfPresent(Int64.self, forKey: "birthday")
         location = try container.decodeIfPresent(String.self, forKey: "location")

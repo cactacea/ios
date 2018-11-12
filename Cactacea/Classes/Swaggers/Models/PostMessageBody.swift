@@ -12,7 +12,7 @@ import Foundation
 open class PostMessageBody: Codable {
 
     /** Group identifier. */
-    public var id: Int64?
+    public var id: Int64
     /** A message will be posted. */
     public var message: String?
     /** A medium will be posted. */
@@ -20,7 +20,7 @@ open class PostMessageBody: Codable {
 
 
     
-    public init(id: Int64?, message: String?, mediumId: Int64?) {
+    public init(id: Int64, message: String?, mediumId: Int64?) {
         self.id = id
         self.message = message
         self.mediumId = mediumId
@@ -33,7 +33,7 @@ open class PostMessageBody: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encodeIfPresent(id, forKey: "id")
+        try container.encode(id, forKey: "id")
         try container.encodeIfPresent(message, forKey: "message")
         try container.encodeIfPresent(mediumId, forKey: "medium_id")
     }
@@ -43,7 +43,7 @@ open class PostMessageBody: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        id = try container.decodeIfPresent(Int64.self, forKey: "id")
+        id = try container.decode(Int64.self, forKey: "id")
         message = try container.decodeIfPresent(String.self, forKey: "message")
         mediumId = try container.decodeIfPresent(Int64.self, forKey: "medium_id")
     }
