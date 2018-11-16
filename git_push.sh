@@ -6,6 +6,7 @@
 git_user_id=$1
 git_repo_id=$2
 release_note=$3
+version=$4
 
 if [ "$git_user_id" = "" ]; then
     git_user_id="GIT_USER_ID"
@@ -50,3 +51,7 @@ git pull origin master
 echo "Git pushing to https://github.com/${git_user_id}/${git_repo_id}.git"
 git push origin master 2>&1 | grep -v 'To https'
 
+git tag -a $4 -m $3
+git push origin $4
+
+pod trunk push --allow-warnings
