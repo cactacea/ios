@@ -26,11 +26,6 @@ public struct PostGroupReportBody: Codable {
         self.reportContent = reportContent
     }
 
-    public enum CodingKeys: String, CodingKey { 
-        case reportType = "report_type"
-        case reportContent = "report_content"
-    }
-
 
 }
 

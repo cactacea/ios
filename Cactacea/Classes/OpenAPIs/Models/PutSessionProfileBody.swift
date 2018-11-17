@@ -30,14 +30,6 @@ public struct PutSessionProfileBody: Codable {
         self.bio = bio
     }
 
-    public enum CodingKeys: String, CodingKey { 
-        case displayName = "display_name"
-        case web
-        case birthday
-        case location
-        case bio
-    }
-
 
 }
 

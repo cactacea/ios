@@ -27,7 +27,7 @@ public struct PostMessageBody: Codable {
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
         case message
-        case mediumId = "medium_id"
+        case mediumId
     }
 
 

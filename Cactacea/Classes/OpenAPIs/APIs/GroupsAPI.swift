@@ -471,9 +471,9 @@ open class GroupsAPI {
         
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "group_name": groupName, 
-            "invitation_only": invitationOnly, 
-            "privacy_type": privacyType?.rawValue, 
+            "groupName": groupName, 
+            "invitationOnly": invitationOnly, 
+            "privacyType": privacyType?.rawValue, 
             "since": since, 
             "offset": offset, 
             "count": count
@@ -721,7 +721,7 @@ open class GroupsAPI {
 
     /**
      Join a account in a group
-     - POST /accounts/{account_id}/groups/{group_id}/join
+     - POST /accounts/{accountId}/groups/{groupId}/join
      - API Key:
        - type: apiKey X-API-KEY 
        - name: api_key
@@ -733,13 +733,13 @@ open class GroupsAPI {
      - returns: RequestBuilder<Void> 
      */
     open class func joinAccountToGroupWithRequestBuilder(accountId: Int64, groupId: Int64) -> RequestBuilder<Void> {
-        var path = "/accounts/{account_id}/groups/{group_id}/join"
+        var path = "/accounts/{accountId}/groups/{groupId}/join"
         let accountIdPreEscape = "\(accountId)"
         let accountIdPostEscape = accountIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{account_id}", with: accountIdPostEscape, options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{accountId}", with: accountIdPostEscape, options: .literal, range: nil)
         let groupIdPreEscape = "\(groupId)"
         let groupIdPostEscape = groupIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{group_id}", with: groupIdPostEscape, options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{groupId}", with: groupIdPostEscape, options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
         
@@ -853,7 +853,7 @@ open class GroupsAPI {
 
     /**
      Leave a account from a group
-     - POST /accounts/{account_id}/groups/{group_id}/leave
+     - POST /accounts/{accountId}/groups/{groupId}/leave
      - API Key:
        - type: apiKey X-API-KEY 
        - name: api_key
@@ -865,13 +865,13 @@ open class GroupsAPI {
      - returns: RequestBuilder<Void> 
      */
     open class func leaveAccountFromGroupWithRequestBuilder(accountId: Int64, groupId: Int64) -> RequestBuilder<Void> {
-        var path = "/accounts/{account_id}/groups/{group_id}/leave"
+        var path = "/accounts/{accountId}/groups/{groupId}/leave"
         let accountIdPreEscape = "\(accountId)"
         let accountIdPostEscape = accountIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{account_id}", with: accountIdPostEscape, options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{accountId}", with: accountIdPostEscape, options: .literal, range: nil)
         let groupIdPreEscape = "\(groupId)"
         let groupIdPostEscape = groupIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{group_id}", with: groupIdPostEscape, options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{groupId}", with: groupIdPostEscape, options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
         

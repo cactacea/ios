@@ -37,13 +37,6 @@ public struct PostGroupBody: Codable {
         self.authorityType = authorityType
     }
 
-    public enum CodingKeys: String, CodingKey { 
-        case name
-        case byInvitationOnly = "by_invitation_only"
-        case privacyType = "privacy_type"
-        case authorityType = "authority_type"
-    }
-
 
 }
 

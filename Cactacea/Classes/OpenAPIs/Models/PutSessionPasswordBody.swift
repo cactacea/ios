@@ -21,11 +21,6 @@ public struct PutSessionPasswordBody: Codable {
         self.newPassword = newPassword
     }
 
-    public enum CodingKeys: String, CodingKey { 
-        case oldPassword = "old_password"
-        case newPassword = "new_password"
-    }
-
 
 }
 

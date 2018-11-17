@@ -15,13 +15,13 @@ open class SessionsAPI {
     /**
      Sign in
      
-     - parameter name: (query) Account name. 
+     - parameter accountName: (query) Account name. 
      - parameter password: (query) Account password. 
      - parameter udid: (query) Unique Device Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func signIn(name: String, password: String, udid: String, completion: @escaping ((_ data: Authentication?,_ error: Error?) -> Void)) {
-        signInWithRequestBuilder(name: name, password: password, udid: udid).execute { (response, error) -> Void in
+    open class func signIn(accountName: String, password: String, udid: String, completion: @escaping ((_ data: Authentication?,_ error: Error?) -> Void)) {
+        signInWithRequestBuilder(accountName: accountName, password: password, udid: udid).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -29,14 +29,14 @@ open class SessionsAPI {
     /**
      Sign in
      
-     - parameter name: (query) Account name. 
+     - parameter accountName: (query) Account name. 
      - parameter password: (query) Account password. 
      - parameter udid: (query) Unique Device Identifier. 
      - returns: Observable<Authentication>
      */
-    open class func signIn(name: String, password: String, udid: String) -> Observable<Authentication> {
+    open class func signIn(accountName: String, password: String, udid: String) -> Observable<Authentication> {
         return Observable.create { observer -> Disposable in
-            signIn(name: name, password: password, udid: udid) { data, error in
+            signIn(accountName: accountName, password: password, udid: udid) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -54,19 +54,19 @@ open class SessionsAPI {
      - API Key:
        - type: apiKey X-API-KEY 
        - name: api_key
-     - parameter name: (query) Account name. 
+     - parameter accountName: (query) Account name. 
      - parameter password: (query) Account password. 
      - parameter udid: (query) Unique Device Identifier. 
      - returns: RequestBuilder<Authentication> 
      */
-    open class func signInWithRequestBuilder(name: String, password: String, udid: String) -> RequestBuilder<Authentication> {
+    open class func signInWithRequestBuilder(accountName: String, password: String, udid: String) -> RequestBuilder<Authentication> {
         let path = "/sessions"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
         
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "name": name, 
+            "accountName": accountName, 
             "password": password, 
             "udid": udid
         ])

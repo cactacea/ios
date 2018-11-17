@@ -46,7 +46,7 @@ open class AccountsAPI {
 
     /**
      Confirm account name exist
-     - GET /account/{account_name}
+     - GET /account/{accountName}
      - API Key:
        - type: apiKey X-API-KEY 
        - name: api_key
@@ -57,10 +57,10 @@ open class AccountsAPI {
      - returns: RequestBuilder<AccountNameNotExists> 
      */
     open class func existAccountNameWithRequestBuilder(accountName: String) -> RequestBuilder<AccountNameNotExists> {
-        var path = "/account/{account_name}"
+        var path = "/account/{accountName}"
         let accountNamePreEscape = "\(accountName)"
         let accountNamePostEscape = accountNamePreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{account_name}", with: accountNamePostEscape, options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{accountName}", with: accountNamePostEscape, options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
         
@@ -249,7 +249,7 @@ open class AccountsAPI {
         
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "display_name": displayName, 
+            "displayName": displayName, 
             "since": since, 
             "offset": offset, 
             "count": count

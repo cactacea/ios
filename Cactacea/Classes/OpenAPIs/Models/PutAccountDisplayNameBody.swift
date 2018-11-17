@@ -18,10 +18,6 @@ public struct PutAccountDisplayNameBody: Codable {
         self.displayName = displayName
     }
 
-    public enum CodingKeys: String, CodingKey { 
-        case displayName = "display_name"
-    }
-
 
 }
 

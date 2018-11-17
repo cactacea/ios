@@ -18,10 +18,6 @@ public struct PostInvitationAccountsBody: Codable {
         self.accountIds = accountIds
     }
 
-    public enum CodingKeys: String, CodingKey { 
-        case accountIds = "account_ids"
-    }
-
 
 }
 

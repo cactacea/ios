@@ -111,7 +111,7 @@ open class InvitationsAPI {
 
     /**
      Create a invitation to a account
-     - POST /accounts/{account_id}/groups/{group_id}/invitations
+     - POST /accounts/{accountId}/groups/{groupId}/invitations
      - API Key:
        - type: apiKey X-API-KEY 
        - name: api_key
@@ -123,13 +123,13 @@ open class InvitationsAPI {
      - returns: RequestBuilder<InvitationCreated> 
      */
     open class func createGroupInvitationToAccountWithRequestBuilder(accountId: Int64, groupId: Int64) -> RequestBuilder<InvitationCreated> {
-        var path = "/accounts/{account_id}/groups/{group_id}/invitations"
+        var path = "/accounts/{accountId}/groups/{groupId}/invitations"
         let accountIdPreEscape = "\(accountId)"
         let accountIdPostEscape = accountIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{account_id}", with: accountIdPostEscape, options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{accountId}", with: accountIdPostEscape, options: .literal, range: nil)
         let groupIdPreEscape = "\(groupId)"
         let groupIdPostEscape = groupIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{group_id}", with: groupIdPostEscape, options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{groupId}", with: groupIdPostEscape, options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
         

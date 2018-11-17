@@ -23,7 +23,7 @@ public struct PostCommentBody: Codable {
 
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
-        case commentMessage = "comment_message"
+        case commentMessage
     }
 
 

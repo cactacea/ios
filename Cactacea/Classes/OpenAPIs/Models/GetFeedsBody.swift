@@ -24,10 +24,6 @@ public struct GetFeedsBody: Codable {
         self.privacyType = privacyType
     }
 
-    public enum CodingKeys: String, CodingKey { 
-        case privacyType = "privacy_type"
-    }
-
 
 }
 

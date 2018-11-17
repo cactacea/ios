@@ -39,17 +39,6 @@ public struct PostSignUpBody: Codable {
         self.bio = bio
     }
 
-    public enum CodingKeys: String, CodingKey { 
-        case accountName = "account_name"
-        case displayName = "display_name"
-        case password
-        case udid
-        case web
-        case birthday
-        case location
-        case bio
-    }
-
 
 }
 

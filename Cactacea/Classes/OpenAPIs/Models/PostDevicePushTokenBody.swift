@@ -18,10 +18,6 @@ public struct PostDevicePushTokenBody: Codable {
         self.pushToken = pushToken
     }
 
-    public enum CodingKeys: String, CodingKey { 
-        case pushToken = "push_token"
-    }
-
 
 }
 

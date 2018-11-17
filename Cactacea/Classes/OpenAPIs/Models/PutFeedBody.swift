@@ -39,15 +39,6 @@ public struct PutFeedBody: Codable {
         self.expiration = expiration
     }
 
-    public enum CodingKeys: String, CodingKey { 
-        case message
-        case mediumIds = "medium_ids"
-        case tags
-        case privacyType = "privacy_type"
-        case contentWarning = "content_warning"
-        case expiration
-    }
-
 
 }
 
