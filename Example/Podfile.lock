@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (4.5.1)
-  - Cactacea (18.11.0):
+  - Cactacea (18.11.3):
     - Alamofire (~> 4.5.0)
     - RxSwift (~> 4.0)
   - Nimble (7.3.1)
@@ -30,7 +30,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  Cactacea: 4dcac0fc90940b4ea36f98433380d4e7049d6dc9
+  Cactacea: 2c1094b8da7e58f9913f9ffa62a52596b4af0cfc
   Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
   Quick: 2623cb30d7a7f41ca62f684f679586558f483d46
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
