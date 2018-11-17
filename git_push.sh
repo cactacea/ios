@@ -51,7 +51,7 @@ git pull origin master
 echo "Git pushing to https://github.com/${git_user_id}/${git_repo_id}.git"
 git push origin master 2>&1 | grep -v 'To https'
 
-git tag -a $4 -m $3
-git push origin $4
+git tag -a $version -m $release_note
+git push origin $version
 
 pod trunk push --allow-warnings
