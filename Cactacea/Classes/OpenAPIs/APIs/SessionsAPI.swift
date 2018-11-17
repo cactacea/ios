@@ -18,11 +18,10 @@ open class SessionsAPI {
      - parameter name: (query) Account name. 
      - parameter password: (query) Account password. 
      - parameter udid: (query) Unique Device Identifier. 
-     - parameter userAgent: (header)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func signIn(name: String, password: String, udid: String, userAgent: String? = nil, completion: @escaping ((_ data: Authentication?,_ error: Error?) -> Void)) {
-        signInWithRequestBuilder(name: name, password: password, udid: udid, userAgent: userAgent).execute { (response, error) -> Void in
+    open class func signIn(name: String, password: String, udid: String, completion: @escaping ((_ data: Authentication?,_ error: Error?) -> Void)) {
+        signInWithRequestBuilder(name: name, password: password, udid: udid).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -33,12 +32,11 @@ open class SessionsAPI {
      - parameter name: (query) Account name. 
      - parameter password: (query) Account password. 
      - parameter udid: (query) Unique Device Identifier. 
-     - parameter userAgent: (header)  (optional)
      - returns: Observable<Authentication>
      */
-    open class func signIn(name: String, password: String, udid: String, userAgent: String? = nil) -> Observable<Authentication> {
+    open class func signIn(name: String, password: String, udid: String) -> Observable<Authentication> {
         return Observable.create { observer -> Disposable in
-            signIn(name: name, password: password, udid: udid, userAgent: userAgent) { data, error in
+            signIn(name: name, password: password, udid: udid) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -59,10 +57,9 @@ open class SessionsAPI {
      - parameter name: (query) Account name. 
      - parameter password: (query) Account password. 
      - parameter udid: (query) Unique Device Identifier. 
-     - parameter userAgent: (header)  (optional)
      - returns: RequestBuilder<Authentication> 
      */
-    open class func signInWithRequestBuilder(name: String, password: String, udid: String, userAgent: String? = nil) -> RequestBuilder<Authentication> {
+    open class func signInWithRequestBuilder(name: String, password: String, udid: String) -> RequestBuilder<Authentication> {
         let path = "/sessions"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -73,25 +70,20 @@ open class SessionsAPI {
             "password": password, 
             "udid": udid
         ])
-        let nillableHeaders: [String: Any?] = [
-            "user_agent": userAgent
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<Authentication>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
      Sign up
      
      - parameter postSignUpBody: (body)  
-     - parameter userAgent: (header)  (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func signUp(postSignUpBody: PostSignUpBody, userAgent: String? = nil, completion: @escaping ((_ data: Authentication?,_ error: Error?) -> Void)) {
-        signUpWithRequestBuilder(postSignUpBody: postSignUpBody, userAgent: userAgent).execute { (response, error) -> Void in
+    open class func signUp(postSignUpBody: PostSignUpBody, completion: @escaping ((_ data: Authentication?,_ error: Error?) -> Void)) {
+        signUpWithRequestBuilder(postSignUpBody: postSignUpBody).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -100,12 +92,11 @@ open class SessionsAPI {
      Sign up
      
      - parameter postSignUpBody: (body)  
-     - parameter userAgent: (header)  (optional)
      - returns: Observable<Authentication>
      */
-    open class func signUp(postSignUpBody: PostSignUpBody, userAgent: String? = nil) -> Observable<Authentication> {
+    open class func signUp(postSignUpBody: PostSignUpBody) -> Observable<Authentication> {
         return Observable.create { observer -> Disposable in
-            signUp(postSignUpBody: postSignUpBody, userAgent: userAgent) { data, error in
+            signUp(postSignUpBody: postSignUpBody) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -121,23 +112,18 @@ open class SessionsAPI {
      Sign up
      - POST /sessions
      - parameter postSignUpBody: (body)  
-     - parameter userAgent: (header)  (optional)
      - returns: RequestBuilder<Authentication> 
      */
-    open class func signUpWithRequestBuilder(postSignUpBody: PostSignUpBody, userAgent: String? = nil) -> RequestBuilder<Authentication> {
+    open class func signUpWithRequestBuilder(postSignUpBody: PostSignUpBody) -> RequestBuilder<Authentication> {
         let path = "/sessions"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: postSignUpBody)
 
         let url = URLComponents(string: URLString)
-        let nillableHeaders: [String: Any?] = [
-            "user_agent": userAgent
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<Authentication>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
 }
