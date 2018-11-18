@@ -281,16 +281,26 @@ open class FeedsAPI {
     }
 
     /**
+     * enum for parameter feedPrivacyType
+     */
+    public enum FeedPrivacyType_findFeeds: String {
+        case everyone = "everyone"
+        case followers = "followers"
+        case friends = "friends"
+        case _self = "self"
+    }
+
+    /**
      Search feeds
      
-     - parameter getFeedsBody: (body)  
      - parameter since: (query) Filters feeds which started on since or later. (optional)
      - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
+     - parameter feedPrivacyType: (query) Feed privacy type. By default the value is everyone. (optional)
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findFeeds(getFeedsBody: GetFeedsBody, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
-        findFeedsWithRequestBuilder(getFeedsBody: getFeedsBody, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findFeeds(since: Int64? = nil, offset: Int64? = nil, feedPrivacyType: FeedPrivacyType_findFeeds? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
+        findFeedsWithRequestBuilder(since: since, offset: offset, feedPrivacyType: feedPrivacyType, count: count).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -298,15 +308,15 @@ open class FeedsAPI {
     /**
      Search feeds
      
-     - parameter getFeedsBody: (body)  
      - parameter since: (query) Filters feeds which started on since or later. (optional)
      - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
+     - parameter feedPrivacyType: (query) Feed privacy type. By default the value is everyone. (optional)
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: Observable<[Feed]>
      */
-    open class func findFeeds(getFeedsBody: GetFeedsBody, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Feed]> {
+    open class func findFeeds(since: Int64? = nil, offset: Int64? = nil, feedPrivacyType: FeedPrivacyType_findFeeds? = nil, count: Int64? = nil) -> Observable<[Feed]> {
         return Observable.create { observer -> Disposable in
-            findFeeds(getFeedsBody: getFeedsBody, since: since, offset: offset, count: count) { data, error in
+            findFeeds(since: since, offset: offset, feedPrivacyType: feedPrivacyType, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -327,27 +337,28 @@ open class FeedsAPI {
      - OAuth:
        - type: oauth2
        - name: cactacea_auth
-     - parameter getFeedsBody: (body)  
      - parameter since: (query) Filters feeds which started on since or later. (optional)
      - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
+     - parameter feedPrivacyType: (query) Feed privacy type. By default the value is everyone. (optional)
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: RequestBuilder<[Feed]> 
      */
-    open class func findFeedsWithRequestBuilder(getFeedsBody: GetFeedsBody, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
+    open class func findFeedsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, feedPrivacyType: FeedPrivacyType_findFeeds? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
         let path = "/feeds"
         let URLString = CactaceaAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: getFeedsBody)
-
+        let parameters: [String:Any]? = nil
+        
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
             "since": since, 
             "offset": offset, 
+            "feedPrivacyType": feedPrivacyType?.rawValue, 
             "count": count
         ])
 
         let requestBuilder: RequestBuilder<[Feed]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**

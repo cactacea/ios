@@ -396,9 +396,9 @@ open class GroupsAPI {
     }
 
     /**
-     * enum for parameter privacyType
+     * enum for parameter groupPrivacyType
      */
-    public enum PrivacyType_findGroups: String {
+    public enum GroupPrivacyType_findGroups: String {
         case everyone = "everyone"
         case follows = "follows"
         case followers = "followers"
@@ -410,14 +410,14 @@ open class GroupsAPI {
      
      - parameter groupName: (query) Filters groups which group name start of. (optional)
      - parameter invitationOnly: (query) Filters groups that invited accounts can join in. (optional)
-     - parameter privacyType: (query) Filters groups which can join in. (optional)
+     - parameter groupPrivacyType: (query) Filters groups which can join in. (optional)
      - parameter since: (query) Filters groups which started on since or later. (optional)
      - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of groups returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findGroups(groupName: String? = nil, invitationOnly: Int64? = nil, privacyType: PrivacyType_findGroups? = nil, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Group]?,_ error: Error?) -> Void)) {
-        findGroupsWithRequestBuilder(groupName: groupName, invitationOnly: invitationOnly, privacyType: privacyType, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findGroups(groupName: String? = nil, invitationOnly: Int64? = nil, groupPrivacyType: GroupPrivacyType_findGroups? = nil, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Group]?,_ error: Error?) -> Void)) {
+        findGroupsWithRequestBuilder(groupName: groupName, invitationOnly: invitationOnly, groupPrivacyType: groupPrivacyType, since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -427,15 +427,15 @@ open class GroupsAPI {
      
      - parameter groupName: (query) Filters groups which group name start of. (optional)
      - parameter invitationOnly: (query) Filters groups that invited accounts can join in. (optional)
-     - parameter privacyType: (query) Filters groups which can join in. (optional)
+     - parameter groupPrivacyType: (query) Filters groups which can join in. (optional)
      - parameter since: (query) Filters groups which started on since or later. (optional)
      - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of groups returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: Observable<[Group]>
      */
-    open class func findGroups(groupName: String? = nil, invitationOnly: Int64? = nil, privacyType: PrivacyType_findGroups? = nil, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Group]> {
+    open class func findGroups(groupName: String? = nil, invitationOnly: Int64? = nil, groupPrivacyType: GroupPrivacyType_findGroups? = nil, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Group]> {
         return Observable.create { observer -> Disposable in
-            findGroups(groupName: groupName, invitationOnly: invitationOnly, privacyType: privacyType, since: since, offset: offset, count: count) { data, error in
+            findGroups(groupName: groupName, invitationOnly: invitationOnly, groupPrivacyType: groupPrivacyType, since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -458,13 +458,13 @@ open class GroupsAPI {
        - name: cactacea_auth
      - parameter groupName: (query) Filters groups which group name start of. (optional)
      - parameter invitationOnly: (query) Filters groups that invited accounts can join in. (optional)
-     - parameter privacyType: (query) Filters groups which can join in. (optional)
+     - parameter groupPrivacyType: (query) Filters groups which can join in. (optional)
      - parameter since: (query) Filters groups which started on since or later. (optional)
      - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of groups returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: RequestBuilder<[Group]> 
      */
-    open class func findGroupsWithRequestBuilder(groupName: String? = nil, invitationOnly: Int64? = nil, privacyType: PrivacyType_findGroups? = nil, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Group]> {
+    open class func findGroupsWithRequestBuilder(groupName: String? = nil, invitationOnly: Int64? = nil, groupPrivacyType: GroupPrivacyType_findGroups? = nil, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Group]> {
         let path = "/groups"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -473,7 +473,7 @@ open class GroupsAPI {
         url?.queryItems = APIHelper.mapValuesToQueryItems([
             "groupName": groupName, 
             "invitationOnly": invitationOnly, 
-            "privacyType": privacyType?.rawValue, 
+            "groupPrivacyType": groupPrivacyType?.rawValue, 
             "since": since, 
             "offset": offset, 
             "count": count
