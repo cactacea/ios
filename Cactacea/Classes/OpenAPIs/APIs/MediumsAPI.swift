@@ -78,10 +78,11 @@ open class MediumsAPI {
     /**
      Upload a medium
      
+     - parameter file: (form) Upload a medium file 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func uploadMedium(completion: @escaping ((_ data: MediumCreated?,_ error: Error?) -> Void)) {
-        uploadMediumWithRequestBuilder().execute { (response, error) -> Void in
+    open class func uploadMedium(file: URL, completion: @escaping ((_ data: MediumCreated?,_ error: Error?) -> Void)) {
+        uploadMediumWithRequestBuilder(file: file).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -89,11 +90,12 @@ open class MediumsAPI {
     /**
      Upload a medium
      
+     - parameter file: (form) Upload a medium file 
      - returns: Observable<MediumCreated>
      */
-    open class func uploadMedium() -> Observable<MediumCreated> {
+    open class func uploadMedium(file: URL) -> Observable<MediumCreated> {
         return Observable.create { observer -> Disposable in
-            uploadMedium() { data, error in
+            uploadMedium(file: file) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -114,12 +116,18 @@ open class MediumsAPI {
      - OAuth:
        - type: oauth2
        - name: cactacea_auth
+     - parameter file: (form) Upload a medium file 
      - returns: RequestBuilder<MediumCreated> 
      */
-    open class func uploadMediumWithRequestBuilder() -> RequestBuilder<MediumCreated> {
+    open class func uploadMediumWithRequestBuilder(file: URL) -> RequestBuilder<MediumCreated> {
         let path = "/mediums"
         let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
+        let formParams: [String:Any?] = [
+            "file": file
+        ]
+
+        let nonNullParameters = APIHelper.rejectNil(formParams)
+        let parameters = APIHelper.convertBoolToString(nonNullParameters)
         
         let url = URLComponents(string: URLString)
 
