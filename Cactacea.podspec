@@ -9,6 +9,6 @@ Pod::Spec.new do |s|
   s.license = { :type => 'MIT', :file => 'LICENSE' }
   s.homepage = 'https://github.com/cactacea/ios'
   s.source_files = 'Cactacea/Classes/**/*.swift'
-  s.dependency 'RxSwift', '~> 4.0'
-  s.dependency 'Alamofire', '~> 4.5.0'
+  s.dependency 'RxSwift', '~> 4.4'
+  s.dependency 'Alamofire', '~> 4.7.3'
 end
