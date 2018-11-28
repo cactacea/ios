@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Cactacea
+import KeychainAccess
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+//        let keychain = Keychain(service: "io.github.cactace")
+//        Session.accessToken = keychain["access_token"]
+        
+        CactaceaAPI.basePath = "http://10.0.1.3:9000"
+        CactaceaAPI.customHeaders["X-API-KEY"] = "78290547-ddd6-4cf2-8fe4-7dd241da3061"
+        CactaceaAPI.customHeaders["Content-Type"] = "application/json"
+
         return true
     }
 

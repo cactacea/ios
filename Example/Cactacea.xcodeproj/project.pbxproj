@@ -7,14 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14F7CBA3749D7243E9CB0AEE /* Pods_Cactacea_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61D4AC9D02D6B909014F6C62 /* Pods_Cactacea_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		820FE83521AA63DE001097F5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 820FE83421AA63DE001097F5 /* Images.xcassets */; };
-		89A0703AA2C4E4E0EA2B84DD /* Pods_Cactacea_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35FE7F757A8442F06AADEBF1 /* Pods_Cactacea_Tests.framework */; };
-		D5C25A31D5E859DD6A4511C2 /* Pods_Cactacea_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32472A87DCFF8A319174F7BF /* Pods_Cactacea_Example.framework */; };
+		820FE83721AC0CE0001097F5 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820FE83621AC0CE0001097F5 /* Session.swift */; };
+		820FE83A21AC0E6C001097F5 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820FE83921AC0E6C001097F5 /* MainController.swift */; };
+		820FE83C21AC0EEC001097F5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820FE83B21AC0EEC001097F5 /* SignUpViewController.swift */; };
+		820FE83E21AC0F11001097F5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820FE83D21AC0F11001097F5 /* SignInViewController.swift */; };
+		820FE84021AC0F45001097F5 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820FE83F21AC0F45001097F5 /* FriendsViewController.swift */; };
+		829CF04221AC1CD400D5B5EB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04121AC1CD400D5B5EB /* Extensions.swift */; };
+		829CF04721AD699000D5B5EB /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04621AD699000D5B5EB /* PhotoSelectorController.swift */; };
+		829CF04921AD6A0200D5B5EB /* PhotoSelectorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04821AD6A0200D5B5EB /* PhotoSelectorHandler.swift */; };
+		829CF04B21AD6A4600D5B5EB /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04A21AD6A4600D5B5EB /* PhotoSelectorCell.swift */; };
+		829CF04D21AD6AC100D5B5EB /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04C21AD6AC100D5B5EB /* SharePhotoController.swift */; };
+		829CF04F21AD6B3600D5B5EB /* PlaceHolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04E21AD6B3600D5B5EB /* PlaceHolderTextView.swift */; };
+		A30072B50BFA31CA9C144705 /* Pods_Cactacea_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E62A8AEF46FEDBB34C8B0FF /* Pods_Cactacea_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,8 +41,7 @@
 /* Begin PBXFileReference section */
 		0AD96C988D040B5CFF2ED824 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		0FFDC0C75D3B2699EA7E82BD /* Cactacea.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Cactacea.podspec; path = ../Cactacea.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		32472A87DCFF8A319174F7BF /* Pods_Cactacea_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cactacea_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		35FE7F757A8442F06AADEBF1 /* Pods_Cactacea_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cactacea_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E62A8AEF46FEDBB34C8B0FF /* Pods_Cactacea_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cactacea_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* Cactacea_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cactacea_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,12 +51,24 @@
 		607FACE51AFB9204008FA782 /* Cactacea_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Cactacea_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		61D4AC9D02D6B909014F6C62 /* Pods_Cactacea_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cactacea_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		820FE83421AA63DE001097F5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		B48290EDB50CA28EBBC9A4AB /* Pods-Cactacea_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		820FE83621AC0CE0001097F5 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		820FE83921AC0E6C001097F5 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		820FE83B21AC0EEC001097F5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		820FE83D21AC0F11001097F5 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		820FE83F21AC0F45001097F5 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		829CF04121AC1CD400D5B5EB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		829CF04621AD699000D5B5EB /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
+		829CF04821AD6A0200D5B5EB /* PhotoSelectorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHandler.swift; sourceTree = "<group>"; };
+		829CF04A21AD6A4600D5B5EB /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
+		829CF04C21AD6AC100D5B5EB /* SharePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
+		829CF04E21AD6B3600D5B5EB /* PlaceHolderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolderTextView.swift; sourceTree = "<group>"; };
+		8C3BD379CA48ADD2A72E8FCF /* Pods-Cactacea_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		9A1C9CEFA1F069BCA9720392 /* Pods-Cactacea_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		A2BE60797CBD5595B288348F /* Pods-Cactacea_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.release.xcconfig"; sourceTree = "<group>"; };
 		C27A1CD5822A6AFDFD43F685 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		ECAB88CF14B48EC0151387DE /* Pods-Cactacea_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		F6DECB0A330AECE915A23649 /* Pods-Cactacea_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.release.xcconfig"; sourceTree = "<group>"; };
-		F9C71BB7FCFF6EE747A0037E /* Pods-Cactacea_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		FBEBA9AA30F9578A649DA580 /* Pods-Cactacea_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5C25A31D5E859DD6A4511C2 /* Pods_Cactacea_Example.framework in Frameworks */,
+				A30072B50BFA31CA9C144705 /* Pods_Cactacea_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,13 +84,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89A0703AA2C4E4E0EA2B84DD /* Pods_Cactacea_Tests.framework in Frameworks */,
+				14F7CBA3749D7243E9CB0AEE /* Pods_Cactacea_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		563D5459FA527B9BE0CD3E91 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5E62A8AEF46FEDBB34C8B0FF /* Pods_Cactacea_Example.framework */,
+				61D4AC9D02D6B909014F6C62 /* Pods_Cactacea_Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -76,8 +107,8 @@
 				607FACD21AFB9204008FA782 /* Example for Cactacea */,
 				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
-				D0964553DF00A98D07BC23B9 /* Pods */,
-				C5914EE85F8848B3FEE9D906 /* Frameworks */,
+				76F640F4EC70E340D9F43922 /* Pods */,
+				563D5459FA527B9BE0CD3E91 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,12 +124,15 @@
 		607FACD21AFB9204008FA782 /* Example for Cactacea */ = {
 			isa = PBXGroup;
 			children = (
+				829CF04521AD5E4000D5B5EB /* Extensions */,
+				820FE83821AC0E32001097F5 /* ViewControllers */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				820FE83421AA63DE001097F5 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				820FE83621AC0CE0001097F5 /* Session.swift */,
 			);
 			name = "Example for Cactacea";
 			path = Cactacea;
@@ -139,24 +173,63 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		C5914EE85F8848B3FEE9D906 /* Frameworks */ = {
+		76F640F4EC70E340D9F43922 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				32472A87DCFF8A319174F7BF /* Pods_Cactacea_Example.framework */,
-				35FE7F757A8442F06AADEBF1 /* Pods_Cactacea_Tests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D0964553DF00A98D07BC23B9 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F9C71BB7FCFF6EE747A0037E /* Pods-Cactacea_Example.debug.xcconfig */,
-				F6DECB0A330AECE915A23649 /* Pods-Cactacea_Example.release.xcconfig */,
-				ECAB88CF14B48EC0151387DE /* Pods-Cactacea_Tests.debug.xcconfig */,
-				B48290EDB50CA28EBBC9A4AB /* Pods-Cactacea_Tests.release.xcconfig */,
+				9A1C9CEFA1F069BCA9720392 /* Pods-Cactacea_Example.debug.xcconfig */,
+				A2BE60797CBD5595B288348F /* Pods-Cactacea_Example.release.xcconfig */,
+				8C3BD379CA48ADD2A72E8FCF /* Pods-Cactacea_Tests.debug.xcconfig */,
+				FBEBA9AA30F9578A649DA580 /* Pods-Cactacea_Tests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		820FE83821AC0E32001097F5 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				829CF05121AD801C00D5B5EB /* Top */,
+				829CF05021AD800900D5B5EB /* Post */,
+				829CF05221AD802600D5B5EB /* Friends */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		829CF04521AD5E4000D5B5EB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				829CF04121AC1CD400D5B5EB /* Extensions.swift */,
+				829CF04E21AD6B3600D5B5EB /* PlaceHolderTextView.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		829CF05021AD800900D5B5EB /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				829CF04621AD699000D5B5EB /* PhotoSelectorController.swift */,
+				829CF04821AD6A0200D5B5EB /* PhotoSelectorHandler.swift */,
+				829CF04A21AD6A4600D5B5EB /* PhotoSelectorCell.swift */,
+				829CF04C21AD6AC100D5B5EB /* SharePhotoController.swift */,
+			);
+			name = Post;
+			sourceTree = "<group>";
+		};
+		829CF05121AD801C00D5B5EB /* Top */ = {
+			isa = PBXGroup;
+			children = (
+				820FE83921AC0E6C001097F5 /* MainController.swift */,
+				820FE83D21AC0F11001097F5 /* SignInViewController.swift */,
+				820FE83B21AC0EEC001097F5 /* SignUpViewController.swift */,
+			);
+			name = Top;
+			sourceTree = "<group>";
+		};
+		829CF05221AD802600D5B5EB /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				820FE83F21AC0F45001097F5 /* FriendsViewController.swift */,
+			);
+			name = Friends;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,11 +239,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Cactacea_Example" */;
 			buildPhases = (
-				DBD60E67A274CDB8387AC600 /* [CP] Check Pods Manifest.lock */,
+				E26788E382B2608BFC6D64B0 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				EA55C62D72FFC54348702AE4 /* [CP] Embed Pods Frameworks */,
+				D2194CEEDE91D559001FDC87 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -185,11 +258,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Cactacea_Tests" */;
 			buildPhases = (
-				2007085006DEFF64DA39BC9B /* [CP] Check Pods Manifest.lock */,
+				D0BF220F6C34F30F3873D227 /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
-				97864CA4A5163D7FE22935B8 /* [CP] Embed Pods Frameworks */,
+				A93296154464DBF6D2D4CC07 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -209,7 +282,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 1010;
-				ORGANIZATIONNAME = CocoaPods;
+				ORGANIZATIONNAME = Cactacea;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -263,29 +336,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2007085006DEFF64DA39BC9B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cactacea_Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		97864CA4A5163D7FE22935B8 /* [CP] Embed Pods Frameworks */ = {
+		A93296154464DBF6D2D4CC07 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -315,7 +366,59 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DBD60E67A274CDB8387AC600 /* [CP] Check Pods Manifest.lock */ = {
+		D0BF220F6C34F30F3873D227 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cactacea_Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2194CEEDE91D559001FDC87 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Cactacea/Cactacea.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cactacea.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E26788E382B2608BFC6D64B0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -337,34 +440,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EA55C62D72FFC54348702AE4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Cactacea/Cactacea.framework",
-				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cactacea.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -372,8 +447,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				829CF04B21AD6A4600D5B5EB /* PhotoSelectorCell.swift in Sources */,
+				829CF04921AD6A0200D5B5EB /* PhotoSelectorHandler.swift in Sources */,
+				820FE83A21AC0E6C001097F5 /* MainController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				820FE83E21AC0F11001097F5 /* SignInViewController.swift in Sources */,
+				829CF04F21AD6B3600D5B5EB /* PlaceHolderTextView.swift in Sources */,
+				829CF04721AD699000D5B5EB /* PhotoSelectorController.swift in Sources */,
+				829CF04D21AD6AC100D5B5EB /* SharePhotoController.swift in Sources */,
+				829CF04221AC1CD400D5B5EB /* Extensions.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				820FE84021AC0F45001097F5 /* FriendsViewController.swift in Sources */,
+				820FE83721AC0CE0001097F5 /* Session.swift in Sources */,
+				820FE83C21AC0EEC001097F5 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,14 +606,15 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F9C71BB7FCFF6EE747A0037E /* Pods-Cactacea_Example.debug.xcconfig */;
+			baseConfigurationReference = 9A1C9CEFA1F069BCA9720392 /* Pods-Cactacea_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AV2D28Q4FY;
 				INFOPLIST_FILE = Cactacea/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.cactacea;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 			};
@@ -535,14 +622,15 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F6DECB0A330AECE915A23649 /* Pods-Cactacea_Example.release.xcconfig */;
+			baseConfigurationReference = A2BE60797CBD5595B288348F /* Pods-Cactacea_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AV2D28Q4FY;
 				INFOPLIST_FILE = Cactacea/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.cactacea;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 			};
@@ -550,7 +638,7 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECAB88CF14B48EC0151387DE /* Pods-Cactacea_Tests.debug.xcconfig */;
+			baseConfigurationReference = 8C3BD379CA48ADD2A72E8FCF /* Pods-Cactacea_Tests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -571,7 +659,7 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B48290EDB50CA28EBBC9A4AB /* Pods-Cactacea_Tests.release.xcconfig */;
+			baseConfigurationReference = FBEBA9AA30F9578A649DA580 /* Pods-Cactacea_Tests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

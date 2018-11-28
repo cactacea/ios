@@ -2,6 +2,7 @@ use_frameworks!
 
 target 'Cactacea_Example' do
   pod 'Cactacea', :path => '../'
+  pod 'KeychainAccess', '~> 3.1.2'
 
   target 'Cactacea_Tests' do
     inherit! :search_paths
