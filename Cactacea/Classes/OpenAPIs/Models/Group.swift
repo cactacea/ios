@@ -28,10 +28,11 @@ public struct Group: Codable {
     public var invitationOnly: Bool
     public var authorityType: AuthorityType
     public var accountCount: Int64
+    public var lastPostedAt: Int64?
     public var organizedAt: Int64
-    public var next: Int64
+    public var next: Int64?
 
-    public init(_id: Int64, name: String?, message: Message?, groupPrivacyType: GroupPrivacyType, invitationOnly: Bool, authorityType: AuthorityType, accountCount: Int64, organizedAt: Int64, next: Int64) {
+    public init(_id: Int64, name: String?, message: Message?, groupPrivacyType: GroupPrivacyType, invitationOnly: Bool, authorityType: AuthorityType, accountCount: Int64, lastPostedAt: Int64?, organizedAt: Int64, next: Int64?) {
         self._id = _id
         self.name = name
         self.message = message
@@ -39,6 +40,7 @@ public struct Group: Codable {
         self.invitationOnly = invitationOnly
         self.authorityType = authorityType
         self.accountCount = accountCount
+        self.lastPostedAt = lastPostedAt
         self.organizedAt = organizedAt
         self.next = next
     }
@@ -51,6 +53,7 @@ public struct Group: Codable {
         case invitationOnly
         case authorityType
         case accountCount
+        case lastPostedAt
         case organizedAt
         case next
     }

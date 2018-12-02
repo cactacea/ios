@@ -326,13 +326,14 @@ open class SessionAPI {
     /**
      Get friends list
      
+     - parameter getSessionFriendsBody: (body)  
      - parameter since: (query) Filters friends which started on since or later. (optional)
      - parameter offset: (query) The offset of friends. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of friends returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findSessionFriends(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
-        findSessionFriendsWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findSessionFriends(getSessionFriendsBody: GetSessionFriendsBody, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
+        findSessionFriendsWithRequestBuilder(getSessionFriendsBody: getSessionFriendsBody, since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -340,14 +341,15 @@ open class SessionAPI {
     /**
      Get friends list
      
+     - parameter getSessionFriendsBody: (body)  
      - parameter since: (query) Filters friends which started on since or later. (optional)
      - parameter offset: (query) The offset of friends. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of friends returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: Observable<[Account]>
      */
-    open class func findSessionFriends(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
+    open class func findSessionFriends(getSessionFriendsBody: GetSessionFriendsBody, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
         return Observable.create { observer -> Disposable in
-            findSessionFriends(since: since, offset: offset, count: count) { data, error in
+            findSessionFriends(getSessionFriendsBody: getSessionFriendsBody, since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -368,16 +370,17 @@ open class SessionAPI {
      - OAuth:
        - type: oauth2
        - name: cactacea_auth
+     - parameter getSessionFriendsBody: (body)  
      - parameter since: (query) Filters friends which started on since or later. (optional)
      - parameter offset: (query) The offset of friends. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of friends returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: RequestBuilder<[Account]> 
      */
-    open class func findSessionFriendsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
+    open class func findSessionFriendsWithRequestBuilder(getSessionFriendsBody: GetSessionFriendsBody, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
         let path = "/session/friends"
         let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: getSessionFriendsBody)
+
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
             "since": since, 
@@ -387,7 +390,7 @@ open class SessionAPI {
 
         let requestBuilder: RequestBuilder<[Account]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**

@@ -23,7 +23,6 @@ public struct Message: Codable {
     public var messageType: MessageType
     public var message: String?
     public var medium: Medium?
-    public var by: Account
     public var account: Account?
     public var unread: Bool
     public var accountCount: Int64
@@ -31,13 +30,13 @@ public struct Message: Codable {
     public var contentWarning: Bool
     public var contentDeleted: Bool
     public var postedAt: Int64
+    public var next: Int64?
 
-    public init(_id: Int64, messageType: MessageType, message: String?, medium: Medium?, by: Account, account: Account?, unread: Bool, accountCount: Int64, readAccountCount: Int64, contentWarning: Bool, contentDeleted: Bool, postedAt: Int64) {
+    public init(_id: Int64, messageType: MessageType, message: String?, medium: Medium?, account: Account?, unread: Bool, accountCount: Int64, readAccountCount: Int64, contentWarning: Bool, contentDeleted: Bool, postedAt: Int64, next: Int64?) {
         self._id = _id
         self.messageType = messageType
         self.message = message
         self.medium = medium
-        self.by = by
         self.account = account
         self.unread = unread
         self.accountCount = accountCount
@@ -45,6 +44,7 @@ public struct Message: Codable {
         self.contentWarning = contentWarning
         self.contentDeleted = contentDeleted
         self.postedAt = postedAt
+        self.next = next
     }
 
     public enum CodingKeys: String, CodingKey { 
@@ -52,7 +52,6 @@ public struct Message: Codable {
         case messageType
         case message
         case medium
-        case by
         case account
         case unread
         case accountCount
@@ -60,6 +59,7 @@ public struct Message: Codable {
         case contentWarning
         case contentDeleted
         case postedAt
+        case next
     }
 
 
