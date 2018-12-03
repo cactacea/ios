@@ -13,7 +13,7 @@ public struct Account: Codable {
 
     public var _id: Int64
     public var accountName: String
-    public var displayName: String?
+    public var displayName: String
     public var profileImageUrl: String?
     public var friend: Bool
     public var friendRequestInProgress: Bool
@@ -29,9 +29,9 @@ public struct Account: Codable {
     public var location: String?
     public var bio: String?
     public var joinedAt: Int64?
-    public var next: Int64
+    public var next: Int64?
 
-    public init(_id: Int64, accountName: String, displayName: String?, profileImageUrl: String?, friend: Bool, friendRequestInProgress: Bool, follow: Bool, follower: Bool, followCount: Int64?, followerCount: Int64?, friendCount: Int64?, feedsCount: Int64?, mute: Bool, web: String?, birthday: Int64?, location: String?, bio: String?, joinedAt: Int64?, next: Int64) {
+    public init(_id: Int64, accountName: String, displayName: String, profileImageUrl: String?, friend: Bool, friendRequestInProgress: Bool, follow: Bool, follower: Bool, followCount: Int64?, followerCount: Int64?, friendCount: Int64?, feedsCount: Int64?, mute: Bool, web: String?, birthday: Int64?, location: String?, bio: String?, joinedAt: Int64?, next: Int64?) {
         self._id = _id
         self.accountName = accountName
         self.displayName = displayName

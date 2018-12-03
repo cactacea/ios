@@ -20,9 +20,9 @@ public struct FriendRequest: Codable {
     public var account: Account
     public var requestStatus: RequestStatus
     public var requestedAt: Int64
-    public var next: Int64
+    public var next: Int64?
 
-    public init(_id: Int64, account: Account, requestStatus: RequestStatus, requestedAt: Int64, next: Int64) {
+    public init(_id: Int64, account: Account, requestStatus: RequestStatus, requestedAt: Int64, next: Int64?) {
         self._id = _id
         self.account = account
         self.requestStatus = requestStatus

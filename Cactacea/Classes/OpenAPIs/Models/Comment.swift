@@ -19,9 +19,9 @@ public struct Comment: Codable {
     public var contentWarning: Bool
     public var contentDeleted: Bool
     public var postedAt: Int64
-    public var next: Int64
+    public var next: Int64?
 
-    public init(_id: Int64, replyId: Int64?, message: String, account: Account, likeCount: Int64, contentWarning: Bool, contentDeleted: Bool, postedAt: Int64, next: Int64) {
+    public init(_id: Int64, replyId: Int64?, message: String, account: Account, likeCount: Int64, contentWarning: Bool, contentDeleted: Bool, postedAt: Int64, next: Int64?) {
         self._id = _id
         self.replyId = replyId
         self.message = message

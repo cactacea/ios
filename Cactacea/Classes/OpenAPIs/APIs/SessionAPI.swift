@@ -324,15 +324,24 @@ open class SessionAPI {
     }
 
     /**
+     * enum for parameter sortType
+     */
+    public enum SortType_findSessionFriends: String {
+        case friendsat = "friendsAt"
+        case accountname = "accountName"
+    }
+
+    /**
      Get friends list
      
      - parameter since: (query) Filters friends which started on since or later. (optional)
      - parameter offset: (query) The offset of friends. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of friends returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter sortType: (query) Friends which sorted by accountName or friendsAt. Default is friendsAt. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findSessionFriends(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
-        findSessionFriendsWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findSessionFriends(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, sortType: SortType_findSessionFriends? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
+        findSessionFriendsWithRequestBuilder(since: since, offset: offset, count: count, sortType: sortType).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
     }
@@ -343,11 +352,12 @@ open class SessionAPI {
      - parameter since: (query) Filters friends which started on since or later. (optional)
      - parameter offset: (query) The offset of friends. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of friends returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter sortType: (query) Friends which sorted by accountName or friendsAt. Default is friendsAt. (optional)
      - returns: Observable<[Account]>
      */
-    open class func findSessionFriends(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
+    open class func findSessionFriends(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, sortType: SortType_findSessionFriends? = nil) -> Observable<[Account]> {
         return Observable.create { observer -> Disposable in
-            findSessionFriends(since: since, offset: offset, count: count) { data, error in
+            findSessionFriends(since: since, offset: offset, count: count, sortType: sortType) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -371,9 +381,10 @@ open class SessionAPI {
      - parameter since: (query) Filters friends which started on since or later. (optional)
      - parameter offset: (query) The offset of friends. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of friends returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter sortType: (query) Friends which sorted by accountName or friendsAt. Default is friendsAt. (optional)
      - returns: RequestBuilder<[Account]> 
      */
-    open class func findSessionFriendsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
+    open class func findSessionFriendsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, sortType: SortType_findSessionFriends? = nil) -> RequestBuilder<[Account]> {
         let path = "/session/friends"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -382,7 +393,8 @@ open class SessionAPI {
         url?.queryItems = APIHelper.mapValuesToQueryItems([
             "since": since, 
             "offset": offset, 
-            "count": count
+            "count": count, 
+            "sortType": sortType?.rawValue
         ])
 
         let requestBuilder: RequestBuilder<[Account]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()

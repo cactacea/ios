@@ -21,9 +21,10 @@ public struct Feed: Codable {
     public var contentWarning: Bool
     public var contentDeleted: Bool
     public var postedAt: Int64
-    public var next: Int64
+    public var likedAt: Int64?
+    public var next: Int64?
 
-    public init(_id: Int64, message: String, mediums: [Medium]?, tags: [String]?, account: Account?, likeCount: Int64, commentCount: Int64, contentWarning: Bool, contentDeleted: Bool, postedAt: Int64, next: Int64) {
+    public init(_id: Int64, message: String, mediums: [Medium]?, tags: [String]?, account: Account?, likeCount: Int64, commentCount: Int64, contentWarning: Bool, contentDeleted: Bool, postedAt: Int64, likedAt: Int64?, next: Int64?) {
         self._id = _id
         self.message = message
         self.mediums = mediums
@@ -34,6 +35,7 @@ public struct Feed: Codable {
         self.contentWarning = contentWarning
         self.contentDeleted = contentDeleted
         self.postedAt = postedAt
+        self.likedAt = likedAt
         self.next = next
     }
 
@@ -48,6 +50,7 @@ public struct Feed: Codable {
         case contentWarning
         case contentDeleted
         case postedAt
+        case likedAt
         case next
     }
 
