@@ -15,7 +15,7 @@ extension UIViewController {
     private func messageFromError(_ error: Error) -> String {
         if let err = error as? ErrorResponse {
             switch(err){
-            case ErrorResponse.error(_, let data, _):
+            case ErrorResponse.error(_, let data, let error):
                 if let data = data {
                     let decodeResult = CodableHelper.decode(CactaceaErrors.self, from: data)
                     if decodeResult.error == nil {
@@ -24,6 +24,7 @@ extension UIViewController {
                         }
                     }
                 }
+                return error.localizedDescription
             }
         }
         return error.localizedDescription

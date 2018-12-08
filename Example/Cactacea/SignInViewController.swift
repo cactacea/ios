@@ -18,6 +18,10 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tabOnView)))
+        
+        accountNameTextField.text = "shinzo_abe"
+        passwordTextField.text = "Password_2018"
+
     }
 
     @objc func tabOnView(sender: UIView) {

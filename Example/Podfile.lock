@@ -1,30 +1,41 @@
 PODS:
+  - ActiveLabel (1.0.1)
   - Alamofire (4.7.3)
-  - Cactacea (18.11.8):
+  - AlamofireImage (3.4.1):
+    - Alamofire (~> 4.7)
+  - Cactacea (18.12.1):
     - Alamofire (~> 4.7.3)
     - RxSwift (~> 4.4)
   - KeychainAccess (3.1.2)
   - Nimble (7.3.1)
   - Quick (1.3.2)
   - RxAtomic (4.4.0)
+  - RxCocoa (4.4.0):
+    - RxSwift (~> 4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
 
 DEPENDENCIES:
+  - ActiveLabel
   - Alamofire (~> 4.7.3)
+  - AlamofireImage
   - Cactacea (from `../`)
   - KeychainAccess (~> 3.1.2)
   - Nimble (~> 7.3.1)
   - Quick (~> 1.3.2)
+  - RxCocoa (~> 4.4.0)
   - RxSwift (~> 4.4.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - ActiveLabel
     - Alamofire
+    - AlamofireImage
     - KeychainAccess
     - Nimble
     - Quick
     - RxAtomic
+    - RxCocoa
     - RxSwift
 
 EXTERNAL SOURCES:
@@ -32,14 +43,17 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
+  ActiveLabel: b8b2396fe25308d563601437d6605bf691c3b5db
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  Cactacea: 921841eb658d933faa6406b1231242b983c300ef
+  AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
+  Cactacea: 18155678f1b38b85045c47b1bbe85fcb37a6066b
   KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
   Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
   Quick: 2623cb30d7a7f41ca62f684f679586558f483d46
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
+  RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
 
-PODFILE CHECKSUM: 0a9b9db332fbca8ae416652b53f592ad85070e4c
+PODFILE CHECKSUM: d504584cb4d08774b9e5dac4ccd82e78478cfa03
 
 COCOAPODS: 1.5.3
