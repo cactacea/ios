@@ -68,7 +68,7 @@ class SignUpViewController: UIViewController {
         signUpButton.setTitle("", for: .normal)
         
         let request = PostSignUpBody(accountName: accountName, password: password, udid: udid)
-        SessionsAPI.signUp(postSignUpBody: request) { [weak self] (result, error) in
+        SessionsAPI.signUp(body: request) { [weak self] (result, error) in
             guard let weakSelf = self else { return }
             weakSelf.signUpButton.showsActivityIndicator = false
             weakSelf.signUpButton.setTitle("Signup", for: .normal)

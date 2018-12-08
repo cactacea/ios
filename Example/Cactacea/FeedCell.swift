@@ -32,9 +32,11 @@ class FeedCell: UITableViewCell {
     var delegate: FeedCellDelegate?
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
+
     var feed: Feed? {
         didSet {
-            updateView()
+            updateFeed()
+            updateLike()
         }
     }
     var account: Account? {
@@ -51,7 +53,7 @@ class FeedCell: UITableViewCell {
     
     var isMuted = true
     
-    func updateView() {
+    func updateFeed() {
         guard let feed = feed else { return }
         captionLabel.text = feed.message
         if let medium = mediums?.first {
@@ -71,6 +73,11 @@ class FeedCell: UITableViewCell {
             profileImageView.af_setImage(withURLRequest: urlRequest)
         }
         
+
+    }
+    
+    func updateLike() {
+        guard let feed = feed else { return }
         let imageName = feed.likedAt == nil ? "like_unselected" : "like_selected"
         likeImageView.image = UIImage(named: imageName)
         if feed.likeCount != 0 {
@@ -78,7 +85,6 @@ class FeedCell: UITableViewCell {
         } else {
             likeCountButton.setTitle("Be the first like this", for: UIControl.State.normal)
         }
-
     }
 
     @IBAction func volumeButton_TouchUpInSide(_ sender: UIButton) {
@@ -112,24 +118,43 @@ class FeedCell: UITableViewCell {
     
     
     @objc func nameLabel_TouchUpInside() {
-        if let id = account?._id {
+        if let id = account?.id {
             delegate?.goToProfileUserVC(accountId: id)
         }
     }
     
     @objc func likeImageView_TouchUpInside() {
-//        Api.Post.incrementLikes(postId: post!.id!, onSucess: { (post) in
-//            self.updateLike(post: post)
-//            self.post?.likes = post.likes
-//            self.post?.isLiked = post.isLiked
-//            self.post?.likeCount = post.likeCount
-//        }) { (errorMessage) in
-//            ProgressHUD.showError(errorMessage)
-//        }
+        guard let feed = feed else { return }
+        if let _ = feed.likedAt {
+            CommentLikesAPI.unlike(id: feed.id) { [weak self] (error) in
+                guard let weakSelf = self else { return }
+                guard let viewController = weakSelf.parentViewController else { return }
+                if let error = error {
+                    viewController.show(error)
+                } else {
+                    feed.likeCount = feed.likeCount - 1
+                    feed.likedAt = nil
+                    weakSelf.updateLike()
+                }
+            }
+        } else {
+            CommentLikesAPI.like(id: feed.id) { [weak self] (error) in
+                guard let weakSelf = self else { return }
+                guard let viewController = weakSelf.parentViewController else { return }
+                if let error = error {
+                    viewController.show(error)
+                } else {
+                    feed.likeCount = feed.likeCount + 1
+                    feed.likedAt = 0
+                    weakSelf.updateLike()
+                }
+            }
+        }
+        
     }
     
     @objc func commentImageView_TouchUpInside() {
-        if let id = feed?._id {
+        if let id = feed?.id {
             delegate?.goToCommentVC(feedId: id)
         }
     }
@@ -149,24 +174,3 @@ class FeedCell: UITableViewCell {
 
 }
 
-
-
-//        if let ratio = ratio {
-//            heightConstraintPhoto.constant = UIScreen.main.bounds.width / ratio
-//            layoutIfNeeded()
-//        }
-//        if let photoUrlString = post?.photoUrl {
-//            let photoUrl = URL(string: photoUrlString)
-//            postImageView.sd_setImage(with: photoUrl)
-//        }
-//        if let videoUrlString = post?.videoUrl, let videoUrl = URL(string: videoUrlString) {
-//            self.volumeView.isHidden = false
-//            player = AVPlayer(url: videoUrl)
-//            playerLayer = AVPlayerLayer(player: player)
-//            playerLayer?.frame = postImageView.frame
-//            playerLayer?.frame.size.width = UIScreen.main.bounds.width
-//            self.contentView.layer.addSublayer(playerLayer!)
-//            self.volumeView.layer.zPosition = 1
-//            player?.play()
-//            player?.isMuted = isMuted
-//        }

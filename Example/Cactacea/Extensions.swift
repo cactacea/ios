@@ -39,6 +39,7 @@ extension UIViewController {
     }
 }
 
+
 extension UIButton {
     
     /// Boolean value indicating whether an activity indicator should be shown.
@@ -261,4 +262,17 @@ extension Date {
 extension NSNotification.Name {
     static var updateHomeFeed = NSNotification.Name(rawValue: "updateFeed")
     static var updateUserProfileFeed = NSNotification.Name(rawValue: "updateUserProfileFeed")
+}
+
+extension UITableViewCell {
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
 }

@@ -33,7 +33,7 @@ class CommentsViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 
-        CommentsAPI.findComments(_id: feed._id, since: nil, offset: nil, count: nil) { [weak self] (result, error) in
+        CommentsAPI.findComments(id: feed.id, since: nil, offset: nil, count: nil) { [weak self] (result, error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 weakSelf.show(error)

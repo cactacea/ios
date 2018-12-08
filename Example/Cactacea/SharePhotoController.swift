@@ -38,7 +38,7 @@ class SharePhotoController: UIViewController {
         textView.isUserInteractionEnabled = false
         
         let postFeedBody = PostFeedBody(message: self.textView.text, mediumIds: nil, tags: nil, privacyType: PostFeedBody.PrivacyType.everyone, contentWarning: false, expiration: nil)
-        FeedsAPI.postFeed(postFeedBody: postFeedBody) { [weak self] (result, error) in
+        FeedsAPI.postFeed(body: postFeedBody) { [weak self] (result, error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 weakSelf.navigationItem.setRightBarButton(weakSelf.shareButton, animated: false)

@@ -66,7 +66,7 @@ class CommentTableViewCell: UITableViewCell {
     }
     
     @objc func nameLabel_TouchUpInside() {
-        if let id = comment?.account._id {
+        if let id = comment?.account.id {
 //            delegate?.goToProfileUserVC(userId: id)
         }
     }
