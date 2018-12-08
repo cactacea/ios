@@ -126,7 +126,7 @@ class FeedCell: UITableViewCell {
     @objc func likeImageView_TouchUpInside() {
         guard let feed = feed else { return }
         if let _ = feed.likedAt {
-            CommentLikesAPI.unlike(id: feed.id) { [weak self] (error) in
+            FeedLikesAPI.unlike(id: feed.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 guard let viewController = weakSelf.parentViewController else { return }
                 if let error = error {
@@ -138,7 +138,7 @@ class FeedCell: UITableViewCell {
                 }
             }
         } else {
-            CommentLikesAPI.like(id: feed.id) { [weak self] (error) in
+            FeedLikesAPI.like(id: feed.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 guard let viewController = weakSelf.parentViewController else { return }
                 if let error = error {

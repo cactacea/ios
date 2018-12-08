@@ -8,8 +8,7 @@
 
 import UIKit
 import Cactacea
-
-//import ActiveLabel
+import ActiveLabel
 
 protocol CommentTableViewCellDelegate {
     func goToProfileUserVC(userId: String)
@@ -28,12 +27,6 @@ class CommentTableViewCell: UITableViewCell {
         }
     }
     
-//    var user: User? {
-//        didSet {
-//            setupUserInfo()
-//        }
-//    }
-
     func updateView() {
         commentLabel.text = comment?.message
 //        commentLabel.userHandleLinkTapHandler = {
@@ -66,7 +59,7 @@ class CommentTableViewCell: UITableViewCell {
     }
     
     @objc func nameLabel_TouchUpInside() {
-        if let id = comment?.account.id {
+        if let _ = comment?.account.id {
 //            delegate?.goToProfileUserVC(userId: id)
         }
     }

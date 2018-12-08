@@ -19,29 +19,17 @@ class CommentsViewController: UIViewController {
     var feed: Feed!
     var comments = [Comment]()
 
-//    var users = [Account]()
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Comment"
-        tableView.dataSource = self
+
         tableView.estimatedRowHeight = 77
         tableView.rowHeight = UITableView.automaticDimension
         empty()
         handleTextField()
+        loadComments()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-
-        CommentsAPI.findComments(id: feed.id, since: nil, offset: nil, count: nil) { [weak self] (result, error) in
-            guard let weakSelf = self else { return }
-            if let error = error {
-                weakSelf.show(error)
-            } else if let result = result {
-                weakSelf.comments.append(contentsOf: result)
-                weakSelf.tableView.reloadData()
-            }
-        }
 
     }
     
@@ -66,28 +54,17 @@ class CommentsViewController: UIViewController {
         }
     }
     
-    
-//    func loadComments() {
-//         Api.Post_Comment.REF_POST_COMMENTS.child(self.postId).observe(.childAdded, with: {
-//            snapshot in
-//            Api.Comment.observeComments(withPostId: snapshot.key, completion: {
-//                comment in
-//                self.fetchUser(uid: comment.uid!, completed: {
-//                    self.comments.append(comment)
-//                    self.tableView.reloadData()
-//                })
-//            })
-//        })
-//    }
-    
-//    func fetchUser(uid: String, completed:  @escaping () -> Void ) {
-//
-//        Api.User.observeUser(withId: uid, completion: {
-//            user in
-//            self.users.append(user)
-//            completed()
-//        })
-//    }
+    func loadComments() {
+        CommentsAPI.findComments(id: feed.id, since: nil, offset: nil, count: nil) { [weak self] (result, error) in
+            guard let weakSelf = self else { return }
+            if let error = error {
+                weakSelf.show(error)
+            } else if let result = result {
+                weakSelf.comments.append(contentsOf: result)
+                weakSelf.tableView.reloadData()
+            }
+        }
+    }
     
     func handleTextField() {
         commentTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControl.Event.editingChanged)
@@ -103,43 +80,29 @@ class CommentsViewController: UIViewController {
         }
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        self.tabBarController?.tabBar.isHidden = true
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        self.tabBarController?.tabBar.isHidden = false
-//    }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
     
     @IBAction func sendButton_TouchUpInside(_ sender: Any) {
-        
-//        let commentsReference = Api.Comment.REF_COMMENTS
-//        let newCommentId = commentsReference.childByAutoId().key
-//        let newCommentReference = commentsReference.child(newCommentId)
-//        guard let currentUser = Api.User.CURRENT_USER else  {
-//            return
-//        }
-//        let currentUserId = currentUser.uid
-//        newCommentReference.setValue(["uid": currentUserId, "commentText": commentTextField.text!], withCompletionBlock: {
-//            (error, ref) in
-//            if error != nil {
-//                ProgressHUD.showError(error!.localizedDescription)
-//                return
-//            }
-//            let postCommentRef = Api.Post_Comment.REF_POST_COMMENTS.child(self.postId).child(newCommentId)
-//            postCommentRef.setValue(true, withCompletionBlock: { (error, ref) in
-//                if error != nil {
-//                    ProgressHUD.showError(error!.localizedDescription)
-//                    return
-//                }
-//            })
-//            self.empty()
-//            self.view.endEditing(true)
-//        })
-
+        guard let message = commentTextField.text else { return }
+        let body = PostCommentBody(id: feed.id, message: message)
+        CommentsAPI.postComment(body: body) { [weak self] (result, error) in
+            guard let weakSelf = self else { return }
+            if let error = error {
+                weakSelf.show(error)
+            } else if let _ = result {
+                weakSelf.loadComments()
+            }
+            weakSelf.empty()
+            weakSelf.view.endEditing(true)
+        }
     }
     
     func empty() {
@@ -164,10 +127,7 @@ extension CommentsViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentTableViewCell
-        let comment = comments[indexPath.row]
-//        let user = users[indexPath.row]
-        cell.comment = comment
-//        cell.user = user
+        cell.comment = comments[indexPath.row]
         cell.delegate = self
         return cell
     }
