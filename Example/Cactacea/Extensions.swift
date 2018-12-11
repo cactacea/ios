@@ -9,35 +9,9 @@
 import Foundation
 import UIKit
 import Cactacea
+import RxSwift
 
-extension UIViewController {
 
-    private func messageFromError(_ error: Error) -> String {
-        if let err = error as? ErrorResponse {
-            switch(err){
-            case ErrorResponse.error(_, let data, let error):
-                if let data = data {
-                    let decodeResult = CodableHelper.decode(CactaceaErrors.self, from: data)
-                    if decodeResult.error == nil {
-                        if let m = decodeResult.decodableObj?.errors.first {
-                            return m.message
-                        }
-                    }
-                }
-                return error.localizedDescription
-            }
-        }
-        return error.localizedDescription
-    }
-
-    func show(_ error: Error) {
-        let message = messageFromError(error)
-        let alert = UIAlertController(title:nil, message: message, preferredStyle: UIAlertController.Style.alert)
-        let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
-    }
-}
 
 
 extension UIButton {
@@ -264,15 +238,76 @@ extension NSNotification.Name {
     static var updateUserProfileFeed = NSNotification.Name(rawValue: "updateUserProfileFeed")
 }
 
-extension UITableViewCell {
-    var parentViewController: UIViewController? {
-        var parentResponder: UIResponder? = self
-        while parentResponder != nil {
-            parentResponder = parentResponder!.next
-            if let viewController = parentResponder as? UIViewController {
-                return viewController
+
+
+
+extension MediumsAPI {
+
+    open class func uploadMedium(data: Data, fileExtension: String, completion: @escaping ((_ data: [MediumCreated]?,_ error: Error?) -> Void)) {
+        let pathName = NSTemporaryDirectory()
+        let fileName = UUID().uuidString + fileExtension
+        let url = URL(fileURLWithPath: pathName)
+        let file = url.appendingPathComponent(fileName)
+        do {
+            try data.write(to: file)
+            uploadMediumWithRequestBuilder(file: file).execute { (response, error) -> Void in
+                try! FileManager.default.removeItem(at: file)
+                completion(response?.body, error);
             }
+        } catch let error {
+            completion(nil, error);
         }
-        return nil
+    }
+
+    open class func uploadMedium(data: Data, fileExtension: String) -> Observable<[MediumCreated]> {
+        let pathName = NSTemporaryDirectory()
+        let fileName = UUID().uuidString + fileExtension
+        let file = URL(fileURLWithPath: pathName).appendingPathComponent(fileName)
+        do {
+            try data.write(to: file)
+            return Observable.create { observer -> Disposable in
+                uploadMedium(file: file) { data, error in
+                    try! FileManager.default.removeItem(at: file)
+                    if let error = error {
+                        observer.on(.error(error))
+                    } else {
+                        observer.on(.next(data!))
+                    }
+                    observer.on(.completed)
+                }
+                return Disposables.create()
+            }
+        } catch let error {
+            return Observable.error(error)
+        }
+    }
+
+}
+
+extension UIImage {
+    
+    func resizeImage(newWidth: CGFloat) -> UIImage? {
+        let scale = newWidth / self.size.width
+        let newHeight = self.size.height * scale
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: newWidth, height: newHeight), false, 0.0)
+        self.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+
+}
+
+extension UIAlertController {
+    func show(completion: (() -> Void)?) {
+        guard let rootViewController = UIApplication.shared.delegate?.window??.rootViewController else {
+            return
+        }
+        
+        if let presentedViewController = rootViewController.presentedViewController {
+            presentedViewController.present(self, animated: true, completion: completion)
+        } else {
+            rootViewController.present(self, animated: true, completion: completion)
+        }
     }
 }

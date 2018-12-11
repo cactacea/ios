@@ -8,6 +8,7 @@
 
 import UIKit
 import Cactacea
+import RxSwift
 
 class SignUpViewController: UIViewController {
     
@@ -73,12 +74,26 @@ class SignUpViewController: UIViewController {
             weakSelf.signUpButton.showsActivityIndicator = false
             weakSelf.signUpButton.setTitle("Signup", for: .normal)
             if let error = error {
-                weakSelf.show(error)
+                Session.showError(error)
                 weakSelf.resetInputFields()
             } else {
                 Session.authentication = result
+                weakSelf.updateProfileImage()
                 weakSelf.dismiss(animated: true, completion: nil)
             }
+        }
+    }
+    
+    func updateProfileImage() {
+        guard let image = profileImage?.resizeImage(newWidth: 200) else { return }
+        if let data = image.jpegData(compressionQuality: 0.7) {
+            let _ = MediumsAPI.uploadMedium(data: data, fileExtension: ".jpeg").map({ (result) -> Observable<Void> in
+                guard let medium = result.first else { return Observable.empty() }
+                let body = PutSessionProfileImageBody(id: medium.id)
+                return SessionAPI.updateProfileImage(body: body).asObservable()
+            }).subscribe(onNext: nil, onError: { (error) in
+                Session.showError(error)
+            }, onCompleted: nil, onDisposed: nil)
         }
     }
 

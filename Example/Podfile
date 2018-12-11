@@ -10,6 +10,7 @@ target 'Cactacea_Example' do
   pod 'Alamofire', '~> 4.7.3'
   pod 'AlamofireImage'
   pod 'ActiveLabel'
+  pod 'YPImagePicker'
   
   target 'Cactacea_Tests' do
     inherit! :search_paths

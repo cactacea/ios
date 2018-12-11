@@ -11,10 +11,10 @@ import Cactacea
 import ActiveLabel
 
 protocol CommentTableViewCellDelegate {
-    func goToProfileUserVC(userId: String)
+    func tappedProfile(account: Account)
 }
 
-class CommentTableViewCell: UITableViewCell {
+class CommentCell: UITableViewCell {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -29,12 +29,13 @@ class CommentTableViewCell: UITableViewCell {
     
     func updateView() {
         commentLabel.text = comment?.message
+
 //        commentLabel.userHandleLinkTapHandler = {
 //            label, handle, rang in
 //            var mention = handle
 //            mention = String(mention.characters.dropFirst())
 //            Api.User.observeUserByUsername(username: mention.lowercased(), completion: { (user) in
-//                self.delegate?.goToProfileUserVC(userId: user.id!)
+//                self.delegate?.tappedProfile(userId: user.id!)
 //            })
 //
 //        }
@@ -53,20 +54,20 @@ class CommentTableViewCell: UITableViewCell {
         super.awakeFromNib()
         nameLabel.text = ""
         commentLabel.text = ""
-        let tapGestureForNameLabel = UITapGestureRecognizer(target: self, action: #selector(self.nameLabel_TouchUpInside))
+        let tapGestureForNameLabel = UITapGestureRecognizer(target: self, action: #selector(self.tappedName))
         nameLabel.addGestureRecognizer(tapGestureForNameLabel)
         nameLabel.isUserInteractionEnabled = true
     }
     
-    @objc func nameLabel_TouchUpInside() {
-        if let _ = comment?.account.id {
-//            delegate?.goToProfileUserVC(userId: id)
+    @objc func tappedName() {
+        if let account = comment?.account {
+            delegate?.tappedProfile(account: account)
         }
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-//        profileImageView.image = UIImage(named: "placeholderImg")
+        profileImageView.image = UIImage(named: "placeholder_profile")
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -58,9 +58,10 @@ class CommentsViewController: UIViewController {
         CommentsAPI.findComments(id: feed.id, since: nil, offset: nil, count: nil) { [weak self] (result, error) in
             guard let weakSelf = self else { return }
             if let error = error {
-                weakSelf.show(error)
+                Session.showError(error)
             } else if let result = result {
-                weakSelf.comments.append(contentsOf: result)
+//                weakSelf.comments.append(contentsOf: result)
+                weakSelf.comments = result
                 weakSelf.tableView.reloadData()
             }
         }
@@ -90,13 +91,13 @@ class CommentsViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    @IBAction func sendButton_TouchUpInside(_ sender: Any) {
+    @IBAction func tappedSendButton(_ sender: Any) {
         guard let message = commentTextField.text else { return }
         let body = PostCommentBody(id: feed.id, message: message)
         CommentsAPI.postComment(body: body) { [weak self] (result, error) in
             guard let weakSelf = self else { return }
             if let error = error {
-                weakSelf.show(error)
+                Session.showError(error)
             } else if let _ = result {
                 weakSelf.loadComments()
             }
@@ -111,32 +112,37 @@ class CommentsViewController: UIViewController {
         sendButton.setTitleColor(UIColor.lightGray, for: UIControl.State.normal)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "Comment_ProfileSegue" {
-//            let profileVC = segue.destination as! ProfileUserViewController
-//            let userId = sender  as! String
-//            profileVC.userId = userId
-//        }
-    }
-    
 }
 
 extension CommentsViewController: UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return comments.count
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentCell
         cell.comment = comments[indexPath.row]
         cell.delegate = self
         return cell
     }
+
 }
 
 extension CommentsViewController: CommentTableViewCellDelegate {
-    func goToProfileUserVC(userId: String) {
-//        performSegue(withIdentifier: "Comment_ProfileSegue", sender: userId)
+
+    func tappedProfile(account: Account) {
+        performSegue(withIdentifier: "profile", sender: account)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "profile" {
+            let vc = segue.destination as! ProfileViewController
+            let account = sender  as! Account
+            vc.user = account
+        }
+    }
+
 }
 
 

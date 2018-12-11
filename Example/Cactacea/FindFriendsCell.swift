@@ -13,4 +13,9 @@ class FindFriendsCell: UITableViewCell {
     @IBOutlet var accountNameLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        profileImageView.image = UIImage(named: "placeholder_profile")
+    }
+
 }

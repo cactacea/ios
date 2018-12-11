@@ -18,10 +18,13 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tabOnView)))
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         accountNameTextField.text = "shinzo_abe"
         passwordTextField.text = "Password_2018"
-
+        loginButton.isEnabled = true
     }
 
     @objc func tabOnView(sender: UIView) {
@@ -53,7 +56,7 @@ class SignInViewController: UIViewController {
             weakSelf.loginButton.showsActivityIndicator = false
             weakSelf.loginButton.setTitle("Login", for: .normal)
             if let error = error {
-                weakSelf.show(error)
+                Session.showError(error)
                 weakSelf.resetInputFields()
             } else {
                 Session.authentication = result

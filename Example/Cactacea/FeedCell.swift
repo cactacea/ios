@@ -11,8 +11,8 @@ import Cactacea
 import AVFoundation
 
 protocol FeedCellDelegate {
-    func goToCommentVC(feedId: Int64)
-    func goToProfileUserVC(accountId: Int64)
+    func tappedFeed(feed: Feed)
+    func tappedProfile(account: Account)
 }
 
 class FeedCell: UITableViewCell {
@@ -103,34 +103,33 @@ class FeedCell: UITableViewCell {
         super.awakeFromNib()
         nameLabel.text = ""
         captionLabel.text = ""
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.commentImageView_TouchUpInside))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tappedFeed))
         commentImageView.addGestureRecognizer(tapGesture)
         commentImageView.isUserInteractionEnabled = true
         
-        let tapGestureForLikeImageView = UITapGestureRecognizer(target: self, action: #selector(self.likeImageView_TouchUpInside))
+        let tapGestureForLikeImageView = UITapGestureRecognizer(target: self, action: #selector(self.tappedLike))
         likeImageView.addGestureRecognizer(tapGestureForLikeImageView)
         likeImageView.isUserInteractionEnabled = true
         
-        let tapGestureForNameLabel = UITapGestureRecognizer(target: self, action: #selector(self.nameLabel_TouchUpInside))
+        let tapGestureForNameLabel = UITapGestureRecognizer(target: self, action: #selector(self.tappedName))
         nameLabel.addGestureRecognizer(tapGestureForNameLabel)
         nameLabel.isUserInteractionEnabled = true
     }
     
     
-    @objc func nameLabel_TouchUpInside() {
-        if let id = account?.id {
-            delegate?.goToProfileUserVC(accountId: id)
+    @objc func tappedName() {
+        if let account = account {
+            delegate?.tappedProfile(account: account)
         }
     }
     
-    @objc func likeImageView_TouchUpInside() {
+    @objc func tappedLike() {
         guard let feed = feed else { return }
         if let _ = feed.likedAt {
             FeedLikesAPI.unlike(id: feed.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
-                guard let viewController = weakSelf.parentViewController else { return }
                 if let error = error {
-                    viewController.show(error)
+                    Session.showError(error)
                 } else {
                     feed.likeCount = feed.likeCount - 1
                     feed.likedAt = nil
@@ -140,9 +139,8 @@ class FeedCell: UITableViewCell {
         } else {
             FeedLikesAPI.like(id: feed.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
-                guard let viewController = weakSelf.parentViewController else { return }
                 if let error = error {
-                    viewController.show(error)
+                    Session.showError(error)
                 } else {
                     feed.likeCount = feed.likeCount + 1
                     feed.likedAt = 0
@@ -153,9 +151,9 @@ class FeedCell: UITableViewCell {
         
     }
     
-    @objc func commentImageView_TouchUpInside() {
-        if let id = feed?.id {
-            delegate?.goToCommentVC(feedId: id)
+    @objc func tappedFeed() {
+        if let feed = feed {
+            delegate?.tappedFeed(feed: feed)
         }
     }
     
