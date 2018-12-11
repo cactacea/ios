@@ -1,5 +1,5 @@
 //
-//  PhotoCollectionViewCell.swift
+//  ProfilePhotoCell.swift
 //  InstagramClone
 //
 //  Created by The Zero2Launch Team on 1/15/17.
@@ -13,7 +13,7 @@ protocol PhotoCollectionViewCellDelegate {
     func goToDetailVC(postId: Int64)
 }
 
-class PhotoCollectionViewCell: UICollectionViewCell {
+class ProfilePhotoCell: UICollectionViewCell {
     @IBOutlet weak var photo: UIImageView!
     
     var delegate: PhotoCollectionViewCellDelegate?

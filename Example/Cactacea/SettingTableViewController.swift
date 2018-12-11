@@ -25,18 +25,19 @@ class SettingTableViewController: UITableViewController {
         navigationItem.title = "Edit Profile"
         usernnameTextField.delegate = self
         emailTextField.delegate = self
-        fetchCurrentUser()
+//        fetchCurrentUser()
     }
     
-    func fetchCurrentUser() {
-//        Api.User.observeCurrentUser { (user) in
-//            self.usernnameTextField.text = user.username
-//            self.emailTextField.text = user.email
-//            if let profileUrl = URL(string: user.profileImageUrl!) {
-//                self.profileImageView.sd_setImage(with: profileUrl)
-//            }
-//        }
-    }
+//    func fetchCurrentUser() {
+////        Api.User.observeCurrentUser { (user) in
+////            self.usernnameTextField.text = user.username
+////            self.emailTextField.text = user.email
+////            if let profileUrl = URL(string: user.profileImageUrl!) {
+////                self.profileImageView.sd_setImage(with: profileUrl)
+////            }
+////        }
+//    }
+
     @IBAction func saveBtn_TouchUpInside(_ sender: Any) {
 //        if let profileImg = self.profileImageView.image, let imageData = profileImg.jpegData(compressionQuality: 0.1) {
 //            ProgressHUD.show("Waiting...")

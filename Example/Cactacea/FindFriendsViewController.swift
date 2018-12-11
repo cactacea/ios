@@ -84,11 +84,7 @@ final class DataSource: NSObject, UITableViewDataSource, RxTableViewDataSourceTy
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         if let cell = cell as? FindFriendsCell  {
             let account = items[indexPath.row]
-            cell.accountNameLabel.text = account.accountName
-            if let smallImageURL = account.profileImageUrl {
-                let urlRequest = Session.request(url: smallImageURL)
-                cell.profileImageView.af_setImage(withURLRequest: urlRequest)
-            }
+            cell.account = account
         }
         return cell
     }

@@ -19,12 +19,17 @@ class ProfileViewController: UIViewController {
     var posts: [Feed] = []
     var userId = ""
     var delegate: ProfileHeaderReusableViewDelegate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if user == nil {
             user = Session.authentication?.account
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         fetchUser()
         fetchMyPosts()
@@ -33,7 +38,6 @@ class ProfileViewController: UIViewController {
     func fetchUser() {
         self.navigationItem.title = user.accountName
         self.collectionView.reloadData()
-
 //        Api.User.observeUser(withId: userId) { (user) in
 //            self.isFollowing(userId: user.id!, completed: { (value) in
 //                user.isFollowing = value
@@ -90,7 +94,7 @@ extension ProfileViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as! PhotoCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfilePhotoCell", for: indexPath) as! ProfilePhotoCell
         let post = posts[indexPath.row]
         cell.post = post
         cell.delegate = self

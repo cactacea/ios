@@ -3,7 +3,7 @@ PODS:
   - Alamofire (4.7.3)
   - AlamofireImage (3.4.1):
     - Alamofire (~> 4.7)
-  - Cactacea (18.12.2):
+  - Cactacea (18.12.6):
     - Alamofire (~> 4.7.3)
     - RxSwift (~> 4.4)
   - KeychainAccess (3.1.2)
@@ -55,7 +55,7 @@ SPEC CHECKSUMS:
   ActiveLabel: b8b2396fe25308d563601437d6605bf691c3b5db
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
-  Cactacea: cadd54126fb79b016dad625ca976d78a81bea78e
+  Cactacea: a829a47e614cae132735beb35d45b7fab932ea8d
   KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
   Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
   PryntTrimmerView: 53ac64053c7ce63cb3e27f54090f52da0734891d
