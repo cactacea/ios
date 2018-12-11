@@ -73,81 +73,14 @@ open class InvitationsAPI {
     }
 
     /**
-     Create a invitation to a account
-     
-     - parameter accountId: (path) Account Identifier. 
-     - parameter groupId: (path) Group Identifier. 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func createGroupInvitationToAccount(accountId: Int64, groupId: Int64, completion: @escaping ((_ data: InvitationCreated?,_ error: Error?) -> Void)) {
-        createGroupInvitationToAccountWithRequestBuilder(accountId: accountId, groupId: groupId).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-    /**
-     Create a invitation to a account
-     
-     - parameter accountId: (path) Account Identifier. 
-     - parameter groupId: (path) Group Identifier. 
-     - returns: Observable<InvitationCreated>
-     */
-    open class func createGroupInvitationToAccount(accountId: Int64, groupId: Int64) -> Observable<InvitationCreated> {
-        return Observable.create { observer -> Disposable in
-            createGroupInvitationToAccount(accountId: accountId, groupId: groupId) { data, error in
-                if let error = error {
-                    observer.on(.error(error))
-                } else {
-                    observer.on(.next(data!))
-                }
-                observer.on(.completed)
-            }
-            return Disposables.create()
-        }
-    }
-
-    /**
-     Create a invitation to a account
-     - POST /accounts/{accountId}/groups/{groupId}/invitations
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
-     - examples: [{contentType=application/json, example={
-  "id" : 0.80082819046101150206595775671303272247314453125
-}}]
-     
-     - parameter accountId: (path) Account Identifier. 
-     - parameter groupId: (path) Group Identifier. 
-
-     - returns: RequestBuilder<InvitationCreated> 
-     */
-    open class func createGroupInvitationToAccountWithRequestBuilder(accountId: Int64, groupId: Int64) -> RequestBuilder<InvitationCreated> {
-        var path = "/accounts/{accountId}/groups/{groupId}/invitations"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{groupId}", with: "\(groupId)", options: .literal, range: nil)
-        let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-
-        let requestBuilder: RequestBuilder<InvitationCreated>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
      Post a invitation to some accounts
      
      - parameter id: (path) Group Identifier. 
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func createGroupInvitationToAccounts(id: Int64, body: PostInvitationAccountsBody, completion: @escaping ((_ data: InvitationCreated?,_ error: Error?) -> Void)) {
-        createGroupInvitationToAccountsWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
+    open class func create(id: Int64, body: PostInvitationAccountsBody, completion: @escaping ((_ data: InvitationCreated?,_ error: Error?) -> Void)) {
+        createWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -159,9 +92,9 @@ open class InvitationsAPI {
      - parameter body: (body)  
      - returns: Observable<InvitationCreated>
      */
-    open class func createGroupInvitationToAccounts(id: Int64, body: PostInvitationAccountsBody) -> Observable<InvitationCreated> {
+    open class func create(id: Int64, body: PostInvitationAccountsBody) -> Observable<InvitationCreated> {
         return Observable.create { observer -> Disposable in
-            createGroupInvitationToAccounts(id: id, body: body) { data, error in
+            create(id: id, body: body) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -191,7 +124,7 @@ open class InvitationsAPI {
 
      - returns: RequestBuilder<InvitationCreated> 
      */
-    open class func createGroupInvitationToAccountsWithRequestBuilder(id: Int64, body: PostInvitationAccountsBody) -> RequestBuilder<InvitationCreated> {
+    open class func createWithRequestBuilder(id: Int64, body: PostInvitationAccountsBody) -> RequestBuilder<InvitationCreated> {
         var path = "/groups/{id}/invitations"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -206,30 +139,28 @@ open class InvitationsAPI {
     }
 
     /**
-     Get invitations list session account received
+     Create a invitation to a account
      
-     - parameter since: (query) Filters invitations which started on since or later. (optional)
-     - parameter offset: (query) The offset of group invitations. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of invitations returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter accountId: (path) Account Identifier. 
+     - parameter groupId: (path) Group Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findSessionGroupInvitations(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [GroupInvitation]?,_ error: Error?) -> Void)) {
-        findSessionGroupInvitationsWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func create_0(accountId: Int64, groupId: Int64, completion: @escaping ((_ data: InvitationCreated?,_ error: Error?) -> Void)) {
+        create_0WithRequestBuilder(accountId: accountId, groupId: groupId).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
 
     /**
-     Get invitations list session account received
+     Create a invitation to a account
      
-     - parameter since: (query) Filters invitations which started on since or later. (optional)
-     - parameter offset: (query) The offset of group invitations. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of invitations returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<[GroupInvitation]>
+     - parameter accountId: (path) Account Identifier. 
+     - parameter groupId: (path) Group Identifier. 
+     - returns: Observable<InvitationCreated>
      */
-    open class func findSessionGroupInvitations(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[GroupInvitation]> {
+    open class func create_0(accountId: Int64, groupId: Int64) -> Observable<InvitationCreated> {
         return Observable.create { observer -> Disposable in
-            findSessionGroupInvitations(since: since, offset: offset, count: count) { data, error in
+            create_0(accountId: accountId, groupId: groupId) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -242,200 +173,36 @@ open class InvitationsAPI {
     }
 
     /**
-     Get invitations list session account received
-     - GET /session/invitations
+     Create a invitation to a account
+     - POST /accounts/{accountId}/groups/{groupId}/invitations
      - API Key:
        - type: apiKey X-API-KEY 
        - name: api_key
      - OAuth:
        - type: oauth2
        - name: cactacea_auth
-     - examples: [{contentType=application/json, example=[ {
-  "next" : 1.46581298050294517310021547018550336360931396484375,
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "invitationStatus" : "noResponded",
-  "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "follower" : true,
-    "followCount" : 6.02745618307040320615897144307382404804229736328125,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
-    "accountName" : "accountName",
-    "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "bio" : "bio",
-    "mute" : true,
-    "follow" : true,
-    "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
-    "web" : "web",
-    "friend" : true,
-    "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
-  },
-  "group" : {
-    "next" : 2.027123023002321833274663731572218239307403564453125,
-    "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-    "groupPrivacyType" : "everyone",
-    "accountCount" : 7,
-    "name" : "name",
-    "invitationOnly" : true,
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "message" : {
-      "next" : 2.3021358869347654518833223846741020679473876953125,
-      "contentWarning" : true,
-      "readAccountCount" : 5,
-      "accountCount" : 1,
-      "messageType" : "text",
-      "postedAt" : 5,
-      "unread" : true,
-      "contentDeleted" : true,
-      "id" : 6.02745618307040320615897144307382404804229736328125,
-      "medium" : {
-        "contentWarning" : true,
-        "size" : 5,
-        "contentDeleted" : true,
-        "width" : 1,
-        "mediumType" : "image",
-        "id" : 6.02745618307040320615897144307382404804229736328125,
-        "uri" : "uri",
-        "height" : 5,
-        "thumbnailUrl" : "thumbnailUrl"
-      },
-      "message" : "message",
-      "account" : {
-        "birthday" : 2.3021358869347654518833223846741020679473876953125,
-        "next" : 9.301444243932575517419536481611430644989013671875,
-        "follower" : true,
-        "followCount" : 6.02745618307040320615897144307382404804229736328125,
-        "friendCount" : 5.962133916683182377482808078639209270477294921875,
-        "accountName" : "accountName",
-        "displayName" : "displayName",
-        "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-        "bio" : "bio",
-        "mute" : true,
-        "follow" : true,
-        "friendRequestInProgress" : true,
-        "feedsCount" : 5.63737665663332876420099637471139430999755859375,
-        "web" : "web",
-        "friend" : true,
-        "location" : "location",
-        "id" : 0.80082819046101150206595775671303272247314453125,
-        "profileImageUrl" : "profileImageUrl",
-        "followerCount" : 1.46581298050294517310021547018550336360931396484375
-      }
-    },
-    "authorityType" : "owner",
-    "organizedAt" : 3
-  },
-  "invitedAt" : 6
-}, {
-  "next" : 1.46581298050294517310021547018550336360931396484375,
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "invitationStatus" : "noResponded",
-  "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "follower" : true,
-    "followCount" : 6.02745618307040320615897144307382404804229736328125,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
-    "accountName" : "accountName",
-    "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "bio" : "bio",
-    "mute" : true,
-    "follow" : true,
-    "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
-    "web" : "web",
-    "friend" : true,
-    "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
-  },
-  "group" : {
-    "next" : 2.027123023002321833274663731572218239307403564453125,
-    "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-    "groupPrivacyType" : "everyone",
-    "accountCount" : 7,
-    "name" : "name",
-    "invitationOnly" : true,
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "message" : {
-      "next" : 2.3021358869347654518833223846741020679473876953125,
-      "contentWarning" : true,
-      "readAccountCount" : 5,
-      "accountCount" : 1,
-      "messageType" : "text",
-      "postedAt" : 5,
-      "unread" : true,
-      "contentDeleted" : true,
-      "id" : 6.02745618307040320615897144307382404804229736328125,
-      "medium" : {
-        "contentWarning" : true,
-        "size" : 5,
-        "contentDeleted" : true,
-        "width" : 1,
-        "mediumType" : "image",
-        "id" : 6.02745618307040320615897144307382404804229736328125,
-        "uri" : "uri",
-        "height" : 5,
-        "thumbnailUrl" : "thumbnailUrl"
-      },
-      "message" : "message",
-      "account" : {
-        "birthday" : 2.3021358869347654518833223846741020679473876953125,
-        "next" : 9.301444243932575517419536481611430644989013671875,
-        "follower" : true,
-        "followCount" : 6.02745618307040320615897144307382404804229736328125,
-        "friendCount" : 5.962133916683182377482808078639209270477294921875,
-        "accountName" : "accountName",
-        "displayName" : "displayName",
-        "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-        "bio" : "bio",
-        "mute" : true,
-        "follow" : true,
-        "friendRequestInProgress" : true,
-        "feedsCount" : 5.63737665663332876420099637471139430999755859375,
-        "web" : "web",
-        "friend" : true,
-        "location" : "location",
-        "id" : 0.80082819046101150206595775671303272247314453125,
-        "profileImageUrl" : "profileImageUrl",
-        "followerCount" : 1.46581298050294517310021547018550336360931396484375
-      }
-    },
-    "authorityType" : "owner",
-    "organizedAt" : 3
-  },
-  "invitedAt" : 6
-} ]}]
+     - examples: [{contentType=application/json, example={
+  "id" : 0.80082819046101150206595775671303272247314453125
+}}]
      
-     - parameter since: (query) Filters invitations which started on since or later. (optional)
-     - parameter offset: (query) The offset of group invitations. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of invitations returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter accountId: (path) Account Identifier. 
+     - parameter groupId: (path) Group Identifier. 
 
-     - returns: RequestBuilder<[GroupInvitation]> 
+     - returns: RequestBuilder<InvitationCreated> 
      */
-    open class func findSessionGroupInvitationsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[GroupInvitation]> {
-        let path = "/session/invitations"
+    open class func create_0WithRequestBuilder(accountId: Int64, groupId: Int64) -> RequestBuilder<InvitationCreated> {
+        var path = "/accounts/{accountId}/groups/{groupId}/invitations"
+        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
+        path = path.replacingOccurrences(of: "{groupId}", with: "\(groupId)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
 
         let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "since": since, 
-            "offset": offset, 
-            "count": count
-        ])
-        
 
-        let requestBuilder: RequestBuilder<[GroupInvitation]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let requestBuilder: RequestBuilder<InvitationCreated>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**

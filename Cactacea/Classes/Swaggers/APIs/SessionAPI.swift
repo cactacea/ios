@@ -17,8 +17,8 @@ open class SessionAPI {
      
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func deleteSessionProfileImage(completion: @escaping ((_ error: Error?) -> Void)) {
-        deleteSessionProfileImageWithRequestBuilder().execute { (response, error) -> Void in
+    open class func deleteProfileImage(completion: @escaping ((_ error: Error?) -> Void)) {
+        deleteProfileImageWithRequestBuilder().execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -28,9 +28,9 @@ open class SessionAPI {
      
      - returns: Observable<Void>
      */
-    open class func deleteSessionProfileImage() -> Observable<Void> {
+    open class func deleteProfileImage() -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            deleteSessionProfileImage() { error in
+            deleteProfileImage() { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -54,7 +54,7 @@ open class SessionAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func deleteSessionProfileImageWithRequestBuilder() -> RequestBuilder<Void> {
+    open class func deleteProfileImageWithRequestBuilder() -> RequestBuilder<Void> {
         let path = "/session/profile_image"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -72,8 +72,8 @@ open class SessionAPI {
      
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findSession(completion: @escaping ((_ data: Account?,_ error: Error?) -> Void)) {
-        findSessionWithRequestBuilder().execute { (response, error) -> Void in
+    open class func find(completion: @escaping ((_ data: Account?,_ error: Error?) -> Void)) {
+        findWithRequestBuilder().execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -83,9 +83,9 @@ open class SessionAPI {
      
      - returns: Observable<Account>
      */
-    open class func findSession() -> Observable<Account> {
+    open class func find() -> Observable<Account> {
         return Observable.create { observer -> Disposable in
-            findSession() { data, error in
+            find() { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -130,7 +130,7 @@ open class SessionAPI {
 
      - returns: RequestBuilder<Account> 
      */
-    open class func findSessionWithRequestBuilder() -> RequestBuilder<Account> {
+    open class func findWithRequestBuilder() -> RequestBuilder<Account> {
         let path = "/session"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -151,8 +151,8 @@ open class SessionAPI {
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findSessionFeeds(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: Feed?,_ error: Error?) -> Void)) {
-        findSessionFeedsWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findFeeds(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
+        findFeedsWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -163,11 +163,11 @@ open class SessionAPI {
      - parameter since: (query) Filters feeds which started on since or later. (optional)
      - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<Feed>
+     - returns: Observable<[Feed]>
      */
-    open class func findSessionFeeds(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<Feed> {
+    open class func findFeeds(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Feed]> {
         return Observable.create { observer -> Disposable in
-            findSessionFeeds(since: since, offset: offset, count: count) { data, error in
+            findFeeds(since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -188,7 +188,7 @@ open class SessionAPI {
      - OAuth:
        - type: oauth2
        - name: cactacea_auth
-     - examples: [{contentType=application/json, example={
+     - examples: [{contentType=application/json, example=[ {
   "next" : 2.027123023002321833274663731572218239307403564453125,
   "contentWarning" : true,
   "likedAt" : 3.61607674925191080461672754609026014804840087890625,
@@ -241,15 +241,68 @@ open class SessionAPI {
   },
   "tags" : [ "tags", "tags" ],
   "commentCount" : 7
-}}]
+}, {
+  "next" : 2.027123023002321833274663731572218239307403564453125,
+  "contentWarning" : true,
+  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
+  "postedAt" : 9,
+  "contentDeleted" : true,
+  "likeCount" : 2,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : "message",
+  "mediums" : [ {
+    "contentWarning" : true,
+    "size" : 5,
+    "contentDeleted" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  }, {
+    "contentWarning" : true,
+    "size" : 5,
+    "contentDeleted" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  } ],
+  "account" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 9.301444243932575517419536481611430644989013671875,
+    "follower" : true,
+    "followCount" : 6.02745618307040320615897144307382404804229736328125,
+    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "accountName" : "accountName",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "bio" : "bio",
+    "mute" : true,
+    "follow" : true,
+    "friendRequestInProgress" : true,
+    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "web" : "web",
+    "friend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  },
+  "tags" : [ "tags", "tags" ],
+  "commentCount" : 7
+} ]}]
      
      - parameter since: (query) Filters feeds which started on since or later. (optional)
      - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
 
-     - returns: RequestBuilder<Feed> 
+     - returns: RequestBuilder<[Feed]> 
      */
-    open class func findSessionFeedsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<Feed> {
+    open class func findFeedsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
         let path = "/session/feeds"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -262,7 +315,7 @@ open class SessionAPI {
         ])
         
 
-        let requestBuilder: RequestBuilder<Feed>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<[Feed]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -275,8 +328,8 @@ open class SessionAPI {
      - parameter count: (query) Maximum number of followers returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findSessionFollowers(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
-        findSessionFollowersWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findFollowers(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
+        findFollowersWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -289,9 +342,9 @@ open class SessionAPI {
      - parameter count: (query) Maximum number of followers returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: Observable<[Account]>
      */
-    open class func findSessionFollowers(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
+    open class func findFollowers(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
         return Observable.create { observer -> Disposable in
-            findSessionFollowers(since: since, offset: offset, count: count) { data, error in
+            findFollowers(since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -360,7 +413,7 @@ open class SessionAPI {
 
      - returns: RequestBuilder<[Account]> 
      */
-    open class func findSessionFollowersWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
+    open class func findFollowersWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
         let path = "/session/followers"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -386,8 +439,8 @@ open class SessionAPI {
      - parameter count: (query) Maximum number of follower returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findSessionFollows(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
-        findSessionFollowsWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findFollows(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
+        findFollowsWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -400,9 +453,9 @@ open class SessionAPI {
      - parameter count: (query) Maximum number of follower returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: Observable<[Account]>
      */
-    open class func findSessionFollows(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
+    open class func findFollows(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
         return Observable.create { observer -> Disposable in
-            findSessionFollows(since: since, offset: offset, count: count) { data, error in
+            findFollows(since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -471,7 +524,7 @@ open class SessionAPI {
 
      - returns: RequestBuilder<[Account]> 
      */
-    open class func findSessionFollowsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
+    open class func findFollowsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
         let path = "/session/follows"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -490,9 +543,136 @@ open class SessionAPI {
     }
 
     /**
+     Get friend requests list session account created or received
+     
+     - parameter received: (query) Filters friend requests which you have received or sent. 
+     - parameter since: (query) Filters friend requests which started on since or later. (optional)
+     - parameter offset: (query) The offset of friend request. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of friend request returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func findFriendRequests(received: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [FriendRequest]?,_ error: Error?) -> Void)) {
+        findFriendRequestsWithRequestBuilder(received: received, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+    /**
+     Get friend requests list session account created or received
+     
+     - parameter received: (query) Filters friend requests which you have received or sent. 
+     - parameter since: (query) Filters friend requests which started on since or later. (optional)
+     - parameter offset: (query) The offset of friend request. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of friend request returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - returns: Observable<[FriendRequest]>
+     */
+    open class func findFriendRequests(received: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[FriendRequest]> {
+        return Observable.create { observer -> Disposable in
+            findFriendRequests(received: received, since: since, offset: offset, count: count) { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Get friend requests list session account created or received
+     - GET /session/requests
+     - API Key:
+       - type: apiKey X-API-KEY 
+       - name: api_key
+     - OAuth:
+       - type: oauth2
+       - name: cactacea_auth
+     - examples: [{contentType=application/json, example=[ {
+  "next" : 1.46581298050294517310021547018550336360931396484375,
+  "requestedAt" : 6,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "account" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 9.301444243932575517419536481611430644989013671875,
+    "follower" : true,
+    "followCount" : 6.02745618307040320615897144307382404804229736328125,
+    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "accountName" : "accountName",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "bio" : "bio",
+    "mute" : true,
+    "follow" : true,
+    "friendRequestInProgress" : true,
+    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "web" : "web",
+    "friend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  },
+  "requestStatus" : "noResponded"
+}, {
+  "next" : 1.46581298050294517310021547018550336360931396484375,
+  "requestedAt" : 6,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "account" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 9.301444243932575517419536481611430644989013671875,
+    "follower" : true,
+    "followCount" : 6.02745618307040320615897144307382404804229736328125,
+    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "accountName" : "accountName",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "bio" : "bio",
+    "mute" : true,
+    "follow" : true,
+    "friendRequestInProgress" : true,
+    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "web" : "web",
+    "friend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  },
+  "requestStatus" : "noResponded"
+} ]}]
+     
+     - parameter received: (query) Filters friend requests which you have received or sent. 
+     - parameter since: (query) Filters friend requests which started on since or later. (optional)
+     - parameter offset: (query) The offset of friend request. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of friend request returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+
+     - returns: RequestBuilder<[FriendRequest]> 
+     */
+    open class func findFriendRequestsWithRequestBuilder(received: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[FriendRequest]> {
+        let path = "/session/requests"
+        let URLString = CactaceaAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "since": since, 
+            "offset": offset, 
+            "count": count, 
+            "received": received
+        ])
+        
+
+        let requestBuilder: RequestBuilder<[FriendRequest]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      * enum for parameter sortType
      */
-    public enum SortType_findSessionFriends: String { 
+    public enum SortType_findFriends: String { 
         case friendsat = "friendsAt"
         case accountname = "accountName"
     }
@@ -506,8 +686,8 @@ open class SessionAPI {
      - parameter sortType: (query) Friends which sorted by accountName or friendsAt. Default is friendsAt. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findSessionFriends(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, sortType: SortType_findSessionFriends? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
-        findSessionFriendsWithRequestBuilder(since: since, offset: offset, count: count, sortType: sortType).execute { (response, error) -> Void in
+    open class func findFriends(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, sortType: SortType_findFriends? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
+        findFriendsWithRequestBuilder(since: since, offset: offset, count: count, sortType: sortType).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -521,9 +701,9 @@ open class SessionAPI {
      - parameter sortType: (query) Friends which sorted by accountName or friendsAt. Default is friendsAt. (optional)
      - returns: Observable<[Account]>
      */
-    open class func findSessionFriends(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, sortType: SortType_findSessionFriends? = nil) -> Observable<[Account]> {
+    open class func findFriends(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, sortType: SortType_findFriends? = nil) -> Observable<[Account]> {
         return Observable.create { observer -> Disposable in
-            findSessionFriends(since: since, offset: offset, count: count, sortType: sortType) { data, error in
+            findFriends(since: since, offset: offset, count: count, sortType: sortType) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -593,7 +773,7 @@ open class SessionAPI {
 
      - returns: RequestBuilder<[Account]> 
      */
-    open class func findSessionFriendsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, sortType: SortType_findSessionFriends? = nil) -> RequestBuilder<[Account]> {
+    open class func findFriendsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, sortType: SortType_findFriends? = nil) -> RequestBuilder<[Account]> {
         let path = "/session/friends"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -613,6 +793,597 @@ open class SessionAPI {
     }
 
     /**
+     Get invitations list session account received
+     
+     - parameter since: (query) Filters invitations which started on since or later. (optional)
+     - parameter offset: (query) The offset of group invitations. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of invitations returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func findGroupInvitations(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [GroupInvitation]?,_ error: Error?) -> Void)) {
+        findGroupInvitationsWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+    /**
+     Get invitations list session account received
+     
+     - parameter since: (query) Filters invitations which started on since or later. (optional)
+     - parameter offset: (query) The offset of group invitations. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of invitations returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - returns: Observable<[GroupInvitation]>
+     */
+    open class func findGroupInvitations(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[GroupInvitation]> {
+        return Observable.create { observer -> Disposable in
+            findGroupInvitations(since: since, offset: offset, count: count) { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Get invitations list session account received
+     - GET /session/invitations
+     - API Key:
+       - type: apiKey X-API-KEY 
+       - name: api_key
+     - OAuth:
+       - type: oauth2
+       - name: cactacea_auth
+     - examples: [{contentType=application/json, example=[ {
+  "next" : 1.46581298050294517310021547018550336360931396484375,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "invitationStatus" : "noResponded",
+  "account" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 9.301444243932575517419536481611430644989013671875,
+    "follower" : true,
+    "followCount" : 6.02745618307040320615897144307382404804229736328125,
+    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "accountName" : "accountName",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "bio" : "bio",
+    "mute" : true,
+    "follow" : true,
+    "friendRequestInProgress" : true,
+    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "web" : "web",
+    "friend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  },
+  "group" : {
+    "next" : 2.027123023002321833274663731572218239307403564453125,
+    "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
+    "groupPrivacyType" : "everyone",
+    "accountCount" : 7,
+    "name" : "name",
+    "invitationOnly" : true,
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "message" : {
+      "next" : 2.3021358869347654518833223846741020679473876953125,
+      "contentWarning" : true,
+      "readAccountCount" : 5,
+      "accountCount" : 1,
+      "messageType" : "text",
+      "postedAt" : 5,
+      "unread" : true,
+      "contentDeleted" : true,
+      "id" : 6.02745618307040320615897144307382404804229736328125,
+      "medium" : {
+        "contentWarning" : true,
+        "size" : 5,
+        "contentDeleted" : true,
+        "width" : 1,
+        "mediumType" : "image",
+        "id" : 6.02745618307040320615897144307382404804229736328125,
+        "uri" : "uri",
+        "height" : 5,
+        "thumbnailUrl" : "thumbnailUrl"
+      },
+      "message" : "message",
+      "account" : {
+        "birthday" : 2.3021358869347654518833223846741020679473876953125,
+        "next" : 9.301444243932575517419536481611430644989013671875,
+        "follower" : true,
+        "followCount" : 6.02745618307040320615897144307382404804229736328125,
+        "friendCount" : 5.962133916683182377482808078639209270477294921875,
+        "accountName" : "accountName",
+        "displayName" : "displayName",
+        "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+        "bio" : "bio",
+        "mute" : true,
+        "follow" : true,
+        "friendRequestInProgress" : true,
+        "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+        "web" : "web",
+        "friend" : true,
+        "location" : "location",
+        "id" : 0.80082819046101150206595775671303272247314453125,
+        "profileImageUrl" : "profileImageUrl",
+        "followerCount" : 1.46581298050294517310021547018550336360931396484375
+      }
+    },
+    "authorityType" : "owner",
+    "organizedAt" : 3
+  },
+  "invitedAt" : 6
+}, {
+  "next" : 1.46581298050294517310021547018550336360931396484375,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "invitationStatus" : "noResponded",
+  "account" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 9.301444243932575517419536481611430644989013671875,
+    "follower" : true,
+    "followCount" : 6.02745618307040320615897144307382404804229736328125,
+    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "accountName" : "accountName",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "bio" : "bio",
+    "mute" : true,
+    "follow" : true,
+    "friendRequestInProgress" : true,
+    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "web" : "web",
+    "friend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  },
+  "group" : {
+    "next" : 2.027123023002321833274663731572218239307403564453125,
+    "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
+    "groupPrivacyType" : "everyone",
+    "accountCount" : 7,
+    "name" : "name",
+    "invitationOnly" : true,
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "message" : {
+      "next" : 2.3021358869347654518833223846741020679473876953125,
+      "contentWarning" : true,
+      "readAccountCount" : 5,
+      "accountCount" : 1,
+      "messageType" : "text",
+      "postedAt" : 5,
+      "unread" : true,
+      "contentDeleted" : true,
+      "id" : 6.02745618307040320615897144307382404804229736328125,
+      "medium" : {
+        "contentWarning" : true,
+        "size" : 5,
+        "contentDeleted" : true,
+        "width" : 1,
+        "mediumType" : "image",
+        "id" : 6.02745618307040320615897144307382404804229736328125,
+        "uri" : "uri",
+        "height" : 5,
+        "thumbnailUrl" : "thumbnailUrl"
+      },
+      "message" : "message",
+      "account" : {
+        "birthday" : 2.3021358869347654518833223846741020679473876953125,
+        "next" : 9.301444243932575517419536481611430644989013671875,
+        "follower" : true,
+        "followCount" : 6.02745618307040320615897144307382404804229736328125,
+        "friendCount" : 5.962133916683182377482808078639209270477294921875,
+        "accountName" : "accountName",
+        "displayName" : "displayName",
+        "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+        "bio" : "bio",
+        "mute" : true,
+        "follow" : true,
+        "friendRequestInProgress" : true,
+        "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+        "web" : "web",
+        "friend" : true,
+        "location" : "location",
+        "id" : 0.80082819046101150206595775671303272247314453125,
+        "profileImageUrl" : "profileImageUrl",
+        "followerCount" : 1.46581298050294517310021547018550336360931396484375
+      }
+    },
+    "authorityType" : "owner",
+    "organizedAt" : 3
+  },
+  "invitedAt" : 6
+} ]}]
+     
+     - parameter since: (query) Filters invitations which started on since or later. (optional)
+     - parameter offset: (query) The offset of group invitations. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of invitations returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+
+     - returns: RequestBuilder<[GroupInvitation]> 
+     */
+    open class func findGroupInvitationsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[GroupInvitation]> {
+        let path = "/session/invitations"
+        let URLString = CactaceaAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "since": since, 
+            "offset": offset, 
+            "count": count
+        ])
+        
+
+        let requestBuilder: RequestBuilder<[GroupInvitation]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get groups list session account joined
+     
+     - parameter since: (query) Filters groups which started on since or later. (optional)
+     - parameter offset: (query) The offset of groups. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of groups returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func findGroups(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Group]?,_ error: Error?) -> Void)) {
+        findGroupsWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+    /**
+     Get groups list session account joined
+     
+     - parameter since: (query) Filters groups which started on since or later. (optional)
+     - parameter offset: (query) The offset of groups. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of groups returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - returns: Observable<[Group]>
+     */
+    open class func findGroups(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Group]> {
+        return Observable.create { observer -> Disposable in
+            findGroups(since: since, offset: offset, count: count) { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Get groups list session account joined
+     - GET /session/groups
+     - API Key:
+       - type: apiKey X-API-KEY 
+       - name: api_key
+     - OAuth:
+       - type: oauth2
+       - name: cactacea_auth
+     - examples: [{contentType=application/json, example=[ {
+  "next" : 2.027123023002321833274663731572218239307403564453125,
+  "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
+  "groupPrivacyType" : "everyone",
+  "accountCount" : 7,
+  "name" : "name",
+  "invitationOnly" : true,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : {
+    "next" : 2.3021358869347654518833223846741020679473876953125,
+    "contentWarning" : true,
+    "readAccountCount" : 5,
+    "accountCount" : 1,
+    "messageType" : "text",
+    "postedAt" : 5,
+    "unread" : true,
+    "contentDeleted" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "medium" : {
+      "contentWarning" : true,
+      "size" : 5,
+      "contentDeleted" : true,
+      "width" : 1,
+      "mediumType" : "image",
+      "id" : 6.02745618307040320615897144307382404804229736328125,
+      "uri" : "uri",
+      "height" : 5,
+      "thumbnailUrl" : "thumbnailUrl"
+    },
+    "message" : "message",
+    "account" : {
+      "birthday" : 2.3021358869347654518833223846741020679473876953125,
+      "next" : 9.301444243932575517419536481611430644989013671875,
+      "follower" : true,
+      "followCount" : 6.02745618307040320615897144307382404804229736328125,
+      "friendCount" : 5.962133916683182377482808078639209270477294921875,
+      "accountName" : "accountName",
+      "displayName" : "displayName",
+      "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+      "bio" : "bio",
+      "mute" : true,
+      "follow" : true,
+      "friendRequestInProgress" : true,
+      "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+      "web" : "web",
+      "friend" : true,
+      "location" : "location",
+      "id" : 0.80082819046101150206595775671303272247314453125,
+      "profileImageUrl" : "profileImageUrl",
+      "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    }
+  },
+  "authorityType" : "owner",
+  "organizedAt" : 3
+}, {
+  "next" : 2.027123023002321833274663731572218239307403564453125,
+  "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
+  "groupPrivacyType" : "everyone",
+  "accountCount" : 7,
+  "name" : "name",
+  "invitationOnly" : true,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : {
+    "next" : 2.3021358869347654518833223846741020679473876953125,
+    "contentWarning" : true,
+    "readAccountCount" : 5,
+    "accountCount" : 1,
+    "messageType" : "text",
+    "postedAt" : 5,
+    "unread" : true,
+    "contentDeleted" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "medium" : {
+      "contentWarning" : true,
+      "size" : 5,
+      "contentDeleted" : true,
+      "width" : 1,
+      "mediumType" : "image",
+      "id" : 6.02745618307040320615897144307382404804229736328125,
+      "uri" : "uri",
+      "height" : 5,
+      "thumbnailUrl" : "thumbnailUrl"
+    },
+    "message" : "message",
+    "account" : {
+      "birthday" : 2.3021358869347654518833223846741020679473876953125,
+      "next" : 9.301444243932575517419536481611430644989013671875,
+      "follower" : true,
+      "followCount" : 6.02745618307040320615897144307382404804229736328125,
+      "friendCount" : 5.962133916683182377482808078639209270477294921875,
+      "accountName" : "accountName",
+      "displayName" : "displayName",
+      "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+      "bio" : "bio",
+      "mute" : true,
+      "follow" : true,
+      "friendRequestInProgress" : true,
+      "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+      "web" : "web",
+      "friend" : true,
+      "location" : "location",
+      "id" : 0.80082819046101150206595775671303272247314453125,
+      "profileImageUrl" : "profileImageUrl",
+      "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    }
+  },
+  "authorityType" : "owner",
+  "organizedAt" : 3
+} ]}]
+     
+     - parameter since: (query) Filters groups which started on since or later. (optional)
+     - parameter offset: (query) The offset of groups. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of groups returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+
+     - returns: RequestBuilder<[Group]> 
+     */
+    open class func findGroupsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Group]> {
+        let path = "/session/groups"
+        let URLString = CactaceaAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "since": since, 
+            "offset": offset, 
+            "count": count
+        ])
+        
+
+        let requestBuilder: RequestBuilder<[Group]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get hidden groups list session account joined
+     
+     - parameter since: (query) Filters groups which started on since or later. (optional)
+     - parameter offset: (query) The offset of groups. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of groups returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func findHides(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Group]?,_ error: Error?) -> Void)) {
+        findHidesWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+    /**
+     Get hidden groups list session account joined
+     
+     - parameter since: (query) Filters groups which started on since or later. (optional)
+     - parameter offset: (query) The offset of groups. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of groups returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - returns: Observable<[Group]>
+     */
+    open class func findHides(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Group]> {
+        return Observable.create { observer -> Disposable in
+            findHides(since: since, offset: offset, count: count) { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Get hidden groups list session account joined
+     - GET /session/hides
+     - API Key:
+       - type: apiKey X-API-KEY 
+       - name: api_key
+     - OAuth:
+       - type: oauth2
+       - name: cactacea_auth
+     - examples: [{contentType=application/json, example=[ {
+  "next" : 2.027123023002321833274663731572218239307403564453125,
+  "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
+  "groupPrivacyType" : "everyone",
+  "accountCount" : 7,
+  "name" : "name",
+  "invitationOnly" : true,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : {
+    "next" : 2.3021358869347654518833223846741020679473876953125,
+    "contentWarning" : true,
+    "readAccountCount" : 5,
+    "accountCount" : 1,
+    "messageType" : "text",
+    "postedAt" : 5,
+    "unread" : true,
+    "contentDeleted" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "medium" : {
+      "contentWarning" : true,
+      "size" : 5,
+      "contentDeleted" : true,
+      "width" : 1,
+      "mediumType" : "image",
+      "id" : 6.02745618307040320615897144307382404804229736328125,
+      "uri" : "uri",
+      "height" : 5,
+      "thumbnailUrl" : "thumbnailUrl"
+    },
+    "message" : "message",
+    "account" : {
+      "birthday" : 2.3021358869347654518833223846741020679473876953125,
+      "next" : 9.301444243932575517419536481611430644989013671875,
+      "follower" : true,
+      "followCount" : 6.02745618307040320615897144307382404804229736328125,
+      "friendCount" : 5.962133916683182377482808078639209270477294921875,
+      "accountName" : "accountName",
+      "displayName" : "displayName",
+      "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+      "bio" : "bio",
+      "mute" : true,
+      "follow" : true,
+      "friendRequestInProgress" : true,
+      "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+      "web" : "web",
+      "friend" : true,
+      "location" : "location",
+      "id" : 0.80082819046101150206595775671303272247314453125,
+      "profileImageUrl" : "profileImageUrl",
+      "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    }
+  },
+  "authorityType" : "owner",
+  "organizedAt" : 3
+}, {
+  "next" : 2.027123023002321833274663731572218239307403564453125,
+  "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
+  "groupPrivacyType" : "everyone",
+  "accountCount" : 7,
+  "name" : "name",
+  "invitationOnly" : true,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : {
+    "next" : 2.3021358869347654518833223846741020679473876953125,
+    "contentWarning" : true,
+    "readAccountCount" : 5,
+    "accountCount" : 1,
+    "messageType" : "text",
+    "postedAt" : 5,
+    "unread" : true,
+    "contentDeleted" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "medium" : {
+      "contentWarning" : true,
+      "size" : 5,
+      "contentDeleted" : true,
+      "width" : 1,
+      "mediumType" : "image",
+      "id" : 6.02745618307040320615897144307382404804229736328125,
+      "uri" : "uri",
+      "height" : 5,
+      "thumbnailUrl" : "thumbnailUrl"
+    },
+    "message" : "message",
+    "account" : {
+      "birthday" : 2.3021358869347654518833223846741020679473876953125,
+      "next" : 9.301444243932575517419536481611430644989013671875,
+      "follower" : true,
+      "followCount" : 6.02745618307040320615897144307382404804229736328125,
+      "friendCount" : 5.962133916683182377482808078639209270477294921875,
+      "accountName" : "accountName",
+      "displayName" : "displayName",
+      "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+      "bio" : "bio",
+      "mute" : true,
+      "follow" : true,
+      "friendRequestInProgress" : true,
+      "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+      "web" : "web",
+      "friend" : true,
+      "location" : "location",
+      "id" : 0.80082819046101150206595775671303272247314453125,
+      "profileImageUrl" : "profileImageUrl",
+      "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    }
+  },
+  "authorityType" : "owner",
+  "organizedAt" : 3
+} ]}]
+     
+     - parameter since: (query) Filters groups which started on since or later. (optional)
+     - parameter offset: (query) The offset of groups. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of groups returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+
+     - returns: RequestBuilder<[Group]> 
+     */
+    open class func findHidesWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Group]> {
+        let path = "/session/hides"
+        let URLString = CactaceaAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "since": since, 
+            "offset": offset, 
+            "count": count
+        ])
+        
+
+        let requestBuilder: RequestBuilder<[Group]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Get feeds list session account set a like
      
      - parameter since: (query) Filters entries which started on since or later. (optional)
@@ -620,8 +1391,8 @@ open class SessionAPI {
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findSessionLikes(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: Feed?,_ error: Error?) -> Void)) {
-        findSessionLikesWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findLikes(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
+        findLikesWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -632,11 +1403,11 @@ open class SessionAPI {
      - parameter since: (query) Filters entries which started on since or later. (optional)
      - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<Feed>
+     - returns: Observable<[Feed]>
      */
-    open class func findSessionLikes(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<Feed> {
+    open class func findLikes(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Feed]> {
         return Observable.create { observer -> Disposable in
-            findSessionLikes(since: since, offset: offset, count: count) { data, error in
+            findLikes(since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -657,7 +1428,7 @@ open class SessionAPI {
      - OAuth:
        - type: oauth2
        - name: cactacea_auth
-     - examples: [{contentType=application/json, example={
+     - examples: [{contentType=application/json, example=[ {
   "next" : 2.027123023002321833274663731572218239307403564453125,
   "contentWarning" : true,
   "likedAt" : 3.61607674925191080461672754609026014804840087890625,
@@ -710,15 +1481,68 @@ open class SessionAPI {
   },
   "tags" : [ "tags", "tags" ],
   "commentCount" : 7
-}}]
+}, {
+  "next" : 2.027123023002321833274663731572218239307403564453125,
+  "contentWarning" : true,
+  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
+  "postedAt" : 9,
+  "contentDeleted" : true,
+  "likeCount" : 2,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : "message",
+  "mediums" : [ {
+    "contentWarning" : true,
+    "size" : 5,
+    "contentDeleted" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  }, {
+    "contentWarning" : true,
+    "size" : 5,
+    "contentDeleted" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  } ],
+  "account" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 9.301444243932575517419536481611430644989013671875,
+    "follower" : true,
+    "followCount" : 6.02745618307040320615897144307382404804229736328125,
+    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "accountName" : "accountName",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "bio" : "bio",
+    "mute" : true,
+    "follow" : true,
+    "friendRequestInProgress" : true,
+    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "web" : "web",
+    "friend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  },
+  "tags" : [ "tags", "tags" ],
+  "commentCount" : 7
+} ]}]
      
      - parameter since: (query) Filters entries which started on since or later. (optional)
      - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
 
-     - returns: RequestBuilder<Feed> 
+     - returns: RequestBuilder<[Feed]> 
      */
-    open class func findSessionLikesWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<Feed> {
+    open class func findLikesWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
         let path = "/session/likes"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -731,7 +1555,118 @@ open class SessionAPI {
         ])
         
 
-        let requestBuilder: RequestBuilder<Feed>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<[Feed]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get accounts list session account muted
+     
+     - parameter since: (query) Filters accounts which started on since or later. (optional)
+     - parameter offset: (query) The offset of accounts. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of accounts returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func findMutes(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
+        findMutesWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+    /**
+     Get accounts list session account muted
+     
+     - parameter since: (query) Filters accounts which started on since or later. (optional)
+     - parameter offset: (query) The offset of accounts. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of accounts returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - returns: Observable<[Account]>
+     */
+    open class func findMutes(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
+        return Observable.create { observer -> Disposable in
+            findMutes(since: since, offset: offset, count: count) { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Get accounts list session account muted
+     - GET /session/mutes
+     - API Key:
+       - type: apiKey X-API-KEY 
+       - name: api_key
+     - OAuth:
+       - type: oauth2
+       - name: cactacea_auth
+     - examples: [{contentType=application/json, example=[ {
+  "birthday" : 2.3021358869347654518833223846741020679473876953125,
+  "next" : 9.301444243932575517419536481611430644989013671875,
+  "follower" : true,
+  "followCount" : 6.02745618307040320615897144307382404804229736328125,
+  "friendCount" : 5.962133916683182377482808078639209270477294921875,
+  "accountName" : "accountName",
+  "displayName" : "displayName",
+  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "bio" : "bio",
+  "mute" : true,
+  "follow" : true,
+  "friendRequestInProgress" : true,
+  "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+  "web" : "web",
+  "friend" : true,
+  "location" : "location",
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "profileImageUrl" : "profileImageUrl",
+  "followerCount" : 1.46581298050294517310021547018550336360931396484375
+}, {
+  "birthday" : 2.3021358869347654518833223846741020679473876953125,
+  "next" : 9.301444243932575517419536481611430644989013671875,
+  "follower" : true,
+  "followCount" : 6.02745618307040320615897144307382404804229736328125,
+  "friendCount" : 5.962133916683182377482808078639209270477294921875,
+  "accountName" : "accountName",
+  "displayName" : "displayName",
+  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "bio" : "bio",
+  "mute" : true,
+  "follow" : true,
+  "friendRequestInProgress" : true,
+  "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+  "web" : "web",
+  "friend" : true,
+  "location" : "location",
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "profileImageUrl" : "profileImageUrl",
+  "followerCount" : 1.46581298050294517310021547018550336360931396484375
+} ]}]
+     
+     - parameter since: (query) Filters accounts which started on since or later. (optional)
+     - parameter offset: (query) The offset of accounts. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of accounts returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+
+     - returns: RequestBuilder<[Account]> 
+     */
+    open class func findMutesWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
+        let path = "/session/mutes"
+        let URLString = CactaceaAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "since": since, 
+            "offset": offset, 
+            "count": count
+        ])
+        
+
+        let requestBuilder: RequestBuilder<[Account]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -797,8 +1732,8 @@ open class SessionAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateSessionAccountName(body: PutSessionAccountNameBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        updateSessionAccountNameWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func updateAccountName(body: PutSessionAccountNameBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateAccountNameWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -809,9 +1744,9 @@ open class SessionAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func updateSessionAccountName(body: PutSessionAccountNameBody) -> Observable<Void> {
+    open class func updateAccountName(body: PutSessionAccountNameBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            updateSessionAccountName(body: body) { error in
+            updateAccountName(body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -837,7 +1772,7 @@ open class SessionAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateSessionAccountNameWithRequestBuilder(body: PutSessionAccountNameBody) -> RequestBuilder<Void> {
+    open class func updateAccountNameWithRequestBuilder(body: PutSessionAccountNameBody) -> RequestBuilder<Void> {
         let path = "/session/account_name"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
@@ -856,8 +1791,8 @@ open class SessionAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateSessionPassword(body: PutSessionPasswordBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        updateSessionPasswordWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func updatePassword(body: PutSessionPasswordBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        updatePasswordWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -868,9 +1803,9 @@ open class SessionAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func updateSessionPassword(body: PutSessionPasswordBody) -> Observable<Void> {
+    open class func updatePassword(body: PutSessionPasswordBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            updateSessionPassword(body: body) { error in
+            updatePassword(body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -896,7 +1831,7 @@ open class SessionAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateSessionPasswordWithRequestBuilder(body: PutSessionPasswordBody) -> RequestBuilder<Void> {
+    open class func updatePasswordWithRequestBuilder(body: PutSessionPasswordBody) -> RequestBuilder<Void> {
         let path = "/session/password"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
@@ -915,8 +1850,8 @@ open class SessionAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateSessionProfile(body: PutSessionProfileBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        updateSessionProfileWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func updateProfile(body: PutSessionProfileBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateProfileWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -927,9 +1862,9 @@ open class SessionAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func updateSessionProfile(body: PutSessionProfileBody) -> Observable<Void> {
+    open class func updateProfile(body: PutSessionProfileBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            updateSessionProfile(body: body) { error in
+            updateProfile(body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -955,7 +1890,7 @@ open class SessionAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateSessionProfileWithRequestBuilder(body: PutSessionProfileBody) -> RequestBuilder<Void> {
+    open class func updateProfileWithRequestBuilder(body: PutSessionProfileBody) -> RequestBuilder<Void> {
         let path = "/session/profile"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
@@ -974,8 +1909,8 @@ open class SessionAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateSessionProfileImage(body: PutSessionProfileImageBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        updateSessionProfileImageWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func updateProfileImage(body: PutSessionProfileImageBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateProfileImageWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -986,9 +1921,9 @@ open class SessionAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func updateSessionProfileImage(body: PutSessionProfileImageBody) -> Observable<Void> {
+    open class func updateProfileImage(body: PutSessionProfileImageBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            updateSessionProfileImage(body: body) { error in
+            updateProfileImage(body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -1014,7 +1949,7 @@ open class SessionAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateSessionProfileImageWithRequestBuilder(body: PutSessionProfileImageBody) -> RequestBuilder<Void> {
+    open class func updateProfileImageWithRequestBuilder(body: PutSessionProfileImageBody) -> RequestBuilder<Void> {
         let path = "/session/profile_image"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
