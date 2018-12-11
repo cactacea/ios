@@ -1391,7 +1391,7 @@ open class SessionAPI {
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findLikes(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: Feed?,_ error: Error?) -> Void)) {
+    open class func findLikes(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
         findLikesWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
@@ -1403,9 +1403,9 @@ open class SessionAPI {
      - parameter since: (query) Filters entries which started on since or later. (optional)
      - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<Feed>
+     - returns: Observable<[Feed]>
      */
-    open class func findLikes(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<Feed> {
+    open class func findLikes(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Feed]> {
         return Observable.create { observer -> Disposable in
             findLikes(since: since, offset: offset, count: count) { data, error in
                 if let error = error {
@@ -1428,7 +1428,7 @@ open class SessionAPI {
      - OAuth:
        - type: oauth2
        - name: cactacea_auth
-     - examples: [{contentType=application/json, example={
+     - examples: [{contentType=application/json, example=[ {
   "next" : 2.027123023002321833274663731572218239307403564453125,
   "contentWarning" : true,
   "likedAt" : 3.61607674925191080461672754609026014804840087890625,
@@ -1481,15 +1481,68 @@ open class SessionAPI {
   },
   "tags" : [ "tags", "tags" ],
   "commentCount" : 7
-}}]
+}, {
+  "next" : 2.027123023002321833274663731572218239307403564453125,
+  "contentWarning" : true,
+  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
+  "postedAt" : 9,
+  "contentDeleted" : true,
+  "likeCount" : 2,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : "message",
+  "mediums" : [ {
+    "contentWarning" : true,
+    "size" : 5,
+    "contentDeleted" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  }, {
+    "contentWarning" : true,
+    "size" : 5,
+    "contentDeleted" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  } ],
+  "account" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 9.301444243932575517419536481611430644989013671875,
+    "follower" : true,
+    "followCount" : 6.02745618307040320615897144307382404804229736328125,
+    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "accountName" : "accountName",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "bio" : "bio",
+    "mute" : true,
+    "follow" : true,
+    "friendRequestInProgress" : true,
+    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "web" : "web",
+    "friend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  },
+  "tags" : [ "tags", "tags" ],
+  "commentCount" : 7
+} ]}]
      
      - parameter since: (query) Filters entries which started on since or later. (optional)
      - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
 
-     - returns: RequestBuilder<Feed> 
+     - returns: RequestBuilder<[Feed]> 
      */
-    open class func findLikesWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<Feed> {
+    open class func findLikesWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
         let path = "/session/likes"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -1502,7 +1555,7 @@ open class SessionAPI {
         ])
         
 
-        let requestBuilder: RequestBuilder<Feed>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<[Feed]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
