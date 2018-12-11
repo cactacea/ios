@@ -45,7 +45,7 @@ class ProfileHeaderReusableView: UICollectionReusableView {
         
         if let smallImageURL = user.profileImageUrl {
             let urlRequest = Session.request(url: smallImageURL)
-            profileImage.af_setImage(withURLRequest: urlRequest)
+            profileImage.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }
         
         self.myPostsCountLabel.text = "\(user.feedsCount ?? 0)"

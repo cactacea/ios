@@ -85,15 +85,22 @@ class SignUpViewController: UIViewController {
     }
     
     func updateProfileImage() {
-        guard let image = profileImage?.resizeImage(newWidth: 200) else { return }
+        guard let image = profileImage?.resizeImage(newWidth: 200) else {
+            return
+        }
         if let data = image.jpegData(compressionQuality: 0.7) {
-            let _ = MediumsAPI.uploadMedium(data: data, fileExtension: ".jpeg").map({ (result) -> Observable<Void> in
-                guard let medium = result.first else { return Observable.empty() }
-                let body = PutSessionProfileImageBody(id: medium.id)
-                return SessionAPI.updateProfileImage(body: body).asObservable()
-            }).subscribe(onNext: nil, onError: { (error) in
-                Session.showError(error)
-            }, onCompleted: nil, onDisposed: nil)
+            MediumsAPI.uploadMedium(data: data, fileExtension: ".jpeg") { (result, error) in
+                if let error = error {
+                    Session.showError(error)
+                } else if let result = result?.first {
+                    let body = PutSessionProfileImageBody(id: result.id)
+                    SessionAPI.updateProfileImage(body: body, completion: { (error) in
+                        if let error = error {
+                            Session.showError(error)
+                        }
+                    })
+                }
+            }
         }
     }
 

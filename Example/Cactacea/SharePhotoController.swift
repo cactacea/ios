@@ -58,27 +58,33 @@ class SharePhotoController: UIViewController {
         }
         
         if let data = uploadData {
-            let _ = MediumsAPI.uploadMedium(data: data, fileExtension: fileExtension).map({ (result) -> Observable<FeedCreated> in
-                guard let medium = result.first else { return Observable.empty() }
-                let postFeedBody = PostFeedBody(message: self.textView.text, mediumIds: [medium.id], tags: nil, privacyType: PostFeedBody.PrivacyType.everyone, contentWarning: false, expiration: nil)
-                return FeedsAPI.postFeed(body: postFeedBody)
-            }).subscribe(onNext: nil, onError: { (error) in
-                Session.showError(error)
-            }, onCompleted: {
-                NotificationCenter.default.post(name: NSNotification.Name.updateHomeFeed, object: nil)
-                NotificationCenter.default.post(name: NSNotification.Name.updateUserProfileFeed, object: nil)
-            }, onDisposed: nil)
-            
+            MediumsAPI.uploadMedium(data: data, fileExtension: fileExtension) { (result, error) in
+                if let error = error {
+                    Session.showError(error)
+                } else if let medium = result?.first {
+                    let postFeedBody = PostFeedBody(message: self.textView.text, mediumIds: [medium.id], tags: nil, privacyType: PostFeedBody.PrivacyType.everyone, contentWarning: false, expiration: nil)
+                    FeedsAPI.postFeed(body: postFeedBody, completion: { (result, error) in
+                        if let error = error {
+                            Session.showError(error)
+                        } else {
+                            NotificationCenter.default.post(name: NSNotification.Name.updateHomeFeed, object: nil)
+                            NotificationCenter.default.post(name: NSNotification.Name.updateUserProfileFeed, object: nil)
+                        }
+                    })
+                }
+            }
             self.dismiss(animated: true, completion: nil)
 
         } else {
             let postFeedBody = PostFeedBody(message: self.textView.text, mediumIds: nil, tags: nil, privacyType: PostFeedBody.PrivacyType.everyone, contentWarning: false, expiration: nil)
-            let _ = FeedsAPI.postFeed(body: postFeedBody).subscribe(onNext: nil, onError: { (error) in
-                Session.showError(error)
-            }, onCompleted: {
-                NotificationCenter.default.post(name: NSNotification.Name.updateHomeFeed, object: nil)
-                NotificationCenter.default.post(name: NSNotification.Name.updateUserProfileFeed, object: nil)
-            }, onDisposed: nil)
+            FeedsAPI.postFeed(body: postFeedBody, completion: { (result, error) in
+                if let error = error {
+                    Session.showError(error)
+                } else {
+                    NotificationCenter.default.post(name: NSNotification.Name.updateHomeFeed, object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name.updateUserProfileFeed, object: nil)
+                }
+            })
 
             self.dismiss(animated: true, completion: nil)
 

@@ -20,67 +20,76 @@ class FindFriendsCell: UITableViewCell {
     var account: Account? {
         didSet {
             updateAccount()
+            updateAddFriendButton()
         }
     }
 
     func updateAccount() {
-        if let account = account {
-            accountNameLabel.text = account.accountName
-            if let smallImageURL = account.profileImageUrl {
-                let urlRequest = Session.request(url: smallImageURL)
-                let placeholderImage = UIImage(named: "placeholder_profile")
-                self.profileImageView.af_setImage(withURLRequest: urlRequest,
-                                             placeholderImage: placeholderImage,
-                                             filter: nil,
-                                             progress: nil,
-                                             progressQueue: nil,
-                                             imageTransition: .crossDissolve(0.2),
-                                             runImageTransitionIfCached: false,
-                                             completion: nil)
-            }
+        guard let account = account else { return }
+
+        accountNameLabel.text = account.accountName
+        if let smallImageURL = account.profileImageUrl {
+            let urlRequest = Session.request(url: smallImageURL)
+            profileImageView.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }
     }
     
     func updateAddFriendButton() {
-        if let account = account {
-            if account.friend {
-                addFriendButton.setTitle("Unfriend", for: .normal)
-                addFriendButton.isEnabled = true
-            } else if account.friendRequestInProgress {
-                addFriendButton.setTitle("Requested", for: .disabled)
-                addFriendButton.isEnabled = false
-            } else if account.friendRequestInProgress {
-                addFriendButton.setTitle("Friend Request", for: .normal)
-                addFriendButton.isEnabled = true
-            }
+        guard let account = account else { return }
+        
+        if account.friend {
+            addFriendButton.setTitle("Unfriend", for: .normal)
+        } else if account.friendRequestInProgress {
+            addFriendButton.setTitle("Cancel", for: .normal)
+        } else  {
+            addFriendButton.setTitle("Request", for: .normal)
         }
+
+        addFriendButton.isEnabled = true
+        addFriendButton.backgroundColor = UIColor.mainBlue
+        addFriendButton.showsActivityIndicator = false
     }
 
     @IBAction func tappedAddFriend(_ sender: Any) {
-        if let account = account {
-            if account.friend {
-                FriendsAPI.deleteFriend(id: account.id) { [weak self] (error) in
-                    guard let weakSelf = self else { return }
-                    if let error = error {
-                        Session.showError(error)
-                    } else {
-                        account.friend = false
-                        weakSelf.updateAddFriendButton()
-                    }
+        guard let account = account else { return }
+
+        addFriendButton.isEnabled = false
+        addFriendButton.backgroundColor = UIColor.mainLightBlue
+        addFriendButton.showsActivityIndicator = true
+        addFriendButton.setTitle("", for: .normal)
+        
+        if account.friend {
+            FriendsAPI.deleteFriend(id: account.id) { [weak self] (error) in
+                guard let weakSelf = self else { return }
+                if let error = error {
+                    Session.showError(error)
+                } else {
+                    account.friend = false
                 }
-            } else if account.friendRequestInProgress {
-                RequestsAPI.create(id: account.id) { [weak self] (result, error) in
-                    guard let weakSelf = self else { return }
-                    if let error = error {
-                        Session.showError(error)
-                    } else if let _ = result {
-                        account.friendRequestInProgress = true
-                        weakSelf.updateAddFriendButton()
-                    }
-                }
+                weakSelf.updateAddFriendButton()
             }
-        }
-    }
+        } else if account.friendRequestInProgress {
+            RequestsAPI.delete(id: account.id) { [weak self] (error) in
+                guard let weakSelf = self else { return }
+                if let error = error {
+                    Session.showError(error)
+                } else {
+                    account.friendRequestInProgress = false
+                }
+                weakSelf.updateAddFriendButton()
+            }
+            
+        } else {
+            RequestsAPI.create(id: account.id) { [weak self] (result, error) in
+                guard let weakSelf = self else { return }
+                if let error = error {
+                    Session.showError(error)
+                } else if let _ = result {
+                    account.friendRequestInProgress = true
+                }
+                weakSelf.updateAddFriendButton()
+            }
+        }    }
 
     override func prepareForReuse() {
         super.prepareForReuse()

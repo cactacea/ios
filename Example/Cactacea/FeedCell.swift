@@ -63,14 +63,14 @@ class FeedCell: UITableViewCell {
             
             if let url = medium.thumbnailUrl {
                 let urlRequest = Session.request(url: url)
-                postImageView.af_setImage(withURLRequest: urlRequest)
+                postImageView.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
             }
         }
         
         nameLabel.text = account?.accountName
         if let smallImageURL = account?.profileImageUrl {
             let urlRequest = Session.request(url: smallImageURL)
-            profileImageView.af_setImage(withURLRequest: urlRequest)
+            profileImageView.af_setImage(withURLRequest: urlRequest, placeholderImage: UIImage(named: "placeholder_profile"), imageTransition: .crossDissolve(0.2))
         }
         
 
@@ -160,7 +160,7 @@ class FeedCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         profileImageView.image = UIImage(named: "placeholder_profile")
-        postImageView.image = UIImage(named: "placeholder_photo")
+        postImageView.image = nil
         playerLayer?.removeFromSuperlayer()
         player?.pause()
         self.volumeView.isHidden = true

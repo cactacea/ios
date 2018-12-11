@@ -25,32 +25,26 @@ class ProfileViewController: UIViewController {
 
         if user == nil {
             user = Session.authentication?.account
+            fetchUser()
+            fetchMyPosts()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        fetchUser()
-        fetchMyPosts()
     }
     
     func fetchUser() {
         self.navigationItem.title = user.accountName
         self.collectionView.reloadData()
-//        Api.User.observeUser(withId: userId) { (user) in
-//            self.isFollowing(userId: user.id!, completed: { (value) in
-//                user.isFollowing = value
-//                self.user = user
-//                self.navigationItem.title = user.username
-//                self.collectionView.reloadData()
-//            })
-//        }
+        SessionAPI.find { [weak self] (account, _) in
+            guard let weakSelf = self else { return }
+            weakSelf.user = account
+            weakSelf.fetchUser()
+            weakSelf.fetchMyPosts()
+        }
     }
-    
-//    func isFollowing(userId: String, completed: @escaping (Bool) -> Void) {
-//        Api.Follow.isFollowing(userId: userId, completed: completed)
-//    }
     
     func fetchMyPosts() {
         if user.id == Session.authentication?.account.id {
@@ -59,7 +53,7 @@ class ProfileViewController: UIViewController {
                 if let error = error {
                     Session.showError(error)
                 } else if let result = result {
-                    weakSelf.posts.append(contentsOf: result)
+                    weakSelf.posts = result // .append(contentsOf: result)
                     weakSelf.collectionView.reloadData()
                 }
             }
@@ -69,7 +63,7 @@ class ProfileViewController: UIViewController {
                 if let error = error {
                     Session.showError(error)
                 } else if let result = result {
-                    weakSelf.posts.append(contentsOf: result)
+                    weakSelf.posts = result // .append(contentsOf: result)
                     weakSelf.collectionView.reloadData()
                 }
             }

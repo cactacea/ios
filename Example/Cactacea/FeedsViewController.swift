@@ -21,6 +21,10 @@ class FeedsViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.dataSource = self
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadFeeds()
     }
     
@@ -30,7 +34,7 @@ class FeedsViewController: UIViewController {
             if let error = error {
                 Session.showError(error)
             } else if let result = result {
-                weakSelf.posts.append(contentsOf: result)
+                weakSelf.posts = result
                 weakSelf.tableView.reloadData()
             }
         }

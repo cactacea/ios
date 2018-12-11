@@ -25,6 +25,7 @@ class SignInViewController: UIViewController {
         accountNameTextField.text = "shinzo_abe"
         passwordTextField.text = "Password_2018"
         loginButton.isEnabled = true
+        loginButton.backgroundColor = UIColor.mainBlue
     }
 
     @objc func tabOnView(sender: UIView) {

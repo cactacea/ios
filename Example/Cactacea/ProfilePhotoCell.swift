@@ -27,7 +27,7 @@ class ProfilePhotoCell: UICollectionViewCell {
     func updateView() {
         if let url = post?.mediums?.first?.thumbnailUrl {
             let urlRequest = Session.request(url: url)
-            photo.af_setImage(withURLRequest: urlRequest)
+            photo.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }
         
         let tapGestureForPhoto = UITapGestureRecognizer(target: self, action: #selector(self.photo_TouchUpInside))
