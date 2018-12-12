@@ -35,6 +35,7 @@
 		829CF05621B5745100D5B5EB /* FindFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF05521B5745100D5B5EB /* FindFriendsCell.swift */; };
 		82AD415D21C001590023EF6C /* RequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD415B21BFFF260023EF6C /* RequestsViewController.swift */; };
 		82AD415E21C001590023EF6C /* RequestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD415C21BFFF260023EF6C /* RequestsCell.swift */; };
+		82AD416721C08EC60023EF6C /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD416621C08EC60023EF6C /* FriendCell.swift */; };
 		A30072B50BFA31CA9C144705 /* Pods_Cactacea_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E62A8AEF46FEDBB34C8B0FF /* Pods_Cactacea_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		829CF05521B5745100D5B5EB /* FindFriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFriendsCell.swift; sourceTree = "<group>"; };
 		82AD415B21BFFF260023EF6C /* RequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsViewController.swift; sourceTree = "<group>"; };
 		82AD415C21BFFF260023EF6C /* RequestsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsCell.swift; sourceTree = "<group>"; };
+		82AD416621C08EC60023EF6C /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		8C3BD379CA48ADD2A72E8FCF /* Pods-Cactacea_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A1C9CEFA1F069BCA9720392 /* Pods-Cactacea_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		A2BE60797CBD5595B288348F /* Pods-Cactacea_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				820FE83F21AC0F45001097F5 /* FriendsViewController.swift */,
+				82AD416621C08EC60023EF6C /* FriendCell.swift */,
 			);
 			name = Friend;
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				820FE84021AC0F45001097F5 /* FriendsViewController.swift in Sources */,
 				820FE83721AC0CE0001097F5 /* Session.swift in Sources */,
+				82AD416721C08EC60023EF6C /* FriendCell.swift in Sources */,
 				82112B8121BB5A2700F2C54B /* FeedCell.swift in Sources */,
 				82112B8621BB934D00F2C54B /* CommentCell.swift in Sources */,
 				820FE83C21AC0EEC001097F5 /* SignUpViewController.swift in Sources */,

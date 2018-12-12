@@ -25,7 +25,9 @@ class FeedsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadFeeds()
+        if let _ = Session.authentication {
+            loadFeeds()
+        }
     }
     
     func loadFeeds() {
