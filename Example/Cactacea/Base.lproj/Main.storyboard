@@ -1071,8 +1071,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="RWw-Ix-LoX">
+                                <rect key="frame" x="0.0" y="88" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="32K-lx-vPB">
-                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <rect key="frame" x="0.0" y="144" width="375" height="585"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FriendCell" rowHeight="80" id="NNg-qB-bGw" customClass="FriendCell" customModule="Cactacea_Example" customModuleProvider="target">
@@ -1125,8 +1129,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="32K-lx-vPB" firstAttribute="bottom" secondItem="2kC-RV-lXk" secondAttribute="bottom" id="2Pz-B1-g6u"/>
+                            <constraint firstItem="RWw-Ix-LoX" firstAttribute="trailing" secondItem="2kC-RV-lXk" secondAttribute="trailing" id="2y5-dx-jfK"/>
+                            <constraint firstItem="RWw-Ix-LoX" firstAttribute="leading" secondItem="2kC-RV-lXk" secondAttribute="leading" id="6Cz-QF-tFS"/>
                             <constraint firstItem="32K-lx-vPB" firstAttribute="trailing" secondItem="2kC-RV-lXk" secondAttribute="trailing" id="NPw-51-xyH"/>
-                            <constraint firstItem="32K-lx-vPB" firstAttribute="top" secondItem="2kC-RV-lXk" secondAttribute="top" id="dBo-m2-TnZ"/>
+                            <constraint firstItem="32K-lx-vPB" firstAttribute="top" secondItem="RWw-Ix-LoX" secondAttribute="bottom" id="atl-pI-HO4"/>
+                            <constraint firstItem="RWw-Ix-LoX" firstAttribute="top" secondItem="2kC-RV-lXk" secondAttribute="top" id="e4k-SK-4ny"/>
                             <constraint firstItem="32K-lx-vPB" firstAttribute="leading" secondItem="2kC-RV-lXk" secondAttribute="leading" id="pCy-LG-1aE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2kC-RV-lXk"/>
