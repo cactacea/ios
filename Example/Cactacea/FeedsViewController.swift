@@ -8,6 +8,7 @@
 
 import UIKit
 import Cactacea
+import YPImagePicker
 
 class FeedsViewController: UIViewController {
     
@@ -25,6 +26,8 @@ class FeedsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         if let _ = Session.authentication {
             loadFeeds()
         }
@@ -80,4 +83,32 @@ extension FeedsViewController: FeedCellDelegate {
         }
     }
 
+}
+
+extension FeedsViewController {
+    
+    @IBAction func tappedShare(_ sender: Any) {
+        var config = YPImagePickerConfiguration()
+        config.startOnScreen = .library
+        let picker = YPImagePicker(configuration: config)
+        picker.didFinishPicking { [unowned picker] items, cancelled in
+            if cancelled {
+                picker.dismiss(animated: true, completion: nil)
+            } else if let photo = items.singlePhoto {
+                let vc = SharePhotoController.instantinate()
+                vc.selectedImage = photo.modifiedImage ?? photo.image
+                picker.pushViewController(vc, animated: true)
+            } else if let video = items.singleVideo {
+                video.fetchData(completion: { (data) in
+                    let vc = SharePhotoController.instantinate()
+                    vc.selectedImage = video.thumbnail
+                    vc.selectedVideo = data
+                    picker.pushViewController(vc, animated: true)
+                })
+            } else {
+                picker.dismiss(animated: true, completion: nil)
+            }
+        }
+        present(picker, animated: true, completion: nil)
+    }
 }

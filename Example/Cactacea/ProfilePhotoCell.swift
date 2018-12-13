@@ -41,4 +41,10 @@ class ProfilePhotoCell: UICollectionViewCell {
             delegate?.goToDetailVC(postId: id)
         }
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        photo.image = nil
+    }
+
 }

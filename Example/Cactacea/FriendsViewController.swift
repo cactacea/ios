@@ -23,6 +23,7 @@ class FriendsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         if let _ = Session.authentication {
             loadAccounts()
         }

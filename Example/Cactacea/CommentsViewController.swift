@@ -83,6 +83,7 @@ class CommentsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         self.tabBarController?.tabBar.isHidden = true
     }
 

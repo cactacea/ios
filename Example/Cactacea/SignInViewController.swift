@@ -22,6 +22,7 @@ class SignInViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         accountNameTextField.text = "shinzo_abe"
         passwordTextField.text = "Password_2018"
         loginButton.isEnabled = true

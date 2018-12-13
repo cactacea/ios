@@ -28,6 +28,8 @@
 		824BC49221BD24E80094841A /* ProfileHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49121BD24E80094841A /* ProfileHeaderReusableView.swift */; };
 		824BC49421BD2DD00094841A /* ProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49321BD2DD00094841A /* ProfilePhotoCell.swift */; };
 		824BC49621BD3F8A0094841A /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49521BD3F8A0094841A /* SettingTableViewController.swift */; };
+		82986F0621C097650080216B /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82986F0521C097650080216B /* CardsViewController.swift */; };
+		82986F0921C0A1450080216B /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82986F0821C0A1450080216B /* ActivityViewController.swift */; };
 		829CF04221AC1CD400D5B5EB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04121AC1CD400D5B5EB /* Extensions.swift */; };
 		829CF04D21AD6AC100D5B5EB /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04C21AD6AC100D5B5EB /* SharePhotoController.swift */; };
 		829CF04F21AD6B3600D5B5EB /* PlaceHolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04E21AD6B3600D5B5EB /* PlaceHolderTextView.swift */; };
@@ -78,6 +80,8 @@
 		824BC49121BD24E80094841A /* ProfileHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderReusableView.swift; sourceTree = "<group>"; };
 		824BC49321BD2DD00094841A /* ProfilePhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoCell.swift; sourceTree = "<group>"; };
 		824BC49521BD3F8A0094841A /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		82986F0521C097650080216B /* CardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
+		82986F0821C0A1450080216B /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		829CF04121AC1CD400D5B5EB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		829CF04C21AD6AC100D5B5EB /* SharePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
 		829CF04E21AD6B3600D5B5EB /* PlaceHolderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolderTextView.swift; sourceTree = "<group>"; };
@@ -209,6 +213,8 @@
 		820FE83821AC0E32001097F5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				82986F0721C0A12E0080216B /* Activity */,
+				82986F0421C0974F0080216B /* Cards */,
 				82AD415921BFFEE50023EF6C /* Requests */,
 				824BC48E21BD1E470094841A /* Profile */,
 				824BC48B21BCEDAB0094841A /* Menu */,
@@ -274,6 +280,22 @@
 				824BC49321BD2DD00094841A /* ProfilePhotoCell.swift */,
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		82986F0421C0974F0080216B /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				82986F0521C097650080216B /* CardsViewController.swift */,
+			);
+			name = Cards;
+			sourceTree = "<group>";
+		};
+		82986F0721C0A12E0080216B /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				82986F0821C0A1450080216B /* ActivityViewController.swift */,
+			);
+			name = Activity;
 			sourceTree = "<group>";
 		};
 		829CF04521AD5E4000D5B5EB /* Extensions */ = {
@@ -491,6 +513,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SteviaLayout/Stevia.framework",
 				"${BUILT_PRODUCTS_DIR}/YPImagePicker/YPImagePicker.framework",
+				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -507,6 +530,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stevia.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YPImagePicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -554,6 +578,7 @@
 				829CF04F21AD6B3600D5B5EB /* PlaceHolderTextView.swift in Sources */,
 				82112B8421BB926600F2C54B /* CommentsViewController.swift in Sources */,
 				824BC49021BD1E760094841A /* ProfileViewController.swift in Sources */,
+				82986F0621C097650080216B /* CardsViewController.swift in Sources */,
 				824BC48D21BCEDF30094841A /* OptionsViewController.swift in Sources */,
 				829CF04D21AD6AC100D5B5EB /* SharePhotoController.swift in Sources */,
 				829CF04221AC1CD400D5B5EB /* Extensions.swift in Sources */,
@@ -562,6 +587,7 @@
 				820FE84021AC0F45001097F5 /* FriendsViewController.swift in Sources */,
 				820FE83721AC0CE0001097F5 /* Session.swift in Sources */,
 				82AD416721C08EC60023EF6C /* FriendCell.swift in Sources */,
+				82986F0921C0A1450080216B /* ActivityViewController.swift in Sources */,
 				82112B8121BB5A2700F2C54B /* FeedCell.swift in Sources */,
 				82112B8621BB934D00F2C54B /* CommentCell.swift in Sources */,
 				820FE83C21AC0EEC001097F5 /* SignUpViewController.swift in Sources */,
