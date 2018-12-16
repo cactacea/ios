@@ -37,7 +37,7 @@ class FollowingUserCell: UITableViewCell {
     func updateButtons() {
         guard let account = account else { return }
         
-        if account.Following == true  {
+        if account.following == true  {
             cancelButton.backgroundColor = UIColor.mainBlue
             cancelButton.setTitle("Unblock", for: .normal)
         } else {
@@ -55,13 +55,13 @@ class FollowingUserCell: UITableViewCell {
         cancelButton.showsActivityIndicator = true
         cancelButton.setTitle("", for: .normal)
         
-        if account.Following {
+        if account.following {
             BlocksAPI.block(id: account.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
                 } else {
-                    account.Following = false
+                    account.following = false
                 }
                 weakSelf.updateButtons()
             }
@@ -71,7 +71,7 @@ class FollowingUserCell: UITableViewCell {
                 if let error = error {
                     Session.showError(error)
                 } else {
-                    account.Following = true
+                    account.following = true
                 }
                 weakSelf.updateButtons()
             }
