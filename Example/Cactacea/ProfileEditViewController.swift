@@ -8,22 +8,22 @@
 
 import UIKit
 
-protocol SettingTableViewControllerDelegate {
+protocol ProfileEditViewControllerDelegate {
     func updateUserInfor()
 }
 
-class SettingTableViewController: UITableViewController {
+class ProfileEditViewController: UITableViewController {
 
-    @IBOutlet weak var usernnameTextField: UITextField!
+    @IBOutlet weak var accountNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var profileImageView: UIImageView!
     
-    var delegate: SettingTableViewControllerDelegate?
+    var delegate: ProfileEditViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Edit Profile"
-        usernnameTextField.delegate = self
+        accountNameTextField.delegate = self
         emailTextField.delegate = self
 //        fetchCurrentUser()
     }
@@ -96,7 +96,7 @@ class SettingTableViewController: UITableViewController {
 //    }
 //}
 
-extension SettingTableViewController: UITextFieldDelegate {
+extension ProfileEditViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  MyProfileViewController.swift
 //  Cactacea_Example
 //
 //  Created by TAKESHI SHIMADA on 2018/12/09.
@@ -10,47 +10,46 @@ import UIKit
 import Cactacea
 import RxSwift
 
-class ProfileViewController: UIViewController {
+class MyProfileViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-
-    var account: Account? = nil
-    var posts: [Feed] = []
     
+    var posts: [Feed] = []
+    var delegate: MyProfileHeaderReusableViewDelegate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         fetchUser()
         fetchPosts()
-        
+
     }
     
     func fetchUser() {
-        if let account = self.account {
-            self.navigationItem.title = account.accountName
-            AccountsAPI.find(id: account.id) { [weak self] (account, _) in
+
+        if let authentication = Session.authentication {
+            self.navigationItem.title = authentication.account.accountName
+            SessionAPI.find { [weak self] (account, _) in
                 guard let weakSelf = self else { return }
                 guard let account = account else { return }
-                weakSelf.account = account
+                authentication.account = account
                 weakSelf.collectionView.reloadData()
             }
         }
     }
     
     func fetchPosts() {
-        if let account = self.account {
-            AccountsAPI.findFeeds(id: account.id) { [weak self] (result, error) in
-                guard let weakSelf = self else { return }
-                if let error = error {
-                    Session.showError(error)
-                } else if let result = result {
-                    weakSelf.posts = result // .append(contentsOf: result)
-                    weakSelf.collectionView.reloadData()
-                }
+        SessionAPI.findFeeds() { [weak self] (result, error) in
+            guard let weakSelf = self else { return }
+            if let error = error {
+                Session.showError(error)
+            } else if let result = result {
+                weakSelf.posts = result // .append(contentsOf: result)
+                weakSelf.collectionView.reloadData()
             }
         }
     }
@@ -61,7 +60,7 @@ class ProfileViewController: UIViewController {
 }
 
 
-extension ProfileViewController: UICollectionViewDataSource {
+extension MyProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
     }
@@ -76,15 +75,22 @@ extension ProfileViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerViewCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ProfileHeaderReusableView", for: indexPath) as! ProfileHeaderReusableView
-        if let account = self.account {
+        let headerViewCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "MyProfileHeaderReusableView", for: indexPath) as! MyProfileHeaderReusableView
+        if let account = Session.authentication?.account {
             headerViewCell.account = account
+            headerViewCell.delegate = self
         }
         return headerViewCell
     }
 }
 
-extension ProfileViewController: UICollectionViewDelegateFlowLayout {
+extension MyProfileViewController: MyProfileHeaderReusableViewDelegate {
+    func tappedEditButton() {
+        performSegue(withIdentifier: "setting", sender: nil)
+    }
+}
+
+extension MyProfileViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 2
     }
@@ -98,8 +104,9 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension ProfileViewController: PhotoCollectionViewCellDelegate {
+extension MyProfileViewController: PhotoCollectionViewCellDelegate {
     func tappedPhoto(postId: Int64) {
         performSegue(withIdentifier: "ProfileUser_DetailSegue", sender: postId)
     }
 }
+

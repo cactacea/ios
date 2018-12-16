@@ -64,7 +64,7 @@ extension FeedsViewController: FeedCellDelegate {
     }
 
     func tappedProfile(account: Account) {
-        performSegue(withIdentifier: "comment", sender: account)
+        performSegue(withIdentifier: "profile", sender: account)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -72,11 +72,10 @@ extension FeedsViewController: FeedCellDelegate {
             let vc = segue.destination as! CommentsViewController
             let feed = sender as! Feed
             vc.feed = feed
-        }
-        if segue.identifier == "profile" {
-//            let vc = segue.destination as! ProfileViewController
-//            let account = sender as! Account
-//            vc.account = account
+        } else if segue.identifier == "profile" {
+            let vc = segue.destination as! ProfileViewController
+            let account = sender as! Account
+            vc.account = account
         }
     }
 

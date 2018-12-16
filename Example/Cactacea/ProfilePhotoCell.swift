@@ -10,7 +10,7 @@ import UIKit
 import Cactacea
 
 protocol PhotoCollectionViewCellDelegate {
-    func goToDetailVC(postId: Int64)
+    func tappedPhoto(postId: Int64)
 }
 
 class ProfilePhotoCell: UICollectionViewCell {
@@ -38,7 +38,7 @@ class ProfilePhotoCell: UICollectionViewCell {
     
     @objc func photo_TouchUpInside() {
         if let id = post?.id {
-            delegate?.goToDetailVC(postId: id)
+            delegate?.tappedPhoto(postId: id)
         }
     }
 }
