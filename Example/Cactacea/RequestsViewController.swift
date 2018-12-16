@@ -12,7 +12,7 @@ import RxCocoa
 import Cactacea
 import AlamofireImage
 
-class RequestsViewController: UIViewController {
+class FriendRequestsViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
 
@@ -37,7 +37,7 @@ class RequestsViewController: UIViewController {
     
 }
 
-extension RequestsViewController: UITableViewDataSource {
+extension FriendRequestsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

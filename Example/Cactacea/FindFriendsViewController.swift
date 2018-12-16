@@ -16,27 +16,42 @@ class FindFriendsViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var pageFooterView: PageFooterView!
 
+    private let disposeBag = DisposeBag()
+
+    lazy private var pager = Pager<Account>(tableView, pageFooterView)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        incrementalText
-            .flatMap { [weak self] text -> Driver<[Account]> in
-                guard let _ = self else { return .just([]) }
-                if text.isEmpty {
-                    return .just([])
-                }
-                let accountName: String? = text
-                let observable = AccountsAPI.findAccounts(accountName: accountName, since: nil, offset: nil, count: nil)
-                return observable.asDriver(onErrorJustReturn: [])
-            }
-            .drive(tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
+        self.pager.fetchBlock =  { [weak self] (paginator, first) -> Observable<[Account]> in
+            guard let weakSelf = self else { return Observable.empty() }
+            let accountName = weakSelf.searchBar.text
+            let next = first ? nil : paginator.items.last?.next
+            return AccountsAPI.findAccounts(accountName: accountName,
+                                            since: next,
+                                            offset: nil,
+                                            count: nil)
+        }
         
+        self.pager.fetchFirst()
+
+        self.incrementalText.asObservable().flatMap(fetch).subscribe().disposed(by: self.disposeBag)
+
     }
     
-    private let disposeBag = DisposeBag()
-    private let dataSource = DataSource()
+}
+
+extension FindFriendsViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return true
+    }
+
+    private func fetch(accountName: String?) -> Observable<[Account]> {
+        return self.pager.fetch(first: true)
+    }
     
     private var incrementalText: Driver<String> {
         return rx
@@ -46,59 +61,29 @@ class FindFriendsViewController: UIViewController {
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: "")
     }
-    
-}
 
+}
 
 extension FindFriendsViewController: UITableViewDelegate {
-
-    
 }
 
+extension FindFriendsViewController: UITableViewDataSource {
 
-
-extension FindFriendsViewController: UITableViewDataSourcePrefetching {
-
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        print(#function, indexPaths)
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-    
-    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        print(#function)
-    }
-}
 
-extension FindFriendsViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        return true
-    }
-}
-
-final class DataSource: NSObject, UITableViewDataSource, RxTableViewDataSourceType {
-    
-    typealias  Element = [Account]
-    
-    private var items: Element = []
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         if let cell = cell as? FindFriendsCell  {
-            let account = items[indexPath.row]
+            let account = self.pager.items[indexPath.row]
             cell.account = account
         }
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return self.pager.items.count
     }
-    
-    func tableView(_ tableView: UITableView, observedEvent: Event<Element>) {
-        Binder(self) { (dataSource, items) in
-//            if dataSource.items == items { return }
-            dataSource.items = items
-            tableView.reloadData()
-            }
-            .on(observedEvent)
-    }
+
 }

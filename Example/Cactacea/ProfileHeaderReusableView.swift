@@ -49,7 +49,7 @@ class ProfileHeaderReusableView: UICollectionReusableView {
         }
         
         self.myPostsCountLabel.text = "\(user.feedsCount ?? 0)"
-        self.followingCountLabel.text = "\(user.followCount ?? 0)"
+        self.followingCountLabel.text = "\(user.followingCount ?? 0)"
         self.followersCountLabel.text = "\(user.followerCount ?? 0)"
 
         if user.id == Session.authentication?.account.id {
@@ -73,7 +73,7 @@ class ProfileHeaderReusableView: UICollectionReusableView {
     }
     
     func updateStateFollowButton() {
-        if user.follow {
+        if user.following {
             configureUnFollowButton()
         } else {
             configureFollowButton()
@@ -105,28 +105,28 @@ class ProfileHeaderReusableView: UICollectionReusableView {
     }
     
     @objc func followAction() {
-        if user.follow == false {
+        if user.following == false {
             FollowsAPI.follow(id: user.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
                 } else {
                     weakSelf.configureUnFollowButton()
-                    weakSelf.user.follow = true
+                    weakSelf.user.following = true
                 }
             }
         }
     }
     
     @objc func unFollowAction() {
-        if user.follow == true {
+        if user.following == true {
             FollowsAPI.unfollow(id: user.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
                 } else {
                     weakSelf.configureFollowButton()
-                    weakSelf.user.follow = false
+                    weakSelf.user.following = false
                     weakSelf.delegate?.updateFollowButton(forUser: weakSelf.user)
                 }
             }

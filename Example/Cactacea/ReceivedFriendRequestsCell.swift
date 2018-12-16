@@ -11,7 +11,7 @@ import Cactacea
 import Alamofire
 import AlamofireImage
 
-class RequestsCell: UITableViewCell {
+class ReceivedFriendRequestsCell: UITableViewCell {
     
     @IBOutlet var accountNameLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
@@ -66,7 +66,7 @@ class RequestsCell: UITableViewCell {
         acceptButton.setTitle("", for: .normal)
         rejectButton.isEnabled = false
 
-        RequestsAPI.accept(id: friendRequest.id) { [weak self] (error) in
+        FriendRequestsAPI.accept(id: friendRequest.id) { [weak self] (error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)
@@ -86,7 +86,7 @@ class RequestsCell: UITableViewCell {
         acceptButton.setTitle("", for: .normal)
         rejectButton.isEnabled = false
         
-        RequestsAPI.reject(id: friendRequest.id) { [weak self] (error) in
+        FriendRequestsAPI.reject(id: friendRequest.id) { [weak self] (error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)

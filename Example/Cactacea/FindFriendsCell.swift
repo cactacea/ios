@@ -37,7 +37,7 @@ class FindFriendsCell: UITableViewCell {
     func updateAddFriendButton() {
         guard let account = account else { return }
         
-        if account.friend {
+        if account.isFriend {
             addFriendButton.setTitle("Unfriend", for: .normal)
         } else if account.friendRequestInProgress {
             addFriendButton.setTitle("Cancel", for: .normal)
@@ -58,18 +58,18 @@ class FindFriendsCell: UITableViewCell {
         addFriendButton.showsActivityIndicator = true
         addFriendButton.setTitle("", for: .normal)
         
-        if account.friend {
+        if account.isFriend {
             FriendsAPI.deleteFriend(id: account.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
                 } else {
-                    account.friend = false
+                    account.isFriend = false
                 }
                 weakSelf.updateAddFriendButton()
             }
         } else if account.friendRequestInProgress {
-            RequestsAPI.delete(id: account.id) { [weak self] (error) in
+            FriendRequestsAPI.delete(id: account.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
@@ -80,7 +80,7 @@ class FindFriendsCell: UITableViewCell {
             }
             
         } else {
-            RequestsAPI.create(id: account.id) { [weak self] (result, error) in
+            FriendRequestsAPI.create(id: account.id) { [weak self] (result, error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
