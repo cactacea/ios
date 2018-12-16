@@ -57,7 +57,7 @@ class FriendRequestsSentCell: UITableViewCell {
         cancelButton.showsActivityIndicator = true
         cancelButton.setTitle("", for: .normal)
         
-        FriendRequestsAPI.delete(id: friendRequest.account.id) { [weak self] (error) in
+        AccountsAPI.unrequest(id: friendRequest.account.id) { [weak self] (error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)

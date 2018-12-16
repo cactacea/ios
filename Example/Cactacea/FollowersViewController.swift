@@ -1,5 +1,5 @@
 //
-//  FollowingUsersViewControlller.swift
+//  FollowersViewController.swift
 //  Cactacea_Example
 //
 //  Created by TAKESHI SHIMADA on 2018/12/16.
@@ -12,7 +12,7 @@ import RxCocoa
 import Cactacea
 import AlamofireImage
 
-class FollowingUsersViewControlller: UIViewController {
+class FollowersViewControlller: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var pageFooterView: PageFooterView!
@@ -25,7 +25,7 @@ class FollowingUsersViewControlller: UIViewController {
         self.pager.fetchBlock =  { [weak self] (paginator, first) -> Observable<[Account]> in
             guard let _ = self else { return Observable.empty() }
             let next = first ? nil : paginator.items.last?.next
-            return SessionAPI.findFollowing(since: next, offset: nil, count: nil)
+            return SessionAPI.findFollowers(since: next, offset: nil, count: nil)
         }
         
     }
@@ -39,10 +39,10 @@ class FollowingUsersViewControlller: UIViewController {
     
 }
 
-extension FollowingUsersViewControlller: UITableViewDelegate {
+extension FollowersViewControlller: UITableViewDelegate {
 }
 
-extension FollowingUsersViewControlller: UITableViewDataSource {
+extension FollowersViewControlller: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -54,7 +54,7 @@ extension FollowingUsersViewControlller: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        if let cell = cell as? FollowingUserCell {
+        if let cell = cell as? FollowerCell {
             let account = self.pager.items[indexPath.row]
             cell.account = account
         }

@@ -63,7 +63,7 @@ class SharePhotoController: UIViewController {
                     Session.showError(error)
                 } else if let medium = result?.first {
                     let postFeedBody = PostFeedBody(message: self.textView.text, mediumIds: [medium.id], tags: nil, privacyType: PostFeedBody.PrivacyType.everyone, contentWarning: false, expiration: nil)
-                    FeedsAPI.postFeed(body: postFeedBody, completion: { (result, error) in
+                    FeedsAPI.post(body: postFeedBody, completion: { (result, error) in
                         if let error = error {
                             Session.showError(error)
                         } else {
@@ -77,7 +77,7 @@ class SharePhotoController: UIViewController {
 
         } else {
             let postFeedBody = PostFeedBody(message: self.textView.text, mediumIds: nil, tags: nil, privacyType: PostFeedBody.PrivacyType.everyone, contentWarning: false, expiration: nil)
-            FeedsAPI.postFeed(body: postFeedBody, completion: { (result, error) in
+            FeedsAPI.post(body: postFeedBody, completion: { (result, error) in
                 if let error = error {
                     Session.showError(error)
                 } else {

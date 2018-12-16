@@ -34,6 +34,8 @@
 		824BC49221BD24E80094841A /* ProfileHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49121BD24E80094841A /* ProfileHeaderReusableView.swift */; };
 		824BC49421BD2DD00094841A /* ProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49321BD2DD00094841A /* ProfilePhotoCell.swift */; };
 		824BC49621BD3F8A0094841A /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49521BD3F8A0094841A /* SettingTableViewController.swift */; };
+		82968E0521C61EF30023A11E /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82968E0421C61EF30023A11E /* FollowersViewController.swift */; };
+		82968E0721C61F000023A11E /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82968E0621C61F000023A11E /* FollowerCell.swift */; };
 		829857C621C5F14800D4773D /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829857C521C5F14800D4773D /* RequestBuilder.swift */; };
 		829857C921C5F74600D4773D /* FollowingUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829857C821C5F74600D4773D /* FollowingUsersViewController.swift */; };
 		829857CB21C5F75800D4773D /* FollowingUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829857CA21C5F75800D4773D /* FollowingUserCell.swift */; };
@@ -93,6 +95,8 @@
 		824BC49121BD24E80094841A /* ProfileHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderReusableView.swift; sourceTree = "<group>"; };
 		824BC49321BD2DD00094841A /* ProfilePhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoCell.swift; sourceTree = "<group>"; };
 		824BC49521BD3F8A0094841A /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		82968E0421C61EF30023A11E /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
+		82968E0621C61F000023A11E /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		829857C521C5F14800D4773D /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		829857C821C5F74600D4773D /* FollowingUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingUsersViewController.swift; sourceTree = "<group>"; };
 		829857CA21C5F75800D4773D /* FollowingUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingUserCell.swift; sourceTree = "<group>"; };
@@ -253,6 +257,7 @@
 		820FE83821AC0E32001097F5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				82968E0321C61EDF0023A11E /* Followers */,
 				829857C721C5F72400D4773D /* FollowingUsers */,
 				820EE93021C5C11700B1CDE2 /* BlockingUsers */,
 				820EE92B21C5BD7100B1CDE2 /* RequestsSent */,
@@ -321,6 +326,15 @@
 				824BC49321BD2DD00094841A /* ProfilePhotoCell.swift */,
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		82968E0321C61EDF0023A11E /* Followers */ = {
+			isa = PBXGroup;
+			children = (
+				82968E0421C61EF30023A11E /* FollowersViewController.swift */,
+				82968E0621C61F000023A11E /* FollowerCell.swift */,
+			);
+			name = Followers;
 			sourceTree = "<group>";
 		};
 		829857C421C5F12D00D4773D /* Models */ = {
@@ -616,7 +630,9 @@
 				824BC49221BD24E80094841A /* ProfileHeaderReusableView.swift in Sources */,
 				824BC49421BD2DD00094841A /* ProfilePhotoCell.swift in Sources */,
 				820FE83A21AC0E6C001097F5 /* MainController.swift in Sources */,
+				82968E0721C61F000023A11E /* FollowerCell.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				82968E0521C61EF30023A11E /* FollowersViewController.swift in Sources */,
 				829CF05621B5745100D5B5EB /* FindFriendsCell.swift in Sources */,
 				820FE83E21AC0F11001097F5 /* SignInViewController.swift in Sources */,
 				829CF04F21AD6B3600D5B5EB /* PlaceHolderTextView.swift in Sources */,

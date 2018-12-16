@@ -106,7 +106,7 @@ class ProfileHeaderReusableView: UICollectionReusableView {
     
     @objc func followAction() {
         if user.following == false {
-            FollowsAPI.follow(id: user.id) { [weak self] (error) in
+            AccountsAPI.follow(id: user.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
@@ -120,7 +120,7 @@ class ProfileHeaderReusableView: UICollectionReusableView {
     
     @objc func unFollowAction() {
         if user.following == true {
-            FollowsAPI.unfollow(id: user.id) { [weak self] (error) in
+            AccountsAPI.unfollow(id: user.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)

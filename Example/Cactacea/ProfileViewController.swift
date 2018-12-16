@@ -58,7 +58,7 @@ class ProfileViewController: UIViewController {
                 }
             }
         } else {
-            FeedsAPI.findAccountFeeds(id: user.id) { [weak self] (result, error) in
+            AccountsAPI.findFeeds(id: user.id) { [weak self] (result, error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)

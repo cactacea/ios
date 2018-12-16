@@ -29,7 +29,7 @@ class FindFriendsViewController: UIViewController {
             guard let weakSelf = self else { return Observable.empty() }
             let accountName = weakSelf.searchBar.text
             let next = first ? nil : paginator.items.last?.next
-            return AccountsAPI.findAccounts(accountName: accountName,
+            return SessionAPI.findAccounts(accountName: accountName,
                                             since: next,
                                             offset: nil,
                                             count: nil)

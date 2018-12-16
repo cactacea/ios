@@ -15,7 +15,7 @@ class BlockingUserCell: UITableViewCell {
     
     @IBOutlet var accountNameLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
-    @IBOutlet var cancelButton: UIButton!
+    @IBOutlet var actionButton: UIButton!
 
     var account: Account? {
         didSet {
@@ -38,25 +38,26 @@ class BlockingUserCell: UITableViewCell {
         guard let account = account else { return }
         
         if account.blocking == true  {
-            cancelButton.backgroundColor = UIColor.mainBlue
-            cancelButton.setTitle("Unblock", for: .normal)
+            actionButton.backgroundColor = UIColor.mainBlue
+            actionButton.setTitle("Unblock", for: .normal)
         } else {
-            cancelButton.backgroundColor = UIColor.mainBlue
-            cancelButton.setTitle("Block", for: .normal)
+            actionButton.backgroundColor = UIColor.mainBlue
+            actionButton.setTitle("Block", for: .normal)
         }
-        cancelButton.showsActivityIndicator = false
+        actionButton.isEnabled = true
+        actionButton.showsActivityIndicator = false
     }
     
     @IBAction func tappedCancel(_ sender: Any) {
         guard let account = account else { return }
 
-        cancelButton.isEnabled = false
-        cancelButton.backgroundColor = UIColor.mainLightBlue
-        cancelButton.showsActivityIndicator = true
-        cancelButton.setTitle("", for: .normal)
+        actionButton.isEnabled = false
+        actionButton.backgroundColor = UIColor.mainLightBlue
+        actionButton.showsActivityIndicator = true
+        actionButton.setTitle("", for: .normal)
         
         if account.blocking {
-            BlocksAPI.block(id: account.id) { [weak self] (error) in
+            AccountsAPI.block(id: account.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
@@ -66,7 +67,7 @@ class BlockingUserCell: UITableViewCell {
                 weakSelf.updateButtons()
             }
         } else {
-            BlocksAPI.unblock(id: account.id) { [weak self] (error) in
+            AccountsAPI.unblock(id: account.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)

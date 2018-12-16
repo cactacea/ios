@@ -354,7 +354,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="posts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7M-D2-jVG">
-                                                                    <rect key="frame" x="17.333333333333343" y="18" width="35.666666666666657" height="17"/>
+                                                                    <rect key="frame" x="17.333333333333339" y="18" width="35.666666666666657" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -851,6 +851,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="sr5-Cc-GU1" kind="show" id="bRY-o2-poB"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="followers" textLabel="vI5-wQ-34l" style="IBUITableViewCellStyleDefault" id="oDl-N9-Ko9">
                                         <rect key="frame" x="0.0" y="123" width="375" height="44"/>
@@ -868,6 +871,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="ZRI-8H-RzQ" kind="show" id="OOh-Eg-zC3"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="friends" textLabel="QIe-T7-BDe" style="IBUITableViewCellStyleDefault" id="PIj-dc-rGw" userLabel="friends">
                                         <rect key="frame" x="0.0" y="167" width="375" height="44"/>
@@ -1268,7 +1274,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="accountNameLabel" destination="Rba-W4-vK1" id="X35-LP-0qz"/>
-                                            <outlet property="addFriendButton" destination="Ld7-nT-Iom" id="0jF-9B-g1y"/>
+                                            <outlet property="actionButton" destination="Ld7-nT-Iom" id="0jF-9B-g1y"/>
                                             <outlet property="profileImageView" destination="Nq5-1C-99t" id="awJ-pD-Zjm"/>
                                         </connections>
                                     </tableViewCell>
@@ -2216,7 +2222,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="accountNameLabel" destination="k1k-uV-ctN" id="cIr-jG-K6U"/>
-                                            <outlet property="cancelButton" destination="BNG-TT-6kT" id="pKA-iS-W8v"/>
+                                            <outlet property="actionButton" destination="BNG-TT-6kT" id="pKA-iS-W8v"/>
                                             <outlet property="profileImageView" destination="rOF-GA-BRu" id="li5-r0-Gi0"/>
                                         </connections>
                                     </tableViewCell>
@@ -2246,16 +2252,16 @@
             </objects>
             <point key="canvasLocation" x="5268" y="2703"/>
         </scene>
-        <!--Blocking Users-->
+        <!--Following Users-->
         <scene sceneID="rM6-Nd-Lf6">
             <objects>
-                <viewController id="sr5-Cc-GU1" customClass="FollowingUsersViewControlller" sceneMemberID="viewController">
+                <viewController id="sr5-Cc-GU1" customClass="FollowingUsersViewControlller" customModule="Cactacea_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f2t-QZ-bmZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9CG-q3-ZZ1">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="HkO-8k-rsT" customClass="PageFooterView" customModule="Cactacea_Example" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="108" width="375" height="68"/>
@@ -2280,7 +2286,7 @@
                                     </connections>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="80" id="VSH-u5-dMc" customClass="BlockingUserCell" customModule="Cactacea_Example" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="80" id="VSH-u5-dMc" customClass="FollowingUserCell" customModule="Cactacea_Example" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VSH-u5-dMc" id="ZRO-Ns-4f9">
@@ -2341,7 +2347,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="accountNameLabel" destination="OcJ-8L-7wf" id="h5u-3s-rcw"/>
-                                            <outlet property="cancelButton" destination="Y8N-VL-0qe" id="unh-iE-BbX"/>
+                                            <outlet property="actionButton" destination="Y8N-VL-0qe" id="unh-iE-BbX"/>
                                             <outlet property="profileImageView" destination="5fY-ru-oIX" id="ldS-k3-qQr"/>
                                         </connections>
                                     </tableViewCell>
@@ -2361,7 +2367,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Lyr-Kf-V1I"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Blocking Users" id="HZH-mq-qkj"/>
+                    <navigationItem key="navigationItem" title="Following Users" id="HZH-mq-qkj"/>
                     <connections>
                         <outlet property="pageFooterView" destination="HkO-8k-rsT" id="geq-mK-wDa"/>
                         <outlet property="tableView" destination="9CG-q3-ZZ1" id="2Kh-jY-6XX"/>
@@ -2370,6 +2376,131 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XT7-qw-Qnc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5268" y="3451"/>
+        </scene>
+        <!--Followers-->
+        <scene sceneID="UyN-oN-GhE">
+            <objects>
+                <viewController id="ZRI-8H-RzQ" customClass="FollowersViewControlller" customModule="Cactacea_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="01L-Yh-d2x">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZmI-vc-Oq8">
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="0zB-un-Yxf" customClass="PageFooterView" customModule="Cactacea_Example" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="108" width="375" height="68"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3t6-fj-zTF">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
+                                            <state key="normal" title="No users to show">
+                                                <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="3t6-fj-zTF" secondAttribute="bottom" id="ITd-qs-EdC"/>
+                                        <constraint firstAttribute="trailing" secondItem="3t6-fj-zTF" secondAttribute="trailing" id="Km1-IX-yal"/>
+                                        <constraint firstItem="3t6-fj-zTF" firstAttribute="top" secondItem="0zB-un-Yxf" secondAttribute="top" id="cSE-kC-Shx"/>
+                                        <constraint firstItem="3t6-fj-zTF" firstAttribute="leading" secondItem="0zB-un-Yxf" secondAttribute="leading" id="v5t-bH-ebO"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="labelButton" destination="3t6-fj-zTF" id="vIY-V6-BhP"/>
+                                    </connections>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="80" id="Ptf-RY-dY8" customClass="FollowerCell" customModule="Cactacea_Example" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ptf-RY-dY8" id="gJ5-td-kmr">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79.666666666666671"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_profile" translatesAutoresizingMaskIntoConstraints="NO" id="aad-Ia-FyF">
+                                                    <rect key="frame" x="8" y="10" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="8rC-IT-oe4"/>
+                                                        <constraint firstAttribute="height" constant="60" id="HMb-r7-QVh"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="30"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ito Hirobumi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHu-Qq-ubx">
+                                                    <rect key="frame" x="80" y="29.666666666666671" width="93.333333333333314" height="20.333333333333329"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="iN9-Fb-Fuc">
+                                                    <rect key="frame" x="277" y="25" width="90" height="30"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ew6-eD-9p7">
+                                                            <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
+                                                            <color key="backgroundColor" red="0.58431372550000005" green="0.80000000000000004" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <state key="normal" title="Cancel">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </state>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="tappedCancel:" destination="Ptf-RY-dY8" eventType="touchUpInside" id="gbd-KU-ZW0"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="90" id="0O8-pz-MPJ"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="PHu-Qq-ubx" firstAttribute="leading" secondItem="aad-Ia-FyF" secondAttribute="trailing" constant="12" id="Lue-3B-2VO"/>
+                                                <constraint firstItem="aad-Ia-FyF" firstAttribute="centerY" secondItem="gJ5-td-kmr" secondAttribute="centerY" id="OAc-Fs-bnb"/>
+                                                <constraint firstItem="iN9-Fb-Fuc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PHu-Qq-ubx" secondAttribute="trailing" id="SoK-t5-pCW"/>
+                                                <constraint firstItem="iN9-Fb-Fuc" firstAttribute="centerY" secondItem="gJ5-td-kmr" secondAttribute="centerY" id="fAW-wk-zOQ"/>
+                                                <constraint firstItem="PHu-Qq-ubx" firstAttribute="centerY" secondItem="gJ5-td-kmr" secondAttribute="centerY" id="fXy-0a-TnE"/>
+                                                <constraint firstItem="aad-Ia-FyF" firstAttribute="leading" secondItem="gJ5-td-kmr" secondAttribute="leading" constant="8" id="kQt-Vt-S1i"/>
+                                                <constraint firstAttribute="trailing" secondItem="iN9-Fb-Fuc" secondAttribute="trailing" constant="8" id="lYF-w4-yxu"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="accountNameLabel" destination="PHu-Qq-ubx" id="z6K-kI-1Cs"/>
+                                            <outlet property="actionButton" destination="ew6-eD-9p7" id="jPM-Ld-djq"/>
+                                            <outlet property="profileImageView" destination="aad-Ia-FyF" id="IQe-wL-ZYn"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ZRI-8H-RzQ" id="tSV-qt-zfC"/>
+                                    <outlet property="delegate" destination="ZRI-8H-RzQ" id="XVs-Qg-9V6"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ZmI-vc-Oq8" firstAttribute="trailing" secondItem="d3h-00-iIO" secondAttribute="trailing" id="QXO-Hn-fao"/>
+                            <constraint firstItem="ZmI-vc-Oq8" firstAttribute="leading" secondItem="d3h-00-iIO" secondAttribute="leading" id="mgd-14-Hj3"/>
+                            <constraint firstItem="ZmI-vc-Oq8" firstAttribute="bottom" secondItem="d3h-00-iIO" secondAttribute="bottom" id="pfi-LE-Yy5"/>
+                            <constraint firstItem="ZmI-vc-Oq8" firstAttribute="top" secondItem="d3h-00-iIO" secondAttribute="top" id="uf2-mh-tTS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="d3h-00-iIO"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Followers" id="ggI-AY-Eov"/>
+                    <connections>
+                        <outlet property="pageFooterView" destination="0zB-un-Yxf" id="sNV-bc-P1R"/>
+                        <outlet property="tableView" destination="ZmI-vc-Oq8" id="tgN-VB-oiT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6e7-sI-W6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5268" y="4184"/>
         </scene>
     </scenes>
     <resources>
