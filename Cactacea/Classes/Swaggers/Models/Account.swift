@@ -15,15 +15,16 @@ open class Account: Codable {
     public var accountName: String
     public var displayName: String
     public var profileImageUrl: String?
-    public var friend: Bool
+    public var isFriend: Bool
     public var friendRequestInProgress: Bool
-    public var follow: Bool
-    public var follower: Bool
-    public var followCount: Int64?
+    public var following: Bool
+    public var isFollower: Bool
+    public var followingCount: Int64?
     public var followerCount: Int64?
     public var friendCount: Int64?
     public var feedsCount: Int64?
-    public var mute: Bool
+    public var muting: Bool
+    public var blocking: Bool
     public var web: String?
     public var birthday: Int64?
     public var location: String?
@@ -33,20 +34,21 @@ open class Account: Codable {
 
 
     
-    public init(id: Int64, accountName: String, displayName: String, profileImageUrl: String?, friend: Bool, friendRequestInProgress: Bool, follow: Bool, follower: Bool, followCount: Int64?, followerCount: Int64?, friendCount: Int64?, feedsCount: Int64?, mute: Bool, web: String?, birthday: Int64?, location: String?, bio: String?, joinedAt: Int64?, next: Int64?) {
+    public init(id: Int64, accountName: String, displayName: String, profileImageUrl: String?, isFriend: Bool, friendRequestInProgress: Bool, following: Bool, isFollower: Bool, followingCount: Int64?, followerCount: Int64?, friendCount: Int64?, feedsCount: Int64?, muting: Bool, blocking: Bool, web: String?, birthday: Int64?, location: String?, bio: String?, joinedAt: Int64?, next: Int64?) {
         self.id = id
         self.accountName = accountName
         self.displayName = displayName
         self.profileImageUrl = profileImageUrl
-        self.friend = friend
+        self.isFriend = isFriend
         self.friendRequestInProgress = friendRequestInProgress
-        self.follow = follow
-        self.follower = follower
-        self.followCount = followCount
+        self.following = following
+        self.isFollower = isFollower
+        self.followingCount = followingCount
         self.followerCount = followerCount
         self.friendCount = friendCount
         self.feedsCount = feedsCount
-        self.mute = mute
+        self.muting = muting
+        self.blocking = blocking
         self.web = web
         self.birthday = birthday
         self.location = location
@@ -66,15 +68,16 @@ open class Account: Codable {
         try container.encode(accountName, forKey: "accountName")
         try container.encode(displayName, forKey: "displayName")
         try container.encodeIfPresent(profileImageUrl, forKey: "profileImageUrl")
-        try container.encode(friend, forKey: "friend")
+        try container.encode(isFriend, forKey: "isFriend")
         try container.encode(friendRequestInProgress, forKey: "friendRequestInProgress")
-        try container.encode(follow, forKey: "follow")
-        try container.encode(follower, forKey: "follower")
-        try container.encodeIfPresent(followCount, forKey: "followCount")
+        try container.encode(following, forKey: "following")
+        try container.encode(isFollower, forKey: "isFollower")
+        try container.encodeIfPresent(followingCount, forKey: "followingCount")
         try container.encodeIfPresent(followerCount, forKey: "followerCount")
         try container.encodeIfPresent(friendCount, forKey: "friendCount")
         try container.encodeIfPresent(feedsCount, forKey: "feedsCount")
-        try container.encode(mute, forKey: "mute")
+        try container.encode(muting, forKey: "muting")
+        try container.encode(blocking, forKey: "blocking")
         try container.encodeIfPresent(web, forKey: "web")
         try container.encodeIfPresent(birthday, forKey: "birthday")
         try container.encodeIfPresent(location, forKey: "location")
@@ -92,15 +95,16 @@ open class Account: Codable {
         accountName = try container.decode(String.self, forKey: "accountName")
         displayName = try container.decode(String.self, forKey: "displayName")
         profileImageUrl = try container.decodeIfPresent(String.self, forKey: "profileImageUrl")
-        friend = try container.decode(Bool.self, forKey: "friend")
+        isFriend = try container.decode(Bool.self, forKey: "isFriend")
         friendRequestInProgress = try container.decode(Bool.self, forKey: "friendRequestInProgress")
-        follow = try container.decode(Bool.self, forKey: "follow")
-        follower = try container.decode(Bool.self, forKey: "follower")
-        followCount = try container.decodeIfPresent(Int64.self, forKey: "followCount")
+        following = try container.decode(Bool.self, forKey: "following")
+        isFollower = try container.decode(Bool.self, forKey: "isFollower")
+        followingCount = try container.decodeIfPresent(Int64.self, forKey: "followingCount")
         followerCount = try container.decodeIfPresent(Int64.self, forKey: "followerCount")
         friendCount = try container.decodeIfPresent(Int64.self, forKey: "friendCount")
         feedsCount = try container.decodeIfPresent(Int64.self, forKey: "feedsCount")
-        mute = try container.decode(Bool.self, forKey: "mute")
+        muting = try container.decode(Bool.self, forKey: "muting")
+        blocking = try container.decode(Bool.self, forKey: "blocking")
         web = try container.decodeIfPresent(String.self, forKey: "web")
         birthday = try container.decodeIfPresent(Int64.self, forKey: "birthday")
         location = try container.decodeIfPresent(String.self, forKey: "location")

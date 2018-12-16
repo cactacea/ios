@@ -18,8 +18,8 @@ open class MessagesAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func deleteMessage(body: DeleteMessagesBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        deleteMessageWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func delete(body: DeleteMessagesBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        deleteWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -30,9 +30,9 @@ open class MessagesAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func deleteMessage(body: DeleteMessagesBody) -> Observable<Void> {
+    open class func delete(body: DeleteMessagesBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            deleteMessage(body: body) { error in
+            delete(body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -58,7 +58,7 @@ open class MessagesAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func deleteMessageWithRequestBuilder(body: DeleteMessagesBody) -> RequestBuilder<Void> {
+    open class func deleteWithRequestBuilder(body: DeleteMessagesBody) -> RequestBuilder<Void> {
         let path = "/messages"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
@@ -81,8 +81,8 @@ open class MessagesAPI {
      - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findMessages(id: Int64, ascending: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: Message?,_ error: Error?) -> Void)) {
-        findMessagesWithRequestBuilder(id: id, ascending: ascending, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func find(id: Int64, ascending: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: Message?,_ error: Error?) -> Void)) {
+        findWithRequestBuilder(id: id, ascending: ascending, since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -97,9 +97,9 @@ open class MessagesAPI {
      - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: Observable<Message>
      */
-    open class func findMessages(id: Int64, ascending: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<Message> {
+    open class func find(id: Int64, ascending: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<Message> {
         return Observable.create { observer -> Disposable in
-            findMessages(id: id, ascending: ascending, since: since, offset: offset, count: count) { data, error in
+            find(id: id, ascending: ascending, since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -145,21 +145,22 @@ open class MessagesAPI {
   "account" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
     "next" : 9.301444243932575517419536481611430644989013671875,
-    "follower" : true,
-    "followCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendCount" : 5.962133916683182377482808078639209270477294921875,
     "accountName" : "accountName",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "bio" : "bio",
-    "mute" : true,
-    "follow" : true,
+    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
     "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "muting" : true,
     "web" : "web",
-    "friend" : true,
+    "blocking" : true,
+    "following" : true,
+    "isFriend" : true,
     "location" : "location",
     "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
     "followerCount" : 1.46581298050294517310021547018550336360931396484375
   }
@@ -173,7 +174,7 @@ open class MessagesAPI {
 
      - returns: RequestBuilder<Message> 
      */
-    open class func findMessagesWithRequestBuilder(id: Int64, ascending: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<Message> {
+    open class func findWithRequestBuilder(id: Int64, ascending: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<Message> {
         let path = "/messages"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -199,8 +200,8 @@ open class MessagesAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func postMessage(body: PostMessageBody, completion: @escaping ((_ data: MessageCreated?,_ error: Error?) -> Void)) {
-        postMessageWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func post(body: PostMessageBody, completion: @escaping ((_ data: MessageCreated?,_ error: Error?) -> Void)) {
+        postWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -211,9 +212,9 @@ open class MessagesAPI {
      - parameter body: (body)  
      - returns: Observable<MessageCreated>
      */
-    open class func postMessage(body: PostMessageBody) -> Observable<MessageCreated> {
+    open class func post(body: PostMessageBody) -> Observable<MessageCreated> {
         return Observable.create { observer -> Disposable in
-            postMessage(body: body) { data, error in
+            post(body: body) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -242,7 +243,7 @@ open class MessagesAPI {
 
      - returns: RequestBuilder<MessageCreated> 
      */
-    open class func postMessageWithRequestBuilder(body: PostMessageBody) -> RequestBuilder<MessageCreated> {
+    open class func postWithRequestBuilder(body: PostMessageBody) -> RequestBuilder<MessageCreated> {
         let path = "/messages"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)

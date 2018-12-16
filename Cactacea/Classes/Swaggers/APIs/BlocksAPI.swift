@@ -13,66 +13,6 @@ import RxSwift
 
 open class BlocksAPI {
     /**
-     Block a account
-     
-     - parameter id: (path) Account Identifier. 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func block(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        blockWithRequestBuilder(id: id).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-    /**
-     Block a account
-     
-     - parameter id: (path) Account Identifier. 
-     - returns: Observable<Void>
-     */
-    open class func block(id: Int64) -> Observable<Void> {
-        return Observable.create { observer -> Disposable in
-            block(id: id) { error in
-                if let error = error {
-                    observer.on(.error(error))
-                } else {
-                    observer.on(.next(()))
-                }
-                observer.on(.completed)
-            }
-            return Disposables.create()
-        }
-    }
-
-    /**
-     Block a account
-     - POST /accounts/{id}/blocks
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
-     
-     - parameter id: (path) Account Identifier. 
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func blockWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
-        var path = "/accounts/{id}/blocks"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-
-        let requestBuilder: RequestBuilder<Void>.Type = CactaceaAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
      Get blocking accounts list
      
      - parameter since: (query) Filters accounts which started on since or later. (optional)
@@ -120,41 +60,43 @@ open class BlocksAPI {
      - examples: [{contentType=application/json, example=[ {
   "birthday" : 2.3021358869347654518833223846741020679473876953125,
   "next" : 9.301444243932575517419536481611430644989013671875,
-  "follower" : true,
-  "followCount" : 6.02745618307040320615897144307382404804229736328125,
   "friendCount" : 5.962133916683182377482808078639209270477294921875,
   "accountName" : "accountName",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
   "bio" : "bio",
-  "mute" : true,
-  "follow" : true,
+  "followingCount" : 6.02745618307040320615897144307382404804229736328125,
   "friendRequestInProgress" : true,
   "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+  "muting" : true,
   "web" : "web",
-  "friend" : true,
+  "blocking" : true,
+  "following" : true,
+  "isFriend" : true,
   "location" : "location",
   "id" : 0.80082819046101150206595775671303272247314453125,
+  "isFollower" : true,
   "profileImageUrl" : "profileImageUrl",
   "followerCount" : 1.46581298050294517310021547018550336360931396484375
 }, {
   "birthday" : 2.3021358869347654518833223846741020679473876953125,
   "next" : 9.301444243932575517419536481611430644989013671875,
-  "follower" : true,
-  "followCount" : 6.02745618307040320615897144307382404804229736328125,
   "friendCount" : 5.962133916683182377482808078639209270477294921875,
   "accountName" : "accountName",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
   "bio" : "bio",
-  "mute" : true,
-  "follow" : true,
+  "followingCount" : 6.02745618307040320615897144307382404804229736328125,
   "friendRequestInProgress" : true,
   "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+  "muting" : true,
   "web" : "web",
-  "friend" : true,
+  "blocking" : true,
+  "following" : true,
+  "isFriend" : true,
   "location" : "location",
   "id" : 0.80082819046101150206595775671303272247314453125,
+  "isFollower" : true,
   "profileImageUrl" : "profileImageUrl",
   "followerCount" : 1.46581298050294517310021547018550336360931396484375
 } ]}]
@@ -181,66 +123,6 @@ open class BlocksAPI {
         let requestBuilder: RequestBuilder<[Account]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-     Unblock a account
-     
-     - parameter id: (path) Account identifier. 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func unblock(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        unblockWithRequestBuilder(id: id).execute { (response, error) -> Void in
-            completion(error);
-        }
-    }
-
-    /**
-     Unblock a account
-     
-     - parameter id: (path) Account identifier. 
-     - returns: Observable<Void>
-     */
-    open class func unblock(id: Int64) -> Observable<Void> {
-        return Observable.create { observer -> Disposable in
-            unblock(id: id) { error in
-                if let error = error {
-                    observer.on(.error(error))
-                } else {
-                    observer.on(.next(()))
-                }
-                observer.on(.completed)
-            }
-            return Disposables.create()
-        }
-    }
-
-    /**
-     Unblock a account
-     - DELETE /accounts/{id}/blocks
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
-     
-     - parameter id: (path) Account identifier. 
-
-     - returns: RequestBuilder<Void> 
-     */
-    open class func unblockWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
-        var path = "/accounts/{id}/blocks"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-
-        let requestBuilder: RequestBuilder<Void>.Type = CactaceaAPI.requestBuilderFactory.getNonDecodableBuilder()
-
-        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
 }
