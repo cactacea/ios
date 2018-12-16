@@ -24,7 +24,7 @@
 		820FE83A21AC0E6C001097F5 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820FE83921AC0E6C001097F5 /* MainController.swift */; };
 		820FE83C21AC0EEC001097F5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820FE83B21AC0EEC001097F5 /* SignUpViewController.swift */; };
 		820FE83E21AC0F11001097F5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820FE83D21AC0F11001097F5 /* SignInViewController.swift */; };
-		820FE84021AC0F45001097F5 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820FE83F21AC0F45001097F5 /* FriendsViewController.swift */; };
+		820FE84021AC0F45001097F5 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820FE83F21AC0F45001097F5 /* ContactViewController.swift */; };
 		82112B7F21BB5A0B00F2C54B /* FeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82112B7E21BB5A0B00F2C54B /* FeedsViewController.swift */; };
 		82112B8121BB5A2700F2C54B /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82112B8021BB5A2700F2C54B /* FeedCell.swift */; };
 		82112B8421BB926600F2C54B /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82112B8321BB926600F2C54B /* CommentsViewController.swift */; };
@@ -36,6 +36,8 @@
 		824BC49621BD3F8A0094841A /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49521BD3F8A0094841A /* SettingTableViewController.swift */; };
 		82968E0521C61EF30023A11E /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82968E0421C61EF30023A11E /* FollowersViewController.swift */; };
 		82968E0721C61F000023A11E /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82968E0621C61F000023A11E /* FollowerCell.swift */; };
+		82968E0A21C62A4C0023A11E /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82968E0921C62A4C0023A11E /* FriendsViewController.swift */; };
+		82968E0C21C62A5A0023A11E /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82968E0B21C62A5A0023A11E /* FriendCell.swift */; };
 		829857C621C5F14800D4773D /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829857C521C5F14800D4773D /* RequestBuilder.swift */; };
 		829857C921C5F74600D4773D /* FollowingUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829857C821C5F74600D4773D /* FollowingUsersViewController.swift */; };
 		829857CB21C5F75800D4773D /* FollowingUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829857CA21C5F75800D4773D /* FollowingUserCell.swift */; };
@@ -46,7 +48,7 @@
 		829CF05621B5745100D5B5EB /* FindFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF05521B5745100D5B5EB /* FindFriendsCell.swift */; };
 		82AD415D21C001590023EF6C /* ReceivedFriendRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD415B21BFFF260023EF6C /* ReceivedFriendRequestsViewController.swift */; };
 		82AD415E21C001590023EF6C /* ReceivedFriendRequestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD415C21BFFF260023EF6C /* ReceivedFriendRequestsCell.swift */; };
-		82AD416721C08EC60023EF6C /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD416621C08EC60023EF6C /* FriendCell.swift */; };
+		82AD416721C08EC60023EF6C /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD416621C08EC60023EF6C /* ContactCell.swift */; };
 		A30072B50BFA31CA9C144705 /* Pods_Cactacea_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E62A8AEF46FEDBB34C8B0FF /* Pods_Cactacea_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,7 +87,7 @@
 		820FE83921AC0E6C001097F5 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		820FE83B21AC0EEC001097F5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		820FE83D21AC0F11001097F5 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		820FE83F21AC0F45001097F5 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		820FE83F21AC0F45001097F5 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		82112B7E21BB5A0B00F2C54B /* FeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedsViewController.swift; sourceTree = "<group>"; };
 		82112B8021BB5A2700F2C54B /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		82112B8321BB926600F2C54B /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,8 @@
 		824BC49521BD3F8A0094841A /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		82968E0421C61EF30023A11E /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
 		82968E0621C61F000023A11E /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
+		82968E0921C62A4C0023A11E /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		82968E0B21C62A5A0023A11E /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		829857C521C5F14800D4773D /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		829857C821C5F74600D4773D /* FollowingUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingUsersViewController.swift; sourceTree = "<group>"; };
 		829857CA21C5F75800D4773D /* FollowingUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingUserCell.swift; sourceTree = "<group>"; };
@@ -107,7 +111,7 @@
 		829CF05521B5745100D5B5EB /* FindFriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFriendsCell.swift; sourceTree = "<group>"; };
 		82AD415B21BFFF260023EF6C /* ReceivedFriendRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedFriendRequestsViewController.swift; sourceTree = "<group>"; };
 		82AD415C21BFFF260023EF6C /* ReceivedFriendRequestsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedFriendRequestsCell.swift; sourceTree = "<group>"; };
-		82AD416621C08EC60023EF6C /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
+		82AD416621C08EC60023EF6C /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		8C3BD379CA48ADD2A72E8FCF /* Pods-Cactacea_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A1C9CEFA1F069BCA9720392 /* Pods-Cactacea_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		A2BE60797CBD5595B288348F /* Pods-Cactacea_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -257,6 +261,7 @@
 		820FE83821AC0E32001097F5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				82968E0821C629650023A11E /* Friends */,
 				82968E0321C61EDF0023A11E /* Followers */,
 				829857C721C5F72400D4773D /* FollowingUsers */,
 				820EE93021C5C11700B1CDE2 /* BlockingUsers */,
@@ -266,7 +271,7 @@
 				824BC48B21BCEDAB0094841A /* Menu */,
 				829CF05121AD801C00D5B5EB /* Top */,
 				829CF05021AD800900D5B5EB /* Post */,
-				829CF05221AD802600D5B5EB /* Friend */,
+				829CF05221AD802600D5B5EB /* Contact */,
 				821ED8F921BFEEB100A9B242 /* FindFriend */,
 				82112B7D21BB59ED00F2C54B /* Feed */,
 				82112B8221BB912E00F2C54B /* Comment */,
@@ -337,6 +342,15 @@
 			name = Followers;
 			sourceTree = "<group>";
 		};
+		82968E0821C629650023A11E /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				82968E0921C62A4C0023A11E /* FriendsViewController.swift */,
+				82968E0B21C62A5A0023A11E /* FriendCell.swift */,
+			);
+			name = Friends;
+			sourceTree = "<group>";
+		};
 		829857C421C5F12D00D4773D /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,13 +398,13 @@
 			name = Top;
 			sourceTree = "<group>";
 		};
-		829CF05221AD802600D5B5EB /* Friend */ = {
+		829CF05221AD802600D5B5EB /* Contact */ = {
 			isa = PBXGroup;
 			children = (
-				820FE83F21AC0F45001097F5 /* FriendsViewController.swift */,
-				82AD416621C08EC60023EF6C /* FriendCell.swift */,
+				820FE83F21AC0F45001097F5 /* ContactViewController.swift */,
+				82AD416621C08EC60023EF6C /* ContactCell.swift */,
 			);
-			name = Friend;
+			name = Contact;
 			sourceTree = "<group>";
 		};
 		82AD415921BFFEE50023EF6C /* ReceivedFriendRequests */ = {
@@ -645,16 +659,18 @@
 				820EE93421C5C15A00B1CDE2 /* BlockingUserCell.swift in Sources */,
 				82112B7F21BB5A0B00F2C54B /* FeedsViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				820FE84021AC0F45001097F5 /* FriendsViewController.swift in Sources */,
+				820FE84021AC0F45001097F5 /* ContactViewController.swift in Sources */,
 				820EE92A21C5502100B1CDE2 /* Pager.swift in Sources */,
 				829857CB21C5F75800D4773D /* FollowingUserCell.swift in Sources */,
 				820EE92F21C5BDB000B1CDE2 /* FriendRequetsSentCell.swift in Sources */,
 				820FE83721AC0CE0001097F5 /* Session.swift in Sources */,
-				82AD416721C08EC60023EF6C /* FriendCell.swift in Sources */,
+				82AD416721C08EC60023EF6C /* ContactCell.swift in Sources */,
+				82968E0A21C62A4C0023A11E /* FriendsViewController.swift in Sources */,
 				82112B8121BB5A2700F2C54B /* FeedCell.swift in Sources */,
 				82112B8621BB934D00F2C54B /* CommentCell.swift in Sources */,
 				829857C921C5F74600D4773D /* FollowingUsersViewController.swift in Sources */,
 				829857C621C5F14800D4773D /* RequestBuilder.swift in Sources */,
+				82968E0C21C62A5A0023A11E /* FriendCell.swift in Sources */,
 				820EE93221C5C14400B1CDE2 /* BlockingUsersViewControlller.swift in Sources */,
 				820FE83C21AC0EEC001097F5 /* SignUpViewController.swift in Sources */,
 				829CF05421B565A000D5B5EB /* FindFriendsViewController.swift in Sources */,

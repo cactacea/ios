@@ -1,8 +1,8 @@
 //
-//  FriendsCell.swift
+//  FriendCell.swift
 //  Cactacea_Example
 //
-//  Created by TAKESHI SHIMADA on 2018/12/03.
+//  Created by TAKESHI SHIMADA on 2018/12/16.
 //  Copyright © 2018 Cactacea. All rights reserved.
 //
 
@@ -15,10 +15,12 @@ class FriendCell: UITableViewCell {
     
     @IBOutlet var accountNameLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
+    @IBOutlet var actionButton: UIButton!
     
     var account: Account? {
         didSet {
             updateAccount()
+            updateButtons()
         }
     }
     
@@ -32,9 +34,46 @@ class FriendCell: UITableViewCell {
         }
     }
     
+    func updateButtons() {
+        guard let account = account else { return }
+        
+        if account.isFriend == true  {
+            actionButton.backgroundColor = UIColor.mainBlue
+            actionButton.setTitle("Unfriend", for: .normal)
+            actionButton.isEnabled = true
+        } else {
+            actionButton.backgroundColor = UIColor.mainLightBlue
+            actionButton.setTitle("Unfriended", for: .normal)
+            actionButton.isEnabled = false
+        }
+        actionButton.showsActivityIndicator = false
+    }
+    
+    @IBAction func tappedCancel(_ sender: Any) {
+        guard let account = account else { return }
+        
+        actionButton.isEnabled = false
+        actionButton.backgroundColor = UIColor.mainLightBlue
+        actionButton.showsActivityIndicator = true
+        actionButton.setTitle("", for: .normal)
+        
+        if account.isFriend {
+            AccountsAPI.unfriend(id: account.id) { [weak self] (error) in
+                guard let weakSelf = self else { return }
+                if let error = error {
+                    Session.showError(error)
+                } else {
+                    account.isFriend = false
+                }
+                weakSelf.updateButtons()
+            }
+        }
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         profileImageView.image = UIImage(named: "placeholder_profile")
     }
     
 }
+

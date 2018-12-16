@@ -43,7 +43,11 @@ class FriendRequestsSentCell: UITableViewCell {
             cancelButton.isEnabled = true
         } else if friendRequest.requestStatus == .rejected {
             cancelButton.backgroundColor = UIColor.mainLightBlue
-            cancelButton.setTitle("Cancelled", for: .normal)
+            cancelButton.setTitle("Cancel", for: .normal)
+            cancelButton.isEnabled = true
+        } else if friendRequest.requestStatus == .accepted {
+            cancelButton.backgroundColor = UIColor.mainLightBlue
+            cancelButton.setTitle("Accepted", for: .normal)
             cancelButton.isEnabled = false
         }
         cancelButton.showsActivityIndicator = false

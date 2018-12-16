@@ -137,9 +137,9 @@ extension CommentsViewController: CommentTableViewCellDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "profile" {
-            let vc = segue.destination as! ProfileViewController
-            let account = sender  as! Account
-            vc.user = account
+//            let vc = segue.destination as! ProfileViewController
+//            let account = sender  as! Account
+//            vc.account = account
         }
     }
 

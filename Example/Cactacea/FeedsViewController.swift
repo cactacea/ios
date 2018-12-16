@@ -74,9 +74,9 @@ extension FeedsViewController: FeedCellDelegate {
             vc.feed = feed
         }
         if segue.identifier == "profile" {
-            let vc = segue.destination as! ProfileViewController
-            let account = sender as! Account
-            vc.user = account
+//            let vc = segue.destination as! ProfileViewController
+//            let account = sender as! Account
+//            vc.account = account
         }
     }
 

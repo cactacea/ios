@@ -14,69 +14,47 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var user: Account!
-
     var posts: [Feed] = []
-    var userId = ""
     var delegate: ProfileHeaderReusableViewDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if user == nil {
-            user = Session.authentication?.account
-            fetchUser()
-            fetchMyPosts()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        fetchUser()
+        fetchMyPosts()
+
     }
     
     func fetchUser() {
-        self.navigationItem.title = user.accountName
-        self.collectionView.reloadData()
-        SessionAPI.find { [weak self] (account, _) in
-            guard let weakSelf = self else { return }
-            weakSelf.user = account
-            weakSelf.fetchUser()
-            weakSelf.fetchMyPosts()
+
+        if let authentication = Session.authentication {
+            self.navigationItem.title = authentication.account.accountName
+            SessionAPI.find { [weak self] (account, _) in
+                guard let weakSelf = self else { return }
+                guard let account = account else { return }
+                authentication.account = account
+                weakSelf.collectionView.reloadData()
+            }
         }
     }
     
     func fetchMyPosts() {
-        if user.id == Session.authentication?.account.id {
-            SessionAPI.findFeeds() { [weak self] (result, error) in
-                guard let weakSelf = self else { return }
-                if let error = error {
-                    Session.showError(error)
-                } else if let result = result {
-                    weakSelf.posts = result // .append(contentsOf: result)
-                    weakSelf.collectionView.reloadData()
-                }
-            }
-        } else {
-            AccountsAPI.findFeeds(id: user.id) { [weak self] (result, error) in
-                guard let weakSelf = self else { return }
-                if let error = error {
-                    Session.showError(error)
-                } else if let result = result {
-                    weakSelf.posts = result // .append(contentsOf: result)
-                    weakSelf.collectionView.reloadData()
-                }
+        SessionAPI.findFeeds() { [weak self] (result, error) in
+            guard let weakSelf = self else { return }
+            if let error = error {
+                Session.showError(error)
+            } else if let result = result {
+                weakSelf.posts = result // .append(contentsOf: result)
+                weakSelf.collectionView.reloadData()
             }
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-//        if segue.identifier == "ProfileUser_DetailSegue" {
-//            let detailVC = segue.destination as! DetailViewController
-//            let postId = sender  as! String
-//            detailVC.postId = postId
-//        }
     }
     
 }
@@ -98,8 +76,8 @@ extension ProfileViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerViewCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ProfileHeaderReusableView", for: indexPath) as! ProfileHeaderReusableView
-        if let user = self.user {
-            headerViewCell.user = user
+        if let account = Session.authentication?.account {
+            headerViewCell.user = account
             headerViewCell.delegate = self.delegate
             headerViewCell.delegate2 = self
         }
@@ -132,3 +110,26 @@ extension ProfileViewController: PhotoCollectionViewCellDelegate {
         performSegue(withIdentifier: "ProfileUser_DetailSegue", sender: postId)
     }
 }
+
+
+
+
+
+
+//        if user.id == Session.authentication?.account.id {
+//        } else {
+//            AccountsAPI.findFeeds(id: user.id) { [weak self] (result, error) in
+//                guard let weakSelf = self else { return }
+//                if let error = error {
+//                    Session.showError(error)
+//                } else if let result = result {
+//                    weakSelf.posts = result // .append(contentsOf: result)
+//                    weakSelf.collectionView.reloadData()
+//                }
+//            }
+//        }
+//        if segue.identifier == "ProfileUser_DetailSegue" {
+//            let detailVC = segue.destination as! DetailViewController
+//            let postId = sender  as! String
+//            detailVC.postId = postId
+//        }
