@@ -18,8 +18,8 @@ open class FeedsAPI {
      - parameter id: (path) Feed identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func deleteFeed(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        deleteFeedWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func delete(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        deleteWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -30,9 +30,9 @@ open class FeedsAPI {
      - parameter id: (path) Feed identifier. 
      - returns: Observable<Void>
      */
-    open class func deleteFeed(id: Int64) -> Observable<Void> {
+    open class func delete(id: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            deleteFeed(id: id) { error in
+            delete(id: id) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -58,7 +58,7 @@ open class FeedsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func deleteFeedWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
+    open class func deleteWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
         var path = "/feeds/{id}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -70,368 +70,6 @@ open class FeedsAPI {
         let requestBuilder: RequestBuilder<Void>.Type = CactaceaAPI.requestBuilderFactory.getNonDecodableBuilder()
 
         return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-     Get feeds list a account posted
-     
-     - parameter id: (path) Account Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func findAccountFeeds(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
-        findAccountFeedsWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-    /**
-     Get feeds list a account posted
-     
-     - parameter id: (path) Account Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<[Feed]>
-     */
-    open class func findAccountFeeds(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Feed]> {
-        return Observable.create { observer -> Disposable in
-            findAccountFeeds(id: id, since: since, offset: offset, count: count) { data, error in
-                if let error = error {
-                    observer.on(.error(error))
-                } else {
-                    observer.on(.next(data!))
-                }
-                observer.on(.completed)
-            }
-            return Disposables.create()
-        }
-    }
-
-    /**
-     Get feeds list a account posted
-     - GET /accounts/{id}/feeds
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
-     - examples: [{contentType=application/json, example=[ {
-  "next" : 2.027123023002321833274663731572218239307403564453125,
-  "contentWarning" : true,
-  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
-  "postedAt" : 9,
-  "contentDeleted" : true,
-  "likeCount" : 2,
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "message" : "message",
-  "mediums" : [ {
-    "contentWarning" : true,
-    "size" : 5,
-    "contentDeleted" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  }, {
-    "contentWarning" : true,
-    "size" : 5,
-    "contentDeleted" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  } ],
-  "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "follower" : true,
-    "followCount" : 6.02745618307040320615897144307382404804229736328125,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
-    "accountName" : "accountName",
-    "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "bio" : "bio",
-    "mute" : true,
-    "follow" : true,
-    "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
-    "web" : "web",
-    "friend" : true,
-    "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
-  },
-  "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
-}, {
-  "next" : 2.027123023002321833274663731572218239307403564453125,
-  "contentWarning" : true,
-  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
-  "postedAt" : 9,
-  "contentDeleted" : true,
-  "likeCount" : 2,
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "message" : "message",
-  "mediums" : [ {
-    "contentWarning" : true,
-    "size" : 5,
-    "contentDeleted" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  }, {
-    "contentWarning" : true,
-    "size" : 5,
-    "contentDeleted" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  } ],
-  "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "follower" : true,
-    "followCount" : 6.02745618307040320615897144307382404804229736328125,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
-    "accountName" : "accountName",
-    "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "bio" : "bio",
-    "mute" : true,
-    "follow" : true,
-    "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
-    "web" : "web",
-    "friend" : true,
-    "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
-  },
-  "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
-} ]}]
-     
-     - parameter id: (path) Account Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-
-     - returns: RequestBuilder<[Feed]> 
-     */
-    open class func findAccountFeedsWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
-        var path = "/accounts/{id}/feeds"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "since": since, 
-            "offset": offset, 
-            "count": count
-        ])
-        
-
-        let requestBuilder: RequestBuilder<[Feed]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-     Get account's liked feeds
-     
-     - parameter id: (path) Account Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func findAccountLikes(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
-        findAccountLikesWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-    /**
-     Get account's liked feeds
-     
-     - parameter id: (path) Account Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<[Feed]>
-     */
-    open class func findAccountLikes(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Feed]> {
-        return Observable.create { observer -> Disposable in
-            findAccountLikes(id: id, since: since, offset: offset, count: count) { data, error in
-                if let error = error {
-                    observer.on(.error(error))
-                } else {
-                    observer.on(.next(data!))
-                }
-                observer.on(.completed)
-            }
-            return Disposables.create()
-        }
-    }
-
-    /**
-     Get account's liked feeds
-     - GET /accounts/{id}/likes
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
-     - examples: [{contentType=application/json, example=[ {
-  "next" : 2.027123023002321833274663731572218239307403564453125,
-  "contentWarning" : true,
-  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
-  "postedAt" : 9,
-  "contentDeleted" : true,
-  "likeCount" : 2,
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "message" : "message",
-  "mediums" : [ {
-    "contentWarning" : true,
-    "size" : 5,
-    "contentDeleted" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  }, {
-    "contentWarning" : true,
-    "size" : 5,
-    "contentDeleted" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  } ],
-  "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "follower" : true,
-    "followCount" : 6.02745618307040320615897144307382404804229736328125,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
-    "accountName" : "accountName",
-    "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "bio" : "bio",
-    "mute" : true,
-    "follow" : true,
-    "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
-    "web" : "web",
-    "friend" : true,
-    "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
-  },
-  "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
-}, {
-  "next" : 2.027123023002321833274663731572218239307403564453125,
-  "contentWarning" : true,
-  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
-  "postedAt" : 9,
-  "contentDeleted" : true,
-  "likeCount" : 2,
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "message" : "message",
-  "mediums" : [ {
-    "contentWarning" : true,
-    "size" : 5,
-    "contentDeleted" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  }, {
-    "contentWarning" : true,
-    "size" : 5,
-    "contentDeleted" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  } ],
-  "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "follower" : true,
-    "followCount" : 6.02745618307040320615897144307382404804229736328125,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
-    "accountName" : "accountName",
-    "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "bio" : "bio",
-    "mute" : true,
-    "follow" : true,
-    "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
-    "web" : "web",
-    "friend" : true,
-    "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
-  },
-  "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
-} ]}]
-     
-     - parameter id: (path) Account Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-
-     - returns: RequestBuilder<[Feed]> 
-     */
-    open class func findAccountLikesWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
-        var path = "/accounts/{id}/likes"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "since": since, 
-            "offset": offset, 
-            "count": count
-        ])
-        
-
-        let requestBuilder: RequestBuilder<[Feed]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
@@ -508,21 +146,22 @@ open class FeedsAPI {
   "account" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
     "next" : 9.301444243932575517419536481611430644989013671875,
-    "follower" : true,
-    "followCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendCount" : 5.962133916683182377482808078639209270477294921875,
     "accountName" : "accountName",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "bio" : "bio",
-    "mute" : true,
-    "follow" : true,
+    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
     "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "muting" : true,
     "web" : "web",
-    "friend" : true,
+    "blocking" : true,
+    "following" : true,
+    "isFriend" : true,
     "location" : "location",
     "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
     "followerCount" : 1.46581298050294517310021547018550336360931396484375
   },
@@ -638,21 +277,22 @@ open class FeedsAPI {
   "account" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
     "next" : 9.301444243932575517419536481611430644989013671875,
-    "follower" : true,
-    "followCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendCount" : 5.962133916683182377482808078639209270477294921875,
     "accountName" : "accountName",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "bio" : "bio",
-    "mute" : true,
-    "follow" : true,
+    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
     "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "muting" : true,
     "web" : "web",
-    "friend" : true,
+    "blocking" : true,
+    "following" : true,
+    "isFriend" : true,
     "location" : "location",
     "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
     "followerCount" : 1.46581298050294517310021547018550336360931396484375
   },
@@ -691,21 +331,22 @@ open class FeedsAPI {
   "account" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
     "next" : 9.301444243932575517419536481611430644989013671875,
-    "follower" : true,
-    "followCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendCount" : 5.962133916683182377482808078639209270477294921875,
     "accountName" : "accountName",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "bio" : "bio",
-    "mute" : true,
-    "follow" : true,
+    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
     "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "muting" : true,
     "web" : "web",
-    "friend" : true,
+    "blocking" : true,
+    "following" : true,
+    "isFriend" : true,
     "location" : "location",
     "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
     "followerCount" : 1.46581298050294517310021547018550336360931396484375
   },
@@ -745,8 +386,8 @@ open class FeedsAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func postFeed(body: PostFeedBody, completion: @escaping ((_ data: FeedCreated?,_ error: Error?) -> Void)) {
-        postFeedWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func post(body: PostFeedBody, completion: @escaping ((_ data: FeedCreated?,_ error: Error?) -> Void)) {
+        postWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -757,9 +398,9 @@ open class FeedsAPI {
      - parameter body: (body)  
      - returns: Observable<FeedCreated>
      */
-    open class func postFeed(body: PostFeedBody) -> Observable<FeedCreated> {
+    open class func post(body: PostFeedBody) -> Observable<FeedCreated> {
         return Observable.create { observer -> Disposable in
-            postFeed(body: body) { data, error in
+            post(body: body) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -788,7 +429,7 @@ open class FeedsAPI {
 
      - returns: RequestBuilder<FeedCreated> 
      */
-    open class func postFeedWithRequestBuilder(body: PostFeedBody) -> RequestBuilder<FeedCreated> {
+    open class func postWithRequestBuilder(body: PostFeedBody) -> RequestBuilder<FeedCreated> {
         let path = "/feeds"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
@@ -808,8 +449,8 @@ open class FeedsAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func reportFeed(id: Int64, body: PostFeedReportBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        reportFeedWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
+    open class func report(id: Int64, body: PostFeedReportBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        reportWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -821,9 +462,9 @@ open class FeedsAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func reportFeed(id: Int64, body: PostFeedReportBody) -> Observable<Void> {
+    open class func report(id: Int64, body: PostFeedReportBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            reportFeed(id: id, body: body) { error in
+            report(id: id, body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -850,7 +491,7 @@ open class FeedsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func reportFeedWithRequestBuilder(id: Int64, body: PostFeedReportBody) -> RequestBuilder<Void> {
+    open class func reportWithRequestBuilder(id: Int64, body: PostFeedReportBody) -> RequestBuilder<Void> {
         var path = "/feeds/{id}/reports"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -871,8 +512,8 @@ open class FeedsAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateFeed(id: Int64, body: PutFeedBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        updateFeedWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
+    open class func update(id: Int64, body: PutFeedBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -884,9 +525,9 @@ open class FeedsAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func updateFeed(id: Int64, body: PutFeedBody) -> Observable<Void> {
+    open class func update(id: Int64, body: PutFeedBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            updateFeed(id: id, body: body) { error in
+            update(id: id, body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -913,7 +554,7 @@ open class FeedsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateFeedWithRequestBuilder(id: Int64, body: PutFeedBody) -> RequestBuilder<Void> {
+    open class func updateWithRequestBuilder(id: Int64, body: PutFeedBody) -> RequestBuilder<Void> {
         var path = "/feeds/{id}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path

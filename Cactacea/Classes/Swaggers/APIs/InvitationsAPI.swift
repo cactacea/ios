@@ -18,8 +18,8 @@ open class InvitationsAPI {
      - parameter id: (path) Group invitation identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func acceptGroupInvitation(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        acceptGroupInvitationWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func accept(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        acceptWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -30,9 +30,9 @@ open class InvitationsAPI {
      - parameter id: (path) Group invitation identifier. 
      - returns: Observable<Void>
      */
-    open class func acceptGroupInvitation(id: Int64) -> Observable<Void> {
+    open class func accept(id: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            acceptGroupInvitation(id: id) { error in
+            accept(id: id) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -58,7 +58,7 @@ open class InvitationsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func acceptGroupInvitationWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
+    open class func acceptWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
         var path = "/invitations/{id}/accept"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -139,80 +139,13 @@ open class InvitationsAPI {
     }
 
     /**
-     Create a invitation to a account
-     
-     - parameter accountId: (path) Account Identifier. 
-     - parameter groupId: (path) Group Identifier. 
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func create_0(accountId: Int64, groupId: Int64, completion: @escaping ((_ data: InvitationCreated?,_ error: Error?) -> Void)) {
-        create_0WithRequestBuilder(accountId: accountId, groupId: groupId).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-    /**
-     Create a invitation to a account
-     
-     - parameter accountId: (path) Account Identifier. 
-     - parameter groupId: (path) Group Identifier. 
-     - returns: Observable<InvitationCreated>
-     */
-    open class func create_0(accountId: Int64, groupId: Int64) -> Observable<InvitationCreated> {
-        return Observable.create { observer -> Disposable in
-            create_0(accountId: accountId, groupId: groupId) { data, error in
-                if let error = error {
-                    observer.on(.error(error))
-                } else {
-                    observer.on(.next(data!))
-                }
-                observer.on(.completed)
-            }
-            return Disposables.create()
-        }
-    }
-
-    /**
-     Create a invitation to a account
-     - POST /accounts/{accountId}/groups/{groupId}/invitations
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
-     - examples: [{contentType=application/json, example={
-  "id" : 0.80082819046101150206595775671303272247314453125
-}}]
-     
-     - parameter accountId: (path) Account Identifier. 
-     - parameter groupId: (path) Group Identifier. 
-
-     - returns: RequestBuilder<InvitationCreated> 
-     */
-    open class func create_0WithRequestBuilder(accountId: Int64, groupId: Int64) -> RequestBuilder<InvitationCreated> {
-        var path = "/accounts/{accountId}/groups/{groupId}/invitations"
-        path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
-        path = path.replacingOccurrences(of: "{groupId}", with: "\(groupId)", options: .literal, range: nil)
-        let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-
-        let requestBuilder: RequestBuilder<InvitationCreated>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
      Reject a invitation
      
      - parameter id: (path) Group invitation identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func rejectGroupInvitation(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        rejectGroupInvitationWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func reject(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        rejectWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -223,9 +156,9 @@ open class InvitationsAPI {
      - parameter id: (path) Group invitation identifier. 
      - returns: Observable<Void>
      */
-    open class func rejectGroupInvitation(id: Int64) -> Observable<Void> {
+    open class func reject(id: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            rejectGroupInvitation(id: id) { error in
+            reject(id: id) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -251,7 +184,7 @@ open class InvitationsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func rejectGroupInvitationWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
+    open class func rejectWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
         var path = "/invitations/{id}/reject"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path

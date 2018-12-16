@@ -18,8 +18,8 @@ open class CommentsAPI {
      - parameter id: (path) Comment Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func deleteComment(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        deleteCommentWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func delete(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        deleteWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -30,9 +30,9 @@ open class CommentsAPI {
      - parameter id: (path) Comment Identifier. 
      - returns: Observable<Void>
      */
-    open class func deleteComment(id: Int64) -> Observable<Void> {
+    open class func delete(id: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            deleteComment(id: id) { error in
+            delete(id: id) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -58,7 +58,7 @@ open class CommentsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func deleteCommentWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
+    open class func deleteWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
         var path = "/comments/{id}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -125,21 +125,22 @@ open class CommentsAPI {
   "account" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
     "next" : 9.301444243932575517419536481611430644989013671875,
-    "follower" : true,
-    "followCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendCount" : 5.962133916683182377482808078639209270477294921875,
     "accountName" : "accountName",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "bio" : "bio",
-    "mute" : true,
-    "follow" : true,
+    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
     "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "muting" : true,
     "web" : "web",
-    "friend" : true,
+    "blocking" : true,
+    "following" : true,
+    "isFriend" : true,
     "location" : "location",
     "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
     "followerCount" : 1.46581298050294517310021547018550336360931396484375
   }
@@ -222,21 +223,22 @@ open class CommentsAPI {
   "account" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
     "next" : 9.301444243932575517419536481611430644989013671875,
-    "follower" : true,
-    "followCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendCount" : 5.962133916683182377482808078639209270477294921875,
     "accountName" : "accountName",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "bio" : "bio",
-    "mute" : true,
-    "follow" : true,
+    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
     "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "muting" : true,
     "web" : "web",
-    "friend" : true,
+    "blocking" : true,
+    "following" : true,
+    "isFriend" : true,
     "location" : "location",
     "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
     "followerCount" : 1.46581298050294517310021547018550336360931396484375
   }
@@ -252,21 +254,22 @@ open class CommentsAPI {
   "account" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
     "next" : 9.301444243932575517419536481611430644989013671875,
-    "follower" : true,
-    "followCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendCount" : 5.962133916683182377482808078639209270477294921875,
     "accountName" : "accountName",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "bio" : "bio",
-    "mute" : true,
-    "follow" : true,
+    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
     "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "muting" : true,
     "web" : "web",
-    "friend" : true,
+    "blocking" : true,
+    "following" : true,
+    "isFriend" : true,
     "location" : "location",
     "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
     "followerCount" : 1.46581298050294517310021547018550336360931396484375
   }
@@ -304,8 +307,8 @@ open class CommentsAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func postComment(body: PostCommentBody, completion: @escaping ((_ data: CommentCreated?,_ error: Error?) -> Void)) {
-        postCommentWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func post(body: PostCommentBody, completion: @escaping ((_ data: CommentCreated?,_ error: Error?) -> Void)) {
+        postWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -316,9 +319,9 @@ open class CommentsAPI {
      - parameter body: (body)  
      - returns: Observable<CommentCreated>
      */
-    open class func postComment(body: PostCommentBody) -> Observable<CommentCreated> {
+    open class func post(body: PostCommentBody) -> Observable<CommentCreated> {
         return Observable.create { observer -> Disposable in
-            postComment(body: body) { data, error in
+            post(body: body) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -347,7 +350,7 @@ open class CommentsAPI {
 
      - returns: RequestBuilder<CommentCreated> 
      */
-    open class func postCommentWithRequestBuilder(body: PostCommentBody) -> RequestBuilder<CommentCreated> {
+    open class func postWithRequestBuilder(body: PostCommentBody) -> RequestBuilder<CommentCreated> {
         let path = "/comments"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
@@ -367,8 +370,8 @@ open class CommentsAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func reportComment(id: Int64, body: PostCommentReportBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        reportCommentWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
+    open class func report(id: Int64, body: PostCommentReportBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        reportWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -380,9 +383,9 @@ open class CommentsAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func reportComment(id: Int64, body: PostCommentReportBody) -> Observable<Void> {
+    open class func report(id: Int64, body: PostCommentReportBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            reportComment(id: id, body: body) { error in
+            report(id: id, body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -409,7 +412,7 @@ open class CommentsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func reportCommentWithRequestBuilder(id: Int64, body: PostCommentReportBody) -> RequestBuilder<Void> {
+    open class func reportWithRequestBuilder(id: Int64, body: PostCommentReportBody) -> RequestBuilder<Void> {
         var path = "/comments/{id}/reports"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
