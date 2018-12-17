@@ -51,6 +51,7 @@
 		82AD416721C08EC60023EF6C /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD416621C08EC60023EF6C /* ContactCell.swift */; };
 		82AE928D21C6824500B34F50 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AE928C21C6824500B34F50 /* ProfileViewController.swift */; };
 		82AE928F21C6840400B34F50 /* ProfileHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AE928E21C6840400B34F50 /* ProfileHeaderReusableView.swift */; };
+		82AE929421C69D4B00B34F50 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AE929321C69D4B00B34F50 /* NotificationSettingsViewController.swift */; };
 		A30072B50BFA31CA9C144705 /* Pods_Cactacea_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E62A8AEF46FEDBB34C8B0FF /* Pods_Cactacea_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +117,7 @@
 		82AD416621C08EC60023EF6C /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		82AE928C21C6824500B34F50 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		82AE928E21C6840400B34F50 /* ProfileHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderReusableView.swift; sourceTree = "<group>"; };
+		82AE929321C69D4B00B34F50 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
 		8C3BD379CA48ADD2A72E8FCF /* Pods-Cactacea_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A1C9CEFA1F069BCA9720392 /* Pods-Cactacea_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		A2BE60797CBD5595B288348F /* Pods-Cactacea_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 		820FE83821AC0E32001097F5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				82AE929021C69CFF00B34F50 /* NotificationSetting */,
 				82AE928B21C6823300B34F50 /* Profile */,
 				82968E0821C629650023A11E /* Friends */,
 				82968E0321C61EDF0023A11E /* Followers */,
@@ -428,6 +431,14 @@
 				82AE928E21C6840400B34F50 /* ProfileHeaderReusableView.swift */,
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		82AE929021C69CFF00B34F50 /* NotificationSetting */ = {
+			isa = PBXGroup;
+			children = (
+				82AE929321C69D4B00B34F50 /* NotificationSettingsViewController.swift */,
+			);
+			name = NotificationSetting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -677,6 +688,7 @@
 				820FE84021AC0F45001097F5 /* ContactViewController.swift in Sources */,
 				820EE92A21C5502100B1CDE2 /* Pager.swift in Sources */,
 				829857CB21C5F75800D4773D /* FollowingUserCell.swift in Sources */,
+				82AE929421C69D4B00B34F50 /* NotificationSettingsViewController.swift in Sources */,
 				820EE92F21C5BDB000B1CDE2 /* FriendRequetsSentCell.swift in Sources */,
 				820FE83721AC0CE0001097F5 /* Session.swift in Sources */,
 				82AD416721C08EC60023EF6C /* ContactCell.swift in Sources */,
