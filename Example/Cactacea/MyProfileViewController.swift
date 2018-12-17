@@ -33,7 +33,7 @@ class MyProfileViewController: UIViewController {
 
         if let authentication = Session.authentication {
             self.navigationItem.title = authentication.account.accountName
-            SessionAPI.find { [weak self] (account, _) in
+            SessionAPI.findSession() { [weak self] (account, _) in
                 guard let weakSelf = self else { return }
                 guard let account = account else { return }
                 authentication.account = account
