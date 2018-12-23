@@ -13,6 +13,7 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		8209B07921CBDE98003C5D2B /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8209B07821CBDE98003C5D2B /* ProfileEditViewController.swift */; };
 		820EE91B21C49F2700B1CDE2 /* PageFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EE91A21C49F2700B1CDE2 /* PageFooterView.swift */; };
 		820EE92A21C5502100B1CDE2 /* Pager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EE92921C5502100B1CDE2 /* Pager.swift */; };
 		820EE92D21C5BD9700B1CDE2 /* FriendRequetsSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EE92C21C5BD9700B1CDE2 /* FriendRequetsSentViewController.swift */; };
@@ -33,7 +34,7 @@
 		824BC49021BD1E760094841A /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC48F21BD1E760094841A /* MyProfileViewController.swift */; };
 		824BC49221BD24E80094841A /* MyProfileHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49121BD24E80094841A /* MyProfileHeaderReusableView.swift */; };
 		824BC49421BD2DD00094841A /* ProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49321BD2DD00094841A /* ProfilePhotoCell.swift */; };
-		824BC49621BD3F8A0094841A /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49521BD3F8A0094841A /* ProfileEditViewController.swift */; };
+		824BC49621BD3F8A0094841A /* AccountEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49521BD3F8A0094841A /* AccountEditViewController.swift */; };
 		82968E0521C61EF30023A11E /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82968E0421C61EF30023A11E /* FollowersViewController.swift */; };
 		82968E0721C61F000023A11E /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82968E0621C61F000023A11E /* FollowerCell.swift */; };
 		82968E0A21C62A4C0023A11E /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82968E0921C62A4C0023A11E /* FriendsViewController.swift */; };
@@ -79,6 +80,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		61D4AC9D02D6B909014F6C62 /* Pods_Cactacea_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cactacea_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8209B07821CBDE98003C5D2B /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		820EE91A21C49F2700B1CDE2 /* PageFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageFooterView.swift; sourceTree = "<group>"; };
 		820EE92921C5502100B1CDE2 /* Pager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pager.swift; sourceTree = "<group>"; };
 		820EE92C21C5BD9700B1CDE2 /* FriendRequetsSentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequetsSentViewController.swift; sourceTree = "<group>"; };
@@ -99,7 +101,7 @@
 		824BC48F21BD1E760094841A /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		824BC49121BD24E80094841A /* MyProfileHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileHeaderReusableView.swift; sourceTree = "<group>"; };
 		824BC49321BD2DD00094841A /* ProfilePhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoCell.swift; sourceTree = "<group>"; };
-		824BC49521BD3F8A0094841A /* ProfileEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		824BC49521BD3F8A0094841A /* AccountEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountEditViewController.swift; sourceTree = "<group>"; };
 		82968E0421C61EF30023A11E /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
 		82968E0621C61F000023A11E /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		82968E0921C62A4C0023A11E /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
@@ -237,6 +239,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8209B07721CBDE70003C5D2B /* AccountEdit */ = {
+			isa = PBXGroup;
+			children = (
+				824BC49521BD3F8A0094841A /* AccountEditViewController.swift */,
+			);
+			name = AccountEdit;
+			sourceTree = "<group>";
+		};
 		820EE91C21C49F9500B1CDE2 /* Paginator */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,6 +293,7 @@
 				821ED8F921BFEEB100A9B242 /* FindFriend */,
 				82112B7D21BB59ED00F2C54B /* Feed */,
 				82112B8221BB912E00F2C54B /* Comment */,
+				8209B07721CBDE70003C5D2B /* AccountEdit */,
 				821ED8F821BFED4000A9B242 /* ProfileEdit */,
 			);
 			name = ViewControllers;
@@ -309,7 +320,7 @@
 		821ED8F821BFED4000A9B242 /* ProfileEdit */ = {
 			isa = PBXGroup;
 			children = (
-				824BC49521BD3F8A0094841A /* ProfileEditViewController.swift */,
+				8209B07821CBDE98003C5D2B /* ProfileEditViewController.swift */,
 			);
 			name = ProfileEdit;
 			sourceTree = "<group>";
@@ -663,9 +674,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				820EE92D21C5BD9700B1CDE2 /* FriendRequetsSentViewController.swift in Sources */,
+				8209B07921CBDE98003C5D2B /* ProfileEditViewController.swift in Sources */,
 				82AD415D21C001590023EF6C /* ReceivedFriendRequestsViewController.swift in Sources */,
 				82AD415E21C001590023EF6C /* ReceivedFriendRequestsCell.swift in Sources */,
-				824BC49621BD3F8A0094841A /* ProfileEditViewController.swift in Sources */,
+				824BC49621BD3F8A0094841A /* AccountEditViewController.swift in Sources */,
 				824BC49221BD24E80094841A /* MyProfileHeaderReusableView.swift in Sources */,
 				824BC49421BD2DD00094841A /* ProfilePhotoCell.swift in Sources */,
 				820FE83A21AC0E6C001097F5 /* MainController.swift in Sources */,

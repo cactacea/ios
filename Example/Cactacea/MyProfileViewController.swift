@@ -16,7 +16,7 @@ class MyProfileViewController: UIViewController {
     
     var posts: [Feed] = []
     var delegate: MyProfileHeaderReusableViewDelegate?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -30,7 +30,6 @@ class MyProfileViewController: UIViewController {
     }
     
     func fetchUser() {
-
         if let authentication = Session.authentication {
             self.navigationItem.title = authentication.account.accountName
             SessionAPI.findSession() { [weak self] (account, _) in

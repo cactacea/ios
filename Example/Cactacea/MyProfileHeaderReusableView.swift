@@ -47,7 +47,7 @@ class MyProfileHeaderReusableView: UICollectionReusableView {
         self.followingCountLabel.text = "\(account.followingCount ?? 0)"
         self.followersCountLabel.text = "\(account.followerCount ?? 0)"
 
-        followButton.setTitle("Edit Profile", for: UIControl.State.normal)
+        followButton.setTitle("Edit", for: UIControl.State.normal)
         followButton.addTarget(self, action: #selector(self.tappedEditButton), for: UIControl.Event.touchUpInside)
 
     }

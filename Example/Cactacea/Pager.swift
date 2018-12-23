@@ -19,6 +19,7 @@ class Pager<T> {
     public var items: [T] = []
     public var fetchBlock: fetchBlockType? = nil
     public var completionBlock: completionBlockType? = nil
+    public var addOnTop: Bool = false
 
     private(set) public var connecting = false
     private(set) public var firstFetched = false
@@ -51,7 +52,12 @@ class Pager<T> {
     func fetchNext() {
         fetch(first: false).subscribe().disposed(by: self.disposeBag)
     }
-    
+
+    func fetchRerty() {
+        self.hasNext = true
+        fetch(first: false).subscribe().disposed(by: self.disposeBag)
+    }
+
     @objc private func refresh(sender: UIRefreshControl) {
         fetch(first: true).subscribe().disposed(by: self.disposeBag)
     }
@@ -66,12 +72,15 @@ class Pager<T> {
             self.firstFetched = false
             return fetchBlock(self, first).do(
                 onNext: { [weak self] (result) in
-                    print("subbscribe")
                     guard let weakSelf = self else { return }
                     if first {
                         weakSelf.items = result
                     } else {
-                        weakSelf.items.append(contentsOf: result)
+                        if weakSelf.addOnTop {
+                            weakSelf.items.insert(contentsOf: result, at: 0)
+                        } else {
+                            weakSelf.items.append(contentsOf: result)
+                        }
                     }
                     if (result.count < 20) {
                         weakSelf.hasNext = false

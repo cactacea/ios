@@ -1,152 +1,105 @@
 //
-//  SettingTableViewController.swift
-//  InstagramClone
+//  ProfileEditViewController.swift
+//  Cactacea_Example
 //
-//  Created by The Zero2Launch Team on 2/11/17.
-//  Copyright © 2017 The Zero2Launch Team. All rights reserved.
+//  Created by TAKESHI SHIMADA on 2018/12/20.
+//  Copyright © 2018 Cactacea. All rights reserved.
 //
 
 import UIKit
-
-protocol ProfileEditViewControllerDelegate {
-    func updateUserInfor()
-}
+import YPImagePicker
+import Cactacea
+import AlamofireImage
 
 class ProfileEditViewController: UITableViewController {
-
-    @IBOutlet weak var accountNameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var profileImageView: UIImageView!
     
-    var delegate: ProfileEditViewControllerDelegate?
+    @IBOutlet weak var displayNameTextFiled: UITextField!
+    @IBOutlet weak var webTextFiled: UITextField!
+    @IBOutlet weak var birthdayTextFiled: UITextField!
+    @IBOutlet weak var locationTextFiled: UITextField!
+    @IBOutlet weak var bioTextView: UITextView!
+
+    var account: Account? = Session.authentication?.account
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Edit Profile"
-        accountNameTextField.delegate = self
-        emailTextField.delegate = self
-//        fetchCurrentUser()
+
+        displayNameTextFiled.delegate = self
+        webTextFiled.delegate = self
+        birthdayTextFiled.delegate = self
+        locationTextFiled.delegate = self
+        bioTextView.delegate = self
+        
+        refreshProfile()
+        fetchCurrentUser()
     }
     
-//    func fetchCurrentUser() {
-////        Api.User.observeCurrentUser { (user) in
-////            self.usernnameTextField.text = user.username
-////            self.emailTextField.text = user.email
-////            if let profileUrl = URL(string: user.profileImageUrl!) {
-////                self.profileImageView.sd_setImage(with: profileUrl)
-////            }
-////        }
-//    }
-
-    @IBAction func saveBtn_TouchUpInside(_ sender: Any) {
-//        if let profileImg = self.profileImageView.image, let imageData = profileImg.jpegData(compressionQuality: 0.1) {
-//            ProgressHUD.show("Waiting...")
-//            AuthService.updateUserInfor(username: usernnameTextField.text!, email: emailTextField.text!, imageData: imageData, onSuccess: {
-//                ProgressHUD.showSuccess("Success")
-//                self.delegate?.updateUserInfor()
-//            }, onError: { (errorMessage) in
-//                ProgressHUD.showError(errorMessage)
-//            })
-//        }
+    func fetchCurrentUser() {
+        if let authentication = Session.authentication {
+            self.navigationItem.title = authentication.account.accountName
+            SessionAPI.findSession() { [weak self] (account, _) in
+                guard let weakSelf = self else { return }
+                guard let account = account else { return }
+                authentication.account = account
+                weakSelf.refreshProfile()
+            }
+        }
     }
+    
+    func refreshProfile() {
+        if let authentication = Session.authentication {
+            self.displayNameTextFiled.text = authentication.account.displayName
+            self.webTextFiled.text = authentication.account.web
+//            self.birthdayTextFiled.text = authentication.account.birthday
+            self.locationTextFiled.text = authentication.account.location
+            self.bioTextView.text = authentication.account.bio
+        }
+    }
+    
+    @IBAction func tapSave(_ sender: Any) {
 
-    @IBAction func logoutBtn_TouchUpInside(_ sender: Any) {
-        let alertController = UIAlertController(title: "Are you sure?", message: nil, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        let logOutAction = UIAlertAction(title: "Log Out", style: .default) { (_) in
-            Session.authentication = nil
-            if let vc = self.tabBarController as? MainController {
-                vc.showSignIn()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    self.tabBarController?.selectedIndex = 0
-                    self.navigationController?.popToRootViewController(animated: false)
+        if let authentication = Session.authentication {
+            let displayName = self.displayNameTextFiled.text ?? authentication.account.displayName
+            let body = PutSessionProfileBody(
+                displayName: displayName,
+                web: self.webTextFiled.text,
+                birthday: nil,
+                location: self.locationTextFiled.text,
+                bio: self.bioTextView.text)
+
+            SessionAPI.updateProfile(body: body) { [weak self] (error) in
+                guard let weakSelf = self else { return }
+                if let error = error {
+                    Session.showError(error)
+                } else {
+                    weakSelf.navigationController?.popToRootViewController(animated: true)
                 }
             }
         }
-        alertController.addAction(logOutAction)
-        self.present(alertController, animated: true, completion: nil)
-//        AuthService.logout(onSuccess: {
-//            let storyboard = UIStoryboard(name: "Start", bundle: nil)
-//            let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
-//            self.present(signInVC, animated: true, completion: nil)
-//        }) { (errorMessage) in
-//            ProgressHUD.showError(errorMessage)
-//        }
     }
     
-    @IBAction func changeProfileBtn_TouchUpInside(_ sender: Any) {
-//        let pickerController = UIImagePickerController()
-//        pickerController.delegate = self
-//        present(pickerController, animated: true, completion: nil)
-    }
-
 }
-
-//extension SettingTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//// Local variable inserted by Swift 4.2 migrator.
-//let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-//
-//        print("did Finish Picking Media")
-//        if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage{
-//            profileImageView.image = image
-//        }
-//        dismiss(animated: true, completion: nil)
-//    }
-//}
 
 extension ProfileEditViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == self.displayNameTextFiled {
+            if let text = textField.text {
+                if text.isEmpty {
+                    textField.text = Session.authentication?.account.displayName
+                }
+            } else {
+                textField.text = Session.authentication?.account.displayName
+            }
+        }
         textField.resignFirstResponder()
         return true
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+extension ProfileEditViewController: UITextViewDelegate {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textView.resignFirstResponder()
+    }
 }
