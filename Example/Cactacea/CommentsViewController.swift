@@ -12,8 +12,6 @@ import RxSwift
 
 class CommentsViewController: UIViewController {
 
-//    @IBOutlet var tableView: UITableView!
-
     @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -51,38 +49,6 @@ class CommentsViewController: UIViewController {
         }
     }
 
-    //        tableView.estimatedRowHeight = 77
-    //        tableView.rowHeight = UITableView.automaticDimension
-    
-
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        tableView.estimatedRowHeight = 77
-//        tableView.rowHeight = UITableView.automaticDimension
-//        empty()
-//        handleTextField()
-//        loadComments()
-//
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-//
-//    }
-    
-    
-//    func loadComments() {
-//        CommentsAPI.findComments(id: feed.id, since: nil, offset: nil, count: nil) { [weak self] (result, error) in
-//            guard let weakSelf = self else { return }
-//            if let error = error {
-//                Session.showError(error)
-//            } else if let result = result {
-////                weakSelf.comments.append(contentsOf: result)
-//                weakSelf.comments = result
-//                weakSelf.tableView.reloadData()
-//            }
-//        }
-//    }
-    
 }
 
 extension CommentsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -94,10 +60,26 @@ extension CommentsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentCell
         cell.comment = self.pager.items[indexPath.row]
-        cell.delegate = self
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let comment = self.pager.items[indexPath.row]
+        if let account = Session.authentication?.account {
+            if account.id != comment.account.id {
+                performSegue(withIdentifier: "profile", sender: comment.account)
+            }
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "profile" {
+            let vc = segue.destination as! ProfileViewController
+            let account = sender as! Account
+            vc.account = account
+        }
+    }
+
 }
 
 extension CommentsViewController {
@@ -156,21 +138,6 @@ extension CommentsViewController {
 
 }
 
-extension CommentsViewController: CommentTableViewCellDelegate {
-
-    func tappedProfile(account: Account) {
-        performSegue(withIdentifier: "profile", sender: account)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "profile" {
-//            let vc = segue.destination as! ProfileViewController
-//            let account = sender  as! Account
-//            vc.account = account
-        }
-    }
-
-}
 
 
 

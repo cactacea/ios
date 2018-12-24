@@ -11,7 +11,9 @@ target 'Cactacea_Example' do
   pod 'AlamofireImage'
   pod 'ActiveLabel'
   pod 'YPImagePicker'
-
+  pod 'MessageKit'
+  pod 'SwiftDate'
+  
   target 'Cactacea_Tests' do
     inherit! :search_paths
 

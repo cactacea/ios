@@ -39,6 +39,18 @@ class ContactViewController: UIViewController {
 }
 
 extension ContactViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let account = self.pager.items[indexPath.row]
+        performSegue(withIdentifier: "chat", sender: account)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "chat" {
+            if let _ = segue.destination as? BasicExampleViewController {
+            }
+        }
+    }
 }
 
 extension ContactViewController: UITableViewDataSource {

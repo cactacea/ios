@@ -30,6 +30,17 @@
 		82112B8121BB5A2700F2C54B /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82112B8021BB5A2700F2C54B /* FeedCell.swift */; };
 		82112B8421BB926600F2C54B /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82112B8321BB926600F2C54B /* CommentsViewController.swift */; };
 		82112B8621BB934D00F2C54B /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82112B8521BB934D00F2C54B /* CommentCell.swift */; };
+		8232366F21CF39AC0086F4CB /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232366E21CF39AC0086F4CB /* ChatViewController.swift */; };
+		8232367221CF3A1A0086F4CB /* MockSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367021CF3A1A0086F4CB /* MockSocket.swift */; };
+		8232367321CF3A1A0086F4CB /* MockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367121CF3A1A0086F4CB /* MockMessage.swift */; };
+		8232367621CF3A250086F4CB /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367421CF3A250086F4CB /* SampleData.swift */; };
+		8232367721CF3A250086F4CB /* Lorem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367521CF3A250086F4CB /* Lorem.swift */; };
+		8232367A21CF3A300086F4CB /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367821CF3A300086F4CB /* UIColor+Extensions.swift */; };
+		8232367B21CF3A300086F4CB /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367921CF3A300086F4CB /* UIViewController+Extensions.swift */; };
+		8232367F21CF3A460086F4CB /* CustomMessageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367E21CF3A460086F4CB /* CustomMessageFlowLayout.swift */; };
+		8232368121CF3A690086F4CB /* Settings+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232368021CF3A680086F4CB /* Settings+UserDefaults.swift */; };
+		8232368321CF3AC70086F4CB /* BasicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232368221CF3AC70086F4CB /* BasicExampleViewController.swift */; };
+		8232368521CF3E220086F4CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8232368421CF3E220086F4CB /* Assets.xcassets */; };
 		824BC48D21BCEDF30094841A /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC48C21BCEDF30094841A /* OptionsViewController.swift */; };
 		824BC49021BD1E760094841A /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC48F21BD1E760094841A /* MyProfileViewController.swift */; };
 		824BC49221BD24E80094841A /* MyProfileHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49121BD24E80094841A /* MyProfileHeaderReusableView.swift */; };
@@ -97,6 +108,17 @@
 		82112B8021BB5A2700F2C54B /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		82112B8321BB926600F2C54B /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		82112B8521BB934D00F2C54B /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		8232366E21CF39AC0086F4CB /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		8232367021CF3A1A0086F4CB /* MockSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSocket.swift; sourceTree = "<group>"; };
+		8232367121CF3A1A0086F4CB /* MockMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockMessage.swift; sourceTree = "<group>"; };
+		8232367421CF3A250086F4CB /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		8232367521CF3A250086F4CB /* Lorem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lorem.swift; sourceTree = "<group>"; };
+		8232367821CF3A300086F4CB /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		8232367921CF3A300086F4CB /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		8232367E21CF3A460086F4CB /* CustomMessageFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMessageFlowLayout.swift; sourceTree = "<group>"; };
+		8232368021CF3A680086F4CB /* Settings+UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Settings+UserDefaults.swift"; sourceTree = "<group>"; };
+		8232368221CF3AC70086F4CB /* BasicExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicExampleViewController.swift; sourceTree = "<group>"; };
+		8232368421CF3E220086F4CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		824BC48C21BCEDF30094841A /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		824BC48F21BD1E760094841A /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		824BC49121BD24E80094841A /* MyProfileHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileHeaderReusableView.swift; sourceTree = "<group>"; };
@@ -186,6 +208,7 @@
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				820FE83421AA63DE001097F5 /* Images.xcassets */,
+				8232368421CF3E220086F4CB /* Assets.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
@@ -277,6 +300,7 @@
 		820FE83821AC0E32001097F5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8232366D21CF398D0086F4CB /* Chat */,
 				82AE929021C69CFF00B34F50 /* NotificationSetting */,
 				82AE928B21C6823300B34F50 /* Profile */,
 				82968E0821C629650023A11E /* Friends */,
@@ -332,6 +356,23 @@
 				829CF05521B5745100D5B5EB /* FindFriendsCell.swift */,
 			);
 			name = FindFriend;
+			sourceTree = "<group>";
+		};
+		8232366D21CF398D0086F4CB /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				8232367521CF3A250086F4CB /* Lorem.swift */,
+				8232367421CF3A250086F4CB /* SampleData.swift */,
+				8232366E21CF39AC0086F4CB /* ChatViewController.swift */,
+				8232368221CF3AC70086F4CB /* BasicExampleViewController.swift */,
+				8232367E21CF3A460086F4CB /* CustomMessageFlowLayout.swift */,
+				8232367121CF3A1A0086F4CB /* MockMessage.swift */,
+				8232367021CF3A1A0086F4CB /* MockSocket.swift */,
+				8232367821CF3A300086F4CB /* UIColor+Extensions.swift */,
+				8232367921CF3A300086F4CB /* UIViewController+Extensions.swift */,
+				8232368021CF3A680086F4CB /* Settings+UserDefaults.swift */,
+			);
+			name = Chat;
 			sourceTree = "<group>";
 		};
 		824BC48B21BCEDAB0094841A /* Menu */ = {
@@ -542,6 +583,7 @@
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				8232368521CF3E220086F4CB /* Assets.xcassets in Resources */,
 				820FE83521AA63DE001097F5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -616,11 +658,14 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Cactacea/Cactacea.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
+				"${BUILT_PRODUCTS_DIR}/MessageInputBar/MessageInputBar.framework",
+				"${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PryntTrimmerView/PryntTrimmerView.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SteviaLayout/Stevia.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/YPImagePicker/YPImagePicker.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -632,11 +677,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cactacea.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageInputBar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PryntTrimmerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stevia.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YPImagePicker.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -673,6 +721,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8232368321CF3AC70086F4CB /* BasicExampleViewController.swift in Sources */,
 				820EE92D21C5BD9700B1CDE2 /* FriendRequetsSentViewController.swift in Sources */,
 				8209B07921CBDE98003C5D2B /* ProfileEditViewController.swift in Sources */,
 				82AD415D21C001590023EF6C /* ReceivedFriendRequestsViewController.swift in Sources */,
@@ -681,8 +730,10 @@
 				824BC49221BD24E80094841A /* MyProfileHeaderReusableView.swift in Sources */,
 				824BC49421BD2DD00094841A /* ProfilePhotoCell.swift in Sources */,
 				820FE83A21AC0E6C001097F5 /* MainController.swift in Sources */,
+				8232367221CF3A1A0086F4CB /* MockSocket.swift in Sources */,
 				82968E0721C61F000023A11E /* FollowerCell.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				8232366F21CF39AC0086F4CB /* ChatViewController.swift in Sources */,
 				82968E0521C61EF30023A11E /* FollowersViewController.swift in Sources */,
 				829CF05621B5745100D5B5EB /* FindFriendsCell.swift in Sources */,
 				820FE83E21AC0F11001097F5 /* SignInViewController.swift in Sources */,
@@ -696,24 +747,31 @@
 				829CF04221AC1CD400D5B5EB /* Extensions.swift in Sources */,
 				820EE93421C5C15A00B1CDE2 /* BlockingUserCell.swift in Sources */,
 				82112B7F21BB5A0B00F2C54B /* FeedsViewController.swift in Sources */,
+				8232367F21CF3A460086F4CB /* CustomMessageFlowLayout.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				820FE84021AC0F45001097F5 /* ContactViewController.swift in Sources */,
 				820EE92A21C5502100B1CDE2 /* Pager.swift in Sources */,
+				8232367B21CF3A300086F4CB /* UIViewController+Extensions.swift in Sources */,
 				829857CB21C5F75800D4773D /* FollowingUserCell.swift in Sources */,
 				82AE929421C69D4B00B34F50 /* NotificationSettingsViewController.swift in Sources */,
 				820EE92F21C5BDB000B1CDE2 /* FriendRequetsSentCell.swift in Sources */,
 				820FE83721AC0CE0001097F5 /* Session.swift in Sources */,
 				82AD416721C08EC60023EF6C /* ContactCell.swift in Sources */,
+				8232367721CF3A250086F4CB /* Lorem.swift in Sources */,
+				8232367A21CF3A300086F4CB /* UIColor+Extensions.swift in Sources */,
 				82AE928D21C6824500B34F50 /* ProfileViewController.swift in Sources */,
 				82968E0A21C62A4C0023A11E /* FriendsViewController.swift in Sources */,
 				82112B8121BB5A2700F2C54B /* FeedCell.swift in Sources */,
 				82112B8621BB934D00F2C54B /* CommentCell.swift in Sources */,
+				8232368121CF3A690086F4CB /* Settings+UserDefaults.swift in Sources */,
 				829857C921C5F74600D4773D /* FollowingUsersViewController.swift in Sources */,
 				829857C621C5F14800D4773D /* RequestBuilder.swift in Sources */,
 				82968E0C21C62A5A0023A11E /* FriendCell.swift in Sources */,
 				820EE93221C5C14400B1CDE2 /* BlockingUsersViewControlller.swift in Sources */,
 				820FE83C21AC0EEC001097F5 /* SignUpViewController.swift in Sources */,
 				829CF05421B565A000D5B5EB /* FindFriendsViewController.swift in Sources */,
+				8232367621CF3A250086F4CB /* SampleData.swift in Sources */,
+				8232367321CF3A1A0086F4CB /* MockMessage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

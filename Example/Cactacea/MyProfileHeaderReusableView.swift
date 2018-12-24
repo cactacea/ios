@@ -24,7 +24,7 @@ class MyProfileHeaderReusableView: UICollectionReusableView {
     @IBOutlet weak var followButton: UIButton!
     
     var delegate: MyProfileHeaderReusableViewDelegate?
-    var account: Account! {
+    var account: AccountDetail! {
         didSet {
             updateView()
         }

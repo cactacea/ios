@@ -1386,7 +1386,6 @@
                                         <connections>
                                             <outlet property="accountNameLabel" destination="kv1-aM-9L7" id="8zP-TN-r2Z"/>
                                             <outlet property="profileImageView" destination="pCl-yz-llZ" id="Kfk-17-YIC"/>
-                                            <segue destination="cMN-CI-O5P" kind="show" id="aR0-Qf-lh1"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1416,6 +1415,7 @@
                     <connections>
                         <outlet property="pageFooterView" destination="hyg-Nc-hfd" id="6Rf-cF-NL0"/>
                         <outlet property="tableView" destination="32K-lx-vPB" id="K4s-fu-PpK"/>
+                        <segue destination="cMN-CI-O5P" kind="show" identifier="chat" id="tSg-C5-lzU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EIW-TW-Jdf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1598,7 +1598,7 @@
         <!--Chat-->
         <scene sceneID="cIM-P0-esm">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="cMN-CI-O5P" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="cMN-CI-O5P" customClass="BasicExampleViewController" customModule="Cactacea_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SoU-eR-HQ9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1808,7 +1808,7 @@
                                     </connections>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentCell" rowHeight="77" id="mOw-Gp-WZO" customClass="CommentCell" customModule="Cactacea_Example" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentCell" rowHeight="77" id="mOw-Gp-WZO" customClass="CommentCell" customModule="Cactacea_Example" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mOw-Gp-WZO" id="lii-mV-eec">
@@ -1932,6 +1932,7 @@
                         <outlet property="pageFooterView" destination="Ry1-7i-KpD" id="1oW-Zz-AoP"/>
                         <outlet property="sendButton" destination="E0v-rb-Mtu" id="jZ3-cn-1eZ"/>
                         <outlet property="tableView" destination="QkE-dz-Dmb" id="WpN-8V-BRc"/>
+                        <segue destination="VSa-mO-ee9" kind="show" identifier="profile" id="F3O-hv-AFY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Wa-AU-goe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3220,8 +3221,9 @@
         <image name="send2" width="22" height="19.5"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="F3O-hv-AFY"/>
         <segue reference="5RU-RG-o00"/>
-        <segue reference="aR0-Qf-lh1"/>
+        <segue reference="tSg-C5-lzU"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

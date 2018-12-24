@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
 
     var account: Account? = nil
+    var accountDetail: AccountDetail? = nil
     var posts: [Feed] = []
     
     override func viewDidLoad() {
@@ -32,18 +33,18 @@ class ProfileViewController: UIViewController {
     func fetchUser() {
         if let account = self.account {
             self.navigationItem.title = account.accountName
-            AccountsAPI.findAccount(id: account.id) { [weak self] (account, _) in
+            AccountsAPI.findDetail(id: account.id) { [weak self] (result, _) in
                 guard let weakSelf = self else { return }
-                guard let account = account else { return }
-                weakSelf.account = account
+                guard let accountDetail = result else { return }
+                weakSelf.accountDetail = accountDetail
                 weakSelf.collectionView.reloadData()
             }
         }
     }
     
     func fetchPosts() {
-        if let account = self.account {
-            AccountsAPI.findFeeds(id: account.id) { [weak self] (result, error) in
+        if let accountDetail = self.accountDetail {
+            AccountsAPI.findFeeds(id: accountDetail.id) { [weak self] (result, error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
@@ -71,14 +72,13 @@ extension ProfileViewController: UICollectionViewDataSource {
         let post = posts[indexPath.row]
         cell.post = post
         cell.delegate = self
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerViewCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ProfileHeaderReusableView", for: indexPath) as! ProfileHeaderReusableView
-        if let account = self.account {
-            headerViewCell.account = account
+        if let accountDetail = self.accountDetail {
+            headerViewCell.accountDetail = accountDetail
         }
         return headerViewCell
     }
