@@ -30,16 +30,20 @@
 		82112B8121BB5A2700F2C54B /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82112B8021BB5A2700F2C54B /* FeedCell.swift */; };
 		82112B8421BB926600F2C54B /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82112B8321BB926600F2C54B /* CommentsViewController.swift */; };
 		82112B8621BB934D00F2C54B /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82112B8521BB934D00F2C54B /* CommentCell.swift */; };
+		821B278C21D26BBC00F4F42E /* Message+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821B278B21D26BBC00F4F42E /* Message+Extension.swift */; };
+		821B278E21D26C1300F4F42E /* Medium+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821B278D21D26C1300F4F42E /* Medium+Extension.swift */; };
+		821B279021D26C4C00F4F42E /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821B278F21D26C4C00F4F42E /* UIScrollView+Extension.swift */; };
+		821B279221D26C6800F4F42E /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821B279121D26C6800F4F42E /* UIAlertController+Extension.swift */; };
+		821B279421D26C8E00F4F42E /* MediumsAPI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821B279321D26C8E00F4F42E /* MediumsAPI+Extension.swift */; };
+		821B279621D26CB300F4F42E /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821B279521D26CB300F4F42E /* UIButton+Extension.swift */; };
+		821B279821D26CD400F4F42E /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821B279721D26CD400F4F42E /* UIBarButtonItem+Extension.swift */; };
+		821B279A21D26D0300F4F42E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821B279921D26D0300F4F42E /* Date+Extension.swift */; };
+		821B279C21D26D1B00F4F42E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821B279B21D26D1B00F4F42E /* UIColor+Extension.swift */; };
+		821B279E21D26D4600F4F42E /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821B279D21D26D4600F4F42E /* NSNotification+Extension.swift */; };
 		8232366F21CF39AC0086F4CB /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232366E21CF39AC0086F4CB /* ChatViewController.swift */; };
-		8232367221CF3A1A0086F4CB /* MockSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367021CF3A1A0086F4CB /* MockSocket.swift */; };
-		8232367321CF3A1A0086F4CB /* MockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367121CF3A1A0086F4CB /* MockMessage.swift */; };
-		8232367621CF3A250086F4CB /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367421CF3A250086F4CB /* SampleData.swift */; };
-		8232367721CF3A250086F4CB /* Lorem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367521CF3A250086F4CB /* Lorem.swift */; };
 		8232367A21CF3A300086F4CB /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367821CF3A300086F4CB /* UIColor+Extensions.swift */; };
 		8232367B21CF3A300086F4CB /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367921CF3A300086F4CB /* UIViewController+Extensions.swift */; };
-		8232367F21CF3A460086F4CB /* CustomMessageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367E21CF3A460086F4CB /* CustomMessageFlowLayout.swift */; };
 		8232368121CF3A690086F4CB /* Settings+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232368021CF3A680086F4CB /* Settings+UserDefaults.swift */; };
-		8232368321CF3AC70086F4CB /* BasicExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232368221CF3AC70086F4CB /* BasicExampleViewController.swift */; };
 		8232368521CF3E220086F4CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8232368421CF3E220086F4CB /* Assets.xcassets */; };
 		824BC48D21BCEDF30094841A /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC48C21BCEDF30094841A /* OptionsViewController.swift */; };
 		824BC49021BD1E760094841A /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC48F21BD1E760094841A /* MyProfileViewController.swift */; };
@@ -53,7 +57,7 @@
 		829857C621C5F14800D4773D /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829857C521C5F14800D4773D /* RequestBuilder.swift */; };
 		829857C921C5F74600D4773D /* FollowingUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829857C821C5F74600D4773D /* FollowingUsersViewController.swift */; };
 		829857CB21C5F75800D4773D /* FollowingUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829857CA21C5F75800D4773D /* FollowingUserCell.swift */; };
-		829CF04221AC1CD400D5B5EB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04121AC1CD400D5B5EB /* Extensions.swift */; };
+		829CF04221AC1CD400D5B5EB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04121AC1CD400D5B5EB /* UIView+Extension.swift */; };
 		829CF04D21AD6AC100D5B5EB /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04C21AD6AC100D5B5EB /* SharePhotoController.swift */; };
 		829CF04F21AD6B3600D5B5EB /* PlaceHolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04E21AD6B3600D5B5EB /* PlaceHolderTextView.swift */; };
 		829CF05421B565A000D5B5EB /* FindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF05321B5659F00D5B5EB /* FindFriendsViewController.swift */; };
@@ -108,16 +112,20 @@
 		82112B8021BB5A2700F2C54B /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		82112B8321BB926600F2C54B /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		82112B8521BB934D00F2C54B /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		821B278B21D26BBC00F4F42E /* Message+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+Extension.swift"; sourceTree = "<group>"; };
+		821B278D21D26C1300F4F42E /* Medium+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Medium+Extension.swift"; sourceTree = "<group>"; };
+		821B278F21D26C4C00F4F42E /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
+		821B279121D26C6800F4F42E /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
+		821B279321D26C8E00F4F42E /* MediumsAPI+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediumsAPI+Extension.swift"; sourceTree = "<group>"; };
+		821B279521D26CB300F4F42E /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		821B279721D26CD400F4F42E /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
+		821B279921D26D0300F4F42E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		821B279B21D26D1B00F4F42E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		821B279D21D26D4600F4F42E /* NSNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
 		8232366E21CF39AC0086F4CB /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		8232367021CF3A1A0086F4CB /* MockSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSocket.swift; sourceTree = "<group>"; };
-		8232367121CF3A1A0086F4CB /* MockMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockMessage.swift; sourceTree = "<group>"; };
-		8232367421CF3A250086F4CB /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
-		8232367521CF3A250086F4CB /* Lorem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lorem.swift; sourceTree = "<group>"; };
 		8232367821CF3A300086F4CB /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		8232367921CF3A300086F4CB /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
-		8232367E21CF3A460086F4CB /* CustomMessageFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMessageFlowLayout.swift; sourceTree = "<group>"; };
 		8232368021CF3A680086F4CB /* Settings+UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Settings+UserDefaults.swift"; sourceTree = "<group>"; };
-		8232368221CF3AC70086F4CB /* BasicExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicExampleViewController.swift; sourceTree = "<group>"; };
 		8232368421CF3E220086F4CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		824BC48C21BCEDF30094841A /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		824BC48F21BD1E760094841A /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
@@ -131,7 +139,7 @@
 		829857C521C5F14800D4773D /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		829857C821C5F74600D4773D /* FollowingUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingUsersViewController.swift; sourceTree = "<group>"; };
 		829857CA21C5F75800D4773D /* FollowingUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingUserCell.swift; sourceTree = "<group>"; };
-		829CF04121AC1CD400D5B5EB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		829CF04121AC1CD400D5B5EB /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		829CF04C21AD6AC100D5B5EB /* SharePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
 		829CF04E21AD6B3600D5B5EB /* PlaceHolderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolderTextView.swift; sourceTree = "<group>"; };
 		829CF05321B5659F00D5B5EB /* FindFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFriendsViewController.swift; sourceTree = "<group>"; };
@@ -361,13 +369,7 @@
 		8232366D21CF398D0086F4CB /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				8232367521CF3A250086F4CB /* Lorem.swift */,
-				8232367421CF3A250086F4CB /* SampleData.swift */,
 				8232366E21CF39AC0086F4CB /* ChatViewController.swift */,
-				8232368221CF3AC70086F4CB /* BasicExampleViewController.swift */,
-				8232367E21CF3A460086F4CB /* CustomMessageFlowLayout.swift */,
-				8232367121CF3A1A0086F4CB /* MockMessage.swift */,
-				8232367021CF3A1A0086F4CB /* MockSocket.swift */,
 				8232367821CF3A300086F4CB /* UIColor+Extensions.swift */,
 				8232367921CF3A300086F4CB /* UIViewController+Extensions.swift */,
 				8232368021CF3A680086F4CB /* Settings+UserDefaults.swift */,
@@ -434,8 +436,18 @@
 		829CF04521AD5E4000D5B5EB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				829CF04121AC1CD400D5B5EB /* Extensions.swift */,
+				829CF04121AC1CD400D5B5EB /* UIView+Extension.swift */,
+				821B279121D26C6800F4F42E /* UIAlertController+Extension.swift */,
+				821B278F21D26C4C00F4F42E /* UIScrollView+Extension.swift */,
 				829CF04E21AD6B3600D5B5EB /* PlaceHolderTextView.swift */,
+				821B278B21D26BBC00F4F42E /* Message+Extension.swift */,
+				821B278D21D26C1300F4F42E /* Medium+Extension.swift */,
+				821B279321D26C8E00F4F42E /* MediumsAPI+Extension.swift */,
+				821B279521D26CB300F4F42E /* UIButton+Extension.swift */,
+				821B279721D26CD400F4F42E /* UIBarButtonItem+Extension.swift */,
+				821B279921D26D0300F4F42E /* Date+Extension.swift */,
+				821B279B21D26D1B00F4F42E /* UIColor+Extension.swift */,
+				821B279D21D26D4600F4F42E /* NSNotification+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -721,35 +733,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8232368321CF3AC70086F4CB /* BasicExampleViewController.swift in Sources */,
 				820EE92D21C5BD9700B1CDE2 /* FriendRequetsSentViewController.swift in Sources */,
+				821B278C21D26BBC00F4F42E /* Message+Extension.swift in Sources */,
 				8209B07921CBDE98003C5D2B /* ProfileEditViewController.swift in Sources */,
+				821B279C21D26D1B00F4F42E /* UIColor+Extension.swift in Sources */,
 				82AD415D21C001590023EF6C /* ReceivedFriendRequestsViewController.swift in Sources */,
 				82AD415E21C001590023EF6C /* ReceivedFriendRequestsCell.swift in Sources */,
 				824BC49621BD3F8A0094841A /* AccountEditViewController.swift in Sources */,
 				824BC49221BD24E80094841A /* MyProfileHeaderReusableView.swift in Sources */,
+				821B279021D26C4C00F4F42E /* UIScrollView+Extension.swift in Sources */,
 				824BC49421BD2DD00094841A /* ProfilePhotoCell.swift in Sources */,
+				821B279A21D26D0300F4F42E /* Date+Extension.swift in Sources */,
 				820FE83A21AC0E6C001097F5 /* MainController.swift in Sources */,
-				8232367221CF3A1A0086F4CB /* MockSocket.swift in Sources */,
 				82968E0721C61F000023A11E /* FollowerCell.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				821B279821D26CD400F4F42E /* UIBarButtonItem+Extension.swift in Sources */,
 				8232366F21CF39AC0086F4CB /* ChatViewController.swift in Sources */,
 				82968E0521C61EF30023A11E /* FollowersViewController.swift in Sources */,
 				829CF05621B5745100D5B5EB /* FindFriendsCell.swift in Sources */,
+				821B279421D26C8E00F4F42E /* MediumsAPI+Extension.swift in Sources */,
 				820FE83E21AC0F11001097F5 /* SignInViewController.swift in Sources */,
 				829CF04F21AD6B3600D5B5EB /* PlaceHolderTextView.swift in Sources */,
 				82112B8421BB926600F2C54B /* CommentsViewController.swift in Sources */,
 				824BC49021BD1E760094841A /* MyProfileViewController.swift in Sources */,
+				821B279621D26CB300F4F42E /* UIButton+Extension.swift in Sources */,
 				820EE91B21C49F2700B1CDE2 /* PageFooterView.swift in Sources */,
 				82AE928F21C6840400B34F50 /* ProfileHeaderReusableView.swift in Sources */,
 				824BC48D21BCEDF30094841A /* OptionsViewController.swift in Sources */,
 				829CF04D21AD6AC100D5B5EB /* SharePhotoController.swift in Sources */,
-				829CF04221AC1CD400D5B5EB /* Extensions.swift in Sources */,
+				829CF04221AC1CD400D5B5EB /* UIView+Extension.swift in Sources */,
 				820EE93421C5C15A00B1CDE2 /* BlockingUserCell.swift in Sources */,
 				82112B7F21BB5A0B00F2C54B /* FeedsViewController.swift in Sources */,
-				8232367F21CF3A460086F4CB /* CustomMessageFlowLayout.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				821B278E21D26C1300F4F42E /* Medium+Extension.swift in Sources */,
 				820FE84021AC0F45001097F5 /* ContactViewController.swift in Sources */,
+				821B279221D26C6800F4F42E /* UIAlertController+Extension.swift in Sources */,
 				820EE92A21C5502100B1CDE2 /* Pager.swift in Sources */,
 				8232367B21CF3A300086F4CB /* UIViewController+Extensions.swift in Sources */,
 				829857CB21C5F75800D4773D /* FollowingUserCell.swift in Sources */,
@@ -757,7 +775,6 @@
 				820EE92F21C5BDB000B1CDE2 /* FriendRequetsSentCell.swift in Sources */,
 				820FE83721AC0CE0001097F5 /* Session.swift in Sources */,
 				82AD416721C08EC60023EF6C /* ContactCell.swift in Sources */,
-				8232367721CF3A250086F4CB /* Lorem.swift in Sources */,
 				8232367A21CF3A300086F4CB /* UIColor+Extensions.swift in Sources */,
 				82AE928D21C6824500B34F50 /* ProfileViewController.swift in Sources */,
 				82968E0A21C62A4C0023A11E /* FriendsViewController.swift in Sources */,
@@ -767,11 +784,10 @@
 				829857C921C5F74600D4773D /* FollowingUsersViewController.swift in Sources */,
 				829857C621C5F14800D4773D /* RequestBuilder.swift in Sources */,
 				82968E0C21C62A5A0023A11E /* FriendCell.swift in Sources */,
+				821B279E21D26D4600F4F42E /* NSNotification+Extension.swift in Sources */,
 				820EE93221C5C14400B1CDE2 /* BlockingUsersViewControlller.swift in Sources */,
 				820FE83C21AC0EEC001097F5 /* SignUpViewController.swift in Sources */,
 				829CF05421B565A000D5B5EB /* FindFriendsViewController.swift in Sources */,
-				8232367621CF3A250086F4CB /* SampleData.swift in Sources */,
-				8232367321CF3A1A0086F4CB /* MockMessage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

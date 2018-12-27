@@ -11,62 +11,7 @@ import MessageKit
 import MessageInputBar
 import Cactacea
 import SwiftDate
-
-extension Medium: MediaItem {
-    
-    /// The url where the media is located.
-    public var url: URL? {
-        return URL(string: self.uri)
-    }
-    
-    /// The image.
-    public var image: UIImage? {
-        return nil
-    }
-    
-    /// A placeholder image for when the image is obtained asychronously.
-    public var placeholderImage: UIImage {
-        return UIImage()
-    }
-    
-    /// The size of the media item.
-    public var size: CGSize {
-        return self.size
-    }
-
-}
-
-extension Message: MessageType {
-    
-    /// The sender of the message.
-    public var sender: Sender {
-        return Sender(id: String(self.account.id), displayName: self.account.displayName)
-    }
-    
-    /// The unique identifier for the message.
-    public var messageId: String {
-        return String(self.id)
-    }
-    
-    /// The date the message was sent.
-    public var sentDate: Date {
-        let timeInterval = TimeInterval(self.postedAt)
-        return Date(timeIntervalSince1970: timeInterval)
-    }
-    
-    /// The kind of message and its underlying kind.
-    public var kind: MessageKind {
-        if let medium = self.medium {
-            if medium.mediumType == .image {
-                return .photo(medium)
-            } else if medium.mediumType == .movie {
-                return .video(medium)
-            }
-        }
-        return .text(self.message ?? "")
-    }
-
-}
+import MapKit
 
 /// A base class for the example controllers
 class ChatViewController: MessagesViewController, MessagesDataSource {
@@ -76,7 +21,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     }
     
     var account: Account?
-    var group: Group!
+    var group: Group?
     
     var messageList: [Message] = []
     
@@ -91,9 +36,21 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if UserDefaults.isFirstLaunch() {
-            // Enable Text Messages
-            UserDefaults.standard.set(true, forKey: "Text Messages")
+//        if UserDefaults.isFirstLaunch() {
+//            // Enable Text Messages
+//            UserDefaults.standard.set(true, forKey: "Text Messages")
+//        }
+        
+        if let account = account {
+            AccountsAPI.findGroup(id: account.id) { [weak self] (result, error) in
+                guard let weakSelf = self else { return }
+                if let result = result {
+                    weakSelf.group = result
+                    weakSelf.loadFirstMessages()
+                } else if let error = error {
+                    Session.showError(error)
+                }
+            }
         }
 
         configureMessageCollectionView()
@@ -102,6 +59,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         title = "MessageKit"
     }
     
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -113,55 +71,42 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        MockSocket.shared.disconnect()
+//        MockSocket.shared.disconnect()
     }
     
     func loadFirstMessages() {
-        MessagesAPI.findMessages(id: group.id, ascending: true, since: nil, offset: nil, count: 20) { [weak self] (result, error) in
-            guard let weakSelf = self else { return }
-            if let messages = result {
-                weakSelf.messageList = messages
-                weakSelf.messagesCollectionView.reloadData()
-                weakSelf.messagesCollectionView.scrollToBottom()
-            } else if let error = error {
-                Session.showError(error)
+        if let group = group {
+            MessagesAPI.findMessages(id: group.id, ascending: true, since: nil, offset: nil, count: 20) { [weak self] (result, error) in
+                guard let weakSelf = self else { return }
+                if let messages = result {
+                    weakSelf.messageList = messages
+                    weakSelf.messagesCollectionView.reloadData()
+                    weakSelf.messagesCollectionView.scrollToBottom()
+                } else if let error = error {
+                    Session.showError(error)
+                }
             }
         }
-        
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            let count = UserDefaults.standard.mockMessagesCount()
-//            SampleData.shared.getMessages(count: count) { messages in
-//                DispatchQueue.main.async {
-//                    self.messageList = messages
-//                    self.messagesCollectionView.reloadData()
-//                    self.messagesCollectionView.scrollToBottom()
-//                }
-//            }
-//        }
     }
     
     @objc
     func loadMoreMessages() {
-        MessagesAPI.findMessages(id: group.id, ascending: true, since: self.messageList.first?.id, offset: nil, count: 20) { [weak self] (result, error) in
-            guard let weakSelf = self else { return }
-            if let messages = result {
-                weakSelf.messageList.insert(contentsOf: messages, at: 0)
-                weakSelf.messagesCollectionView.reloadDataAndKeepOffset()
-                weakSelf.refreshControl.endRefreshing()
-            } else if let error = error {
-                Session.showError(error)
+        if let group = group {
+            MessagesAPI.findMessages(id: group.id, ascending: false, since: self.messageList.first?.id, offset: nil, count: 20) { [weak self] (result, error) in
+                guard let weakSelf = self else { return }
+                if let messages = result {
+                    if messages.count == 0 {
+                        weakSelf.messagesCollectionView.reloadData()
+                        weakSelf.refreshControl.endRefreshing()
+                    } else {
+                        weakSelf.messagesCollectionView.reloadDataAndKeepOffset()
+                        weakSelf.refreshControl.endRefreshing()
+                    }
+                } else if let error = error {
+                    Session.showError(error)
+                }
             }
         }
-        
-//        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1) {
-//            SampleData.shared.getMessages(count: 20) { messages in
-//                DispatchQueue.main.async {
-//                    self.messageList.insert(contentsOf: messages, at: 0)
-//                    self.messagesCollectionView.reloadDataAndKeepOffset()
-//                    self.refreshControl.endRefreshing()
-//                }
-//            }
-//        }
     }
     
     func configureMessageCollectionView() {
@@ -174,12 +119,17 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         
         messagesCollectionView.addSubview(refreshControl)
         refreshControl.addTarget(self, action: #selector(loadMoreMessages), for: .valueChanged)
+
+        //
+        messagesCollectionView.messagesLayoutDelegate = self
+        messagesCollectionView.messagesDisplayDelegate = self
+
     }
     
     func configureMessageInputBar() {
         messageInputBar.delegate = self
-        messageInputBar.inputTextView.tintColor = .primaryColor
-        messageInputBar.sendButton.tintColor = .primaryColor
+        messageInputBar.inputTextView.tintColor = .mainBlue
+        messageInputBar.sendButton.tintColor = .mainBlue
     }
     
     // MARK: - Helpers
@@ -211,7 +161,10 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     // MARK: - MessagesDataSource
     
     func currentSender() -> Sender {
-        return SampleData.shared.currentSender
+        if let account = Session.authentication?.account {
+            return Sender(id: String(account.id), displayName: account.displayName)
+        }
+        fatalError("Session not found")
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
@@ -305,19 +258,104 @@ extension ChatViewController: MessageInputBarDelegate {
     
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
         
-        for component in inputBar.inputTextView.components {
-            
-            if let str = component as? String {
-//                let message = MockMessage(text: str, sender: currentSender(), messageId: UUID().uuidString, date: Date())
-//                insertMessage(message)
-            } else if let img = component as? UIImage {
-//                let message = MockMessage(image: img, sender: currentSender(), messageId: UUID().uuidString, date: Date())
-//                insertMessage(message)
+        if let group = group {
+            for component in inputBar.inputTextView.components {
+                
+                if let str = component as? String {
+                    let body = PostTextBody(groupId: group.id, message: str)
+                    MessagesAPI.postText(body: body) { [weak self] (result, error) in
+                        guard let weakSelf = self else { return }
+                        if let result = result {
+                            weakSelf.insertMessage(result)
+                        } else if let error = error {
+                            Session.showError(error)
+                        }
+                    }
+//                } else if let img = component as? UIImage {
+                }
+                
             }
-            
         }
         inputBar.inputTextView.text = String()
         messagesCollectionView.scrollToBottom(animated: true)
+    }
+    
+}
+
+
+extension ChatViewController: MessagesDisplayDelegate {
+    
+    // MARK: - Text Messages
+    
+    func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+        return isFromCurrentSender(message: message) ? .white : .darkText
+    }
+    
+    func detectorAttributes(for detector: DetectorType, and message: MessageType, at indexPath: IndexPath) -> [NSAttributedString.Key: Any] {
+        return MessageLabel.defaultAttributes
+    }
+    
+    func enabledDetectors(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> [DetectorType] {
+        return [.url, .address, .phoneNumber, .date, .transitInformation]
+    }
+    
+    // MARK: - All Messages
+    
+    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+        return isFromCurrentSender(message: message) ? .mainBlue : UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
+    }
+    
+    func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
+        
+        let tail: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
+        return .bubbleTail(tail, .curved)
+    }
+    
+    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        let avatar = Avatar(image: nil, initials: "")
+        avatarView.set(avatar: avatar)
+    }
+    
+    // MARK: - Location Messages
+    
+    func annotationViewForLocation(message: MessageType, at indexPath: IndexPath, in messageCollectionView: MessagesCollectionView) -> MKAnnotationView? {
+        let annotationView = MKAnnotationView(annotation: nil, reuseIdentifier: nil)
+        let pinImage = #imageLiteral(resourceName: "ic_map_marker")
+        annotationView.image = pinImage
+        annotationView.centerOffset = CGPoint(x: 0, y: -pinImage.size.height / 2)
+        return annotationView
+    }
+    
+    func animationBlockForLocation(message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> ((UIImageView) -> Void)? {
+        return { view in
+            view.layer.transform = CATransform3DMakeScale(2, 2, 2)
+            UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: [], animations: {
+                view.layer.transform = CATransform3DIdentity
+            }, completion: nil)
+        }
+    }
+    
+    func snapshotOptionsForLocation(message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> LocationMessageSnapshotOptions {
+        
+        return LocationMessageSnapshotOptions(showsBuildings: true, showsPointsOfInterest: true, span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
+    }
+    
+}
+
+// MARK: - MessagesLayoutDelegate
+
+extension ChatViewController: MessagesLayoutDelegate {
+    
+    func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+        return 18
+    }
+    
+    func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+        return 20
+    }
+    
+    func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+        return 16
     }
     
 }

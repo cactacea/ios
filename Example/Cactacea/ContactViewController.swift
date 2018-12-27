@@ -47,7 +47,8 @@ extension ContactViewController: UITableViewDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chat" {
-            if let _ = segue.destination as? BasicExampleViewController {
+            if let vc = segue.destination as? ChatViewController, let account = sender as? Account {
+                vc.account = account
             }
         }
     }

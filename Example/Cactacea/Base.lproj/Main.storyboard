@@ -1598,7 +1598,7 @@
         <!--Chat-->
         <scene sceneID="cIM-P0-esm">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="cMN-CI-O5P" customClass="BasicExampleViewController" customModule="Cactacea_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="cMN-CI-O5P" customClass="ChatViewController" customModule="Cactacea_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SoU-eR-HQ9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2112,7 +2112,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Axa-5O-ccN">
                                                             <rect key="frame" x="0.0" y="35" width="90" height="30"/>
                                                             <state key="normal" title="Reject">
-                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="titleColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                             </state>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -2120,6 +2120,9 @@
                                                                 </userDefinedRuntimeAttribute>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                     <integer key="value" value="1"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                                    <color key="value" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
