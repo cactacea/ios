@@ -13,7 +13,7 @@ open class PutGroupBody: Codable {
 
     public enum PrivacyType: String, Codable { 
         case everyone = "everyone"
-        case follows = "follows"
+        case following = "following"
         case followers = "followers"
         case friends = "friends"
     }

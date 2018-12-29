@@ -132,83 +132,6 @@ open class SessionAPI {
     }
 
     /**
-     Get basic information about session account
-     
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func find(completion: @escaping ((_ data: Account?,_ error: Error?) -> Void)) {
-        findWithRequestBuilder().execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-    /**
-     Get basic information about session account
-     
-     - returns: Observable<Account>
-     */
-    open class func find() -> Observable<Account> {
-        return Observable.create { observer -> Disposable in
-            find() { data, error in
-                if let error = error {
-                    observer.on(.error(error))
-                } else {
-                    observer.on(.next(data!))
-                }
-                observer.on(.completed)
-            }
-            return Disposables.create()
-        }
-    }
-
-    /**
-     Get basic information about session account
-     - GET /session
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
-     - examples: [{contentType=application/json, example={
-  "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
-  "friendCount" : 5.962133916683182377482808078639209270477294921875,
-  "accountName" : "accountName",
-  "displayName" : "displayName",
-  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "bio" : "bio",
-  "followingCount" : 6.02745618307040320615897144307382404804229736328125,
-  "friendRequestInProgress" : true,
-  "feedsCount" : 5.63737665663332876420099637471139430999755859375,
-  "muting" : true,
-  "web" : "web",
-  "blocking" : true,
-  "following" : true,
-  "isFriend" : true,
-  "location" : "location",
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1.46581298050294517310021547018550336360931396484375
-}}]
-
-     - returns: RequestBuilder<Account> 
-     */
-    open class func findWithRequestBuilder() -> RequestBuilder<Account> {
-        let path = "/session"
-        let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-
-
-        let requestBuilder: RequestBuilder<Account>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
      Search accounts
      
      - parameter accountName: (query) Filters accounts whose account name start of. (optional)
@@ -256,47 +179,39 @@ open class SessionAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
-  "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
-  "friendCount" : 5.962133916683182377482808078639209270477294921875,
+  "birthday" : 7.061401241503109105224211816675961017608642578125,
+  "next" : 3.61607674925191080461672754609026014804840087890625,
   "accountName" : "accountName",
   "displayName" : "displayName",
-  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "joinedAt" : 9.301444243932575517419536481611430644989013671875,
   "bio" : "bio",
-  "followingCount" : 6.02745618307040320615897144307382404804229736328125,
   "friendRequestInProgress" : true,
-  "feedsCount" : 5.63737665663332876420099637471139430999755859375,
   "muting" : true,
   "web" : "web",
   "blocking" : true,
   "following" : true,
   "isFriend" : true,
   "location" : "location",
-  "id" : 0.80082819046101150206595775671303272247314453125,
+  "id" : 2.3021358869347654518833223846741020679473876953125,
   "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  "profileImageUrl" : "profileImageUrl"
 }, {
-  "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
-  "friendCount" : 5.962133916683182377482808078639209270477294921875,
+  "birthday" : 7.061401241503109105224211816675961017608642578125,
+  "next" : 3.61607674925191080461672754609026014804840087890625,
   "accountName" : "accountName",
   "displayName" : "displayName",
-  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "joinedAt" : 9.301444243932575517419536481611430644989013671875,
   "bio" : "bio",
-  "followingCount" : 6.02745618307040320615897144307382404804229736328125,
   "friendRequestInProgress" : true,
-  "feedsCount" : 5.63737665663332876420099637471139430999755859375,
   "muting" : true,
   "web" : "web",
   "blocking" : true,
   "following" : true,
   "isFriend" : true,
   "location" : "location",
-  "id" : 0.80082819046101150206595775671303272247314453125,
+  "id" : 2.3021358869347654518833223846741020679473876953125,
   "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  "profileImageUrl" : "profileImageUrl"
 } ]}]
      
      - parameter accountName: (query) Filters accounts whose account name start of. (optional)
@@ -371,10 +286,10 @@ open class SessionAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
-  "next" : 2.027123023002321833274663731572218239307403564453125,
+  "next" : 1.024645700144157789424070870154537260532379150390625,
   "contentWarning" : true,
-  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
-  "postedAt" : 9,
+  "likedAt" : 1.231513536777255612975068288506008684635162353515625,
+  "postedAt" : 7,
   "contentDeleted" : true,
   "likeCount" : 2,
   "id" : 0.80082819046101150206595775671303272247314453125,
@@ -401,34 +316,30 @@ open class SessionAPI {
     "thumbnailUrl" : "thumbnailUrl"
   } ],
   "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "birthday" : 7.061401241503109105224211816675961017608642578125,
+    "next" : 3.61607674925191080461672754609026014804840087890625,
     "accountName" : "accountName",
     "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
     "bio" : "bio",
-    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
     "muting" : true,
     "web" : "web",
     "blocking" : true,
     "following" : true,
     "isFriend" : true,
     "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
+    "id" : 2.3021358869347654518833223846741020679473876953125,
     "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    "profileImageUrl" : "profileImageUrl"
   },
   "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
+  "commentCount" : 4
 }, {
-  "next" : 2.027123023002321833274663731572218239307403564453125,
+  "next" : 1.024645700144157789424070870154537260532379150390625,
   "contentWarning" : true,
-  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
-  "postedAt" : 9,
+  "likedAt" : 1.231513536777255612975068288506008684635162353515625,
+  "postedAt" : 7,
   "contentDeleted" : true,
   "likeCount" : 2,
   "id" : 0.80082819046101150206595775671303272247314453125,
@@ -455,29 +366,25 @@ open class SessionAPI {
     "thumbnailUrl" : "thumbnailUrl"
   } ],
   "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "birthday" : 7.061401241503109105224211816675961017608642578125,
+    "next" : 3.61607674925191080461672754609026014804840087890625,
     "accountName" : "accountName",
     "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
     "bio" : "bio",
-    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
     "muting" : true,
     "web" : "web",
     "blocking" : true,
     "following" : true,
     "isFriend" : true,
     "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
+    "id" : 2.3021358869347654518833223846741020679473876953125,
     "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    "profileImageUrl" : "profileImageUrl"
   },
   "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
+  "commentCount" : 4
 } ]}]
      
      - parameter since: (query) Filters feeds which started on since or later. (optional)
@@ -550,47 +457,39 @@ open class SessionAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
-  "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
-  "friendCount" : 5.962133916683182377482808078639209270477294921875,
+  "birthday" : 7.061401241503109105224211816675961017608642578125,
+  "next" : 3.61607674925191080461672754609026014804840087890625,
   "accountName" : "accountName",
   "displayName" : "displayName",
-  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "joinedAt" : 9.301444243932575517419536481611430644989013671875,
   "bio" : "bio",
-  "followingCount" : 6.02745618307040320615897144307382404804229736328125,
   "friendRequestInProgress" : true,
-  "feedsCount" : 5.63737665663332876420099637471139430999755859375,
   "muting" : true,
   "web" : "web",
   "blocking" : true,
   "following" : true,
   "isFriend" : true,
   "location" : "location",
-  "id" : 0.80082819046101150206595775671303272247314453125,
+  "id" : 2.3021358869347654518833223846741020679473876953125,
   "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  "profileImageUrl" : "profileImageUrl"
 }, {
-  "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
-  "friendCount" : 5.962133916683182377482808078639209270477294921875,
+  "birthday" : 7.061401241503109105224211816675961017608642578125,
+  "next" : 3.61607674925191080461672754609026014804840087890625,
   "accountName" : "accountName",
   "displayName" : "displayName",
-  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "joinedAt" : 9.301444243932575517419536481611430644989013671875,
   "bio" : "bio",
-  "followingCount" : 6.02745618307040320615897144307382404804229736328125,
   "friendRequestInProgress" : true,
-  "feedsCount" : 5.63737665663332876420099637471139430999755859375,
   "muting" : true,
   "web" : "web",
   "blocking" : true,
   "following" : true,
   "isFriend" : true,
   "location" : "location",
-  "id" : 0.80082819046101150206595775671303272247314453125,
+  "id" : 2.3021358869347654518833223846741020679473876953125,
   "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  "profileImageUrl" : "profileImageUrl"
 } ]}]
      
      - parameter since: (query) Filters followers which started on since or later. (optional)
@@ -663,47 +562,39 @@ open class SessionAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
-  "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
-  "friendCount" : 5.962133916683182377482808078639209270477294921875,
+  "birthday" : 7.061401241503109105224211816675961017608642578125,
+  "next" : 3.61607674925191080461672754609026014804840087890625,
   "accountName" : "accountName",
   "displayName" : "displayName",
-  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "joinedAt" : 9.301444243932575517419536481611430644989013671875,
   "bio" : "bio",
-  "followingCount" : 6.02745618307040320615897144307382404804229736328125,
   "friendRequestInProgress" : true,
-  "feedsCount" : 5.63737665663332876420099637471139430999755859375,
   "muting" : true,
   "web" : "web",
   "blocking" : true,
   "following" : true,
   "isFriend" : true,
   "location" : "location",
-  "id" : 0.80082819046101150206595775671303272247314453125,
+  "id" : 2.3021358869347654518833223846741020679473876953125,
   "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  "profileImageUrl" : "profileImageUrl"
 }, {
-  "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
-  "friendCount" : 5.962133916683182377482808078639209270477294921875,
+  "birthday" : 7.061401241503109105224211816675961017608642578125,
+  "next" : 3.61607674925191080461672754609026014804840087890625,
   "accountName" : "accountName",
   "displayName" : "displayName",
-  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "joinedAt" : 9.301444243932575517419536481611430644989013671875,
   "bio" : "bio",
-  "followingCount" : 6.02745618307040320615897144307382404804229736328125,
   "friendRequestInProgress" : true,
-  "feedsCount" : 5.63737665663332876420099637471139430999755859375,
   "muting" : true,
   "web" : "web",
   "blocking" : true,
   "following" : true,
   "isFriend" : true,
   "location" : "location",
-  "id" : 0.80082819046101150206595775671303272247314453125,
+  "id" : 2.3021358869347654518833223846741020679473876953125,
   "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  "profileImageUrl" : "profileImageUrl"
 } ]}]
      
      - parameter since: (query) Filters follower which started on since or later. (optional)
@@ -782,26 +673,22 @@ open class SessionAPI {
   "requestedAt" : 6,
   "id" : 0.80082819046101150206595775671303272247314453125,
   "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "birthday" : 7.061401241503109105224211816675961017608642578125,
+    "next" : 3.61607674925191080461672754609026014804840087890625,
     "accountName" : "accountName",
     "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
     "bio" : "bio",
-    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
     "muting" : true,
     "web" : "web",
     "blocking" : true,
     "following" : true,
     "isFriend" : true,
     "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
+    "id" : 2.3021358869347654518833223846741020679473876953125,
     "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    "profileImageUrl" : "profileImageUrl"
   },
   "requestStatus" : "noResponded"
 }, {
@@ -809,26 +696,22 @@ open class SessionAPI {
   "requestedAt" : 6,
   "id" : 0.80082819046101150206595775671303272247314453125,
   "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "birthday" : 7.061401241503109105224211816675961017608642578125,
+    "next" : 3.61607674925191080461672754609026014804840087890625,
     "accountName" : "accountName",
     "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
     "bio" : "bio",
-    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
     "muting" : true,
     "web" : "web",
     "blocking" : true,
     "following" : true,
     "isFriend" : true,
     "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
+    "id" : 2.3021358869347654518833223846741020679473876953125,
     "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    "profileImageUrl" : "profileImageUrl"
   },
   "requestStatus" : "noResponded"
 } ]}]
@@ -915,47 +798,39 @@ open class SessionAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
-  "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
-  "friendCount" : 5.962133916683182377482808078639209270477294921875,
+  "birthday" : 7.061401241503109105224211816675961017608642578125,
+  "next" : 3.61607674925191080461672754609026014804840087890625,
   "accountName" : "accountName",
   "displayName" : "displayName",
-  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "joinedAt" : 9.301444243932575517419536481611430644989013671875,
   "bio" : "bio",
-  "followingCount" : 6.02745618307040320615897144307382404804229736328125,
   "friendRequestInProgress" : true,
-  "feedsCount" : 5.63737665663332876420099637471139430999755859375,
   "muting" : true,
   "web" : "web",
   "blocking" : true,
   "following" : true,
   "isFriend" : true,
   "location" : "location",
-  "id" : 0.80082819046101150206595775671303272247314453125,
+  "id" : 2.3021358869347654518833223846741020679473876953125,
   "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  "profileImageUrl" : "profileImageUrl"
 }, {
-  "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
-  "friendCount" : 5.962133916683182377482808078639209270477294921875,
+  "birthday" : 7.061401241503109105224211816675961017608642578125,
+  "next" : 3.61607674925191080461672754609026014804840087890625,
   "accountName" : "accountName",
   "displayName" : "displayName",
-  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "joinedAt" : 9.301444243932575517419536481611430644989013671875,
   "bio" : "bio",
-  "followingCount" : 6.02745618307040320615897144307382404804229736328125,
   "friendRequestInProgress" : true,
-  "feedsCount" : 5.63737665663332876420099637471139430999755859375,
   "muting" : true,
   "web" : "web",
   "blocking" : true,
   "following" : true,
   "isFriend" : true,
   "location" : "location",
-  "id" : 0.80082819046101150206595775671303272247314453125,
+  "id" : 2.3021358869347654518833223846741020679473876953125,
   "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  "profileImageUrl" : "profileImageUrl"
 } ]}]
      
      - parameter since: (query) Filters friends which started on since or later. (optional)
@@ -1034,31 +909,26 @@ open class SessionAPI {
   "id" : 0.80082819046101150206595775671303272247314453125,
   "invitationStatus" : "noResponded",
   "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "birthday" : 7.061401241503109105224211816675961017608642578125,
+    "next" : 3.61607674925191080461672754609026014804840087890625,
     "accountName" : "accountName",
     "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
     "bio" : "bio",
-    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
     "muting" : true,
     "web" : "web",
     "blocking" : true,
     "following" : true,
     "isFriend" : true,
     "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
+    "id" : 2.3021358869347654518833223846741020679473876953125,
     "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    "profileImageUrl" : "profileImageUrl"
   },
   "group" : {
     "next" : 2.027123023002321833274663731572218239307403564453125,
     "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-    "groupPrivacyType" : "everyone",
     "accountCount" : 7,
     "name" : "name",
     "invitationOnly" : true,
@@ -1086,30 +956,27 @@ open class SessionAPI {
       },
       "message" : "message",
       "account" : {
-        "birthday" : 2.3021358869347654518833223846741020679473876953125,
-        "next" : 9.301444243932575517419536481611430644989013671875,
-        "friendCount" : 5.962133916683182377482808078639209270477294921875,
+        "birthday" : 7.061401241503109105224211816675961017608642578125,
+        "next" : 3.61607674925191080461672754609026014804840087890625,
         "accountName" : "accountName",
         "displayName" : "displayName",
-        "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+        "joinedAt" : 9.301444243932575517419536481611430644989013671875,
         "bio" : "bio",
-        "followingCount" : 6.02745618307040320615897144307382404804229736328125,
         "friendRequestInProgress" : true,
-        "feedsCount" : 5.63737665663332876420099637471139430999755859375,
         "muting" : true,
         "web" : "web",
         "blocking" : true,
         "following" : true,
         "isFriend" : true,
         "location" : "location",
-        "id" : 0.80082819046101150206595775671303272247314453125,
+        "id" : 2.3021358869347654518833223846741020679473876953125,
         "isFollower" : true,
-        "profileImageUrl" : "profileImageUrl",
-        "followerCount" : 1.46581298050294517310021547018550336360931396484375
+        "profileImageUrl" : "profileImageUrl"
       }
     },
     "authorityType" : "owner",
-    "organizedAt" : 3
+    "organizedAt" : 3,
+    "privacyType" : "everyone"
   },
   "invitedAt" : 6
 }, {
@@ -1117,31 +984,26 @@ open class SessionAPI {
   "id" : 0.80082819046101150206595775671303272247314453125,
   "invitationStatus" : "noResponded",
   "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "birthday" : 7.061401241503109105224211816675961017608642578125,
+    "next" : 3.61607674925191080461672754609026014804840087890625,
     "accountName" : "accountName",
     "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
     "bio" : "bio",
-    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
     "muting" : true,
     "web" : "web",
     "blocking" : true,
     "following" : true,
     "isFriend" : true,
     "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
+    "id" : 2.3021358869347654518833223846741020679473876953125,
     "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    "profileImageUrl" : "profileImageUrl"
   },
   "group" : {
     "next" : 2.027123023002321833274663731572218239307403564453125,
     "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-    "groupPrivacyType" : "everyone",
     "accountCount" : 7,
     "name" : "name",
     "invitationOnly" : true,
@@ -1169,30 +1031,27 @@ open class SessionAPI {
       },
       "message" : "message",
       "account" : {
-        "birthday" : 2.3021358869347654518833223846741020679473876953125,
-        "next" : 9.301444243932575517419536481611430644989013671875,
-        "friendCount" : 5.962133916683182377482808078639209270477294921875,
+        "birthday" : 7.061401241503109105224211816675961017608642578125,
+        "next" : 3.61607674925191080461672754609026014804840087890625,
         "accountName" : "accountName",
         "displayName" : "displayName",
-        "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+        "joinedAt" : 9.301444243932575517419536481611430644989013671875,
         "bio" : "bio",
-        "followingCount" : 6.02745618307040320615897144307382404804229736328125,
         "friendRequestInProgress" : true,
-        "feedsCount" : 5.63737665663332876420099637471139430999755859375,
         "muting" : true,
         "web" : "web",
         "blocking" : true,
         "following" : true,
         "isFriend" : true,
         "location" : "location",
-        "id" : 0.80082819046101150206595775671303272247314453125,
+        "id" : 2.3021358869347654518833223846741020679473876953125,
         "isFollower" : true,
-        "profileImageUrl" : "profileImageUrl",
-        "followerCount" : 1.46581298050294517310021547018550336360931396484375
+        "profileImageUrl" : "profileImageUrl"
       }
     },
     "authorityType" : "owner",
-    "organizedAt" : 3
+    "organizedAt" : 3,
+    "privacyType" : "everyone"
   },
   "invitedAt" : 6
 } ]}]
@@ -1222,7 +1081,7 @@ open class SessionAPI {
     }
 
     /**
-     Get groups list session account joined
+     Get groups list session account groupJoined
      
      - parameter since: (query) Filters groups which started on since or later. (optional)
      - parameter offset: (query) The offset of groups. By default the value is 0. (optional)
@@ -1236,7 +1095,7 @@ open class SessionAPI {
     }
 
     /**
-     Get groups list session account joined
+     Get groups list session account groupJoined
      
      - parameter since: (query) Filters groups which started on since or later. (optional)
      - parameter offset: (query) The offset of groups. By default the value is 0. (optional)
@@ -1258,7 +1117,7 @@ open class SessionAPI {
     }
 
     /**
-     Get groups list session account joined
+     Get groups list session account groupJoined
      - GET /session/groups
      - API Key:
        - type: apiKey X-API-KEY 
@@ -1269,7 +1128,6 @@ open class SessionAPI {
      - examples: [{contentType=application/json, example=[ {
   "next" : 2.027123023002321833274663731572218239307403564453125,
   "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-  "groupPrivacyType" : "everyone",
   "accountCount" : 7,
   "name" : "name",
   "invitationOnly" : true,
@@ -1297,34 +1155,30 @@ open class SessionAPI {
     },
     "message" : "message",
     "account" : {
-      "birthday" : 2.3021358869347654518833223846741020679473876953125,
-      "next" : 9.301444243932575517419536481611430644989013671875,
-      "friendCount" : 5.962133916683182377482808078639209270477294921875,
+      "birthday" : 7.061401241503109105224211816675961017608642578125,
+      "next" : 3.61607674925191080461672754609026014804840087890625,
       "accountName" : "accountName",
       "displayName" : "displayName",
-      "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+      "joinedAt" : 9.301444243932575517419536481611430644989013671875,
       "bio" : "bio",
-      "followingCount" : 6.02745618307040320615897144307382404804229736328125,
       "friendRequestInProgress" : true,
-      "feedsCount" : 5.63737665663332876420099637471139430999755859375,
       "muting" : true,
       "web" : "web",
       "blocking" : true,
       "following" : true,
       "isFriend" : true,
       "location" : "location",
-      "id" : 0.80082819046101150206595775671303272247314453125,
+      "id" : 2.3021358869347654518833223846741020679473876953125,
       "isFollower" : true,
-      "profileImageUrl" : "profileImageUrl",
-      "followerCount" : 1.46581298050294517310021547018550336360931396484375
+      "profileImageUrl" : "profileImageUrl"
     }
   },
   "authorityType" : "owner",
-  "organizedAt" : 3
+  "organizedAt" : 3,
+  "privacyType" : "everyone"
 }, {
   "next" : 2.027123023002321833274663731572218239307403564453125,
   "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-  "groupPrivacyType" : "everyone",
   "accountCount" : 7,
   "name" : "name",
   "invitationOnly" : true,
@@ -1352,30 +1206,27 @@ open class SessionAPI {
     },
     "message" : "message",
     "account" : {
-      "birthday" : 2.3021358869347654518833223846741020679473876953125,
-      "next" : 9.301444243932575517419536481611430644989013671875,
-      "friendCount" : 5.962133916683182377482808078639209270477294921875,
+      "birthday" : 7.061401241503109105224211816675961017608642578125,
+      "next" : 3.61607674925191080461672754609026014804840087890625,
       "accountName" : "accountName",
       "displayName" : "displayName",
-      "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+      "joinedAt" : 9.301444243932575517419536481611430644989013671875,
       "bio" : "bio",
-      "followingCount" : 6.02745618307040320615897144307382404804229736328125,
       "friendRequestInProgress" : true,
-      "feedsCount" : 5.63737665663332876420099637471139430999755859375,
       "muting" : true,
       "web" : "web",
       "blocking" : true,
       "following" : true,
       "isFriend" : true,
       "location" : "location",
-      "id" : 0.80082819046101150206595775671303272247314453125,
+      "id" : 2.3021358869347654518833223846741020679473876953125,
       "isFollower" : true,
-      "profileImageUrl" : "profileImageUrl",
-      "followerCount" : 1.46581298050294517310021547018550336360931396484375
+      "profileImageUrl" : "profileImageUrl"
     }
   },
   "authorityType" : "owner",
-  "organizedAt" : 3
+  "organizedAt" : 3,
+  "privacyType" : "everyone"
 } ]}]
      
      - parameter since: (query) Filters groups which started on since or later. (optional)
@@ -1403,7 +1254,7 @@ open class SessionAPI {
     }
 
     /**
-     Get hidden groups list session account joined
+     Get hidden groups list session account groupJoined
      
      - parameter since: (query) Filters groups which started on since or later. (optional)
      - parameter offset: (query) The offset of groups. By default the value is 0. (optional)
@@ -1417,7 +1268,7 @@ open class SessionAPI {
     }
 
     /**
-     Get hidden groups list session account joined
+     Get hidden groups list session account groupJoined
      
      - parameter since: (query) Filters groups which started on since or later. (optional)
      - parameter offset: (query) The offset of groups. By default the value is 0. (optional)
@@ -1439,7 +1290,7 @@ open class SessionAPI {
     }
 
     /**
-     Get hidden groups list session account joined
+     Get hidden groups list session account groupJoined
      - GET /session/hides
      - API Key:
        - type: apiKey X-API-KEY 
@@ -1450,7 +1301,6 @@ open class SessionAPI {
      - examples: [{contentType=application/json, example=[ {
   "next" : 2.027123023002321833274663731572218239307403564453125,
   "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-  "groupPrivacyType" : "everyone",
   "accountCount" : 7,
   "name" : "name",
   "invitationOnly" : true,
@@ -1478,34 +1328,30 @@ open class SessionAPI {
     },
     "message" : "message",
     "account" : {
-      "birthday" : 2.3021358869347654518833223846741020679473876953125,
-      "next" : 9.301444243932575517419536481611430644989013671875,
-      "friendCount" : 5.962133916683182377482808078639209270477294921875,
+      "birthday" : 7.061401241503109105224211816675961017608642578125,
+      "next" : 3.61607674925191080461672754609026014804840087890625,
       "accountName" : "accountName",
       "displayName" : "displayName",
-      "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+      "joinedAt" : 9.301444243932575517419536481611430644989013671875,
       "bio" : "bio",
-      "followingCount" : 6.02745618307040320615897144307382404804229736328125,
       "friendRequestInProgress" : true,
-      "feedsCount" : 5.63737665663332876420099637471139430999755859375,
       "muting" : true,
       "web" : "web",
       "blocking" : true,
       "following" : true,
       "isFriend" : true,
       "location" : "location",
-      "id" : 0.80082819046101150206595775671303272247314453125,
+      "id" : 2.3021358869347654518833223846741020679473876953125,
       "isFollower" : true,
-      "profileImageUrl" : "profileImageUrl",
-      "followerCount" : 1.46581298050294517310021547018550336360931396484375
+      "profileImageUrl" : "profileImageUrl"
     }
   },
   "authorityType" : "owner",
-  "organizedAt" : 3
+  "organizedAt" : 3,
+  "privacyType" : "everyone"
 }, {
   "next" : 2.027123023002321833274663731572218239307403564453125,
   "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-  "groupPrivacyType" : "everyone",
   "accountCount" : 7,
   "name" : "name",
   "invitationOnly" : true,
@@ -1533,30 +1379,27 @@ open class SessionAPI {
     },
     "message" : "message",
     "account" : {
-      "birthday" : 2.3021358869347654518833223846741020679473876953125,
-      "next" : 9.301444243932575517419536481611430644989013671875,
-      "friendCount" : 5.962133916683182377482808078639209270477294921875,
+      "birthday" : 7.061401241503109105224211816675961017608642578125,
+      "next" : 3.61607674925191080461672754609026014804840087890625,
       "accountName" : "accountName",
       "displayName" : "displayName",
-      "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+      "joinedAt" : 9.301444243932575517419536481611430644989013671875,
       "bio" : "bio",
-      "followingCount" : 6.02745618307040320615897144307382404804229736328125,
       "friendRequestInProgress" : true,
-      "feedsCount" : 5.63737665663332876420099637471139430999755859375,
       "muting" : true,
       "web" : "web",
       "blocking" : true,
       "following" : true,
       "isFriend" : true,
       "location" : "location",
-      "id" : 0.80082819046101150206595775671303272247314453125,
+      "id" : 2.3021358869347654518833223846741020679473876953125,
       "isFollower" : true,
-      "profileImageUrl" : "profileImageUrl",
-      "followerCount" : 1.46581298050294517310021547018550336360931396484375
+      "profileImageUrl" : "profileImageUrl"
     }
   },
   "authorityType" : "owner",
-  "organizedAt" : 3
+  "organizedAt" : 3,
+  "privacyType" : "everyone"
 } ]}]
      
      - parameter since: (query) Filters groups which started on since or later. (optional)
@@ -1629,10 +1472,10 @@ open class SessionAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
-  "next" : 2.027123023002321833274663731572218239307403564453125,
+  "next" : 1.024645700144157789424070870154537260532379150390625,
   "contentWarning" : true,
-  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
-  "postedAt" : 9,
+  "likedAt" : 1.231513536777255612975068288506008684635162353515625,
+  "postedAt" : 7,
   "contentDeleted" : true,
   "likeCount" : 2,
   "id" : 0.80082819046101150206595775671303272247314453125,
@@ -1659,34 +1502,30 @@ open class SessionAPI {
     "thumbnailUrl" : "thumbnailUrl"
   } ],
   "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "birthday" : 7.061401241503109105224211816675961017608642578125,
+    "next" : 3.61607674925191080461672754609026014804840087890625,
     "accountName" : "accountName",
     "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
     "bio" : "bio",
-    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
     "muting" : true,
     "web" : "web",
     "blocking" : true,
     "following" : true,
     "isFriend" : true,
     "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
+    "id" : 2.3021358869347654518833223846741020679473876953125,
     "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    "profileImageUrl" : "profileImageUrl"
   },
   "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
+  "commentCount" : 4
 }, {
-  "next" : 2.027123023002321833274663731572218239307403564453125,
+  "next" : 1.024645700144157789424070870154537260532379150390625,
   "contentWarning" : true,
-  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
-  "postedAt" : 9,
+  "likedAt" : 1.231513536777255612975068288506008684635162353515625,
+  "postedAt" : 7,
   "contentDeleted" : true,
   "likeCount" : 2,
   "id" : 0.80082819046101150206595775671303272247314453125,
@@ -1713,29 +1552,25 @@ open class SessionAPI {
     "thumbnailUrl" : "thumbnailUrl"
   } ],
   "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "birthday" : 7.061401241503109105224211816675961017608642578125,
+    "next" : 3.61607674925191080461672754609026014804840087890625,
     "accountName" : "accountName",
     "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
     "bio" : "bio",
-    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
     "muting" : true,
     "web" : "web",
     "blocking" : true,
     "following" : true,
     "isFriend" : true,
     "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
+    "id" : 2.3021358869347654518833223846741020679473876953125,
     "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    "profileImageUrl" : "profileImageUrl"
   },
   "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
+  "commentCount" : 4
 } ]}]
      
      - parameter since: (query) Filters entries which started on since or later. (optional)
@@ -1808,47 +1643,39 @@ open class SessionAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
-  "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
-  "friendCount" : 5.962133916683182377482808078639209270477294921875,
+  "birthday" : 7.061401241503109105224211816675961017608642578125,
+  "next" : 3.61607674925191080461672754609026014804840087890625,
   "accountName" : "accountName",
   "displayName" : "displayName",
-  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "joinedAt" : 9.301444243932575517419536481611430644989013671875,
   "bio" : "bio",
-  "followingCount" : 6.02745618307040320615897144307382404804229736328125,
   "friendRequestInProgress" : true,
-  "feedsCount" : 5.63737665663332876420099637471139430999755859375,
   "muting" : true,
   "web" : "web",
   "blocking" : true,
   "following" : true,
   "isFriend" : true,
   "location" : "location",
-  "id" : 0.80082819046101150206595775671303272247314453125,
+  "id" : 2.3021358869347654518833223846741020679473876953125,
   "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  "profileImageUrl" : "profileImageUrl"
 }, {
-  "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
-  "friendCount" : 5.962133916683182377482808078639209270477294921875,
+  "birthday" : 7.061401241503109105224211816675961017608642578125,
+  "next" : 3.61607674925191080461672754609026014804840087890625,
   "accountName" : "accountName",
   "displayName" : "displayName",
-  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "joinedAt" : 9.301444243932575517419536481611430644989013671875,
   "bio" : "bio",
-  "followingCount" : 6.02745618307040320615897144307382404804229736328125,
   "friendRequestInProgress" : true,
-  "feedsCount" : 5.63737665663332876420099637471139430999755859375,
   "muting" : true,
   "web" : "web",
   "blocking" : true,
   "following" : true,
   "isFriend" : true,
   "location" : "location",
-  "id" : 0.80082819046101150206595775671303272247314453125,
+  "id" : 2.3021358869347654518833223846741020679473876953125,
   "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1.46581298050294517310021547018550336360931396484375
+  "profileImageUrl" : "profileImageUrl"
 } ]}]
      
      - parameter since: (query) Filters accounts which started on since or later. (optional)
@@ -1871,6 +1698,83 @@ open class SessionAPI {
         
 
         let requestBuilder: RequestBuilder<[Account]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get basic information about session account
+     
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func findSession(completion: @escaping ((_ data: AccountDetail?,_ error: Error?) -> Void)) {
+        findSessionWithRequestBuilder().execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+    /**
+     Get basic information about session account
+     
+     - returns: Observable<AccountDetail>
+     */
+    open class func findSession() -> Observable<AccountDetail> {
+        return Observable.create { observer -> Disposable in
+            findSession() { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Get basic information about session account
+     - GET /session
+     - API Key:
+       - type: apiKey X-API-KEY 
+       - name: api_key
+     - OAuth:
+       - type: oauth2
+       - name: cactacea_auth
+     - examples: [{contentType=application/json, example={
+  "birthday" : 2.3021358869347654518833223846741020679473876953125,
+  "next" : 9.301444243932575517419536481611430644989013671875,
+  "friendCount" : 5,
+  "accountName" : "accountName",
+  "displayName" : "displayName",
+  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "bio" : "bio",
+  "followingCount" : 6,
+  "friendRequestInProgress" : true,
+  "feedsCount" : 5,
+  "muting" : true,
+  "web" : "web",
+  "blocking" : true,
+  "following" : true,
+  "isFriend" : true,
+  "location" : "location",
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "isFollower" : true,
+  "profileImageUrl" : "profileImageUrl",
+  "followerCount" : 1
+}}]
+
+     - returns: RequestBuilder<AccountDetail> 
+     */
+    open class func findSessionWithRequestBuilder() -> RequestBuilder<AccountDetail> {
+        let path = "/session"
+        let URLString = CactaceaAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<AccountDetail>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

@@ -59,14 +59,14 @@ open class SessionsAPI {
   "account" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
     "next" : 9.301444243932575517419536481611430644989013671875,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "friendCount" : 5,
     "accountName" : "accountName",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "bio" : "bio",
-    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
+    "followingCount" : 6,
     "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "feedsCount" : 5,
     "muting" : true,
     "web" : "web",
     "blocking" : true,
@@ -76,7 +76,7 @@ open class SessionsAPI {
     "id" : 0.80082819046101150206595775671303272247314453125,
     "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    "followerCount" : 1
   }
 }}]
      
@@ -144,14 +144,14 @@ open class SessionsAPI {
   "account" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
     "next" : 9.301444243932575517419536481611430644989013671875,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "friendCount" : 5,
     "accountName" : "accountName",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "bio" : "bio",
-    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
+    "followingCount" : 6,
     "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
+    "feedsCount" : 5,
     "muting" : true,
     "web" : "web",
     "blocking" : true,
@@ -161,7 +161,7 @@ open class SessionsAPI {
     "id" : 0.80082819046101150206595775671303272247314453125,
     "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    "followerCount" : 1
   }
 }}]
      

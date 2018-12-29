@@ -11,12 +11,12 @@ import Foundation
 
 open class Authentication: Codable {
 
-    public var account: Account
+    public var account: AccountDetail
     public var accessToken: String
 
 
     
-    public init(account: Account, accessToken: String) {
+    public init(account: AccountDetail, accessToken: String) {
         self.account = account
         self.accessToken = accessToken
     }
@@ -37,7 +37,7 @@ open class Authentication: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        account = try container.decode(Account.self, forKey: "account")
+        account = try container.decode(AccountDetail.self, forKey: "account")
         accessToken = try container.decode(String.self, forKey: "accessToken")
     }
 }
