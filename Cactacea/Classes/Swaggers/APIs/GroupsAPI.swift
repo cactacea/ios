@@ -184,7 +184,6 @@ open class GroupsAPI {
      - examples: [{contentType=application/json, example=[ {
   "next" : 2.027123023002321833274663731572218239307403564453125,
   "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-  "groupPrivacyType" : "everyone",
   "accountCount" : 7,
   "name" : "name",
   "invitationOnly" : true,
@@ -212,34 +211,30 @@ open class GroupsAPI {
     },
     "message" : "message",
     "account" : {
-      "birthday" : 2.3021358869347654518833223846741020679473876953125,
-      "next" : 9.301444243932575517419536481611430644989013671875,
-      "friendCount" : 5.962133916683182377482808078639209270477294921875,
+      "birthday" : 7.061401241503109105224211816675961017608642578125,
+      "next" : 3.61607674925191080461672754609026014804840087890625,
       "accountName" : "accountName",
       "displayName" : "displayName",
-      "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+      "joinedAt" : 9.301444243932575517419536481611430644989013671875,
       "bio" : "bio",
-      "followingCount" : 6.02745618307040320615897144307382404804229736328125,
       "friendRequestInProgress" : true,
-      "feedsCount" : 5.63737665663332876420099637471139430999755859375,
       "muting" : true,
       "web" : "web",
       "blocking" : true,
       "following" : true,
       "isFriend" : true,
       "location" : "location",
-      "id" : 0.80082819046101150206595775671303272247314453125,
+      "id" : 2.3021358869347654518833223846741020679473876953125,
       "isFollower" : true,
-      "profileImageUrl" : "profileImageUrl",
-      "followerCount" : 1.46581298050294517310021547018550336360931396484375
+      "profileImageUrl" : "profileImageUrl"
     }
   },
   "authorityType" : "owner",
-  "organizedAt" : 3
+  "organizedAt" : 3,
+  "privacyType" : "everyone"
 }, {
   "next" : 2.027123023002321833274663731572218239307403564453125,
   "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-  "groupPrivacyType" : "everyone",
   "accountCount" : 7,
   "name" : "name",
   "invitationOnly" : true,
@@ -267,30 +262,27 @@ open class GroupsAPI {
     },
     "message" : "message",
     "account" : {
-      "birthday" : 2.3021358869347654518833223846741020679473876953125,
-      "next" : 9.301444243932575517419536481611430644989013671875,
-      "friendCount" : 5.962133916683182377482808078639209270477294921875,
+      "birthday" : 7.061401241503109105224211816675961017608642578125,
+      "next" : 3.61607674925191080461672754609026014804840087890625,
       "accountName" : "accountName",
       "displayName" : "displayName",
-      "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+      "joinedAt" : 9.301444243932575517419536481611430644989013671875,
       "bio" : "bio",
-      "followingCount" : 6.02745618307040320615897144307382404804229736328125,
       "friendRequestInProgress" : true,
-      "feedsCount" : 5.63737665663332876420099637471139430999755859375,
       "muting" : true,
       "web" : "web",
       "blocking" : true,
       "following" : true,
       "isFriend" : true,
       "location" : "location",
-      "id" : 0.80082819046101150206595775671303272247314453125,
+      "id" : 2.3021358869347654518833223846741020679473876953125,
       "isFollower" : true,
-      "profileImageUrl" : "profileImageUrl",
-      "followerCount" : 1.46581298050294517310021547018550336360931396484375
+      "profileImageUrl" : "profileImageUrl"
     }
   },
   "authorityType" : "owner",
-  "organizedAt" : 3
+  "organizedAt" : 3,
+  "privacyType" : "everyone"
 } ]}]
      
      - parameter id: (path) Group identifier. 
@@ -363,7 +355,6 @@ open class GroupsAPI {
      - examples: [{contentType=application/json, example={
   "next" : 2.027123023002321833274663731572218239307403564453125,
   "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-  "groupPrivacyType" : "everyone",
   "accountCount" : 7,
   "name" : "name",
   "invitationOnly" : true,
@@ -391,30 +382,27 @@ open class GroupsAPI {
     },
     "message" : "message",
     "account" : {
-      "birthday" : 2.3021358869347654518833223846741020679473876953125,
-      "next" : 9.301444243932575517419536481611430644989013671875,
-      "friendCount" : 5.962133916683182377482808078639209270477294921875,
+      "birthday" : 7.061401241503109105224211816675961017608642578125,
+      "next" : 3.61607674925191080461672754609026014804840087890625,
       "accountName" : "accountName",
       "displayName" : "displayName",
-      "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+      "joinedAt" : 9.301444243932575517419536481611430644989013671875,
       "bio" : "bio",
-      "followingCount" : 6.02745618307040320615897144307382404804229736328125,
       "friendRequestInProgress" : true,
-      "feedsCount" : 5.63737665663332876420099637471139430999755859375,
       "muting" : true,
       "web" : "web",
       "blocking" : true,
       "following" : true,
       "isFriend" : true,
       "location" : "location",
-      "id" : 0.80082819046101150206595775671303272247314453125,
+      "id" : 2.3021358869347654518833223846741020679473876953125,
       "isFollower" : true,
-      "profileImageUrl" : "profileImageUrl",
-      "followerCount" : 1.46581298050294517310021547018550336360931396484375
+      "profileImageUrl" : "profileImageUrl"
     }
   },
   "authorityType" : "owner",
-  "organizedAt" : 3
+  "organizedAt" : 3,
+  "privacyType" : "everyone"
 }}]
      
      - parameter id: (path) Group identifier. 
@@ -440,7 +428,7 @@ open class GroupsAPI {
      */
     public enum GroupPrivacyType_findGroups: String { 
         case everyone = "everyone"
-        case follows = "follows"
+        case following = "following"
         case followers = "followers"
         case friends = "friends"
     }
@@ -499,7 +487,6 @@ open class GroupsAPI {
      - examples: [{contentType=application/json, example=[ {
   "next" : 2.027123023002321833274663731572218239307403564453125,
   "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-  "groupPrivacyType" : "everyone",
   "accountCount" : 7,
   "name" : "name",
   "invitationOnly" : true,
@@ -527,34 +514,30 @@ open class GroupsAPI {
     },
     "message" : "message",
     "account" : {
-      "birthday" : 2.3021358869347654518833223846741020679473876953125,
-      "next" : 9.301444243932575517419536481611430644989013671875,
-      "friendCount" : 5.962133916683182377482808078639209270477294921875,
+      "birthday" : 7.061401241503109105224211816675961017608642578125,
+      "next" : 3.61607674925191080461672754609026014804840087890625,
       "accountName" : "accountName",
       "displayName" : "displayName",
-      "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+      "joinedAt" : 9.301444243932575517419536481611430644989013671875,
       "bio" : "bio",
-      "followingCount" : 6.02745618307040320615897144307382404804229736328125,
       "friendRequestInProgress" : true,
-      "feedsCount" : 5.63737665663332876420099637471139430999755859375,
       "muting" : true,
       "web" : "web",
       "blocking" : true,
       "following" : true,
       "isFriend" : true,
       "location" : "location",
-      "id" : 0.80082819046101150206595775671303272247314453125,
+      "id" : 2.3021358869347654518833223846741020679473876953125,
       "isFollower" : true,
-      "profileImageUrl" : "profileImageUrl",
-      "followerCount" : 1.46581298050294517310021547018550336360931396484375
+      "profileImageUrl" : "profileImageUrl"
     }
   },
   "authorityType" : "owner",
-  "organizedAt" : 3
+  "organizedAt" : 3,
+  "privacyType" : "everyone"
 }, {
   "next" : 2.027123023002321833274663731572218239307403564453125,
   "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-  "groupPrivacyType" : "everyone",
   "accountCount" : 7,
   "name" : "name",
   "invitationOnly" : true,
@@ -582,30 +565,27 @@ open class GroupsAPI {
     },
     "message" : "message",
     "account" : {
-      "birthday" : 2.3021358869347654518833223846741020679473876953125,
-      "next" : 9.301444243932575517419536481611430644989013671875,
-      "friendCount" : 5.962133916683182377482808078639209270477294921875,
+      "birthday" : 7.061401241503109105224211816675961017608642578125,
+      "next" : 3.61607674925191080461672754609026014804840087890625,
       "accountName" : "accountName",
       "displayName" : "displayName",
-      "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+      "joinedAt" : 9.301444243932575517419536481611430644989013671875,
       "bio" : "bio",
-      "followingCount" : 6.02745618307040320615897144307382404804229736328125,
       "friendRequestInProgress" : true,
-      "feedsCount" : 5.63737665663332876420099637471139430999755859375,
       "muting" : true,
       "web" : "web",
       "blocking" : true,
       "following" : true,
       "isFriend" : true,
       "location" : "location",
-      "id" : 0.80082819046101150206595775671303272247314453125,
+      "id" : 2.3021358869347654518833223846741020679473876953125,
       "isFollower" : true,
-      "profileImageUrl" : "profileImageUrl",
-      "followerCount" : 1.46581298050294517310021547018550336360931396484375
+      "profileImageUrl" : "profileImageUrl"
     }
   },
   "authorityType" : "owner",
-  "organizedAt" : 3
+  "organizedAt" : 3,
+  "privacyType" : "everyone"
 } ]}]
      
      - parameter groupName: (query) Filters groups which group name start of. (optional)
@@ -761,7 +741,7 @@ open class GroupsAPI {
     /**
      Leave from a group
      
-     - parameter id: (path) Group invitation identifier. 
+     - parameter id: (path) Group groupInvitation identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
     open class func leave(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
@@ -773,7 +753,7 @@ open class GroupsAPI {
     /**
      Leave from a group
      
-     - parameter id: (path) Group invitation identifier. 
+     - parameter id: (path) Group groupInvitation identifier. 
      - returns: Observable<Void>
      */
     open class func leave(id: Int64) -> Observable<Void> {
@@ -800,7 +780,7 @@ open class GroupsAPI {
        - type: oauth2
        - name: cactacea_auth
      
-     - parameter id: (path) Group invitation identifier. 
+     - parameter id: (path) Group groupInvitation identifier. 
 
      - returns: RequestBuilder<Void> 
      */

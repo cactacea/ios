@@ -81,8 +81,8 @@ open class MessagesAPI {
      - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func find(id: Int64, ascending: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: Message?,_ error: Error?) -> Void)) {
-        findWithRequestBuilder(id: id, ascending: ascending, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findMessages(id: Int64, ascending: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Message]?,_ error: Error?) -> Void)) {
+        findMessagesWithRequestBuilder(id: id, ascending: ascending, since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -95,11 +95,11 @@ open class MessagesAPI {
      - parameter since: (query) Filters messages which started on since or later. (optional)
      - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<Message>
+     - returns: Observable<[Message]>
      */
-    open class func find(id: Int64, ascending: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<Message> {
+    open class func findMessages(id: Int64, ascending: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Message]> {
         return Observable.create { observer -> Disposable in
-            find(id: id, ascending: ascending, since: since, offset: offset, count: count) { data, error in
+            findMessages(id: id, ascending: ascending, since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -114,6 +114,157 @@ open class MessagesAPI {
     /**
      Search messages
      - GET /messages
+     - API Key:
+       - type: apiKey X-API-KEY 
+       - name: api_key
+     - OAuth:
+       - type: oauth2
+       - name: cactacea_auth
+     - examples: [{contentType=application/json, example=[ {
+  "next" : 2.3021358869347654518833223846741020679473876953125,
+  "contentWarning" : true,
+  "readAccountCount" : 5,
+  "accountCount" : 1,
+  "messageType" : "text",
+  "postedAt" : 5,
+  "unread" : true,
+  "contentDeleted" : true,
+  "id" : 6.02745618307040320615897144307382404804229736328125,
+  "medium" : {
+    "contentWarning" : true,
+    "size" : 5,
+    "contentDeleted" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  },
+  "message" : "message",
+  "account" : {
+    "birthday" : 7.061401241503109105224211816675961017608642578125,
+    "next" : 3.61607674925191080461672754609026014804840087890625,
+    "accountName" : "accountName",
+    "displayName" : "displayName",
+    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
+    "bio" : "bio",
+    "friendRequestInProgress" : true,
+    "muting" : true,
+    "web" : "web",
+    "blocking" : true,
+    "following" : true,
+    "isFriend" : true,
+    "location" : "location",
+    "id" : 2.3021358869347654518833223846741020679473876953125,
+    "isFollower" : true,
+    "profileImageUrl" : "profileImageUrl"
+  }
+}, {
+  "next" : 2.3021358869347654518833223846741020679473876953125,
+  "contentWarning" : true,
+  "readAccountCount" : 5,
+  "accountCount" : 1,
+  "messageType" : "text",
+  "postedAt" : 5,
+  "unread" : true,
+  "contentDeleted" : true,
+  "id" : 6.02745618307040320615897144307382404804229736328125,
+  "medium" : {
+    "contentWarning" : true,
+    "size" : 5,
+    "contentDeleted" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  },
+  "message" : "message",
+  "account" : {
+    "birthday" : 7.061401241503109105224211816675961017608642578125,
+    "next" : 3.61607674925191080461672754609026014804840087890625,
+    "accountName" : "accountName",
+    "displayName" : "displayName",
+    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
+    "bio" : "bio",
+    "friendRequestInProgress" : true,
+    "muting" : true,
+    "web" : "web",
+    "blocking" : true,
+    "following" : true,
+    "isFriend" : true,
+    "location" : "location",
+    "id" : 2.3021358869347654518833223846741020679473876953125,
+    "isFollower" : true,
+    "profileImageUrl" : "profileImageUrl"
+  }
+} ]}]
+     
+     - parameter id: (query) Group identifier. 
+     - parameter ascending: (query) Order by posted time. 
+     - parameter since: (query) Filters messages which started on since or later. (optional)
+     - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+
+     - returns: RequestBuilder<[Message]> 
+     */
+    open class func findMessagesWithRequestBuilder(id: Int64, ascending: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Message]> {
+        let path = "/messages"
+        let URLString = CactaceaAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "id": id, 
+            "since": since, 
+            "offset": offset, 
+            "count": count, 
+            "ascending": ascending
+        ])
+        
+
+        let requestBuilder: RequestBuilder<[Message]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Send a medium to a group
+     
+     - parameter body: (body)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func postMedium(body: PostMediumBody, completion: @escaping ((_ data: Message?,_ error: Error?) -> Void)) {
+        postMediumWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+    /**
+     Send a medium to a group
+     
+     - parameter body: (body)  
+     - returns: Observable<Message>
+     */
+    open class func postMedium(body: PostMediumBody) -> Observable<Message> {
+        return Observable.create { observer -> Disposable in
+            postMedium(body: body) { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Send a medium to a group
+     - POST /messages/medium
      - API Key:
        - type: apiKey X-API-KEY 
        - name: api_key
@@ -143,78 +294,63 @@ open class MessagesAPI {
   },
   "message" : "message",
   "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "friendCount" : 5.962133916683182377482808078639209270477294921875,
+    "birthday" : 7.061401241503109105224211816675961017608642578125,
+    "next" : 3.61607674925191080461672754609026014804840087890625,
     "accountName" : "accountName",
     "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
     "bio" : "bio",
-    "followingCount" : 6.02745618307040320615897144307382404804229736328125,
     "friendRequestInProgress" : true,
-    "feedsCount" : 5.63737665663332876420099637471139430999755859375,
     "muting" : true,
     "web" : "web",
     "blocking" : true,
     "following" : true,
     "isFriend" : true,
     "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
+    "id" : 2.3021358869347654518833223846741020679473876953125,
     "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1.46581298050294517310021547018550336360931396484375
+    "profileImageUrl" : "profileImageUrl"
   }
 }}]
      
-     - parameter id: (query) Group identifier. 
-     - parameter ascending: (query) Order by posted time. 
-     - parameter since: (query) Filters messages which started on since or later. (optional)
-     - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter body: (body)  
 
      - returns: RequestBuilder<Message> 
      */
-    open class func findWithRequestBuilder(id: Int64, ascending: Bool, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<Message> {
-        let path = "/messages"
+    open class func postMediumWithRequestBuilder(body: PostMediumBody) -> RequestBuilder<Message> {
+        let path = "/messages/medium"
         let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
         let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "id": id, 
-            "since": since, 
-            "offset": offset, 
-            "count": count, 
-            "ascending": ascending
-        ])
-        
+
 
         let requestBuilder: RequestBuilder<Message>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
-     Post a message to a group
+     Send a text to a group
      
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func post(body: PostMessageBody, completion: @escaping ((_ data: MessageCreated?,_ error: Error?) -> Void)) {
-        postWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func postText(body: PostTextBody, completion: @escaping ((_ data: Message?,_ error: Error?) -> Void)) {
+        postTextWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
 
     /**
-     Post a message to a group
+     Send a text to a group
      
      - parameter body: (body)  
-     - returns: Observable<MessageCreated>
+     - returns: Observable<Message>
      */
-    open class func post(body: PostMessageBody) -> Observable<MessageCreated> {
+    open class func postText(body: PostTextBody) -> Observable<Message> {
         return Observable.create { observer -> Disposable in
-            post(body: body) { data, error in
+            postText(body: body) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -227,8 +363,8 @@ open class MessagesAPI {
     }
 
     /**
-     Post a message to a group
-     - POST /messages
+     Send a text to a group
+     - POST /messages/text
      - API Key:
        - type: apiKey X-API-KEY 
        - name: api_key
@@ -236,22 +372,60 @@ open class MessagesAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example={
-  "id" : 0.80082819046101150206595775671303272247314453125
+  "next" : 2.3021358869347654518833223846741020679473876953125,
+  "contentWarning" : true,
+  "readAccountCount" : 5,
+  "accountCount" : 1,
+  "messageType" : "text",
+  "postedAt" : 5,
+  "unread" : true,
+  "contentDeleted" : true,
+  "id" : 6.02745618307040320615897144307382404804229736328125,
+  "medium" : {
+    "contentWarning" : true,
+    "size" : 5,
+    "contentDeleted" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  },
+  "message" : "message",
+  "account" : {
+    "birthday" : 7.061401241503109105224211816675961017608642578125,
+    "next" : 3.61607674925191080461672754609026014804840087890625,
+    "accountName" : "accountName",
+    "displayName" : "displayName",
+    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
+    "bio" : "bio",
+    "friendRequestInProgress" : true,
+    "muting" : true,
+    "web" : "web",
+    "blocking" : true,
+    "following" : true,
+    "isFriend" : true,
+    "location" : "location",
+    "id" : 2.3021358869347654518833223846741020679473876953125,
+    "isFollower" : true,
+    "profileImageUrl" : "profileImageUrl"
+  }
 }}]
      
      - parameter body: (body)  
 
-     - returns: RequestBuilder<MessageCreated> 
+     - returns: RequestBuilder<Message> 
      */
-    open class func postWithRequestBuilder(body: PostMessageBody) -> RequestBuilder<MessageCreated> {
-        let path = "/messages"
+    open class func postTextWithRequestBuilder(body: PostTextBody) -> RequestBuilder<Message> {
+        let path = "/messages/text"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
         let url = NSURLComponents(string: URLString)
 
 
-        let requestBuilder: RequestBuilder<MessageCreated>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<Message>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }

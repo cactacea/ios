@@ -14,17 +14,17 @@ open class PutSessionProfileBody: Codable {
     /** Display name. */
     public var displayName: String
     /** Profile URL. */
-    public var web: String
+    public var web: String?
     /** Account birthday. */
-    public var birthday: Int64
+    public var birthday: Int64?
     /** Account address. */
-    public var location: String
+    public var location: String?
     /** Account bio. */
-    public var bio: String
+    public var bio: String?
 
 
     
-    public init(displayName: String, web: String, birthday: Int64, location: String, bio: String) {
+    public init(displayName: String, web: String?, birthday: Int64?, location: String?, bio: String?) {
         self.displayName = displayName
         self.web = web
         self.birthday = birthday
@@ -40,10 +40,10 @@ open class PutSessionProfileBody: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encode(displayName, forKey: "displayName")
-        try container.encode(web, forKey: "web")
-        try container.encode(birthday, forKey: "birthday")
-        try container.encode(location, forKey: "location")
-        try container.encode(bio, forKey: "bio")
+        try container.encodeIfPresent(web, forKey: "web")
+        try container.encodeIfPresent(birthday, forKey: "birthday")
+        try container.encodeIfPresent(location, forKey: "location")
+        try container.encodeIfPresent(bio, forKey: "bio")
     }
 
     // Decodable protocol methods
@@ -52,10 +52,10 @@ open class PutSessionProfileBody: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         displayName = try container.decode(String.self, forKey: "displayName")
-        web = try container.decode(String.self, forKey: "web")
-        birthday = try container.decode(Int64.self, forKey: "birthday")
-        location = try container.decode(String.self, forKey: "location")
-        bio = try container.decode(String.self, forKey: "bio")
+        web = try container.decodeIfPresent(String.self, forKey: "web")
+        birthday = try container.decodeIfPresent(Int64.self, forKey: "birthday")
+        location = try container.decodeIfPresent(String.self, forKey: "location")
+        bio = try container.decodeIfPresent(String.self, forKey: "bio")
     }
 }
 

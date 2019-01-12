@@ -13,9 +13,9 @@ import RxSwift
 
 open class InvitationsAPI {
     /**
-     Accept a invitation
+     Accept a groupInvitation
      
-     - parameter id: (path) Group invitation identifier. 
+     - parameter id: (path) Group groupInvitation identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
     open class func accept(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
@@ -25,9 +25,9 @@ open class InvitationsAPI {
     }
 
     /**
-     Accept a invitation
+     Accept a groupInvitation
      
-     - parameter id: (path) Group invitation identifier. 
+     - parameter id: (path) Group groupInvitation identifier. 
      - returns: Observable<Void>
      */
     open class func accept(id: Int64) -> Observable<Void> {
@@ -45,7 +45,7 @@ open class InvitationsAPI {
     }
 
     /**
-     Accept a invitation
+     Accept a groupInvitation
      - POST /invitations/{id}/accept
      - API Key:
        - type: apiKey X-API-KEY 
@@ -54,7 +54,7 @@ open class InvitationsAPI {
        - type: oauth2
        - name: cactacea_auth
      
-     - parameter id: (path) Group invitation identifier. 
+     - parameter id: (path) Group groupInvitation identifier. 
 
      - returns: RequestBuilder<Void> 
      */
@@ -73,7 +73,7 @@ open class InvitationsAPI {
     }
 
     /**
-     Post a invitation to some accounts
+     Post a groupInvitation to some accounts
      
      - parameter id: (path) Group Identifier. 
      - parameter body: (body)  
@@ -86,7 +86,7 @@ open class InvitationsAPI {
     }
 
     /**
-     Post a invitation to some accounts
+     Post a groupInvitation to some accounts
      
      - parameter id: (path) Group Identifier. 
      - parameter body: (body)  
@@ -107,7 +107,7 @@ open class InvitationsAPI {
     }
 
     /**
-     Post a invitation to some accounts
+     Post a groupInvitation to some accounts
      - POST /groups/{id}/invitations
      - API Key:
        - type: apiKey X-API-KEY 
@@ -139,9 +139,9 @@ open class InvitationsAPI {
     }
 
     /**
-     Reject a invitation
+     Reject a groupInvitation
      
-     - parameter id: (path) Group invitation identifier. 
+     - parameter id: (path) Group groupInvitation identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
     open class func reject(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
@@ -151,9 +151,9 @@ open class InvitationsAPI {
     }
 
     /**
-     Reject a invitation
+     Reject a groupInvitation
      
-     - parameter id: (path) Group invitation identifier. 
+     - parameter id: (path) Group groupInvitation identifier. 
      - returns: Observable<Void>
      */
     open class func reject(id: Int64) -> Observable<Void> {
@@ -171,7 +171,7 @@ open class InvitationsAPI {
     }
 
     /**
-     Reject a invitation
+     Reject a groupInvitation
      - POST /invitations/{id}/reject
      - API Key:
        - type: apiKey X-API-KEY 
@@ -180,7 +180,7 @@ open class InvitationsAPI {
        - type: oauth2
        - name: cactacea_auth
      
-     - parameter id: (path) Group invitation identifier. 
+     - parameter id: (path) Group groupInvitation identifier. 
 
      - returns: RequestBuilder<Void> 
      */

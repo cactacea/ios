@@ -17,8 +17,8 @@ open class SettingsAPI {
      
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findSessionPushNotificationSettings(completion: @escaping ((_ data: PushNotificationSetting?,_ error: Error?) -> Void)) {
-        findSessionPushNotificationSettingsWithRequestBuilder().execute { (response, error) -> Void in
+    open class func findPushNotificationSettings(completion: @escaping ((_ data: PushNotificationSetting?,_ error: Error?) -> Void)) {
+        findPushNotificationSettingsWithRequestBuilder().execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -28,9 +28,9 @@ open class SettingsAPI {
      
      - returns: Observable<PushNotificationSetting>
      */
-    open class func findSessionPushNotificationSettings() -> Observable<PushNotificationSetting> {
+    open class func findPushNotificationSettings() -> Observable<PushNotificationSetting> {
         return Observable.create { observer -> Disposable in
-            findSessionPushNotificationSettings() { data, error in
+            findPushNotificationSettings() { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -52,17 +52,18 @@ open class SettingsAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example={
-  "directMessage" : true,
+  "feed" : true,
   "groupInvitation" : true,
   "showMessage" : true,
-  "followerFeed" : true,
-  "feedComment" : true,
+  "comment" : true,
+  "friendRequest" : true,
+  "message" : true,
   "groupMessage" : true
 }}]
 
      - returns: RequestBuilder<PushNotificationSetting> 
      */
-    open class func findSessionPushNotificationSettingsWithRequestBuilder() -> RequestBuilder<PushNotificationSetting> {
+    open class func findPushNotificationSettingsWithRequestBuilder() -> RequestBuilder<PushNotificationSetting> {
         let path = "/session/push_notification"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -81,8 +82,8 @@ open class SettingsAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateSessionDeviceStatus(body: PostActiveStatusBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        updateSessionDeviceStatusWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func updateDeviceStatus(body: PostActiveStatusBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateDeviceStatusWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -93,9 +94,9 @@ open class SettingsAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func updateSessionDeviceStatus(body: PostActiveStatusBody) -> Observable<Void> {
+    open class func updateDeviceStatus(body: PostActiveStatusBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            updateSessionDeviceStatus(body: body) { error in
+            updateDeviceStatus(body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -121,7 +122,7 @@ open class SettingsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateSessionDeviceStatusWithRequestBuilder(body: PostActiveStatusBody) -> RequestBuilder<Void> {
+    open class func updateDeviceStatusWithRequestBuilder(body: PostActiveStatusBody) -> RequestBuilder<Void> {
         let path = "/session/status"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
@@ -137,10 +138,11 @@ open class SettingsAPI {
     /**
      Update ths push notification settings
      
+     - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateSessionPushNotificationSettings(completion: @escaping ((_ error: Error?) -> Void)) {
-        updateSessionPushNotificationSettingsWithRequestBuilder().execute { (response, error) -> Void in
+    open class func updatePushNotificationSettings(body: PutNotificationSettingBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        updatePushNotificationSettingsWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -148,11 +150,12 @@ open class SettingsAPI {
     /**
      Update ths push notification settings
      
+     - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func updateSessionPushNotificationSettings() -> Observable<Void> {
+    open class func updatePushNotificationSettings(body: PutNotificationSettingBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            updateSessionPushNotificationSettings() { error in
+            updatePushNotificationSettings(body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -173,20 +176,22 @@ open class SettingsAPI {
      - OAuth:
        - type: oauth2
        - name: cactacea_auth
+     
+     - parameter body: (body)  
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateSessionPushNotificationSettingsWithRequestBuilder() -> RequestBuilder<Void> {
+    open class func updatePushNotificationSettingsWithRequestBuilder(body: PutNotificationSettingBody) -> RequestBuilder<Void> {
         let path = "/session/push_notification"
         let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
         let url = NSURLComponents(string: URLString)
 
 
         let requestBuilder: RequestBuilder<Void>.Type = CactaceaAPI.requestBuilderFactory.getNonDecodableBuilder()
 
-        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
@@ -195,8 +200,8 @@ open class SettingsAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateSessionPushToken(body: PostDevicePushTokenBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        updateSessionPushTokenWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func updatePushToken(body: PostDevicePushTokenBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        updatePushTokenWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -207,9 +212,9 @@ open class SettingsAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func updateSessionPushToken(body: PostDevicePushTokenBody) -> Observable<Void> {
+    open class func updatePushToken(body: PostDevicePushTokenBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            updateSessionPushToken(body: body) { error in
+            updatePushToken(body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -235,7 +240,7 @@ open class SettingsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateSessionPushTokenWithRequestBuilder(body: PostDevicePushTokenBody) -> RequestBuilder<Void> {
+    open class func updatePushTokenWithRequestBuilder(body: PostDevicePushTokenBody) -> RequestBuilder<Void> {
         let path = "/session/push_token"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
