@@ -68,6 +68,7 @@
 		82AE928D21C6824500B34F50 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AE928C21C6824500B34F50 /* ProfileViewController.swift */; };
 		82AE928F21C6840400B34F50 /* ProfileHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AE928E21C6840400B34F50 /* ProfileHeaderReusableView.swift */; };
 		82AE929421C69D4B00B34F50 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AE929321C69D4B00B34F50 /* NotificationSettingsViewController.swift */; };
+		82D4F2DC21EB224000F6BF5B /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D4F2DB21EB224000F6BF5B /* ChatMessage.swift */; };
 		A30072B50BFA31CA9C144705 /* Pods_Cactacea_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E62A8AEF46FEDBB34C8B0FF /* Pods_Cactacea_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -150,6 +151,7 @@
 		82AE928C21C6824500B34F50 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		82AE928E21C6840400B34F50 /* ProfileHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderReusableView.swift; sourceTree = "<group>"; };
 		82AE929321C69D4B00B34F50 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
+		82D4F2DB21EB224000F6BF5B /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		8C3BD379CA48ADD2A72E8FCF /* Pods-Cactacea_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A1C9CEFA1F069BCA9720392 /* Pods-Cactacea_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		A2BE60797CBD5595B288348F /* Pods-Cactacea_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				8232367821CF3A300086F4CB /* UIColor+Extensions.swift */,
 				8232367921CF3A300086F4CB /* UIViewController+Extensions.swift */,
 				8232368021CF3A680086F4CB /* Settings+UserDefaults.swift */,
+				82D4F2DB21EB224000F6BF5B /* ChatMessage.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SteviaLayout/Stevia.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/YPImagePicker/YPImagePicker.framework",
@@ -695,6 +699,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stevia.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YPImagePicker.framework",
@@ -782,6 +787,7 @@
 				82112B8621BB934D00F2C54B /* CommentCell.swift in Sources */,
 				8232368121CF3A690086F4CB /* Settings+UserDefaults.swift in Sources */,
 				829857C921C5F74600D4773D /* FollowingUsersViewController.swift in Sources */,
+				82D4F2DC21EB224000F6BF5B /* ChatMessage.swift in Sources */,
 				829857C621C5F14800D4773D /* RequestBuilder.swift in Sources */,
 				82968E0C21C62A5A0023A11E /* FriendCell.swift in Sources */,
 				821B279E21D26D4600F4F42E /* NSNotification+Extension.swift in Sources */,

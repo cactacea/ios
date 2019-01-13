@@ -12,13 +12,51 @@ import MessageInputBar
 import Cactacea
 import SwiftDate
 import MapKit
+import Starscream
 
-/// A base class for the example controllers
+
+
+extension ChatViewController: WebSocketDelegate {
+
+    func websocketDidConnect(socket: WebSocketClient) {
+//        print("websocket is connected:")
+    }
+
+    func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
+//        print("websocket is disconnected: \(error?.localizedDescription)")
+    }
+    
+    func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
+        if let session = Session.authentication?.account {
+            do {
+                let chatMessage = try JSONDecoder().decode(ChatMessage.self, from: text.data(using: .utf8)!)
+                if let message = chatMessage.message, session.id != message.account.id {
+                    insertMessage(message)
+                }
+            } catch let error {
+                print(error)
+            }
+        }
+        print("got some text: \(text)")
+    }
+    
+    func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
+//        print("got some data: \(data.count)")
+    }
+    
+    func websocketDidReceivePong(socket: WebSocketClient, data: Data?) {
+//        print("Got pong! Maybe some data: \(data?.count)")
+    }
+    
+}
+
 class ChatViewController: MessagesViewController, MessagesDataSource {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    let socket = WebSocket(url: URL(string: "ws://10.0.1.3:14000")!)
     
     var account: Account?
     var group: Group?
@@ -36,6 +74,13 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        socket.delegate = self
+        socket.connect()
+        
+        if let accessToken = Session.authentication?.accessToken {
+            self.sendCommand(name: "connect", value: accessToken)
+        }
+
 //        if UserDefaults.isFirstLaunch() {
 //            // Enable Text Messages
 //            UserDefaults.standard.set(true, forKey: "Text Messages")
@@ -47,6 +92,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
                 if let result = result {
                     weakSelf.group = result
                     weakSelf.loadFirstMessages()
+                    weakSelf.sendCommand(name: "join", value: String(result.id))
                 } else if let error = error {
                     Session.showError(error)
                 }
@@ -59,6 +105,13 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         title = "MessageKit"
     }
     
+    func sendCommand(name: String, value: String) {
+        let parameters = ["name": name, "value": value]
+        let jsonData = try! JSONSerialization.data(withJSONObject: parameters)
+        if let jsonString = String(data: jsonData, encoding: String.Encoding.utf8) {
+            self.socket.write(string: jsonString)
+        }
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

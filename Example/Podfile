@@ -13,7 +13,8 @@ target 'Cactacea_Example' do
   pod 'YPImagePicker'
   pod 'MessageKit'
   pod 'SwiftDate'
-  
+  pod 'Starscream'
+
   target 'Cactacea_Tests' do
     inherit! :search_paths
 
