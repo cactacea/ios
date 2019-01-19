@@ -121,15 +121,10 @@ open class MessagesAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
-  "next" : 2.3021358869347654518833223846741020679473876953125,
-  "contentWarning" : true,
-  "readAccountCount" : 5,
-  "accountCount" : 1,
-  "messageType" : "text",
-  "postedAt" : 5,
+  "next" : 7.061401241503109105224211816675961017608642578125,
+  "accountCount" : 5,
   "unread" : true,
-  "contentDeleted" : true,
-  "id" : 6.02745618307040320615897144307382404804229736328125,
+  "groupId" : 1.46581298050294517310021547018550336360931396484375,
   "medium" : {
     "contentWarning" : true,
     "size" : 5,
@@ -142,6 +137,12 @@ open class MessagesAPI {
     "thumbnailUrl" : "thumbnailUrl"
   },
   "message" : "message",
+  "contentWarning" : true,
+  "readAccountCount" : 5,
+  "messageType" : "text",
+  "postedAt" : 2,
+  "contentDeleted" : true,
+  "id" : 6.02745618307040320615897144307382404804229736328125,
   "account" : {
     "birthday" : 7.061401241503109105224211816675961017608642578125,
     "next" : 3.61607674925191080461672754609026014804840087890625,
@@ -161,15 +162,10 @@ open class MessagesAPI {
     "profileImageUrl" : "profileImageUrl"
   }
 }, {
-  "next" : 2.3021358869347654518833223846741020679473876953125,
-  "contentWarning" : true,
-  "readAccountCount" : 5,
-  "accountCount" : 1,
-  "messageType" : "text",
-  "postedAt" : 5,
+  "next" : 7.061401241503109105224211816675961017608642578125,
+  "accountCount" : 5,
   "unread" : true,
-  "contentDeleted" : true,
-  "id" : 6.02745618307040320615897144307382404804229736328125,
+  "groupId" : 1.46581298050294517310021547018550336360931396484375,
   "medium" : {
     "contentWarning" : true,
     "size" : 5,
@@ -182,6 +178,12 @@ open class MessagesAPI {
     "thumbnailUrl" : "thumbnailUrl"
   },
   "message" : "message",
+  "contentWarning" : true,
+  "readAccountCount" : 5,
+  "messageType" : "text",
+  "postedAt" : 2,
+  "contentDeleted" : true,
+  "id" : 6.02745618307040320615897144307382404804229736328125,
   "account" : {
     "birthday" : 7.061401241503109105224211816675961017608642578125,
     "next" : 3.61607674925191080461672754609026014804840087890625,
@@ -272,15 +274,10 @@ open class MessagesAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example={
-  "next" : 2.3021358869347654518833223846741020679473876953125,
-  "contentWarning" : true,
-  "readAccountCount" : 5,
-  "accountCount" : 1,
-  "messageType" : "text",
-  "postedAt" : 5,
+  "next" : 7.061401241503109105224211816675961017608642578125,
+  "accountCount" : 5,
   "unread" : true,
-  "contentDeleted" : true,
-  "id" : 6.02745618307040320615897144307382404804229736328125,
+  "groupId" : 1.46581298050294517310021547018550336360931396484375,
   "medium" : {
     "contentWarning" : true,
     "size" : 5,
@@ -293,6 +290,12 @@ open class MessagesAPI {
     "thumbnailUrl" : "thumbnailUrl"
   },
   "message" : "message",
+  "contentWarning" : true,
+  "readAccountCount" : 5,
+  "messageType" : "text",
+  "postedAt" : 2,
+  "contentDeleted" : true,
+  "id" : 6.02745618307040320615897144307382404804229736328125,
   "account" : {
     "birthday" : 7.061401241503109105224211816675961017608642578125,
     "next" : 3.61607674925191080461672754609026014804840087890625,
@@ -372,15 +375,10 @@ open class MessagesAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example={
-  "next" : 2.3021358869347654518833223846741020679473876953125,
-  "contentWarning" : true,
-  "readAccountCount" : 5,
-  "accountCount" : 1,
-  "messageType" : "text",
-  "postedAt" : 5,
+  "next" : 7.061401241503109105224211816675961017608642578125,
+  "accountCount" : 5,
   "unread" : true,
-  "contentDeleted" : true,
-  "id" : 6.02745618307040320615897144307382404804229736328125,
+  "groupId" : 1.46581298050294517310021547018550336360931396484375,
   "medium" : {
     "contentWarning" : true,
     "size" : 5,
@@ -393,6 +391,12 @@ open class MessagesAPI {
     "thumbnailUrl" : "thumbnailUrl"
   },
   "message" : "message",
+  "contentWarning" : true,
+  "readAccountCount" : 5,
+  "messageType" : "text",
+  "postedAt" : 2,
+  "contentDeleted" : true,
+  "id" : 6.02745618307040320615897144307382404804229736328125,
   "account" : {
     "birthday" : 7.061401241503109105224211816675961017608642578125,
     "next" : 3.61607674925191080461672754609026014804840087890625,

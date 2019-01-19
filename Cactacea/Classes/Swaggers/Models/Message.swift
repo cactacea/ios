@@ -20,6 +20,7 @@ open class Message: Codable {
         case groupleft = "groupLeft"
     }
     public var id: Int64
+    public var groupId: Int64
     public var messageType: MessageType
     public var message: String?
     public var medium: Medium?
@@ -34,8 +35,9 @@ open class Message: Codable {
 
 
     
-    public init(id: Int64, messageType: MessageType, message: String?, medium: Medium?, account: Account, unread: Bool, accountCount: Int64, readAccountCount: Int64, contentWarning: Bool, contentDeleted: Bool, postedAt: Int64, next: Int64?) {
+    public init(id: Int64, groupId: Int64, messageType: MessageType, message: String?, medium: Medium?, account: Account, unread: Bool, accountCount: Int64, readAccountCount: Int64, contentWarning: Bool, contentDeleted: Bool, postedAt: Int64, next: Int64?) {
         self.id = id
+        self.groupId = groupId
         self.messageType = messageType
         self.message = message
         self.medium = medium
@@ -57,6 +59,7 @@ open class Message: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encode(id, forKey: "id")
+        try container.encode(groupId, forKey: "groupId")
         try container.encode(messageType, forKey: "messageType")
         try container.encodeIfPresent(message, forKey: "message")
         try container.encodeIfPresent(medium, forKey: "medium")
@@ -76,6 +79,7 @@ open class Message: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         id = try container.decode(Int64.self, forKey: "id")
+        groupId = try container.decode(Int64.self, forKey: "groupId")
         messageType = try container.decode(MessageType.self, forKey: "messageType")
         message = try container.decodeIfPresent(String.self, forKey: "message")
         medium = try container.decodeIfPresent(Medium.self, forKey: "medium")
