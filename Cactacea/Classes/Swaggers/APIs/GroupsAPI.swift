@@ -182,22 +182,17 @@ open class GroupsAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
-  "next" : 2.027123023002321833274663731572218239307403564453125,
-  "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-  "accountCount" : 7,
+  "next" : 4.1456080298839363962315474054776132106781005859375,
+  "lastPostedAt" : 3.61607674925191080461672754609026014804840087890625,
+  "accountCount" : 9,
   "name" : "name",
   "invitationOnly" : true,
   "id" : 0.80082819046101150206595775671303272247314453125,
   "message" : {
-    "next" : 2.3021358869347654518833223846741020679473876953125,
-    "contentWarning" : true,
-    "readAccountCount" : 5,
-    "accountCount" : 1,
-    "messageType" : "text",
-    "postedAt" : 5,
+    "next" : 7.061401241503109105224211816675961017608642578125,
+    "accountCount" : 5,
     "unread" : true,
-    "contentDeleted" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "groupId" : 1.46581298050294517310021547018550336360931396484375,
     "medium" : {
       "contentWarning" : true,
       "size" : 5,
@@ -210,6 +205,12 @@ open class GroupsAPI {
       "thumbnailUrl" : "thumbnailUrl"
     },
     "message" : "message",
+    "contentWarning" : true,
+    "readAccountCount" : 5,
+    "messageType" : "text",
+    "postedAt" : 2,
+    "contentDeleted" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
     "account" : {
       "birthday" : 7.061401241503109105224211816675961017608642578125,
       "next" : 3.61607674925191080461672754609026014804840087890625,
@@ -230,25 +231,20 @@ open class GroupsAPI {
     }
   },
   "authorityType" : "owner",
-  "organizedAt" : 3,
+  "organizedAt" : 2,
   "privacyType" : "everyone"
 }, {
-  "next" : 2.027123023002321833274663731572218239307403564453125,
-  "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-  "accountCount" : 7,
+  "next" : 4.1456080298839363962315474054776132106781005859375,
+  "lastPostedAt" : 3.61607674925191080461672754609026014804840087890625,
+  "accountCount" : 9,
   "name" : "name",
   "invitationOnly" : true,
   "id" : 0.80082819046101150206595775671303272247314453125,
   "message" : {
-    "next" : 2.3021358869347654518833223846741020679473876953125,
-    "contentWarning" : true,
-    "readAccountCount" : 5,
-    "accountCount" : 1,
-    "messageType" : "text",
-    "postedAt" : 5,
+    "next" : 7.061401241503109105224211816675961017608642578125,
+    "accountCount" : 5,
     "unread" : true,
-    "contentDeleted" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "groupId" : 1.46581298050294517310021547018550336360931396484375,
     "medium" : {
       "contentWarning" : true,
       "size" : 5,
@@ -261,6 +257,12 @@ open class GroupsAPI {
       "thumbnailUrl" : "thumbnailUrl"
     },
     "message" : "message",
+    "contentWarning" : true,
+    "readAccountCount" : 5,
+    "messageType" : "text",
+    "postedAt" : 2,
+    "contentDeleted" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
     "account" : {
       "birthday" : 7.061401241503109105224211816675961017608642578125,
       "next" : 3.61607674925191080461672754609026014804840087890625,
@@ -281,7 +283,7 @@ open class GroupsAPI {
     }
   },
   "authorityType" : "owner",
-  "organizedAt" : 3,
+  "organizedAt" : 2,
   "privacyType" : "everyone"
 } ]}]
      
@@ -353,22 +355,17 @@ open class GroupsAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example={
-  "next" : 2.027123023002321833274663731572218239307403564453125,
-  "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-  "accountCount" : 7,
+  "next" : 4.1456080298839363962315474054776132106781005859375,
+  "lastPostedAt" : 3.61607674925191080461672754609026014804840087890625,
+  "accountCount" : 9,
   "name" : "name",
   "invitationOnly" : true,
   "id" : 0.80082819046101150206595775671303272247314453125,
   "message" : {
-    "next" : 2.3021358869347654518833223846741020679473876953125,
-    "contentWarning" : true,
-    "readAccountCount" : 5,
-    "accountCount" : 1,
-    "messageType" : "text",
-    "postedAt" : 5,
+    "next" : 7.061401241503109105224211816675961017608642578125,
+    "accountCount" : 5,
     "unread" : true,
-    "contentDeleted" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "groupId" : 1.46581298050294517310021547018550336360931396484375,
     "medium" : {
       "contentWarning" : true,
       "size" : 5,
@@ -381,6 +378,12 @@ open class GroupsAPI {
       "thumbnailUrl" : "thumbnailUrl"
     },
     "message" : "message",
+    "contentWarning" : true,
+    "readAccountCount" : 5,
+    "messageType" : "text",
+    "postedAt" : 2,
+    "contentDeleted" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
     "account" : {
       "birthday" : 7.061401241503109105224211816675961017608642578125,
       "next" : 3.61607674925191080461672754609026014804840087890625,
@@ -401,7 +404,7 @@ open class GroupsAPI {
     }
   },
   "authorityType" : "owner",
-  "organizedAt" : 3,
+  "organizedAt" : 2,
   "privacyType" : "everyone"
 }}]
      
@@ -485,22 +488,17 @@ open class GroupsAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
-  "next" : 2.027123023002321833274663731572218239307403564453125,
-  "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-  "accountCount" : 7,
+  "next" : 4.1456080298839363962315474054776132106781005859375,
+  "lastPostedAt" : 3.61607674925191080461672754609026014804840087890625,
+  "accountCount" : 9,
   "name" : "name",
   "invitationOnly" : true,
   "id" : 0.80082819046101150206595775671303272247314453125,
   "message" : {
-    "next" : 2.3021358869347654518833223846741020679473876953125,
-    "contentWarning" : true,
-    "readAccountCount" : 5,
-    "accountCount" : 1,
-    "messageType" : "text",
-    "postedAt" : 5,
+    "next" : 7.061401241503109105224211816675961017608642578125,
+    "accountCount" : 5,
     "unread" : true,
-    "contentDeleted" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "groupId" : 1.46581298050294517310021547018550336360931396484375,
     "medium" : {
       "contentWarning" : true,
       "size" : 5,
@@ -513,6 +511,12 @@ open class GroupsAPI {
       "thumbnailUrl" : "thumbnailUrl"
     },
     "message" : "message",
+    "contentWarning" : true,
+    "readAccountCount" : 5,
+    "messageType" : "text",
+    "postedAt" : 2,
+    "contentDeleted" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
     "account" : {
       "birthday" : 7.061401241503109105224211816675961017608642578125,
       "next" : 3.61607674925191080461672754609026014804840087890625,
@@ -533,25 +537,20 @@ open class GroupsAPI {
     }
   },
   "authorityType" : "owner",
-  "organizedAt" : 3,
+  "organizedAt" : 2,
   "privacyType" : "everyone"
 }, {
-  "next" : 2.027123023002321833274663731572218239307403564453125,
-  "lastPostedAt" : 9.301444243932575517419536481611430644989013671875,
-  "accountCount" : 7,
+  "next" : 4.1456080298839363962315474054776132106781005859375,
+  "lastPostedAt" : 3.61607674925191080461672754609026014804840087890625,
+  "accountCount" : 9,
   "name" : "name",
   "invitationOnly" : true,
   "id" : 0.80082819046101150206595775671303272247314453125,
   "message" : {
-    "next" : 2.3021358869347654518833223846741020679473876953125,
-    "contentWarning" : true,
-    "readAccountCount" : 5,
-    "accountCount" : 1,
-    "messageType" : "text",
-    "postedAt" : 5,
+    "next" : 7.061401241503109105224211816675961017608642578125,
+    "accountCount" : 5,
     "unread" : true,
-    "contentDeleted" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "groupId" : 1.46581298050294517310021547018550336360931396484375,
     "medium" : {
       "contentWarning" : true,
       "size" : 5,
@@ -564,6 +563,12 @@ open class GroupsAPI {
       "thumbnailUrl" : "thumbnailUrl"
     },
     "message" : "message",
+    "contentWarning" : true,
+    "readAccountCount" : 5,
+    "messageType" : "text",
+    "postedAt" : 2,
+    "contentDeleted" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
     "account" : {
       "birthday" : 7.061401241503109105224211816675961017608642578125,
       "next" : 3.61607674925191080461672754609026014804840087890625,
@@ -584,7 +589,7 @@ open class GroupsAPI {
     }
   },
   "authorityType" : "owner",
-  "organizedAt" : 3,
+  "organizedAt" : 2,
   "privacyType" : "everyone"
 } ]}]
      
