@@ -60,39 +60,47 @@ open class CommentLikesAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
-  "birthday" : 7.061401241503109105224211816675961017608642578125,
-  "next" : 3.61607674925191080461672754609026014804840087890625,
+  "birthday" : 2.3021358869347654518833223846741020679473876953125,
+  "next" : 9.301444243932575517419536481611430644989013671875,
+  "friendCount" : 5,
   "accountName" : "accountName",
   "displayName" : "displayName",
-  "joinedAt" : 9.301444243932575517419536481611430644989013671875,
+  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
   "bio" : "bio",
+  "followingCount" : 6,
   "friendRequestInProgress" : true,
+  "feedsCount" : 5,
   "muting" : true,
   "web" : "web",
   "blocking" : true,
   "following" : true,
   "isFriend" : true,
   "location" : "location",
-  "id" : 2.3021358869347654518833223846741020679473876953125,
+  "id" : 0.80082819046101150206595775671303272247314453125,
   "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl"
+  "profileImageUrl" : "profileImageUrl",
+  "followerCount" : 1
 }, {
-  "birthday" : 7.061401241503109105224211816675961017608642578125,
-  "next" : 3.61607674925191080461672754609026014804840087890625,
+  "birthday" : 2.3021358869347654518833223846741020679473876953125,
+  "next" : 9.301444243932575517419536481611430644989013671875,
+  "friendCount" : 5,
   "accountName" : "accountName",
   "displayName" : "displayName",
-  "joinedAt" : 9.301444243932575517419536481611430644989013671875,
+  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
   "bio" : "bio",
+  "followingCount" : 6,
   "friendRequestInProgress" : true,
+  "feedsCount" : 5,
   "muting" : true,
   "web" : "web",
   "blocking" : true,
   "following" : true,
   "isFriend" : true,
   "location" : "location",
-  "id" : 2.3021358869347654518833223846741020679473876953125,
+  "id" : 0.80082819046101150206595775671303272247314453125,
   "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl"
+  "profileImageUrl" : "profileImageUrl",
+  "followerCount" : 1
 } ]}]
      
      - parameter id: (path) Comment Identifier. 
