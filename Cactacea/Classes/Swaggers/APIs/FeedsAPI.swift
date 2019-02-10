@@ -114,10 +114,10 @@ open class FeedsAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example={
-  "next" : 1.024645700144157789424070870154537260532379150390625,
+  "next" : 2.027123023002321833274663731572218239307403564453125,
   "contentWarning" : true,
-  "likedAt" : 1.231513536777255612975068288506008684635162353515625,
-  "postedAt" : 7,
+  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
+  "postedAt" : 9,
   "contentDeleted" : true,
   "likeCount" : 2,
   "id" : 0.80082819046101150206595775671303272247314453125,
@@ -144,25 +144,29 @@ open class FeedsAPI {
     "thumbnailUrl" : "thumbnailUrl"
   } ],
   "account" : {
-    "birthday" : 7.061401241503109105224211816675961017608642578125,
-    "next" : 3.61607674925191080461672754609026014804840087890625,
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 9.301444243932575517419536481611430644989013671875,
+    "friendCount" : 5,
     "accountName" : "accountName",
     "displayName" : "displayName",
-    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "bio" : "bio",
+    "followingCount" : 6,
     "friendRequestInProgress" : true,
+    "feedsCount" : 5,
     "muting" : true,
     "web" : "web",
     "blocking" : true,
     "following" : true,
     "isFriend" : true,
     "location" : "location",
-    "id" : 2.3021358869347654518833223846741020679473876953125,
+    "id" : 0.80082819046101150206595775671303272247314453125,
     "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl"
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1
   },
   "tags" : [ "tags", "tags" ],
-  "commentCount" : 4
+  "commentCount" : 7
 }}]
      
      - parameter id: (path) Feed identifier. 
@@ -241,10 +245,10 @@ open class FeedsAPI {
        - type: oauth2
        - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
-  "next" : 1.024645700144157789424070870154537260532379150390625,
+  "next" : 2.027123023002321833274663731572218239307403564453125,
   "contentWarning" : true,
-  "likedAt" : 1.231513536777255612975068288506008684635162353515625,
-  "postedAt" : 7,
+  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
+  "postedAt" : 9,
   "contentDeleted" : true,
   "likeCount" : 2,
   "id" : 0.80082819046101150206595775671303272247314453125,
@@ -271,30 +275,34 @@ open class FeedsAPI {
     "thumbnailUrl" : "thumbnailUrl"
   } ],
   "account" : {
-    "birthday" : 7.061401241503109105224211816675961017608642578125,
-    "next" : 3.61607674925191080461672754609026014804840087890625,
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 9.301444243932575517419536481611430644989013671875,
+    "friendCount" : 5,
     "accountName" : "accountName",
     "displayName" : "displayName",
-    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "bio" : "bio",
+    "followingCount" : 6,
     "friendRequestInProgress" : true,
+    "feedsCount" : 5,
     "muting" : true,
     "web" : "web",
     "blocking" : true,
     "following" : true,
     "isFriend" : true,
     "location" : "location",
-    "id" : 2.3021358869347654518833223846741020679473876953125,
+    "id" : 0.80082819046101150206595775671303272247314453125,
     "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl"
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1
   },
   "tags" : [ "tags", "tags" ],
-  "commentCount" : 4
+  "commentCount" : 7
 }, {
-  "next" : 1.024645700144157789424070870154537260532379150390625,
+  "next" : 2.027123023002321833274663731572218239307403564453125,
   "contentWarning" : true,
-  "likedAt" : 1.231513536777255612975068288506008684635162353515625,
-  "postedAt" : 7,
+  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
+  "postedAt" : 9,
   "contentDeleted" : true,
   "likeCount" : 2,
   "id" : 0.80082819046101150206595775671303272247314453125,
@@ -321,25 +329,29 @@ open class FeedsAPI {
     "thumbnailUrl" : "thumbnailUrl"
   } ],
   "account" : {
-    "birthday" : 7.061401241503109105224211816675961017608642578125,
-    "next" : 3.61607674925191080461672754609026014804840087890625,
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 9.301444243932575517419536481611430644989013671875,
+    "friendCount" : 5,
     "accountName" : "accountName",
     "displayName" : "displayName",
-    "joinedAt" : 9.301444243932575517419536481611430644989013671875,
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "bio" : "bio",
+    "followingCount" : 6,
     "friendRequestInProgress" : true,
+    "feedsCount" : 5,
     "muting" : true,
     "web" : "web",
     "blocking" : true,
     "following" : true,
     "isFriend" : true,
     "location" : "location",
-    "id" : 2.3021358869347654518833223846741020679473876953125,
+    "id" : 0.80082819046101150206595775671303272247314453125,
     "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl"
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1
   },
   "tags" : [ "tags", "tags" ],
-  "commentCount" : 4
+  "commentCount" : 7
 } ]}]
      
      - parameter since: (query) Filters feeds which started on since or later. (optional)
