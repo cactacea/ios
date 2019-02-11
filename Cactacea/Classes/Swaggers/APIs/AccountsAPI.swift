@@ -78,8 +78,8 @@ open class AccountsAPI {
      - parameter id: (path) Account identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findDetail(id: Int64, completion: @escaping ((_ data: Account?,_ error: Error?) -> Void)) {
-        findDetailWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func find(id: Int64, completion: @escaping ((_ data: Account?,_ error: Error?) -> Void)) {
+        findWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -90,9 +90,9 @@ open class AccountsAPI {
      - parameter id: (path) Account identifier. 
      - returns: Observable<Account>
      */
-    open class func findDetail(id: Int64) -> Observable<Account> {
+    open class func find(id: Int64) -> Observable<Account> {
         return Observable.create { observer -> Disposable in
-            findDetail(id: id) { data, error in
+            find(id: id) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -140,7 +140,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<Account> 
      */
-    open class func findDetailWithRequestBuilder(id: Int64) -> RequestBuilder<Account> {
+    open class func findWithRequestBuilder(id: Int64) -> RequestBuilder<Account> {
         var path = "/accounts/{id}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
