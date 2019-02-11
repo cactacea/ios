@@ -19,7 +19,7 @@ class ProfileHeaderReusableView: UICollectionReusableView {
     @IBOutlet weak var followersCountLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!
     
-    var accountDetail: AccountDetail! {
+    var account: Account! {
         didSet {
             updateView()
         }
@@ -31,18 +31,18 @@ class ProfileHeaderReusableView: UICollectionReusableView {
     }
     
     func updateView() {
-        self.nameLabel.text = accountDetail.accountName
+        self.nameLabel.text = account.accountName
         
-        if let smallImageURL = accountDetail.profileImageUrl {
+        if let smallImageURL = account.profileImageUrl {
             let urlRequest = Session.request(url: smallImageURL)
             profileImage.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }
         
-        self.postsCountLabel.text = "\(accountDetail.feedsCount)"
-        self.followingCountLabel.text = "\(accountDetail.followingCount)"
-        self.followersCountLabel.text = "\(accountDetail.followerCount)"
+        self.postsCountLabel.text = "\(account.feedsCount)"
+        self.followingCountLabel.text = "\(account.followingCount)"
+        self.followersCountLabel.text = "\(account.followerCount)"
         
-        if accountDetail.following {
+        if account.following {
             configureUnFollowButton()
         } else {
             configureFollowButton()
@@ -81,25 +81,25 @@ class ProfileHeaderReusableView: UICollectionReusableView {
     }
     
     @objc func tappedFollow() {
-        AccountsAPI.follow(id: accountDetail.id) { [weak self] (error) in
+        AccountsAPI.follow(id: account.id) { [weak self] (error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)
             } else {
                 weakSelf.configureUnFollowButton()
-                weakSelf.accountDetail.following = true
+                weakSelf.account.following = true
             }
         }
     }
     
     @objc func tappedUnfollow() {
-        AccountsAPI.unfollow(id: accountDetail.id) { [weak self] (error) in
+        AccountsAPI.unfollow(id: account.id) { [weak self] (error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)
             } else {
                 weakSelf.configureFollowButton()
-                weakSelf.accountDetail.following = false
+                weakSelf.account.following = false
             }
         }
     }

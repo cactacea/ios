@@ -19,7 +19,7 @@ class ProfileEditViewController: UITableViewController {
     @IBOutlet weak var locationTextFiled: UITextField!
     @IBOutlet weak var bioTextView: UITextView!
 
-    var account: AccountDetail? = Session.authentication?.account
+    var account: Account? = Session.authentication?.account
     
     
     override func viewDidLoad() {

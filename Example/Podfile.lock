@@ -3,7 +3,7 @@ PODS:
   - Alamofire (4.7.3)
   - AlamofireImage (3.4.1):
     - Alamofire (~> 4.7)
-  - Cactacea (18.12.10):
+  - Cactacea (19.1.1):
     - Alamofire (~> 4.7.3)
     - RxSwift (~> 4.4)
   - KeychainAccess (3.1.2)
@@ -67,7 +67,7 @@ SPEC CHECKSUMS:
   ActiveLabel: b8b2396fe25308d563601437d6605bf691c3b5db
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
-  Cactacea: b3d4a27cdc0e9851c824a41bb42d28085fc19cba
+  Cactacea: a8f2ac1f7703af474b817e136512c4d4c1ac0c2f
   KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
   MessageInputBar: e81c7535347f1f7b923de7080409a535a004b6e4
   MessageKit: 29c1c87e5a396d2ca7a3f712e5171dc9aba42a1e

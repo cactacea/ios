@@ -20,7 +20,7 @@ class AccountEditViewController: UITableViewController {
     @IBOutlet weak var accountNameTextField: UITextField!
     @IBOutlet weak var profileImageView: UIImageView!
     
-    var account: AccountDetail? = Session.authentication?.account
+    var account: Account? = Session.authentication?.account
     
     var delegate: AccountEditViewControllerDelegate?
     
