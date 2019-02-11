@@ -8,6 +8,8 @@
 
 import UIKit
 import YPImagePicker
+import Cactacea
+import OneSignal
 
 class MainController: UITabBarController {
 
@@ -16,11 +18,18 @@ class MainController: UITabBarController {
         tabBar.tintColor = .black
         tabBar.isTranslucent = false
         self.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
         if Session.authentication == nil {
             // wait until MainTabBarController is inside UI
             DispatchQueue.main.async {
                 self.showSignIn()
             }
+        } else {
+            Session.updateToken()
         }
     }
     

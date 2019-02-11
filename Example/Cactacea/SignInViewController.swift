@@ -52,7 +52,7 @@ class SignInViewController: UIViewController {
         loginButton.setTitle("", for: .normal)
         loginButton.showsActivityIndicator = true
 
-        SessionsAPI.signIn(accountName: accountName, password: password, udid: "") { [weak self] (result, error) in
+        SessionsAPI.signIn(accountName: accountName, password: password, udid: Session.uuid) { [weak self] (result, error) in
             guard let weakSelf = self else { return }
             weakSelf.loginButton.showsActivityIndicator = false
             weakSelf.loginButton.setTitle("Login", for: .normal)

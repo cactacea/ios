@@ -9,9 +9,11 @@
 import UIKit
 import Cactacea
 import KeychainAccess
+import OneSignal
+import Cactacea
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, OSSubscriptionObserver {
 
     var window: UIWindow?
 
@@ -21,17 +23,77 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        let keychain = Keychain(service: "io.github.cactace")
 //        Session.accessToken = keychain["access_token"]
-        
 //        CactaceaAPI.basePath = "http://backend.cactacea.io"
-
 //        CactaceaAPI.requestBuilderFactory = CactaceaRequestBuilderFactory()
+        
+//        NSUUID().UUIDString
+        
+        
+        if let uuid = UserDefaults.standard.string(forKey: "uuid"){
+            Session.uuid = uuid
+        } else {
+            let uuid = UUID().uuidString
+            UserDefaults.standard.setValue(uuid, forKey: "uuid")
+            Session.uuid = uuid
+        }
+        
+        
         CactaceaAPI.basePath = "http://10.0.1.6:9000"
         CactaceaAPI.customHeaders["X-API-KEY"] = "78290547-ddd6-4cf2-8fe4-7dd241da3061"
         CactaceaAPI.customHeaders["Content-Type"] = "application/json"
 
+        let notificationReceivedBlock: OSHandleNotificationReceivedBlock = { notification in
+            
+            print("Received Notification: \(notification!.payload.notificationID)")
+        }
+        
+        let notificationOpenedBlock: OSHandleNotificationActionBlock = { result in
+            // This block gets called when the user reacts to a notification received
+            let payload: OSNotificationPayload = result!.notification.payload
+            
+            var fullMessage = payload.body
+            print("Message = \(fullMessage)")
+            
+            if payload.additionalData != nil {
+                if payload.title != nil {
+                    let messageTitle = payload.title
+                    print("Message Title = \(messageTitle!)")
+                }
+                
+                let additionalData = payload.additionalData
+                if additionalData?["actionSelected"] != nil {
+                    fullMessage = fullMessage! + "\nPressed ButtonID: \(additionalData!["actionSelected"])"
+                }
+            }
+        }
+        
+        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: true,
+                                     kOSSettingsKeyInAppLaunchURL: true]
+        
+        OneSignal.initWithLaunchOptions(launchOptions,
+                                        appId: "41ce7d66-2eb9-49d8-b8d7-53df56338752",
+                                        handleNotificationReceived: notificationReceivedBlock,
+                                        handleNotificationAction: notificationOpenedBlock,
+                                        settings: onesignalInitSettings)
+        
+        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification
+
+        OneSignal.add(self as OSSubscriptionObserver)
+        
         return true
     }
-
+    
+    // After you add the observer on didFinishLaunching, this method will be called when the notification subscription property changes.
+    func onOSSubscriptionChanged(_ stateChanges: OSSubscriptionStateChanges!) {
+        if !stateChanges.from.subscribed && stateChanges.to.subscribed {
+            print("Subscribed for OneSignal push notifications!")
+        }
+        print("SubscriptionStateChange: \n\(stateChanges)")
+        
+        //The player id is inside stateChanges. But be careful, this value can be nil if the user has not granted you permission to send notifications.
+        Session.playerId = stateChanges.to.userId
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

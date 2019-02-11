@@ -17,6 +17,27 @@ class Session {
         }
     }
     
+    static var playerId: String? {
+        didSet {
+            if let _ = Session.authentication {
+                self.updateToken()
+            }
+        }
+    }
+
+    static var uuid: String = ""
+
+    static func updateToken() {
+        if let _ = Session.authentication {
+            let body = PostDevicePushTokenBody(pushToken: self.playerId)
+            SettingsAPI.updatePushToken(body: body) { (error) in
+                if let error = error {
+                    Session.showError(error)
+                }
+            }
+        }
+    }
+    
     static func request(url: String) -> URLRequest {
         var urlRequest = URLRequest(url: URL(string: url)!)
         urlRequest.setValue(CactaceaAPI.customHeaders["X-API-KEY"], forHTTPHeaderField: "X-API-KEY")

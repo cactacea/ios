@@ -58,7 +58,7 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
         guard let accountName = accountNameTextField.text, let password = passwordTextField.text else { return }
-        let udid = UUID().uuidString
+//        let udid = UUID().uuidString
 
         accountNameTextField.isUserInteractionEnabled = false
         passwordTextField.isUserInteractionEnabled = false
@@ -68,7 +68,7 @@ class SignUpViewController: UIViewController {
         signUpButton.showsActivityIndicator = true
         signUpButton.setTitle("", for: .normal)
         
-        let request = PostSignUpBody(accountName: accountName, password: password, udid: udid)
+        let request = PostSignUpBody(accountName: accountName, password: password, udid: Session.uuid)
         SessionsAPI.signUp(body: request) { [weak self] (result, error) in
             guard let weakSelf = self else { return }
             weakSelf.signUpButton.showsActivityIndicator = false
