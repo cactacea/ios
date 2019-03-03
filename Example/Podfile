@@ -1,14 +1,29 @@
+platform :ios, '10.3'
+
 use_frameworks!
 
 target 'Cactacea_Example' do
   pod 'Cactacea', :path => '../'
+  pod 'KeychainAccess', '~> 3.1.2'
+  pod 'RxSwift',    '~> 4.4.0'
+  pod 'RxCocoa',    '~> 4.4.0'
+  pod 'Alamofire', '~> 4.7.3'
+  pod 'AlamofireImage'
+  pod 'ActiveLabel'
+  pod 'YPImagePicker'
+  pod 'MessageKit'
+  pod 'SwiftDate'
+  pod 'Starscream'
+  pod 'OneSignal', '>= 2.6.2', '< 3.0'
 
   target 'Cactacea_Tests' do
     inherit! :search_paths
 
-    pod 'RxSwift',    '~> 4.4.0'
-    pod 'Alamofire', '~> 4.7.3'
     pod 'Quick', '~> 1.3.2'
     pod 'Nimble', '~> 7.3.1'
   end
+end
+
+target 'OneSignalNotificationServiceExtension' do
+    pod 'OneSignal', '>= 2.6.2', '< 3.0'
 end

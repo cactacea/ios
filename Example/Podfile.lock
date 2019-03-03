@@ -1,41 +1,91 @@
 PODS:
+  - ActiveLabel (1.0.1)
   - Alamofire (4.7.3)
-  - Cactacea (18.11.8):
+  - AlamofireImage (3.4.1):
+    - Alamofire (~> 4.7)
+  - Cactacea (19.1.1):
     - Alamofire (~> 4.7.3)
     - RxSwift (~> 4.4)
+  - KeychainAccess (3.1.2)
+  - MessageInputBar/Core (0.4.1)
+  - MessageKit (2.0.0):
+    - MessageInputBar/Core
   - Nimble (7.3.1)
+  - OneSignal (2.9.5)
+  - PryntTrimmerView (3.0.0)
   - Quick (1.3.2)
   - RxAtomic (4.4.0)
+  - RxCocoa (4.4.0):
+    - RxSwift (~> 4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
+  - Starscream (3.0.6)
+  - SteviaLayout (4.4.0)
+  - SwiftDate (5.0.13)
+  - YPImagePicker (3.5.2):
+    - PryntTrimmerView (~> 3.0.0)
+    - SteviaLayout (~> 4.4.0)
 
 DEPENDENCIES:
+  - ActiveLabel
   - Alamofire (~> 4.7.3)
+  - AlamofireImage
   - Cactacea (from `../`)
+  - KeychainAccess (~> 3.1.2)
+  - MessageKit
   - Nimble (~> 7.3.1)
+  - OneSignal (< 3.0, >= 2.6.2)
   - Quick (~> 1.3.2)
+  - RxCocoa (~> 4.4.0)
   - RxSwift (~> 4.4.0)
+  - Starscream
+  - SwiftDate
+  - YPImagePicker
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - ActiveLabel
     - Alamofire
+    - AlamofireImage
+    - KeychainAccess
+    - MessageInputBar
+    - MessageKit
     - Nimble
+    - OneSignal
+    - PryntTrimmerView
     - Quick
     - RxAtomic
+    - RxCocoa
     - RxSwift
+    - Starscream
+    - SteviaLayout
+    - SwiftDate
+    - YPImagePicker
 
 EXTERNAL SOURCES:
   Cactacea:
     :path: "../"
 
 SPEC CHECKSUMS:
+  ActiveLabel: b8b2396fe25308d563601437d6605bf691c3b5db
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  Cactacea: 921841eb658d933faa6406b1231242b983c300ef
+  AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
+  Cactacea: a8f2ac1f7703af474b817e136512c4d4c1ac0c2f
+  KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
+  MessageInputBar: e81c7535347f1f7b923de7080409a535a004b6e4
+  MessageKit: 29c1c87e5a396d2ca7a3f712e5171dc9aba42a1e
   Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
+  OneSignal: ccdeb961882f8668305e5b694e2cb7cb325fc907
+  PryntTrimmerView: 53ac64053c7ce63cb3e27f54090f52da0734891d
   Quick: 2623cb30d7a7f41ca62f684f679586558f483d46
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
+  RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
+  Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
+  SteviaLayout: dd74d1abd127bbf0ce346ac9430441684fe427d0
+  SwiftDate: f4aea5fa9dee812485f34041121a4cbde01b0dee
+  YPImagePicker: 26d5bf7bfe1cffd1c5eedea3ac60422b314e2a42
 
-PODFILE CHECKSUM: 28525a45a1e89b399a7d0a76f1e8dff578906409
+PODFILE CHECKSUM: a943955fe3a067f8a1870bdf4dcf69cc261344d2
 
 COCOAPODS: 1.5.3
