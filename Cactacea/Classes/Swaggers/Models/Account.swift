@@ -22,7 +22,7 @@ open class Account: Codable {
     public var followingCount: Int64
     public var followerCount: Int64
     public var friendCount: Int64
-    public var feedsCount: Int64
+    public var feedCount: Int64
     public var muting: Bool
     public var blocking: Bool
     public var web: String?
@@ -34,7 +34,7 @@ open class Account: Codable {
 
 
     
-    public init(id: Int64, accountName: String, displayName: String, profileImageUrl: String?, isFriend: Bool, friendRequestInProgress: Bool, following: Bool, isFollower: Bool, followingCount: Int64, followerCount: Int64, friendCount: Int64, feedsCount: Int64, muting: Bool, blocking: Bool, web: String?, birthday: Int64?, location: String?, bio: String?, joinedAt: Int64?, next: Int64?) {
+    public init(id: Int64, accountName: String, displayName: String, profileImageUrl: String?, isFriend: Bool, friendRequestInProgress: Bool, following: Bool, isFollower: Bool, followingCount: Int64, followerCount: Int64, friendCount: Int64, feedCount: Int64, muting: Bool, blocking: Bool, web: String?, birthday: Int64?, location: String?, bio: String?, joinedAt: Int64?, next: Int64?) {
         self.id = id
         self.accountName = accountName
         self.displayName = displayName
@@ -46,7 +46,7 @@ open class Account: Codable {
         self.followingCount = followingCount
         self.followerCount = followerCount
         self.friendCount = friendCount
-        self.feedsCount = feedsCount
+        self.feedCount = feedCount
         self.muting = muting
         self.blocking = blocking
         self.web = web
@@ -75,7 +75,7 @@ open class Account: Codable {
         try container.encode(followingCount, forKey: "followingCount")
         try container.encode(followerCount, forKey: "followerCount")
         try container.encode(friendCount, forKey: "friendCount")
-        try container.encode(feedsCount, forKey: "feedsCount")
+        try container.encode(feedCount, forKey: "feedCount")
         try container.encode(muting, forKey: "muting")
         try container.encode(blocking, forKey: "blocking")
         try container.encodeIfPresent(web, forKey: "web")
@@ -102,7 +102,7 @@ open class Account: Codable {
         followingCount = try container.decode(Int64.self, forKey: "followingCount")
         followerCount = try container.decode(Int64.self, forKey: "followerCount")
         friendCount = try container.decode(Int64.self, forKey: "friendCount")
-        feedsCount = try container.decode(Int64.self, forKey: "feedsCount")
+        feedCount = try container.decode(Int64.self, forKey: "feedCount")
         muting = try container.decode(Bool.self, forKey: "muting")
         blocking = try container.decode(Bool.self, forKey: "blocking")
         web = try container.decodeIfPresent(String.self, forKey: "web")

@@ -38,13 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, OSSubscriptionObserver {
         }
         
         
-        CactaceaAPI.basePath = "http://10.0.1.6:9000"
+        CactaceaAPI.basePath = "http://10.0.1.5:9000"
         CactaceaAPI.customHeaders["X-API-KEY"] = "78290547-ddd6-4cf2-8fe4-7dd241da3061"
         CactaceaAPI.customHeaders["Content-Type"] = "application/json"
 
         let notificationReceivedBlock: OSHandleNotificationReceivedBlock = { notification in
             
-            print("Received Notification: \(notification!.payload.notificationID)")
+            print("Received Notification: \(String(describing: notification!.payload.notificationID))")
         }
         
         let notificationOpenedBlock: OSHandleNotificationActionBlock = { result in
@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, OSSubscriptionObserver {
             let payload: OSNotificationPayload = result!.notification.payload
             
             var fullMessage = payload.body
-            print("Message = \(fullMessage)")
+            print("Message = \(String(describing: fullMessage))")
             
             if payload.additionalData != nil {
                 if payload.title != nil {
@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, OSSubscriptionObserver {
                 
                 let additionalData = payload.additionalData
                 if additionalData?["actionSelected"] != nil {
-                    fullMessage = fullMessage! + "\nPressed ButtonID: \(additionalData!["actionSelected"])"
+                    fullMessage = fullMessage! + "\nPressed ButtonID: \(String(describing: additionalData!["actionSelected"]))"
                 }
             }
         }
@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, OSSubscriptionObserver {
         if !stateChanges.from.subscribed && stateChanges.to.subscribed {
             print("Subscribed for OneSignal push notifications!")
         }
-        print("SubscriptionStateChange: \n\(stateChanges)")
+        print("SubscriptionStateChange: \n\(String(describing: stateChanges))")
         
         //The player id is inside stateChanges. But be careful, this value can be nil if the user has not granted you permission to send notifications.
         Session.playerId = stateChanges.to.userId

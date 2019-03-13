@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController {
     func fetchUser() {
         if let account = self.account {
             self.navigationItem.title = account.accountName
-            AccountsAPI.findDetail(id: account.id) { [weak self] (result, _) in
+            AccountsAPI.find(id: account.id) { [weak self] (result, _) in
                 guard let weakSelf = self else { return }
                 guard let account = result else { return }
                 weakSelf.account = account

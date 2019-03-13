@@ -87,6 +87,8 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
 //        }
         
         if let account = account {
+            self.title = account.displayName
+            
             AccountsAPI.findGroup(id: account.id) { [weak self] (result, error) in
                 guard let weakSelf = self else { return }
                 if let result = result {
@@ -102,7 +104,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         configureMessageCollectionView()
         configureMessageInputBar()
         loadFirstMessages()
-        title = "MessageKit"
+//        title = "MessageKit"
     }
     
     func sendCommand(name: String, value: String) {

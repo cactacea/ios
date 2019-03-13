@@ -38,7 +38,7 @@ class ProfileHeaderReusableView: UICollectionReusableView {
             profileImage.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }
         
-        self.postsCountLabel.text = "\(account.feedsCount)"
+        self.postsCountLabel.text = "\(account.feedCount)"
         self.followingCountLabel.text = "\(account.followingCount)"
         self.followersCountLabel.text = "\(account.followerCount)"
         

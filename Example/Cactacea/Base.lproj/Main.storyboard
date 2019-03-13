@@ -54,7 +54,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.029999999999999999" colorSpace="calibratedRGB"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" secureTextEntry="YES"/>
                                         <connections>
                                             <action selector="textFieldChanged:" destination="vXZ-lx-hvc" eventType="editingChanged" id="OzR-1y-6Z6"/>
                                             <outlet property="delegate" destination="kh9-bI-dsS" id="Acs-an-jTZ"/>
@@ -178,7 +178,7 @@
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.029999999999999999" colorSpace="calibratedRGB"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" secureTextEntry="YES"/>
                                         <connections>
                                             <action selector="textFieldChanged:" destination="4f9-v0-h54" eventType="editingChanged" id="QIp-zr-9K7"/>
                                             <outlet property="delegate" destination="qa8-W2-1nl" id="e1X-AD-gBI"/>

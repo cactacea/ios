@@ -43,9 +43,9 @@ class MyProfileHeaderReusableView: UICollectionReusableView {
             profileImage.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }
         
-        self.postsCountLabel.text = "\(account.feedsCount ?? 0)"
-        self.followingCountLabel.text = "\(account.followingCount ?? 0)"
-        self.followersCountLabel.text = "\(account.followerCount ?? 0)"
+        self.postsCountLabel.text = "\(account.feedCount )"
+        self.followingCountLabel.text = "\(account.followingCount)"
+        self.followersCountLabel.text = "\(account.followerCount)"
 
         followButton.setTitle("Edit", for: UIControl.State.normal)
         followButton.addTarget(self, action: #selector(self.tappedEditButton), for: UIControl.Event.touchUpInside)
