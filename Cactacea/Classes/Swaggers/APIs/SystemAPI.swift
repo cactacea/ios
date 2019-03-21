@@ -17,8 +17,8 @@ open class SystemAPI {
      
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func pingGet(completion: @escaping ((_ error: Error?) -> Void)) {
-        pingGetWithRequestBuilder().execute { (response, error) -> Void in
+    open class func ping(completion: @escaping ((_ error: Error?) -> Void)) {
+        pingWithRequestBuilder().execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -28,9 +28,9 @@ open class SystemAPI {
      
      - returns: Observable<Void>
      */
-    open class func pingGet() -> Observable<Void> {
+    open class func ping() -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            pingGet() { error in
+            ping() { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -48,7 +48,7 @@ open class SystemAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func pingGetWithRequestBuilder() -> RequestBuilder<Void> {
+    open class func pingWithRequestBuilder() -> RequestBuilder<Void> {
         let path = "/ping"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
