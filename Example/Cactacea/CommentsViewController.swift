@@ -124,7 +124,7 @@ extension CommentsViewController {
     @IBAction func tappedSendButton(_ sender: Any) {
         guard let message = commentTextField.text else { return }
         let body = PostCommentBody(id: feed.id, message: message)
-        CommentsAPI.post(body: body) { [weak self] (result, error) in
+        CommentsAPI.postComment(body: body) { [weak self] (result, error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)

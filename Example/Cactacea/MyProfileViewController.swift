@@ -42,7 +42,7 @@ class MyProfileViewController: UIViewController {
     }
     
     func fetchPosts() {
-        SessionAPI.findFeeds() { [weak self] (result, error) in
+        SessionAPI.findSessionFeeds() { [weak self] (result, error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)

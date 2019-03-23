@@ -18,8 +18,8 @@ open class FriendRequestsAPI {
      - parameter id: (path) Friend request Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func accept(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        acceptWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func acceptRequest(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        acceptRequestWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -30,9 +30,9 @@ open class FriendRequestsAPI {
      - parameter id: (path) Friend request Identifier. 
      - returns: Observable<Void>
      */
-    open class func accept(id: Int64) -> Observable<Void> {
+    open class func acceptRequest(id: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            accept(id: id) { error in
+            acceptRequest(id: id) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -58,7 +58,7 @@ open class FriendRequestsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func acceptWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
+    open class func acceptRequestWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
         var path = "/requests/{id}/accept"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -78,8 +78,8 @@ open class FriendRequestsAPI {
      - parameter id: (path) Friend request Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func reject(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        rejectWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func rejectRequest(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        rejectRequestWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -90,9 +90,9 @@ open class FriendRequestsAPI {
      - parameter id: (path) Friend request Identifier. 
      - returns: Observable<Void>
      */
-    open class func reject(id: Int64) -> Observable<Void> {
+    open class func rejectRequest(id: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            reject(id: id) { error in
+            rejectRequest(id: id) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -118,7 +118,7 @@ open class FriendRequestsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func rejectWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
+    open class func rejectRequestWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
         var path = "/requests/{id}/reject"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path

@@ -25,7 +25,7 @@ class FollowingUsersViewControlller: UIViewController {
         self.pager.fetchBlock =  { [weak self] (paginator, first) -> Observable<[Account]> in
             guard let _ = self else { return Observable.empty() }
             let next = first ? nil : paginator.items.last?.next
-            return SessionAPI.findFollowing(since: next, offset: nil, count: nil)
+            return SessionAPI.findSessionFollowing(since: next, offset: nil, count: nil)
         }
         
     }

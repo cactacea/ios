@@ -66,7 +66,7 @@ class ReceivedFriendRequestsCell: UITableViewCell {
         acceptButton.setTitle("", for: .normal)
         rejectButton.isEnabled = false
 
-        FriendRequestsAPI.accept(id: friendRequest.id) { [weak self] (error) in
+        FriendRequestsAPI.acceptRequest(id: friendRequest.id) { [weak self] (error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)
@@ -86,7 +86,7 @@ class ReceivedFriendRequestsCell: UITableViewCell {
         acceptButton.setTitle("", for: .normal)
         rejectButton.isEnabled = false
         
-        FriendRequestsAPI.reject(id: friendRequest.id) { [weak self] (error) in
+        FriendRequestsAPI.rejectRequest(id: friendRequest.id) { [weak self] (error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)

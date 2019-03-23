@@ -25,7 +25,7 @@ class BlockingUsersViewControlller: UIViewController {
         self.pager.fetchBlock =  { [weak self] (paginator, first) -> Observable<[Account]> in
             guard let _ = self else { return Observable.empty() }
             let next = first ? nil : paginator.items.last?.next
-            return SessionAPI.findFriends(since: next, offset: nil, count: nil, sortType: .accountname)
+            return SessionAPI.findSessionFriends(since: next, offset: nil, count: nil, sortType: .accountname)
         }
         
     }

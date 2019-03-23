@@ -81,7 +81,7 @@ class ProfileHeaderReusableView: UICollectionReusableView {
     }
     
     @objc func tappedFollow() {
-        AccountsAPI.follow(id: account.id) { [weak self] (error) in
+        AccountsAPI.followAccount(id: account.id) { [weak self] (error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)
@@ -93,7 +93,7 @@ class ProfileHeaderReusableView: UICollectionReusableView {
     }
     
     @objc func tappedUnfollow() {
-        AccountsAPI.unfollow(id: account.id) { [weak self] (error) in
+        AccountsAPI.unfollowAccount(id: account.id) { [weak self] (error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)

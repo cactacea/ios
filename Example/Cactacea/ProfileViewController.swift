@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController {
     func fetchUser() {
         if let account = self.account {
             self.navigationItem.title = account.accountName
-            AccountsAPI.find(id: account.id) { [weak self] (result, _) in
+            AccountsAPI.findAccount(id: account.id) { [weak self] (result, _) in
                 guard let weakSelf = self else { return }
                 guard let account = result else { return }
                 weakSelf.account = account
@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController {
     
     func fetchPosts() {
         if let account = self.account {
-            AccountsAPI.findFeeds(id: account.id) { [weak self] (result, error) in
+            AccountsAPI.findAccountFeeds(id: account.id) { [weak self] (result, error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)

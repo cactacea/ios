@@ -21,8 +21,8 @@ open class FeedLikesAPI {
      - parameter count: (query) Maximum number of accounts returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findLikes(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
-        findLikesWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findAccountsLikedFeed(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
+        findAccountsLikedFeedWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -36,9 +36,9 @@ open class FeedLikesAPI {
      - parameter count: (query) Maximum number of accounts returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: Observable<[Account]>
      */
-    open class func findLikes(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
+    open class func findAccountsLikedFeed(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
         return Observable.create { observer -> Disposable in
-            findLikes(id: id, since: since, offset: offset, count: count) { data, error in
+            findAccountsLikedFeed(id: id, since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -110,7 +110,7 @@ open class FeedLikesAPI {
 
      - returns: RequestBuilder<[Account]> 
      */
-    open class func findLikesWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
+    open class func findAccountsLikedFeedWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
         var path = "/feeds/{id}/likes"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -135,8 +135,8 @@ open class FeedLikesAPI {
      - parameter id: (path) Feed identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func like(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        likeWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func likeFeed(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        likeFeedWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -147,9 +147,9 @@ open class FeedLikesAPI {
      - parameter id: (path) Feed identifier. 
      - returns: Observable<Void>
      */
-    open class func like(id: Int64) -> Observable<Void> {
+    open class func likeFeed(id: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            like(id: id) { error in
+            likeFeed(id: id) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -175,7 +175,7 @@ open class FeedLikesAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func likeWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
+    open class func likeFeedWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
         var path = "/feeds/{id}/likes"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -195,8 +195,8 @@ open class FeedLikesAPI {
      - parameter id: (path) Feed identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func unlike(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        unlikeWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func unlikeFeed(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        unlikeFeedWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -207,9 +207,9 @@ open class FeedLikesAPI {
      - parameter id: (path) Feed identifier. 
      - returns: Observable<Void>
      */
-    open class func unlike(id: Int64) -> Observable<Void> {
+    open class func unlikeFeed(id: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            unlike(id: id) { error in
+            unlikeFeed(id: id) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -235,7 +235,7 @@ open class FeedLikesAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func unlikeWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
+    open class func unlikeFeedWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
         var path = "/feeds/{id}/likes"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path

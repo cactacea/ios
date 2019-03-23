@@ -18,8 +18,8 @@ open class MediumsAPI {
      - parameter id: (path) Medium identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func delete(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        deleteWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func deleteMedium(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        deleteMediumWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -30,9 +30,9 @@ open class MediumsAPI {
      - parameter id: (path) Medium identifier. 
      - returns: Observable<Void>
      */
-    open class func delete(id: Int64) -> Observable<Void> {
+    open class func deleteMedium(id: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            delete(id: id) { error in
+            deleteMedium(id: id) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -58,7 +58,7 @@ open class MediumsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func deleteWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
+    open class func deleteMediumWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
         var path = "/mediums/{id}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -133,8 +133,8 @@ open class MediumsAPI {
      - parameter file: (form) Upload a medium file 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func upload(file: URL, completion: @escaping ((_ data: [MediumCreated]?,_ error: Error?) -> Void)) {
-        uploadWithRequestBuilder(file: file).execute { (response, error) -> Void in
+    open class func uploadMedium(file: URL, completion: @escaping ((_ data: [MediumCreated]?,_ error: Error?) -> Void)) {
+        uploadMediumWithRequestBuilder(file: file).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -145,9 +145,9 @@ open class MediumsAPI {
      - parameter file: (form) Upload a medium file 
      - returns: Observable<[MediumCreated]>
      */
-    open class func upload(file: URL) -> Observable<[MediumCreated]> {
+    open class func uploadMedium(file: URL) -> Observable<[MediumCreated]> {
         return Observable.create { observer -> Disposable in
-            upload(file: file) { data, error in
+            uploadMedium(file: file) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -180,7 +180,7 @@ open class MediumsAPI {
 
      - returns: RequestBuilder<[MediumCreated]> 
      */
-    open class func uploadWithRequestBuilder(file: URL) -> RequestBuilder<[MediumCreated]> {
+    open class func uploadMediumWithRequestBuilder(file: URL) -> RequestBuilder<[MediumCreated]> {
         let path = "/mediums"
         let URLString = CactaceaAPI.basePath + path
         let formParams: [String:Any?] = [

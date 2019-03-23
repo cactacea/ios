@@ -18,7 +18,7 @@ extension MediumsAPI {
         let file = url.appendingPathComponent(fileName)
         do {
             try data.write(to: file)
-            uploadWithRequestBuilder(file: file).execute { (response, error) -> Void in
+            uploadMediumWithRequestBuilder(file: file).execute { (response, error) -> Void in
                 try! FileManager.default.removeItem(at: file)
                 completion(response?.body, error);
             }
@@ -34,7 +34,7 @@ extension MediumsAPI {
         do {
             try data.write(to: file)
             return Observable.create { observer -> Disposable in
-                upload(file: file) { data, error in
+                uploadMedium(file: file) { data, error in
                     try! FileManager.default.removeItem(at: file)
                     if let error = error {
                         observer.on(.error(error))

@@ -126,7 +126,7 @@ class FeedCell: UITableViewCell {
     @objc func tappedLike() {
         guard let feed = feed else { return }
         if let _ = feed.likedAt {
-            FeedLikesAPI.unlike(id: feed.id) { [weak self] (error) in
+            FeedLikesAPI.unlikeFeed(id: feed.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
@@ -137,7 +137,7 @@ class FeedCell: UITableViewCell {
                 }
             }
         } else {
-            FeedLikesAPI.like(id: feed.id) { [weak self] (error) in
+            FeedLikesAPI.likeFeed(id: feed.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)

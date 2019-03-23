@@ -31,7 +31,7 @@ class FeedsViewController: UIViewController {
     }
     
     func loadFeeds() {
-        FeedsAPI.findFeeds(since: nil, offset: nil, feedPrivacyType: nil, count: nil) { [weak self] (result, error) in
+        SessionAPI.findSessionFeeds(since: nil, offset: nil, count: nil) { [weak self] (result, error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)

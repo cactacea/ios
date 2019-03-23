@@ -78,8 +78,8 @@ open class AccountsAPI {
      - parameter id: (path) Account identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func find(id: Int64, completion: @escaping ((_ data: Account?,_ error: Error?) -> Void)) {
-        findWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func findAccount(id: Int64, completion: @escaping ((_ data: Account?,_ error: Error?) -> Void)) {
+        findAccountWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -90,9 +90,9 @@ open class AccountsAPI {
      - parameter id: (path) Account identifier. 
      - returns: Observable<Account>
      */
-    open class func find(id: Int64) -> Observable<Account> {
+    open class func findAccount(id: Int64) -> Observable<Account> {
         return Observable.create { observer -> Disposable in
-            find(id: id) { data, error in
+            findAccount(id: id) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -140,7 +140,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<Account> 
      */
-    open class func findWithRequestBuilder(id: Int64) -> RequestBuilder<Account> {
+    open class func findAccountWithRequestBuilder(id: Int64) -> RequestBuilder<Account> {
         var path = "/accounts/{id}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -163,8 +163,8 @@ open class AccountsAPI {
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findFeeds(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
-        findFeedsWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findAccountFeeds(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
+        findAccountFeedsWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -178,9 +178,9 @@ open class AccountsAPI {
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: Observable<[Feed]>
      */
-    open class func findFeeds(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Feed]> {
+    open class func findAccountFeeds(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Feed]> {
         return Observable.create { observer -> Disposable in
-            findFeeds(id: id, since: since, offset: offset, count: count) { data, error in
+            findAccountFeeds(id: id, since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -318,8 +318,191 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<[Feed]> 
      */
-    open class func findFeedsWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
+    open class func findAccountFeedsWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
         var path = "/accounts/{id}/feeds"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = CactaceaAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "since": since, 
+            "offset": offset, 
+            "count": count
+        ])
+        
+
+        let requestBuilder: RequestBuilder<[Feed]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get account's liked feeds
+     
+     - parameter id: (path) Account Identifier. 
+     - parameter since: (query) Filters feeds which started on since or later. (optional)
+     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func findAccountFeedsLiked(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
+        findAccountFeedsLikedWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+    /**
+     Get account's liked feeds
+     
+     - parameter id: (path) Account Identifier. 
+     - parameter since: (query) Filters feeds which started on since or later. (optional)
+     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - returns: Observable<[Feed]>
+     */
+    open class func findAccountFeedsLiked(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Feed]> {
+        return Observable.create { observer -> Disposable in
+            findAccountFeedsLiked(id: id, since: since, offset: offset, count: count) { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Get account's liked feeds
+     - GET /accounts/{id}/likes
+     - API Key:
+       - type: apiKey X-API-KEY 
+       - name: api_key
+     - OAuth:
+       - type: oauth2
+       - name: cactacea_auth
+     - examples: [{contentType=application/json, example=[ {
+  "next" : 2.027123023002321833274663731572218239307403564453125,
+  "contentWarning" : true,
+  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
+  "postedAt" : 9,
+  "contentDeleted" : true,
+  "likeCount" : 2,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : "message",
+  "mediums" : [ {
+    "contentWarning" : true,
+    "size" : 5,
+    "contentDeleted" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  }, {
+    "contentWarning" : true,
+    "size" : 5,
+    "contentDeleted" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  } ],
+  "account" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 9.301444243932575517419536481611430644989013671875,
+    "friendCount" : 5,
+    "accountName" : "accountName",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "feedCount" : 5,
+    "bio" : "bio",
+    "followingCount" : 6,
+    "friendRequestInProgress" : true,
+    "muting" : true,
+    "web" : "web",
+    "blocking" : true,
+    "following" : true,
+    "isFriend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1
+  },
+  "tags" : [ "tags", "tags" ],
+  "commentCount" : 7
+}, {
+  "next" : 2.027123023002321833274663731572218239307403564453125,
+  "contentWarning" : true,
+  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
+  "postedAt" : 9,
+  "contentDeleted" : true,
+  "likeCount" : 2,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : "message",
+  "mediums" : [ {
+    "contentWarning" : true,
+    "size" : 5,
+    "contentDeleted" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  }, {
+    "contentWarning" : true,
+    "size" : 5,
+    "contentDeleted" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  } ],
+  "account" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 9.301444243932575517419536481611430644989013671875,
+    "friendCount" : 5,
+    "accountName" : "accountName",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "feedCount" : 5,
+    "bio" : "bio",
+    "followingCount" : 6,
+    "friendRequestInProgress" : true,
+    "muting" : true,
+    "web" : "web",
+    "blocking" : true,
+    "following" : true,
+    "isFriend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1
+  },
+  "tags" : [ "tags", "tags" ],
+  "commentCount" : 7
+} ]}]
+     
+     - parameter id: (path) Account Identifier. 
+     - parameter since: (query) Filters feeds which started on since or later. (optional)
+     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+
+     - returns: RequestBuilder<[Feed]> 
+     */
+    open class func findAccountFeedsLikedWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
+        var path = "/accounts/{id}/likes"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -346,8 +529,8 @@ open class AccountsAPI {
      - parameter count: (query) Maximum number of followers returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findFollowers(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
-        findFollowersWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findAccountFollowers(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
+        findAccountFollowersWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -361,9 +544,9 @@ open class AccountsAPI {
      - parameter count: (query) Maximum number of followers returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: Observable<[Account]>
      */
-    open class func findFollowers(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
+    open class func findAccountFollowers(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
         return Observable.create { observer -> Disposable in
-            findFollowers(id: id, since: since, offset: offset, count: count) { data, error in
+            findAccountFollowers(id: id, since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -435,7 +618,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<[Account]> 
      */
-    open class func findFollowersWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
+    open class func findAccountFollowersWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
         var path = "/accounts/{id}/followers"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -455,123 +638,6 @@ open class AccountsAPI {
     }
 
     /**
-     Get accounts list a account following
-     
-     - parameter id: (path) Account Identifier. 
-     - parameter since: (query) Filters follower which started on since or later. (optional)
-     - parameter offset: (query) The offset of follower. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of follower returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func findFollowing(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
-        findFollowingWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-    /**
-     Get accounts list a account following
-     
-     - parameter id: (path) Account Identifier. 
-     - parameter since: (query) Filters follower which started on since or later. (optional)
-     - parameter offset: (query) The offset of follower. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of follower returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<[Account]>
-     */
-    open class func findFollowing(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
-        return Observable.create { observer -> Disposable in
-            findFollowing(id: id, since: since, offset: offset, count: count) { data, error in
-                if let error = error {
-                    observer.on(.error(error))
-                } else {
-                    observer.on(.next(data!))
-                }
-                observer.on(.completed)
-            }
-            return Disposables.create()
-        }
-    }
-
-    /**
-     Get accounts list a account following
-     - GET /accounts/{id}/following
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
-     - examples: [{contentType=application/json, example=[ {
-  "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
-  "friendCount" : 5,
-  "accountName" : "accountName",
-  "displayName" : "displayName",
-  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
-  "bio" : "bio",
-  "followingCount" : 6,
-  "friendRequestInProgress" : true,
-  "muting" : true,
-  "web" : "web",
-  "blocking" : true,
-  "following" : true,
-  "isFriend" : true,
-  "location" : "location",
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1
-}, {
-  "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
-  "friendCount" : 5,
-  "accountName" : "accountName",
-  "displayName" : "displayName",
-  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
-  "bio" : "bio",
-  "followingCount" : 6,
-  "friendRequestInProgress" : true,
-  "muting" : true,
-  "web" : "web",
-  "blocking" : true,
-  "following" : true,
-  "isFriend" : true,
-  "location" : "location",
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "isFollower" : true,
-  "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1
-} ]}]
-     
-     - parameter id: (path) Account Identifier. 
-     - parameter since: (query) Filters follower which started on since or later. (optional)
-     - parameter offset: (query) The offset of follower. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of follower returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-
-     - returns: RequestBuilder<[Account]> 
-     */
-    open class func findFollowingWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
-        var path = "/accounts/{id}/following"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "since": since, 
-            "offset": offset, 
-            "count": count
-        ])
-        
-
-        let requestBuilder: RequestBuilder<[Account]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
      Get a account's friends list
      
      - parameter id: (path) Account Identifier. 
@@ -580,8 +646,8 @@ open class AccountsAPI {
      - parameter count: (query) Maximum number of friends returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findFriends(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
-        findFriendsWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findAccountFriends(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
+        findAccountFriendsWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -595,9 +661,9 @@ open class AccountsAPI {
      - parameter count: (query) Maximum number of friends returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: Observable<[Account]>
      */
-    open class func findFriends(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
+    open class func findAccountFriends(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
         return Observable.create { observer -> Disposable in
-            findFriends(id: id, since: since, offset: offset, count: count) { data, error in
+            findAccountFriends(id: id, since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -669,7 +735,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<[Account]> 
      */
-    open class func findFriendsWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
+    open class func findAccountFriendsWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
         var path = "/accounts/{id}/friends"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -694,8 +760,8 @@ open class AccountsAPI {
      - parameter id: (path) Account identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findGroup(id: Int64, completion: @escaping ((_ data: Group?,_ error: Error?) -> Void)) {
-        findGroupWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func findAccountGroup(id: Int64, completion: @escaping ((_ data: Group?,_ error: Error?) -> Void)) {
+        findAccountGroupWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -706,9 +772,9 @@ open class AccountsAPI {
      - parameter id: (path) Account identifier. 
      - returns: Observable<Group>
      */
-    open class func findGroup(id: Int64) -> Observable<Group> {
+    open class func findAccountGroup(id: Int64) -> Observable<Group> {
         return Observable.create { observer -> Disposable in
-            findGroup(id: id) { data, error in
+            findAccountGroup(id: id) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -791,7 +857,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<Group> 
      */
-    open class func findGroupWithRequestBuilder(id: Int64) -> RequestBuilder<Group> {
+    open class func findAccountGroupWithRequestBuilder(id: Int64) -> RequestBuilder<Group> {
         var path = "/accounts/{id}/group"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -814,8 +880,8 @@ open class AccountsAPI {
      - parameter count: (query) Maximum number of groups returned on one result page. By default the value is 20 groups. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findGroups(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Group]?,_ error: Error?) -> Void)) {
-        findGroupsWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findAccountGroups(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Group]?,_ error: Error?) -> Void)) {
+        findAccountGroupsWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -829,9 +895,9 @@ open class AccountsAPI {
      - parameter count: (query) Maximum number of groups returned on one result page. By default the value is 20 groups. The page size can never be larger than 50. (optional)
      - returns: Observable<[Group]>
      */
-    open class func findGroups(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Group]> {
+    open class func findAccountGroups(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Group]> {
         return Observable.create { observer -> Disposable in
-            findGroups(id: id, since: since, offset: offset, count: count) { data, error in
+            findAccountGroups(id: id, since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -973,7 +1039,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<[Group]> 
      */
-    open class func findGroupsWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Group]> {
+    open class func findAccountGroupsWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Group]> {
         var path = "/accounts/{id}/groups"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -993,196 +1059,13 @@ open class AccountsAPI {
     }
 
     /**
-     Get account's liked feeds
-     
-     - parameter id: (path) Account Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func findLikes(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
-        findLikesWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-    /**
-     Get account's liked feeds
-     
-     - parameter id: (path) Account Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<[Feed]>
-     */
-    open class func findLikes(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Feed]> {
-        return Observable.create { observer -> Disposable in
-            findLikes(id: id, since: since, offset: offset, count: count) { data, error in
-                if let error = error {
-                    observer.on(.error(error))
-                } else {
-                    observer.on(.next(data!))
-                }
-                observer.on(.completed)
-            }
-            return Disposables.create()
-        }
-    }
-
-    /**
-     Get account's liked feeds
-     - GET /accounts/{id}/likes
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
-     - examples: [{contentType=application/json, example=[ {
-  "next" : 2.027123023002321833274663731572218239307403564453125,
-  "contentWarning" : true,
-  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
-  "postedAt" : 9,
-  "contentDeleted" : true,
-  "likeCount" : 2,
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "message" : "message",
-  "mediums" : [ {
-    "contentWarning" : true,
-    "size" : 5,
-    "contentDeleted" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  }, {
-    "contentWarning" : true,
-    "size" : 5,
-    "contentDeleted" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  } ],
-  "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "friendCount" : 5,
-    "accountName" : "accountName",
-    "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
-    "bio" : "bio",
-    "followingCount" : 6,
-    "friendRequestInProgress" : true,
-    "muting" : true,
-    "web" : "web",
-    "blocking" : true,
-    "following" : true,
-    "isFriend" : true,
-    "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1
-  },
-  "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
-}, {
-  "next" : 2.027123023002321833274663731572218239307403564453125,
-  "contentWarning" : true,
-  "likedAt" : 3.61607674925191080461672754609026014804840087890625,
-  "postedAt" : 9,
-  "contentDeleted" : true,
-  "likeCount" : 2,
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "message" : "message",
-  "mediums" : [ {
-    "contentWarning" : true,
-    "size" : 5,
-    "contentDeleted" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  }, {
-    "contentWarning" : true,
-    "size" : 5,
-    "contentDeleted" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  } ],
-  "account" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
-    "friendCount" : 5,
-    "accountName" : "accountName",
-    "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
-    "bio" : "bio",
-    "followingCount" : 6,
-    "friendRequestInProgress" : true,
-    "muting" : true,
-    "web" : "web",
-    "blocking" : true,
-    "following" : true,
-    "isFriend" : true,
-    "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1
-  },
-  "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
-} ]}]
-     
-     - parameter id: (path) Account Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-
-     - returns: RequestBuilder<[Feed]> 
-     */
-    open class func findLikesWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
-        var path = "/accounts/{id}/likes"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "since": since, 
-            "offset": offset, 
-            "count": count
-        ])
-        
-
-        let requestBuilder: RequestBuilder<[Feed]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
      Get account on
      
      - parameter id: (path) Account identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findStatus(id: Int64, completion: @escaping ((_ data: AccountStatus?,_ error: Error?) -> Void)) {
-        findStatusWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func findAccountStatus(id: Int64, completion: @escaping ((_ data: AccountStatus?,_ error: Error?) -> Void)) {
+        findAccountStatusWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -1193,9 +1076,9 @@ open class AccountsAPI {
      - parameter id: (path) Account identifier. 
      - returns: Observable<AccountStatus>
      */
-    open class func findStatus(id: Int64) -> Observable<AccountStatus> {
+    open class func findAccountStatus(id: Int64) -> Observable<AccountStatus> {
         return Observable.create { observer -> Disposable in
-            findStatus(id: id) { data, error in
+            findAccountStatus(id: id) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -1225,7 +1108,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<AccountStatus> 
      */
-    open class func findStatusWithRequestBuilder(id: Int64) -> RequestBuilder<AccountStatus> {
+    open class func findAccountStatusWithRequestBuilder(id: Int64) -> RequestBuilder<AccountStatus> {
         var path = "/accounts/{id}/status"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -1240,13 +1123,130 @@ open class AccountsAPI {
     }
 
     /**
+     Get accounts list a account following
+     
+     - parameter id: (path) Account Identifier. 
+     - parameter since: (query) Filters follower which started on since or later. (optional)
+     - parameter offset: (query) The offset of follower. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of follower returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func findFollowing(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
+        findFollowingWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+    /**
+     Get accounts list a account following
+     
+     - parameter id: (path) Account Identifier. 
+     - parameter since: (query) Filters follower which started on since or later. (optional)
+     - parameter offset: (query) The offset of follower. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of follower returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - returns: Observable<[Account]>
+     */
+    open class func findFollowing(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
+        return Observable.create { observer -> Disposable in
+            findFollowing(id: id, since: since, offset: offset, count: count) { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Get accounts list a account following
+     - GET /accounts/{id}/following
+     - API Key:
+       - type: apiKey X-API-KEY 
+       - name: api_key
+     - OAuth:
+       - type: oauth2
+       - name: cactacea_auth
+     - examples: [{contentType=application/json, example=[ {
+  "birthday" : 2.3021358869347654518833223846741020679473876953125,
+  "next" : 9.301444243932575517419536481611430644989013671875,
+  "friendCount" : 5,
+  "accountName" : "accountName",
+  "displayName" : "displayName",
+  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "feedCount" : 5,
+  "bio" : "bio",
+  "followingCount" : 6,
+  "friendRequestInProgress" : true,
+  "muting" : true,
+  "web" : "web",
+  "blocking" : true,
+  "following" : true,
+  "isFriend" : true,
+  "location" : "location",
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "isFollower" : true,
+  "profileImageUrl" : "profileImageUrl",
+  "followerCount" : 1
+}, {
+  "birthday" : 2.3021358869347654518833223846741020679473876953125,
+  "next" : 9.301444243932575517419536481611430644989013671875,
+  "friendCount" : 5,
+  "accountName" : "accountName",
+  "displayName" : "displayName",
+  "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+  "feedCount" : 5,
+  "bio" : "bio",
+  "followingCount" : 6,
+  "friendRequestInProgress" : true,
+  "muting" : true,
+  "web" : "web",
+  "blocking" : true,
+  "following" : true,
+  "isFriend" : true,
+  "location" : "location",
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "isFollower" : true,
+  "profileImageUrl" : "profileImageUrl",
+  "followerCount" : 1
+} ]}]
+     
+     - parameter id: (path) Account Identifier. 
+     - parameter since: (query) Filters follower which started on since or later. (optional)
+     - parameter offset: (query) The offset of follower. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of follower returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+
+     - returns: RequestBuilder<[Account]> 
+     */
+    open class func findFollowingWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
+        var path = "/accounts/{id}/following"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = CactaceaAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "since": since, 
+            "offset": offset, 
+            "count": count
+        ])
+        
+
+        let requestBuilder: RequestBuilder<[Account]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Follow a account
      
      - parameter id: (path) Account Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func follow(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        followWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func followAccount(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        followAccountWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -1257,9 +1257,9 @@ open class AccountsAPI {
      - parameter id: (path) Account Identifier. 
      - returns: Observable<Void>
      */
-    open class func follow(id: Int64) -> Observable<Void> {
+    open class func followAccount(id: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            follow(id: id) { error in
+            followAccount(id: id) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -1285,7 +1285,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func followWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
+    open class func followAccountWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
         var path = "/accounts/{id}/follow"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -1306,8 +1306,8 @@ open class AccountsAPI {
      - parameter groupId: (path) Group Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func invite(accountId: Int64, groupId: Int64, completion: @escaping ((_ data: InvitationCreated?,_ error: Error?) -> Void)) {
-        inviteWithRequestBuilder(accountId: accountId, groupId: groupId).execute { (response, error) -> Void in
+    open class func inviteAccount(accountId: Int64, groupId: Int64, completion: @escaping ((_ data: InvitationCreated?,_ error: Error?) -> Void)) {
+        inviteAccountWithRequestBuilder(accountId: accountId, groupId: groupId).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -1319,9 +1319,9 @@ open class AccountsAPI {
      - parameter groupId: (path) Group Identifier. 
      - returns: Observable<InvitationCreated>
      */
-    open class func invite(accountId: Int64, groupId: Int64) -> Observable<InvitationCreated> {
+    open class func inviteAccount(accountId: Int64, groupId: Int64) -> Observable<InvitationCreated> {
         return Observable.create { observer -> Disposable in
-            invite(accountId: accountId, groupId: groupId) { data, error in
+            inviteAccount(accountId: accountId, groupId: groupId) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -1351,7 +1351,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<InvitationCreated> 
      */
-    open class func inviteWithRequestBuilder(accountId: Int64, groupId: Int64) -> RequestBuilder<InvitationCreated> {
+    open class func inviteAccountWithRequestBuilder(accountId: Int64, groupId: Int64) -> RequestBuilder<InvitationCreated> {
         var path = "/accounts/{accountId}/groups/{groupId}/invitations"
         path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
         path = path.replacingOccurrences(of: "{groupId}", with: "\(groupId)", options: .literal, range: nil)
@@ -1373,8 +1373,8 @@ open class AccountsAPI {
      - parameter groupId: (path) Group Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func join(accountId: Int64, groupId: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        joinWithRequestBuilder(accountId: accountId, groupId: groupId).execute { (response, error) -> Void in
+    open class func joinAccount(accountId: Int64, groupId: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        joinAccountWithRequestBuilder(accountId: accountId, groupId: groupId).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -1386,9 +1386,9 @@ open class AccountsAPI {
      - parameter groupId: (path) Group Identifier. 
      - returns: Observable<Void>
      */
-    open class func join(accountId: Int64, groupId: Int64) -> Observable<Void> {
+    open class func joinAccount(accountId: Int64, groupId: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            join(accountId: accountId, groupId: groupId) { error in
+            joinAccount(accountId: accountId, groupId: groupId) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -1415,7 +1415,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func joinWithRequestBuilder(accountId: Int64, groupId: Int64) -> RequestBuilder<Void> {
+    open class func joinAccountWithRequestBuilder(accountId: Int64, groupId: Int64) -> RequestBuilder<Void> {
         var path = "/accounts/{accountId}/groups/{groupId}/join"
         path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
         path = path.replacingOccurrences(of: "{groupId}", with: "\(groupId)", options: .literal, range: nil)
@@ -1437,8 +1437,8 @@ open class AccountsAPI {
      - parameter groupId: (path) Group Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func leave(accountId: Int64, groupId: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        leaveWithRequestBuilder(accountId: accountId, groupId: groupId).execute { (response, error) -> Void in
+    open class func leaveAccount(accountId: Int64, groupId: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        leaveAccountWithRequestBuilder(accountId: accountId, groupId: groupId).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -1450,9 +1450,9 @@ open class AccountsAPI {
      - parameter groupId: (path) Group Identifier. 
      - returns: Observable<Void>
      */
-    open class func leave(accountId: Int64, groupId: Int64) -> Observable<Void> {
+    open class func leaveAccount(accountId: Int64, groupId: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            leave(accountId: accountId, groupId: groupId) { error in
+            leaveAccount(accountId: accountId, groupId: groupId) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -1479,7 +1479,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func leaveWithRequestBuilder(accountId: Int64, groupId: Int64) -> RequestBuilder<Void> {
+    open class func leaveAccountWithRequestBuilder(accountId: Int64, groupId: Int64) -> RequestBuilder<Void> {
         var path = "/accounts/{accountId}/groups/{groupId}/leave"
         path = path.replacingOccurrences(of: "{accountId}", with: "\(accountId)", options: .literal, range: nil)
         path = path.replacingOccurrences(of: "{groupId}", with: "\(groupId)", options: .literal, range: nil)
@@ -1500,8 +1500,8 @@ open class AccountsAPI {
      - parameter id: (path) Account Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func mute(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        muteWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func muteAccount(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        muteAccountWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -1512,9 +1512,9 @@ open class AccountsAPI {
      - parameter id: (path) Account Identifier. 
      - returns: Observable<Void>
      */
-    open class func mute(id: Int64) -> Observable<Void> {
+    open class func muteAccount(id: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            mute(id: id) { error in
+            muteAccount(id: id) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -1540,7 +1540,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func muteWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
+    open class func muteAccountWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
         var path = "/accounts/{id}/mutes"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -1561,8 +1561,8 @@ open class AccountsAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func report(id: Int64, body: PostAccountReportBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        reportWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
+    open class func reportAccount(id: Int64, body: PostAccountReportBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        reportAccountWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -1574,9 +1574,9 @@ open class AccountsAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func report(id: Int64, body: PostAccountReportBody) -> Observable<Void> {
+    open class func reportAccount(id: Int64, body: PostAccountReportBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            report(id: id, body: body) { error in
+            reportAccount(id: id, body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -1603,7 +1603,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func reportWithRequestBuilder(id: Int64, body: PostAccountReportBody) -> RequestBuilder<Void> {
+    open class func reportAccountWithRequestBuilder(id: Int64, body: PostAccountReportBody) -> RequestBuilder<Void> {
         var path = "/accounts/{id}/reports"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -1746,8 +1746,8 @@ open class AccountsAPI {
      - parameter id: (path) Account Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func unfollow(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        unfollowWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func unfollowAccount(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        unfollowAccountWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -1758,9 +1758,9 @@ open class AccountsAPI {
      - parameter id: (path) Account Identifier. 
      - returns: Observable<Void>
      */
-    open class func unfollow(id: Int64) -> Observable<Void> {
+    open class func unfollowAccount(id: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            unfollow(id: id) { error in
+            unfollowAccount(id: id) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -1786,7 +1786,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func unfollowWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
+    open class func unfollowAccountWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
         var path = "/accounts/{id}/follow"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -1866,8 +1866,8 @@ open class AccountsAPI {
      - parameter id: (path) Account identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func unmute(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        unmuteWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func unmuteAccount(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        unmuteAccountWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -1878,9 +1878,9 @@ open class AccountsAPI {
      - parameter id: (path) Account identifier. 
      - returns: Observable<Void>
      */
-    open class func unmute(id: Int64) -> Observable<Void> {
+    open class func unmuteAccount(id: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            unmute(id: id) { error in
+            unmuteAccount(id: id) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -1906,7 +1906,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func unmuteWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
+    open class func unmuteAccountWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
         var path = "/accounts/{id}/mutes"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -1987,8 +1987,8 @@ open class AccountsAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updateDisplayName(id: Int64, body: PutAccountDisplayNameBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        updateDisplayNameWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
+    open class func updateAccountDisplayName(id: Int64, body: PutAccountDisplayNameBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateAccountDisplayNameWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -2000,9 +2000,9 @@ open class AccountsAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func updateDisplayName(id: Int64, body: PutAccountDisplayNameBody) -> Observable<Void> {
+    open class func updateAccountDisplayName(id: Int64, body: PutAccountDisplayNameBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            updateDisplayName(id: id, body: body) { error in
+            updateAccountDisplayName(id: id, body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -2029,7 +2029,7 @@ open class AccountsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateDisplayNameWithRequestBuilder(id: Int64, body: PutAccountDisplayNameBody) -> RequestBuilder<Void> {
+    open class func updateAccountDisplayNameWithRequestBuilder(id: Int64, body: PutAccountDisplayNameBody) -> RequestBuilder<Void> {
         var path = "/accounts/{id}/display_name"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path

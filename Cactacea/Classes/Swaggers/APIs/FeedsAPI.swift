@@ -18,8 +18,8 @@ open class FeedsAPI {
      - parameter id: (path) Feed identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func delete(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
-        deleteWithRequestBuilder(id: id).execute { (response, error) -> Void in
+    open class func deleteFeed(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
+        deleteFeedWithRequestBuilder(id: id).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -30,9 +30,9 @@ open class FeedsAPI {
      - parameter id: (path) Feed identifier. 
      - returns: Observable<Void>
      */
-    open class func delete(id: Int64) -> Observable<Void> {
+    open class func deleteFeed(id: Int64) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            delete(id: id) { error in
+            deleteFeed(id: id) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -58,7 +58,7 @@ open class FeedsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func deleteWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
+    open class func deleteFeedWithRequestBuilder(id: Int64) -> RequestBuilder<Void> {
         var path = "/feeds/{id}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -198,7 +198,7 @@ open class FeedsAPI {
     }
 
     /**
-     Search feeds
+     Find feeds
      
      - parameter since: (query) Filters feeds which started on since or later. (optional)
      - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
@@ -213,7 +213,7 @@ open class FeedsAPI {
     }
 
     /**
-     Search feeds
+     Find feeds
      
      - parameter since: (query) Filters feeds which started on since or later. (optional)
      - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
@@ -236,7 +236,7 @@ open class FeedsAPI {
     }
 
     /**
-     Search feeds
+     Find feeds
      - GET /feeds
      - API Key:
        - type: apiKey X-API-KEY 
@@ -386,8 +386,8 @@ open class FeedsAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func post(body: PostFeedBody, completion: @escaping ((_ data: FeedCreated?,_ error: Error?) -> Void)) {
-        postWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func postFeed(body: PostFeedBody, completion: @escaping ((_ data: FeedCreated?,_ error: Error?) -> Void)) {
+        postFeedWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -398,9 +398,9 @@ open class FeedsAPI {
      - parameter body: (body)  
      - returns: Observable<FeedCreated>
      */
-    open class func post(body: PostFeedBody) -> Observable<FeedCreated> {
+    open class func postFeed(body: PostFeedBody) -> Observable<FeedCreated> {
         return Observable.create { observer -> Disposable in
-            post(body: body) { data, error in
+            postFeed(body: body) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -429,7 +429,7 @@ open class FeedsAPI {
 
      - returns: RequestBuilder<FeedCreated> 
      */
-    open class func postWithRequestBuilder(body: PostFeedBody) -> RequestBuilder<FeedCreated> {
+    open class func postFeedWithRequestBuilder(body: PostFeedBody) -> RequestBuilder<FeedCreated> {
         let path = "/feeds"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
@@ -449,8 +449,8 @@ open class FeedsAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func report(id: Int64, body: PostFeedReportBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        reportWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
+    open class func reportFeed(id: Int64, body: PostFeedReportBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        reportFeedWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -462,9 +462,9 @@ open class FeedsAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func report(id: Int64, body: PostFeedReportBody) -> Observable<Void> {
+    open class func reportFeed(id: Int64, body: PostFeedReportBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            report(id: id, body: body) { error in
+            reportFeed(id: id, body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -491,7 +491,7 @@ open class FeedsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func reportWithRequestBuilder(id: Int64, body: PostFeedReportBody) -> RequestBuilder<Void> {
+    open class func reportFeedWithRequestBuilder(id: Int64, body: PostFeedReportBody) -> RequestBuilder<Void> {
         var path = "/feeds/{id}/reports"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -512,8 +512,8 @@ open class FeedsAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func update(id: Int64, body: PutFeedBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        updateWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
+    open class func updateFeed(id: Int64, body: PutFeedBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateFeedWithRequestBuilder(id: id, body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -525,9 +525,9 @@ open class FeedsAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func update(id: Int64, body: PutFeedBody) -> Observable<Void> {
+    open class func updateFeed(id: Int64, body: PutFeedBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            update(id: id, body: body) { error in
+            updateFeed(id: id, body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -554,7 +554,7 @@ open class FeedsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updateWithRequestBuilder(id: Int64, body: PutFeedBody) -> RequestBuilder<Void> {
+    open class func updateFeedWithRequestBuilder(id: Int64, body: PutFeedBody) -> RequestBuilder<Void> {
         var path = "/feeds/{id}"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path

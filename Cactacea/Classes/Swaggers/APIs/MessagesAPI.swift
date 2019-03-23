@@ -18,8 +18,8 @@ open class MessagesAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func delete(body: DeleteMessagesBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        deleteWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func deleteMessage(body: DeleteMessagesBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        deleteMessageWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -30,9 +30,9 @@ open class MessagesAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func delete(body: DeleteMessagesBody) -> Observable<Void> {
+    open class func deleteMessage(body: DeleteMessagesBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            delete(body: body) { error in
+            deleteMessage(body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -58,7 +58,7 @@ open class MessagesAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func deleteWithRequestBuilder(body: DeleteMessagesBody) -> RequestBuilder<Void> {
+    open class func deleteMessageWithRequestBuilder(body: DeleteMessagesBody) -> RequestBuilder<Void> {
         let path = "/messages"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
