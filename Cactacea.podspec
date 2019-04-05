@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Cactacea'
-  s.version = '19.3.4'
+  s.version = '19.3.8'
   s.summary = 'Cactacea iOS SDK'
   s.description = 'An iOS library to interface with Cactacea backend API'
   s.ios.deployment_target = '9.0'
