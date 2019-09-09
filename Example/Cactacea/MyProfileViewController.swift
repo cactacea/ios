@@ -30,12 +30,12 @@ class MyProfileViewController: UIViewController {
     }
     
     func fetchUser() {
-        if let authentication = Session.authentication {
-            self.navigationItem.title = authentication.account.accountName
-            SessionAPI.findSession() { [weak self] (account, _) in
+        if let user = Session.user {
+            self.navigationItem.title = user.userName
+            SessionAPI.findSession() { [weak self] (user, _) in
                 guard let weakSelf = self else { return }
-                guard let account = account else { return }
-                authentication.account = account
+                guard let user = user else { return }
+                Session.user = user
                 weakSelf.collectionView.reloadData()
             }
         }
@@ -75,8 +75,8 @@ extension MyProfileViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerViewCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "MyProfileHeaderReusableView", for: indexPath) as! MyProfileHeaderReusableView
-        if let account = Session.authentication?.account {
-            headerViewCell.account = account
+        if let user = Session.user {
+            headerViewCell.user = user
             headerViewCell.delegate = self
         }
         return headerViewCell

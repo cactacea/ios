@@ -16,22 +16,22 @@ class ContactViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var pageFooterView: PageFooterView!
 
-    lazy private var pager = Pager<Account>(tableView, pageFooterView)
+    lazy private var pager = Pager<User>(tableView, pageFooterView)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.pager.fetchBlock =  { [weak self] (paginator, first) -> Observable<[Account]> in
+        self.pager.fetchBlock =  { [weak self] (paginator, first) -> Observable<[User]> in
             guard let _ = self else { return Observable.empty() }
             let next = first ? nil : paginator.items.last?.next
-            return SessionAPI.findSessionFriends(since: next, offset: nil, count: nil, sortType: .accountname)
+            return SessionAPI.findSessionFriends(since: next, offset: nil, count: nil)
         }
         
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let _ = Session.authentication {
+        if let _ = Session.user {
             self.pager.fetchFirst()
         }
     }
@@ -41,14 +41,14 @@ class ContactViewController: UIViewController {
 extension ContactViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let account = self.pager.items[indexPath.row]
-        performSegue(withIdentifier: "chat", sender: account)
+        let user = self.pager.items[indexPath.row]
+        performSegue(withIdentifier: "chat", sender: user)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chat" {
-            if let vc = segue.destination as? ChatViewController, let account = sender as? Account {
-                vc.account = account
+            if let vc = segue.destination as? ChatViewController, let user = sender as? User {
+                vc.user = user
             }
         }
     }
@@ -67,8 +67,8 @@ extension ContactViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath)
         if let cell = cell as? ContactCell {
-            let account = self.pager.items[indexPath.row]
-            cell.account = account
+            let user = self.pager.items[indexPath.row]
+            cell.user = user
         }
         return cell
     }

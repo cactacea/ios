@@ -13,7 +13,7 @@ import AlamofireImage
 
 class ReceivedFriendRequestsCell: UITableViewCell {
     
-    @IBOutlet var accountNameLabel: UILabel!
+    @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var acceptButton: UIButton!
     @IBOutlet var rejectButton: UIButton!
@@ -21,42 +21,22 @@ class ReceivedFriendRequestsCell: UITableViewCell {
     var friendRequest: FriendRequest? {
         didSet {
             updateFriendRequest()
-            updateButtons()
         }
     }
 
     func updateFriendRequest() {
         guard let friendRequest = friendRequest else { return }
 
-        accountNameLabel.text = friendRequest.account.accountName
-        if let smallImageURL = friendRequest.account.profileImageUrl {
+        userNameLabel.text = friendRequest.user.userName
+        if let smallImageURL = friendRequest.user.profileImageUrl {
             let urlRequest = Session.request(url: smallImageURL)
             profileImageView.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }
+        acceptButton.isHidden = false
+        rejectButton.isHidden = false
+        acceptButton.backgroundColor = UIColor.mainBlue
     }
     
-    func updateButtons() {
-        guard let friendRequest = friendRequest else { return }
-
-        if friendRequest.requestStatus == .noresponded  {
-            acceptButton.isHidden = false
-            rejectButton.isHidden = false
-            acceptButton.backgroundColor = UIColor.mainBlue
-        } else if friendRequest.requestStatus == .accepted {
-            acceptButton.setTitle("Accepted", for: .normal)
-            acceptButton.backgroundColor = UIColor.mainLightBlue
-            acceptButton.isHidden = false
-            acceptButton.isEnabled = false
-            rejectButton.isHidden = true
-        } else if friendRequest.requestStatus == .rejected {
-            acceptButton.isHidden = true
-            rejectButton.setTitle("Rejected", for: .normal)
-            rejectButton.isHidden = false
-            rejectButton.isEnabled = false
-        }
-        acceptButton.showsActivityIndicator = false
-    }
-
     @IBAction func tappedAccept(_ sender: Any) {
         guard let friendRequest = friendRequest else { return }
 
@@ -71,9 +51,13 @@ class ReceivedFriendRequestsCell: UITableViewCell {
             if let error = error {
                 Session.showError(error)
             } else {
-                friendRequest.requestStatus = .accepted
+                weakSelf.acceptButton.setTitle("Accepted", for: .normal)
+                weakSelf.acceptButton.backgroundColor = UIColor.mainLightBlue
+                weakSelf.acceptButton.isHidden = false
+                weakSelf.acceptButton.isEnabled = false
+                weakSelf.rejectButton.isHidden = true
             }
-            weakSelf.updateButtons()
+            weakSelf.acceptButton.showsActivityIndicator = false
         }
     }
 
@@ -91,9 +75,12 @@ class ReceivedFriendRequestsCell: UITableViewCell {
             if let error = error {
                 Session.showError(error)
             } else {
-                friendRequest.requestStatus = .rejected
+                weakSelf.acceptButton.isHidden = true
+                weakSelf.rejectButton.setTitle("Rejected", for: .normal)
+                weakSelf.rejectButton.isHidden = false
+                weakSelf.rejectButton.isEnabled = false
             }
-            weakSelf.updateButtons()
+            weakSelf.acceptButton.showsActivityIndicator = false
         }
     }
     

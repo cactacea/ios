@@ -19,8 +19,7 @@
 		820EE92A21C5502100B1CDE2 /* Pager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EE92921C5502100B1CDE2 /* Pager.swift */; };
 		820EE92D21C5BD9700B1CDE2 /* FriendRequetsSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EE92C21C5BD9700B1CDE2 /* FriendRequetsSentViewController.swift */; };
 		820EE92F21C5BDB000B1CDE2 /* FriendRequetsSentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EE92E21C5BDB000B1CDE2 /* FriendRequetsSentCell.swift */; };
-		820EE93221C5C14400B1CDE2 /* BlockingUsersViewControlller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EE93121C5C14400B1CDE2 /* BlockingUsersViewControlller.swift */; };
-		820EE93421C5C15A00B1CDE2 /* BlockingUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EE93321C5C15A00B1CDE2 /* BlockingUserCell.swift */; };
+		820EE93421C5C15A00B1CDE2 /* BlocksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EE93321C5C15A00B1CDE2 /* BlocksCell.swift */; };
 		820FE83521AA63DE001097F5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 820FE83421AA63DE001097F5 /* Images.xcassets */; };
 		820FE83721AC0CE0001097F5 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820FE83621AC0CE0001097F5 /* Session.swift */; };
 		820FE83A21AC0E6C001097F5 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820FE83921AC0E6C001097F5 /* MainController.swift */; };
@@ -58,8 +57,8 @@
 		82968E0A21C62A4C0023A11E /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82968E0921C62A4C0023A11E /* FriendsViewController.swift */; };
 		82968E0C21C62A5A0023A11E /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82968E0B21C62A5A0023A11E /* FriendCell.swift */; };
 		829857C621C5F14800D4773D /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829857C521C5F14800D4773D /* RequestBuilder.swift */; };
-		829857C921C5F74600D4773D /* FollowingUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829857C821C5F74600D4773D /* FollowingUsersViewController.swift */; };
-		829857CB21C5F75800D4773D /* FollowingUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829857CA21C5F75800D4773D /* FollowingUserCell.swift */; };
+		829857C921C5F74600D4773D /* FollowsViewControlller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829857C821C5F74600D4773D /* FollowsViewControlller.swift */; };
+		829857CB21C5F75800D4773D /* FollowsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829857CA21C5F75800D4773D /* FollowsCell.swift */; };
 		829CF04221AC1CD400D5B5EB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04121AC1CD400D5B5EB /* UIView+Extension.swift */; };
 		829CF04D21AD6AC100D5B5EB /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04C21AD6AC100D5B5EB /* SharePhotoController.swift */; };
 		829CF04F21AD6B3600D5B5EB /* PlaceHolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CF04E21AD6B3600D5B5EB /* PlaceHolderTextView.swift */; };
@@ -71,6 +70,7 @@
 		82AE928D21C6824500B34F50 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AE928C21C6824500B34F50 /* ProfileViewController.swift */; };
 		82AE928F21C6840400B34F50 /* ProfileHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AE928E21C6840400B34F50 /* ProfileHeaderReusableView.swift */; };
 		82AE929421C69D4B00B34F50 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AE929321C69D4B00B34F50 /* NotificationSettingsViewController.swift */; };
+		82C4F39223252DDF00984FBB /* BlocksViewControlller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C4F39123252DDF00984FBB /* BlocksViewControlller.swift */; };
 		82D4F2DC21EB224000F6BF5B /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D4F2DB21EB224000F6BF5B /* ChatMessage.swift */; };
 		A30072B50BFA31CA9C144705 /* Pods_Cactacea_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E62A8AEF46FEDBB34C8B0FF /* Pods_Cactacea_Example.framework */; };
 /* End PBXBuildFile section */
@@ -128,8 +128,7 @@
 		820EE92921C5502100B1CDE2 /* Pager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pager.swift; sourceTree = "<group>"; };
 		820EE92C21C5BD9700B1CDE2 /* FriendRequetsSentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequetsSentViewController.swift; sourceTree = "<group>"; };
 		820EE92E21C5BDB000B1CDE2 /* FriendRequetsSentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequetsSentCell.swift; sourceTree = "<group>"; };
-		820EE93121C5C14400B1CDE2 /* BlockingUsersViewControlller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingUsersViewControlller.swift; sourceTree = "<group>"; };
-		820EE93321C5C15A00B1CDE2 /* BlockingUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingUserCell.swift; sourceTree = "<group>"; };
+		820EE93321C5C15A00B1CDE2 /* BlocksCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksCell.swift; sourceTree = "<group>"; };
 		820FE83421AA63DE001097F5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		820FE83621AC0CE0001097F5 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		820FE83921AC0E6C001097F5 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
@@ -169,8 +168,8 @@
 		82968E0921C62A4C0023A11E /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		82968E0B21C62A5A0023A11E /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		829857C521C5F14800D4773D /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
-		829857C821C5F74600D4773D /* FollowingUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingUsersViewController.swift; sourceTree = "<group>"; };
-		829857CA21C5F75800D4773D /* FollowingUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingUserCell.swift; sourceTree = "<group>"; };
+		829857C821C5F74600D4773D /* FollowsViewControlller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsViewControlller.swift; sourceTree = "<group>"; };
+		829857CA21C5F75800D4773D /* FollowsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsCell.swift; sourceTree = "<group>"; };
 		829CF04121AC1CD400D5B5EB /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		829CF04C21AD6AC100D5B5EB /* SharePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
 		829CF04E21AD6B3600D5B5EB /* PlaceHolderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolderTextView.swift; sourceTree = "<group>"; };
@@ -182,6 +181,7 @@
 		82AE928C21C6824500B34F50 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		82AE928E21C6840400B34F50 /* ProfileHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderReusableView.swift; sourceTree = "<group>"; };
 		82AE929321C69D4B00B34F50 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
+		82C4F39123252DDF00984FBB /* BlocksViewControlller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlocksViewControlller.swift; sourceTree = "<group>"; };
 		82D4F2DB21EB224000F6BF5B /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		8C3BD379CA48ADD2A72E8FCF /* Pods-Cactacea_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A1C9CEFA1F069BCA9720392 /* Pods-Cactacea_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -346,8 +346,8 @@
 		820EE93021C5C11700B1CDE2 /* BlockingUsers */ = {
 			isa = PBXGroup;
 			children = (
-				820EE93121C5C14400B1CDE2 /* BlockingUsersViewControlller.swift */,
-				820EE93321C5C15A00B1CDE2 /* BlockingUserCell.swift */,
+				82C4F39123252DDF00984FBB /* BlocksViewControlller.swift */,
+				820EE93321C5C15A00B1CDE2 /* BlocksCell.swift */,
 			);
 			name = BlockingUsers;
 			sourceTree = "<group>";
@@ -360,7 +360,7 @@
 				82AE928B21C6823300B34F50 /* Profile */,
 				82968E0821C629650023A11E /* Friends */,
 				82968E0321C61EDF0023A11E /* Followers */,
-				829857C721C5F72400D4773D /* FollowingUsers */,
+				829857C721C5F72400D4773D /* Follows */,
 				820EE93021C5C11700B1CDE2 /* BlockingUsers */,
 				820EE92B21C5BD7100B1CDE2 /* RequestsSent */,
 				82AD415921BFFEE50023EF6C /* ReceivedFriendRequests */,
@@ -481,13 +481,13 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		829857C721C5F72400D4773D /* FollowingUsers */ = {
+		829857C721C5F72400D4773D /* Follows */ = {
 			isa = PBXGroup;
 			children = (
-				829857C821C5F74600D4773D /* FollowingUsersViewController.swift */,
-				829857CA21C5F75800D4773D /* FollowingUserCell.swift */,
+				829857C821C5F74600D4773D /* FollowsViewControlller.swift */,
+				829857CA21C5F75800D4773D /* FollowsCell.swift */,
 			);
-			name = FollowingUsers;
+			name = Follows;
 			sourceTree = "<group>";
 		};
 		829CF04521AD5E4000D5B5EB /* Extensions */ = {
@@ -665,6 +665,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -736,23 +737,19 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D0BF220F6C34F30F3873D227 /* [CP] Check Pods Manifest.lock */ = {
@@ -782,16 +779,14 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Cactacea/Cactacea.framework",
+				"${BUILT_PRODUCTS_DIR}/InputBarAccessoryView/InputBarAccessoryView.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
-				"${BUILT_PRODUCTS_DIR}/MessageInputBar/MessageInputBar.framework",
 				"${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PryntTrimmerView/PryntTrimmerView.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
@@ -803,15 +798,13 @@
 				"${BUILT_PRODUCTS_DIR}/YPImagePicker/YPImagePicker.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActiveLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cactacea.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InputBarAccessoryView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageInputBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PryntTrimmerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
@@ -824,7 +817,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E26788E382B2608BFC6D64B0 /* [CP] Check Pods Manifest.lock */ = {
@@ -885,7 +878,7 @@
 				824BC48D21BCEDF30094841A /* OptionsViewController.swift in Sources */,
 				829CF04D21AD6AC100D5B5EB /* SharePhotoController.swift in Sources */,
 				829CF04221AC1CD400D5B5EB /* UIView+Extension.swift in Sources */,
-				820EE93421C5C15A00B1CDE2 /* BlockingUserCell.swift in Sources */,
+				820EE93421C5C15A00B1CDE2 /* BlocksCell.swift in Sources */,
 				82112B7F21BB5A0B00F2C54B /* FeedsViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				821B278E21D26C1300F4F42E /* Medium+Extension.swift in Sources */,
@@ -893,7 +886,7 @@
 				821B279221D26C6800F4F42E /* UIAlertController+Extension.swift in Sources */,
 				820EE92A21C5502100B1CDE2 /* Pager.swift in Sources */,
 				8232367B21CF3A300086F4CB /* UIViewController+Extensions.swift in Sources */,
-				829857CB21C5F75800D4773D /* FollowingUserCell.swift in Sources */,
+				829857CB21C5F75800D4773D /* FollowsCell.swift in Sources */,
 				82AE929421C69D4B00B34F50 /* NotificationSettingsViewController.swift in Sources */,
 				820EE92F21C5BDB000B1CDE2 /* FriendRequetsSentCell.swift in Sources */,
 				820FE83721AC0CE0001097F5 /* Session.swift in Sources */,
@@ -904,13 +897,13 @@
 				82112B8121BB5A2700F2C54B /* FeedCell.swift in Sources */,
 				82112B8621BB934D00F2C54B /* CommentCell.swift in Sources */,
 				8232368121CF3A690086F4CB /* Settings+UserDefaults.swift in Sources */,
-				829857C921C5F74600D4773D /* FollowingUsersViewController.swift in Sources */,
+				829857C921C5F74600D4773D /* FollowsViewControlller.swift in Sources */,
 				82D4F2DC21EB224000F6BF5B /* ChatMessage.swift in Sources */,
 				829857C621C5F14800D4773D /* RequestBuilder.swift in Sources */,
 				82968E0C21C62A5A0023A11E /* FriendCell.swift in Sources */,
 				821B279E21D26D4600F4F42E /* NSNotification+Extension.swift in Sources */,
-				820EE93221C5C14400B1CDE2 /* BlockingUsersViewControlller.swift in Sources */,
 				820FE83C21AC0EEC001097F5 /* SignUpViewController.swift in Sources */,
+				82C4F39223252DDF00984FBB /* BlocksViewControlller.swift in Sources */,
 				829CF05421B565A000D5B5EB /* FindFriendsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,32 +13,32 @@ import RxSwift
 
 open class CommentLikesAPI {
     /**
-     Get accounts list who liked on a comment
+     Get users list who liked on a comment
      
      - parameter id: (path) Comment Identifier. 
-     - parameter since: (query) Filters accounts which started on since or later. (optional)
-     - parameter offset: (query) The offset of accounts. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of accounts returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter since: (query) Filters users which started on since or later. (optional)
+     - parameter offset: (query) The offset of users. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of users returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findAccountsLikedComment(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Account]?,_ error: Error?) -> Void)) {
-        findAccountsLikedCommentWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findUsersLikedComment(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [User]?,_ error: Error?) -> Void)) {
+        findUsersLikedCommentWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
 
     /**
-     Get accounts list who liked on a comment
+     Get users list who liked on a comment
      
      - parameter id: (path) Comment Identifier. 
-     - parameter since: (query) Filters accounts which started on since or later. (optional)
-     - parameter offset: (query) The offset of accounts. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of accounts returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<[Account]>
+     - parameter since: (query) Filters users which started on since or later. (optional)
+     - parameter offset: (query) The offset of users. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of users returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - returns: Observable<[User]>
      */
-    open class func findAccountsLikedComment(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Account]> {
+    open class func findUsersLikedComment(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[User]> {
         return Observable.create { observer -> Disposable in
-            findAccountsLikedComment(id: id, since: since, offset: offset, count: count) { data, error in
+            findUsersLikedComment(id: id, since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -51,66 +51,64 @@ open class CommentLikesAPI {
     }
 
     /**
-     Get accounts list who liked on a comment
+     Get users list who liked on a comment
      - GET /comments/{id}/likes
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
   "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
+  "next" : 3,
+  "followCount" : 6,
   "friendCount" : 5,
-  "accountName" : "accountName",
+  "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
   "feedCount" : 5,
   "bio" : "bio",
-  "followingCount" : 6,
+  "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+  "userName" : "userName",
+  "follow" : true,
   "friendRequestInProgress" : true,
-  "muting" : true,
+  "blocked" : true,
   "web" : "web",
-  "blocking" : true,
-  "following" : true,
   "isFriend" : true,
   "location" : "location",
   "id" : 0.80082819046101150206595775671303272247314453125,
   "isFollower" : true,
   "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1
+  "followerCount" : 1,
+  "muted" : true
 }, {
   "birthday" : 2.3021358869347654518833223846741020679473876953125,
-  "next" : 9.301444243932575517419536481611430644989013671875,
+  "next" : 3,
+  "followCount" : 6,
   "friendCount" : 5,
-  "accountName" : "accountName",
+  "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
   "feedCount" : 5,
   "bio" : "bio",
-  "followingCount" : 6,
+  "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+  "userName" : "userName",
+  "follow" : true,
   "friendRequestInProgress" : true,
-  "muting" : true,
+  "blocked" : true,
   "web" : "web",
-  "blocking" : true,
-  "following" : true,
   "isFriend" : true,
   "location" : "location",
   "id" : 0.80082819046101150206595775671303272247314453125,
   "isFollower" : true,
   "profileImageUrl" : "profileImageUrl",
-  "followerCount" : 1
+  "followerCount" : 1,
+  "muted" : true
 } ]}]
      
      - parameter id: (path) Comment Identifier. 
-     - parameter since: (query) Filters accounts which started on since or later. (optional)
-     - parameter offset: (query) The offset of accounts. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of accounts returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter since: (query) Filters users which started on since or later. (optional)
+     - parameter offset: (query) The offset of users. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of users returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
 
-     - returns: RequestBuilder<[Account]> 
+     - returns: RequestBuilder<[User]> 
      */
-    open class func findAccountsLikedCommentWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Account]> {
+    open class func findUsersLikedCommentWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[User]> {
         var path = "/comments/{id}/likes"
         path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
         let URLString = CactaceaAPI.basePath + path
@@ -124,7 +122,7 @@ open class CommentLikesAPI {
         ])
         
 
-        let requestBuilder: RequestBuilder<[Account]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<[User]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -164,12 +162,6 @@ open class CommentLikesAPI {
     /**
      Set a like on a comment
      - POST /comments/{id}/likes
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      
      - parameter id: (path) Comment Identifier. 
 
@@ -224,12 +216,6 @@ open class CommentLikesAPI {
     /**
      Remove a like on a comment
      - DELETE /comments/{id}/likes
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      
      - parameter id: (path) Comment Identifier. 
 

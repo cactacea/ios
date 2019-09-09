@@ -13,44 +13,27 @@ import AlamofireImage
 
 class FriendRequestsSentCell: UITableViewCell {
     
-    @IBOutlet var accountNameLabel: UILabel!
+    @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var cancelButton: UIButton!
     
     var friendRequest: FriendRequest? {
         didSet {
             updateFriendRequest()
-            updateButtons()
         }
     }
     
     func updateFriendRequest() {
         guard let friendRequest = friendRequest else { return }
         
-        accountNameLabel.text = friendRequest.account.accountName
-        if let smallImageURL = friendRequest.account.profileImageUrl {
+        userNameLabel.text = friendRequest.user.userName
+        if let smallImageURL = friendRequest.user.profileImageUrl {
             let urlRequest = Session.request(url: smallImageURL)
             profileImageView.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }
-    }
-    
-    func updateButtons() {
-        guard let friendRequest = friendRequest else { return }
-        
-        if friendRequest.requestStatus == .noresponded  {
-            cancelButton.backgroundColor = UIColor.mainBlue
-            cancelButton.setTitle("Cancel", for: .normal)
-            cancelButton.isEnabled = true
-        } else if friendRequest.requestStatus == .rejected {
-            cancelButton.backgroundColor = UIColor.mainLightBlue
-            cancelButton.setTitle("Rejected", for: .normal)
-            cancelButton.isEnabled = false
-        } else if friendRequest.requestStatus == .accepted {
-            cancelButton.backgroundColor = UIColor.mainLightBlue
-            cancelButton.setTitle("Accepted", for: .normal)
-            cancelButton.isEnabled = false
-        }
-        cancelButton.showsActivityIndicator = false
+        cancelButton.backgroundColor = UIColor.mainBlue
+        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.isEnabled = true
     }
     
     @IBAction func tappedCancel(_ sender: Any) {
@@ -61,14 +44,16 @@ class FriendRequestsSentCell: UITableViewCell {
         cancelButton.showsActivityIndicator = true
         cancelButton.setTitle("", for: .normal)
         
-        AccountsAPI.unrequest(id: friendRequest.account.id) { [weak self] (error) in
+        UsersAPI.deleteRequest(id: friendRequest.user.id) { [weak self] (error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)
             } else {
-                friendRequest.requestStatus = .rejected
+                weakSelf.cancelButton.backgroundColor = UIColor.mainLightBlue
+                weakSelf.cancelButton.setTitle("Deleted", for: .normal)
+                weakSelf.cancelButton.isEnabled = false
             }
-            weakSelf.updateButtons()
+            weakSelf.cancelButton.showsActivityIndicator = false
         }
     }
     

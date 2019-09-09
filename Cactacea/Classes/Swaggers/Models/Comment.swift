@@ -13,24 +13,26 @@ open class Comment: Codable {
 
     public var id: Int64
     public var replyId: Int64?
+    public var feedId: Int64
     public var message: String
-    public var account: Account
+    public var user: User
     public var likeCount: Int64
-    public var contentWarning: Bool
-    public var contentDeleted: Bool
+    public var warning: Bool
+    public var rejected: Bool
     public var postedAt: Int64
-    public var next: Int64?
+    public var next: Int64
 
 
     
-    public init(id: Int64, replyId: Int64?, message: String, account: Account, likeCount: Int64, contentWarning: Bool, contentDeleted: Bool, postedAt: Int64, next: Int64?) {
+    public init(id: Int64, replyId: Int64?, feedId: Int64, message: String, user: User, likeCount: Int64, warning: Bool, rejected: Bool, postedAt: Int64, next: Int64) {
         self.id = id
         self.replyId = replyId
+        self.feedId = feedId
         self.message = message
-        self.account = account
+        self.user = user
         self.likeCount = likeCount
-        self.contentWarning = contentWarning
-        self.contentDeleted = contentDeleted
+        self.warning = warning
+        self.rejected = rejected
         self.postedAt = postedAt
         self.next = next
     }
@@ -44,13 +46,14 @@ open class Comment: Codable {
 
         try container.encode(id, forKey: "id")
         try container.encodeIfPresent(replyId, forKey: "replyId")
+        try container.encode(feedId, forKey: "feedId")
         try container.encode(message, forKey: "message")
-        try container.encode(account, forKey: "account")
+        try container.encode(user, forKey: "user")
         try container.encode(likeCount, forKey: "likeCount")
-        try container.encode(contentWarning, forKey: "contentWarning")
-        try container.encode(contentDeleted, forKey: "contentDeleted")
+        try container.encode(warning, forKey: "warning")
+        try container.encode(rejected, forKey: "rejected")
         try container.encode(postedAt, forKey: "postedAt")
-        try container.encodeIfPresent(next, forKey: "next")
+        try container.encode(next, forKey: "next")
     }
 
     // Decodable protocol methods
@@ -60,13 +63,14 @@ open class Comment: Codable {
 
         id = try container.decode(Int64.self, forKey: "id")
         replyId = try container.decodeIfPresent(Int64.self, forKey: "replyId")
+        feedId = try container.decode(Int64.self, forKey: "feedId")
         message = try container.decode(String.self, forKey: "message")
-        account = try container.decode(Account.self, forKey: "account")
+        user = try container.decode(User.self, forKey: "user")
         likeCount = try container.decode(Int64.self, forKey: "likeCount")
-        contentWarning = try container.decode(Bool.self, forKey: "contentWarning")
-        contentDeleted = try container.decode(Bool.self, forKey: "contentDeleted")
+        warning = try container.decode(Bool.self, forKey: "warning")
+        rejected = try container.decode(Bool.self, forKey: "rejected")
         postedAt = try container.decode(Int64.self, forKey: "postedAt")
-        next = try container.decodeIfPresent(Int64.self, forKey: "next")
+        next = try container.decode(Int64.self, forKey: "next")
     }
 }
 

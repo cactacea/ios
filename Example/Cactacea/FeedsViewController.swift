@@ -25,13 +25,13 @@ class FeedsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let _ = Session.authentication {
+        if let _ = Session.user {
             loadFeeds()
         }
     }
     
     func loadFeeds() {
-        SessionAPI.findSessionFeeds(since: nil, offset: nil, count: nil) { [weak self] (result, error) in
+        SessionAPI.findSessionFeeds(since: nil, offset: nil, feedPrivacyType: nil, count: nil) { [weak self] (result, error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)
@@ -63,8 +63,8 @@ extension FeedsViewController: FeedCellDelegate {
         performSegue(withIdentifier: "comment", sender: feed)
     }
 
-    func tappedProfile(account: Account) {
-        performSegue(withIdentifier: "profile", sender: account)
+    func tappedProfile(user: User) {
+        performSegue(withIdentifier: "profile", sender: user)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -74,8 +74,8 @@ extension FeedsViewController: FeedCellDelegate {
             vc.feed = feed
         } else if segue.identifier == "profile" {
             let vc = segue.destination as! ProfileViewController
-            let account = sender as! Account
-            vc.account = account
+            let user = sender as! User
+            vc.user = user
         }
     }
 

@@ -47,12 +47,6 @@ open class MediumsAPI {
     /**
      Delete a medium
      - DELETE /mediums/{id}
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      
      - parameter id: (path) Medium identifier. 
 
@@ -105,12 +99,6 @@ open class MediumsAPI {
     /**
      Get a medium
      - GET /mediums/:*
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
 
      - returns: RequestBuilder<Void> 
      */
@@ -162,12 +150,6 @@ open class MediumsAPI {
     /**
      Upload a medium
      - POST /mediums
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
   "id" : 0.80082819046101150206595775671303272247314453125,
   "uri" : "uri"

@@ -10,10 +10,9 @@ import MessageKit
 import Cactacea
 
 extension Message: MessageType {
-    
-    /// The sender of the message.
-    public var sender: Sender {
-        return Sender(id: String(self.account.id), displayName: self.account.displayName)
+
+    public var sender: SenderType {
+        return Sender(id: String(self.user.id), displayName: self.user.displayName)
     }
     
     /// The unique identifier for the message.
@@ -38,6 +37,7 @@ extension Message: MessageType {
         }
         return .text(self.message ?? "")
     }
+
 }
 
 

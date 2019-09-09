@@ -11,15 +11,15 @@ import Foundation
 
 open class PostMediumBody: Codable {
 
-    /** Group identifier. */
-    public var groupId: Int64
+    /** Channel identifier. */
+    public var channelId: Int64
     /** A medium will be posted. */
     public var mediumId: Int64
 
 
     
-    public init(groupId: Int64, mediumId: Int64) {
-        self.groupId = groupId
+    public init(channelId: Int64, mediumId: Int64) {
+        self.channelId = channelId
         self.mediumId = mediumId
     }
     
@@ -30,7 +30,7 @@ open class PostMediumBody: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encode(groupId, forKey: "groupId")
+        try container.encode(channelId, forKey: "channelId")
         try container.encode(mediumId, forKey: "mediumId")
     }
 
@@ -39,7 +39,7 @@ open class PostMediumBody: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        groupId = try container.decode(Int64.self, forKey: "groupId")
+        channelId = try container.decode(Int64.self, forKey: "channelId")
         mediumId = try container.decode(Int64.self, forKey: "mediumId")
     }
 }

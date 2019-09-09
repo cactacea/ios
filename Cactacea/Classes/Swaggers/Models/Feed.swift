@@ -13,31 +13,31 @@ open class Feed: Codable {
 
     public var id: Int64
     public var message: String
-    public var mediums: [Medium]?
+    public var mediums: [Medium]
     public var tags: [String]?
-    public var account: Account?
+    public var user: User?
     public var likeCount: Int64
     public var commentCount: Int64
-    public var contentWarning: Bool
-    public var contentDeleted: Bool
+    public var liked: Bool
+    public var warning: Bool
+    public var rejected: Bool
     public var postedAt: Int64
-    public var likedAt: Int64?
-    public var next: Int64?
+    public var next: Int64
 
 
     
-    public init(id: Int64, message: String, mediums: [Medium]?, tags: [String]?, account: Account?, likeCount: Int64, commentCount: Int64, contentWarning: Bool, contentDeleted: Bool, postedAt: Int64, likedAt: Int64?, next: Int64?) {
+    public init(id: Int64, message: String, mediums: [Medium], tags: [String]?, user: User?, likeCount: Int64, commentCount: Int64, liked: Bool, warning: Bool, rejected: Bool, postedAt: Int64, next: Int64) {
         self.id = id
         self.message = message
         self.mediums = mediums
         self.tags = tags
-        self.account = account
+        self.user = user
         self.likeCount = likeCount
         self.commentCount = commentCount
-        self.contentWarning = contentWarning
-        self.contentDeleted = contentDeleted
+        self.liked = liked
+        self.warning = warning
+        self.rejected = rejected
         self.postedAt = postedAt
-        self.likedAt = likedAt
         self.next = next
     }
     
@@ -50,16 +50,16 @@ open class Feed: Codable {
 
         try container.encode(id, forKey: "id")
         try container.encode(message, forKey: "message")
-        try container.encodeIfPresent(mediums, forKey: "mediums")
+        try container.encode(mediums, forKey: "mediums")
         try container.encodeIfPresent(tags, forKey: "tags")
-        try container.encodeIfPresent(account, forKey: "account")
+        try container.encodeIfPresent(user, forKey: "user")
         try container.encode(likeCount, forKey: "likeCount")
         try container.encode(commentCount, forKey: "commentCount")
-        try container.encode(contentWarning, forKey: "contentWarning")
-        try container.encode(contentDeleted, forKey: "contentDeleted")
+        try container.encode(liked, forKey: "liked")
+        try container.encode(warning, forKey: "warning")
+        try container.encode(rejected, forKey: "rejected")
         try container.encode(postedAt, forKey: "postedAt")
-        try container.encodeIfPresent(likedAt, forKey: "likedAt")
-        try container.encodeIfPresent(next, forKey: "next")
+        try container.encode(next, forKey: "next")
     }
 
     // Decodable protocol methods
@@ -69,16 +69,16 @@ open class Feed: Codable {
 
         id = try container.decode(Int64.self, forKey: "id")
         message = try container.decode(String.self, forKey: "message")
-        mediums = try container.decodeIfPresent([Medium].self, forKey: "mediums")
+        mediums = try container.decode([Medium].self, forKey: "mediums")
         tags = try container.decodeIfPresent([String].self, forKey: "tags")
-        account = try container.decodeIfPresent(Account.self, forKey: "account")
+        user = try container.decodeIfPresent(User.self, forKey: "user")
         likeCount = try container.decode(Int64.self, forKey: "likeCount")
         commentCount = try container.decode(Int64.self, forKey: "commentCount")
-        contentWarning = try container.decode(Bool.self, forKey: "contentWarning")
-        contentDeleted = try container.decode(Bool.self, forKey: "contentDeleted")
+        liked = try container.decode(Bool.self, forKey: "liked")
+        warning = try container.decode(Bool.self, forKey: "warning")
+        rejected = try container.decode(Bool.self, forKey: "rejected")
         postedAt = try container.decode(Int64.self, forKey: "postedAt")
-        likedAt = try container.decodeIfPresent(Int64.self, forKey: "likedAt")
-        next = try container.decodeIfPresent(Int64.self, forKey: "next")
+        next = try container.decode(Int64.self, forKey: "next")
     }
 }
 

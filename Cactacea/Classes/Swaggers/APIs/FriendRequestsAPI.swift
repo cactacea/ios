@@ -15,7 +15,7 @@ open class FriendRequestsAPI {
     /**
      Accept a friend request
      
-     - parameter id: (path) Friend request Identifier. 
+     - parameter id: (path) friend request Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
     open class func acceptRequest(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
@@ -27,7 +27,7 @@ open class FriendRequestsAPI {
     /**
      Accept a friend request
      
-     - parameter id: (path) Friend request Identifier. 
+     - parameter id: (path) friend request Identifier. 
      - returns: Observable<Void>
      */
     open class func acceptRequest(id: Int64) -> Observable<Void> {
@@ -47,14 +47,8 @@ open class FriendRequestsAPI {
     /**
      Accept a friend request
      - POST /requests/{id}/accept
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      
-     - parameter id: (path) Friend request Identifier. 
+     - parameter id: (path) friend request Identifier. 
 
      - returns: RequestBuilder<Void> 
      */
@@ -75,7 +69,7 @@ open class FriendRequestsAPI {
     /**
      Reject a friend request
      
-     - parameter id: (path) Friend request Identifier. 
+     - parameter id: (path) friend request Identifier. 
      - parameter completion: completion handler to receive the data and the error objects
      */
     open class func rejectRequest(id: Int64, completion: @escaping ((_ error: Error?) -> Void)) {
@@ -87,7 +81,7 @@ open class FriendRequestsAPI {
     /**
      Reject a friend request
      
-     - parameter id: (path) Friend request Identifier. 
+     - parameter id: (path) friend request Identifier. 
      - returns: Observable<Void>
      */
     open class func rejectRequest(id: Int64) -> Observable<Void> {
@@ -107,14 +101,8 @@ open class FriendRequestsAPI {
     /**
      Reject a friend request
      - POST /requests/{id}/reject
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      
-     - parameter id: (path) Friend request Identifier. 
+     - parameter id: (path) friend request Identifier. 
 
      - returns: RequestBuilder<Void> 
      */

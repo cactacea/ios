@@ -22,12 +22,12 @@ open class Medium: Codable {
     public var size: Int64
     public var thumbnailUrl: String?
     public var mediumType: MediumType
-    public var contentWarning: Bool
-    public var contentDeleted: Bool
+    public var warning: Bool
+    public var rejected: Bool
 
 
     
-    public init(id: Int64, uri: String, width: Int64, height: Int64, size: Int64, thumbnailUrl: String?, mediumType: MediumType, contentWarning: Bool, contentDeleted: Bool) {
+    public init(id: Int64, uri: String, width: Int64, height: Int64, size: Int64, thumbnailUrl: String?, mediumType: MediumType, warning: Bool, rejected: Bool) {
         self.id = id
         self.uri = uri
         self.width = width
@@ -35,8 +35,8 @@ open class Medium: Codable {
         self.size = size
         self.thumbnailUrl = thumbnailUrl
         self.mediumType = mediumType
-        self.contentWarning = contentWarning
-        self.contentDeleted = contentDeleted
+        self.warning = warning
+        self.rejected = rejected
     }
     
 
@@ -53,8 +53,8 @@ open class Medium: Codable {
         try container.encode(size, forKey: "size")
         try container.encodeIfPresent(thumbnailUrl, forKey: "thumbnailUrl")
         try container.encode(mediumType, forKey: "mediumType")
-        try container.encode(contentWarning, forKey: "contentWarning")
-        try container.encode(contentDeleted, forKey: "contentDeleted")
+        try container.encode(warning, forKey: "warning")
+        try container.encode(rejected, forKey: "rejected")
     }
 
     // Decodable protocol methods
@@ -69,8 +69,8 @@ open class Medium: Codable {
         size = try container.decode(Int64.self, forKey: "size")
         thumbnailUrl = try container.decodeIfPresent(String.self, forKey: "thumbnailUrl")
         mediumType = try container.decode(MediumType.self, forKey: "mediumType")
-        contentWarning = try container.decode(Bool.self, forKey: "contentWarning")
-        contentDeleted = try container.decode(Bool.self, forKey: "contentDeleted")
+        warning = try container.decode(Bool.self, forKey: "warning")
+        rejected = try container.decode(Bool.self, forKey: "rejected")
     }
 }
 

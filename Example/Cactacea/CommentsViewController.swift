@@ -44,7 +44,7 @@ class CommentsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let _ = Session.authentication {
+        if let _ = Session.user {
             self.pager.fetchFirst()
         }
     }
@@ -65,9 +65,9 @@ extension CommentsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let comment = self.pager.items[indexPath.row]
-        if let account = Session.authentication?.account {
-            if account.id != comment.account.id {
-                performSegue(withIdentifier: "profile", sender: comment.account)
+        if let user = Session.user {
+            if user.id != comment.user.id {
+                performSegue(withIdentifier: "profile", sender: comment.user)
             }
         }
     }
@@ -75,8 +75,8 @@ extension CommentsViewController: UITableViewDataSource, UITableViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "profile" {
             let vc = segue.destination as! ProfileViewController
-            let account = sender as! Account
-            vc.account = account
+            let user = sender as! User
+            vc.user = user
         }
     }
 
@@ -123,7 +123,7 @@ extension CommentsViewController {
 
     @IBAction func tappedSendButton(_ sender: Any) {
         guard let message = commentTextField.text else { return }
-        let body = PostCommentBody(id: feed.id, message: message)
+        let body = PostCommentBody(id: feed.id, replyId: nil, message: message)
         CommentsAPI.postComment(body: body) { [weak self] (result, error) in
             guard let weakSelf = self else { return }
             if let error = error {

@@ -11,15 +11,15 @@ import Foundation
 
 open class PostTextBody: Codable {
 
-    /** Group identifier. */
-    public var groupId: Int64
+    /** Channel identifier. */
+    public var channelId: Int64
     /** A message will be posted. */
     public var message: String
 
 
     
-    public init(groupId: Int64, message: String) {
-        self.groupId = groupId
+    public init(channelId: Int64, message: String) {
+        self.channelId = channelId
         self.message = message
     }
     
@@ -30,7 +30,7 @@ open class PostTextBody: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encode(groupId, forKey: "groupId")
+        try container.encode(channelId, forKey: "channelId")
         try container.encode(message, forKey: "message")
     }
 
@@ -39,7 +39,7 @@ open class PostTextBody: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        groupId = try container.decode(Int64.self, forKey: "groupId")
+        channelId = try container.decode(Int64.self, forKey: "channelId")
         message = try container.decode(String.self, forKey: "message")
     }
 }

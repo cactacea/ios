@@ -11,33 +11,33 @@ import Cactacea
 import Alamofire
 import AlamofireImage
 
-class FollowingUserCell: UITableViewCell {
+class FollowsCell: UITableViewCell {
     
-    @IBOutlet var accountNameLabel: UILabel!
+    @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var actionButton: UIButton!
     
-    var account: Account? {
+    var user: User? {
         didSet {
-            updateAccount()
+            updateUser()
             updateButtons()
         }
     }
     
-    func updateAccount() {
-        guard let account = account else { return }
+    func updateUser() {
+        guard let user = user else { return }
         
-        accountNameLabel.text = account.accountName
-        if let smallImageURL = account.profileImageUrl {
+        userNameLabel.text = user.userName
+        if let smallImageURL = user.profileImageUrl {
             let urlRequest = Session.request(url: smallImageURL)
             profileImageView.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }
     }
     
     func updateButtons() {
-        guard let account = account else { return }
+        guard let user = user else { return }
         
-        if account.following == true  {
+        if user.follow == true  {
             actionButton.backgroundColor = UIColor.mainBlue
             actionButton.setTitle("Unfollow", for: .normal)
         } else {
@@ -49,30 +49,30 @@ class FollowingUserCell: UITableViewCell {
     }
     
     @IBAction func tappedCancel(_ sender: Any) {
-        guard let account = account else { return }
+        guard let user = user else { return }
         
         actionButton.isEnabled = false
         actionButton.backgroundColor = UIColor.mainLightBlue
         actionButton.showsActivityIndicator = true
         actionButton.setTitle("", for: .normal)
         
-        if account.following {
-            AccountsAPI.block(id: account.id) { [weak self] (error) in
+        if user.follow {
+            UsersAPI.block(id: user.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
                 } else {
-                    account.following = false
+                    user.follow = false
                 }
                 weakSelf.updateButtons()
             }
         } else {
-            AccountsAPI.unblock(id: account.id) { [weak self] (error) in
+            UsersAPI.unblock(id: user.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
                 } else {
-                    account.following = true
+                    user.follow = true
                 }
                 weakSelf.updateButtons()
             }

@@ -13,7 +13,7 @@ import RxSwift
 
 open class MessagesAPI {
     /**
-     Delete messages form a group
+     Delete messages form a channel
      
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
@@ -25,7 +25,7 @@ open class MessagesAPI {
     }
 
     /**
-     Delete messages form a group
+     Delete messages form a channel
      
      - parameter body: (body)  
      - returns: Observable<Void>
@@ -45,14 +45,8 @@ open class MessagesAPI {
     }
 
     /**
-     Delete messages form a group
+     Delete messages form a channel
      - DELETE /messages
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      
      - parameter body: (body)  
 
@@ -74,7 +68,7 @@ open class MessagesAPI {
     /**
      Search messages
      
-     - parameter id: (query) Group identifier. 
+     - parameter id: (query) Channel identifier. 
      - parameter ascending: (query) Order by posted time. 
      - parameter since: (query) Filters messages which started on since or later. (optional)
      - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
@@ -90,7 +84,7 @@ open class MessagesAPI {
     /**
      Search messages
      
-     - parameter id: (query) Group identifier. 
+     - parameter id: (query) Channel identifier. 
      - parameter ascending: (query) Order by posted time. 
      - parameter since: (query) Filters messages which started on since or later. (optional)
      - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
@@ -114,105 +108,103 @@ open class MessagesAPI {
     /**
      Search messages
      - GET /messages
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
-  "next" : 7.061401241503109105224211816675961017608642578125,
-  "accountCount" : 5,
+  "next" : 7,
   "unread" : true,
-  "groupId" : 1.46581298050294517310021547018550336360931396484375,
+  "rejected" : true,
+  "readUserCount" : 5,
   "medium" : {
-    "contentWarning" : true,
     "size" : 5,
-    "contentDeleted" : true,
+    "rejected" : true,
     "width" : 1,
     "mediumType" : "image",
+    "warning" : true,
     "id" : 6.02745618307040320615897144307382404804229736328125,
     "uri" : "uri",
     "height" : 5,
     "thumbnailUrl" : "thumbnailUrl"
   },
   "message" : "message",
-  "contentWarning" : true,
-  "readAccountCount" : 5,
   "messageType" : "text",
+  "userCount" : 5,
   "postedAt" : 2,
-  "contentDeleted" : true,
+  "warning" : true,
   "id" : 6.02745618307040320615897144307382404804229736328125,
-  "account" : {
+  "user" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
+    "next" : 3,
+    "followCount" : 6,
     "friendCount" : 5,
-    "accountName" : "accountName",
+    "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "feedCount" : 5,
     "bio" : "bio",
-    "followingCount" : 6,
+    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+    "userName" : "userName",
+    "follow" : true,
     "friendRequestInProgress" : true,
-    "muting" : true,
+    "blocked" : true,
     "web" : "web",
-    "blocking" : true,
-    "following" : true,
     "isFriend" : true,
     "location" : "location",
     "id" : 0.80082819046101150206595775671303272247314453125,
     "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1
-  }
+    "followerCount" : 1,
+    "muted" : true
+  },
+  "channelId" : 1.46581298050294517310021547018550336360931396484375
 }, {
-  "next" : 7.061401241503109105224211816675961017608642578125,
-  "accountCount" : 5,
+  "next" : 7,
   "unread" : true,
-  "groupId" : 1.46581298050294517310021547018550336360931396484375,
+  "rejected" : true,
+  "readUserCount" : 5,
   "medium" : {
-    "contentWarning" : true,
     "size" : 5,
-    "contentDeleted" : true,
+    "rejected" : true,
     "width" : 1,
     "mediumType" : "image",
+    "warning" : true,
     "id" : 6.02745618307040320615897144307382404804229736328125,
     "uri" : "uri",
     "height" : 5,
     "thumbnailUrl" : "thumbnailUrl"
   },
   "message" : "message",
-  "contentWarning" : true,
-  "readAccountCount" : 5,
   "messageType" : "text",
+  "userCount" : 5,
   "postedAt" : 2,
-  "contentDeleted" : true,
+  "warning" : true,
   "id" : 6.02745618307040320615897144307382404804229736328125,
-  "account" : {
+  "user" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
+    "next" : 3,
+    "followCount" : 6,
     "friendCount" : 5,
-    "accountName" : "accountName",
+    "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "feedCount" : 5,
     "bio" : "bio",
-    "followingCount" : 6,
+    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+    "userName" : "userName",
+    "follow" : true,
     "friendRequestInProgress" : true,
-    "muting" : true,
+    "blocked" : true,
     "web" : "web",
-    "blocking" : true,
-    "following" : true,
     "isFriend" : true,
     "location" : "location",
     "id" : 0.80082819046101150206595775671303272247314453125,
     "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1
-  }
+    "followerCount" : 1,
+    "muted" : true
+  },
+  "channelId" : 1.46581298050294517310021547018550336360931396484375
 } ]}]
      
-     - parameter id: (query) Group identifier. 
+     - parameter id: (query) Channel identifier. 
      - parameter ascending: (query) Order by posted time. 
      - parameter since: (query) Filters messages which started on since or later. (optional)
      - parameter offset: (query) The offset of messages. By default the value is 0. (optional)
@@ -241,7 +233,7 @@ open class MessagesAPI {
     }
 
     /**
-     Send a medium to a group
+     Send a medium to a channel
      
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
@@ -253,7 +245,7 @@ open class MessagesAPI {
     }
 
     /**
-     Send a medium to a group
+     Send a medium to a channel
      
      - parameter body: (body)  
      - returns: Observable<Message>
@@ -273,59 +265,55 @@ open class MessagesAPI {
     }
 
     /**
-     Send a medium to a group
+     Send a medium to a channel
      - POST /messages/medium
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      - examples: [{contentType=application/json, example={
-  "next" : 7.061401241503109105224211816675961017608642578125,
-  "accountCount" : 5,
+  "next" : 7,
   "unread" : true,
-  "groupId" : 1.46581298050294517310021547018550336360931396484375,
+  "rejected" : true,
+  "readUserCount" : 5,
   "medium" : {
-    "contentWarning" : true,
     "size" : 5,
-    "contentDeleted" : true,
+    "rejected" : true,
     "width" : 1,
     "mediumType" : "image",
+    "warning" : true,
     "id" : 6.02745618307040320615897144307382404804229736328125,
     "uri" : "uri",
     "height" : 5,
     "thumbnailUrl" : "thumbnailUrl"
   },
   "message" : "message",
-  "contentWarning" : true,
-  "readAccountCount" : 5,
   "messageType" : "text",
+  "userCount" : 5,
   "postedAt" : 2,
-  "contentDeleted" : true,
+  "warning" : true,
   "id" : 6.02745618307040320615897144307382404804229736328125,
-  "account" : {
+  "user" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
+    "next" : 3,
+    "followCount" : 6,
     "friendCount" : 5,
-    "accountName" : "accountName",
+    "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "feedCount" : 5,
     "bio" : "bio",
-    "followingCount" : 6,
+    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+    "userName" : "userName",
+    "follow" : true,
     "friendRequestInProgress" : true,
-    "muting" : true,
+    "blocked" : true,
     "web" : "web",
-    "blocking" : true,
-    "following" : true,
     "isFriend" : true,
     "location" : "location",
     "id" : 0.80082819046101150206595775671303272247314453125,
     "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1
-  }
+    "followerCount" : 1,
+    "muted" : true
+  },
+  "channelId" : 1.46581298050294517310021547018550336360931396484375
 }}]
      
      - parameter body: (body)  
@@ -346,7 +334,7 @@ open class MessagesAPI {
     }
 
     /**
-     Send a text to a group
+     Send a text to a channel
      
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
@@ -358,7 +346,7 @@ open class MessagesAPI {
     }
 
     /**
-     Send a text to a group
+     Send a text to a channel
      
      - parameter body: (body)  
      - returns: Observable<Message>
@@ -378,59 +366,55 @@ open class MessagesAPI {
     }
 
     /**
-     Send a text to a group
+     Send a text to a channel
      - POST /messages/text
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      - examples: [{contentType=application/json, example={
-  "next" : 7.061401241503109105224211816675961017608642578125,
-  "accountCount" : 5,
+  "next" : 7,
   "unread" : true,
-  "groupId" : 1.46581298050294517310021547018550336360931396484375,
+  "rejected" : true,
+  "readUserCount" : 5,
   "medium" : {
-    "contentWarning" : true,
     "size" : 5,
-    "contentDeleted" : true,
+    "rejected" : true,
     "width" : 1,
     "mediumType" : "image",
+    "warning" : true,
     "id" : 6.02745618307040320615897144307382404804229736328125,
     "uri" : "uri",
     "height" : 5,
     "thumbnailUrl" : "thumbnailUrl"
   },
   "message" : "message",
-  "contentWarning" : true,
-  "readAccountCount" : 5,
   "messageType" : "text",
+  "userCount" : 5,
   "postedAt" : 2,
-  "contentDeleted" : true,
+  "warning" : true,
   "id" : 6.02745618307040320615897144307382404804229736328125,
-  "account" : {
+  "user" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
+    "next" : 3,
+    "followCount" : 6,
     "friendCount" : 5,
-    "accountName" : "accountName",
+    "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "feedCount" : 5,
     "bio" : "bio",
-    "followingCount" : 6,
+    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+    "userName" : "userName",
+    "follow" : true,
     "friendRequestInProgress" : true,
-    "muting" : true,
+    "blocked" : true,
     "web" : "web",
-    "blocking" : true,
-    "following" : true,
     "isFriend" : true,
     "location" : "location",
     "id" : 0.80082819046101150206595775671303272247314453125,
     "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1
-  }
+    "followerCount" : 1,
+    "muted" : true
+  },
+  "channelId" : 1.46581298050294517310021547018550336360931396484375
 }}]
      
      - parameter body: (body)  

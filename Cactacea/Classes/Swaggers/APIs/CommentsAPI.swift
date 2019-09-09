@@ -47,12 +47,6 @@ open class CommentsAPI {
     /**
      Delete a comment
      - DELETE /comments/{id}
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      
      - parameter id: (path) Comment Identifier. 
 
@@ -107,42 +101,39 @@ open class CommentsAPI {
     /**
      Get basic information about a comment
      - GET /comments/{id}
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      - examples: [{contentType=application/json, example={
-  "next" : 5.63737665663332876420099637471139430999755859375,
-  "contentWarning" : true,
+  "next" : 2,
   "postedAt" : 5,
-  "contentDeleted" : true,
+  "feedId" : 1.46581298050294517310021547018550336360931396484375,
+  "rejected" : true,
   "replyId" : 6.02745618307040320615897144307382404804229736328125,
-  "likeCount" : 1,
+  "warning" : true,
+  "likeCount" : 5,
   "id" : 0.80082819046101150206595775671303272247314453125,
   "message" : "message",
-  "account" : {
+  "user" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
+    "next" : 3,
+    "followCount" : 6,
     "friendCount" : 5,
-    "accountName" : "accountName",
+    "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "feedCount" : 5,
     "bio" : "bio",
-    "followingCount" : 6,
+    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+    "userName" : "userName",
+    "follow" : true,
     "friendRequestInProgress" : true,
-    "muting" : true,
+    "blocked" : true,
     "web" : "web",
-    "blocking" : true,
-    "following" : true,
     "isFriend" : true,
     "location" : "location",
     "id" : 0.80082819046101150206595775671303272247314453125,
     "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1
+    "followerCount" : 1,
+    "muted" : true
   }
 }}]
      
@@ -205,73 +196,73 @@ open class CommentsAPI {
     /**
      Search comments
      - GET /comments
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      - examples: [{contentType=application/json, example=[ {
-  "next" : 5.63737665663332876420099637471139430999755859375,
-  "contentWarning" : true,
+  "next" : 2,
   "postedAt" : 5,
-  "contentDeleted" : true,
+  "feedId" : 1.46581298050294517310021547018550336360931396484375,
+  "rejected" : true,
   "replyId" : 6.02745618307040320615897144307382404804229736328125,
-  "likeCount" : 1,
+  "warning" : true,
+  "likeCount" : 5,
   "id" : 0.80082819046101150206595775671303272247314453125,
   "message" : "message",
-  "account" : {
+  "user" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
+    "next" : 3,
+    "followCount" : 6,
     "friendCount" : 5,
-    "accountName" : "accountName",
+    "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "feedCount" : 5,
     "bio" : "bio",
-    "followingCount" : 6,
+    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+    "userName" : "userName",
+    "follow" : true,
     "friendRequestInProgress" : true,
-    "muting" : true,
+    "blocked" : true,
     "web" : "web",
-    "blocking" : true,
-    "following" : true,
     "isFriend" : true,
     "location" : "location",
     "id" : 0.80082819046101150206595775671303272247314453125,
     "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1
+    "followerCount" : 1,
+    "muted" : true
   }
 }, {
-  "next" : 5.63737665663332876420099637471139430999755859375,
-  "contentWarning" : true,
+  "next" : 2,
   "postedAt" : 5,
-  "contentDeleted" : true,
+  "feedId" : 1.46581298050294517310021547018550336360931396484375,
+  "rejected" : true,
   "replyId" : 6.02745618307040320615897144307382404804229736328125,
-  "likeCount" : 1,
+  "warning" : true,
+  "likeCount" : 5,
   "id" : 0.80082819046101150206595775671303272247314453125,
   "message" : "message",
-  "account" : {
+  "user" : {
     "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 9.301444243932575517419536481611430644989013671875,
+    "next" : 3,
+    "followCount" : 6,
     "friendCount" : 5,
-    "accountName" : "accountName",
+    "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
     "feedCount" : 5,
     "bio" : "bio",
-    "followingCount" : 6,
+    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+    "userName" : "userName",
+    "follow" : true,
     "friendRequestInProgress" : true,
-    "muting" : true,
+    "blocked" : true,
     "web" : "web",
-    "blocking" : true,
-    "following" : true,
     "isFriend" : true,
     "location" : "location",
     "id" : 0.80082819046101150206595775671303272247314453125,
     "isFollower" : true,
     "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1
+    "followerCount" : 1,
+    "muted" : true
   }
 } ]}]
      
@@ -336,12 +327,6 @@ open class CommentsAPI {
     /**
      Create a comment on a feed
      - POST /comments
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      - examples: [{contentType=application/json, example={
   "id" : 0.80082819046101150206595775671303272247314453125
 }}]
@@ -400,12 +385,6 @@ open class CommentsAPI {
     /**
      Report a comment
      - POST /comments/{id}/reports
-     - API Key:
-       - type: apiKey X-API-KEY 
-       - name: api_key
-     - OAuth:
-       - type: oauth2
-       - name: cactacea_auth
      
      - parameter id: (path) Comment Identifier. 
      - parameter body: (body)  

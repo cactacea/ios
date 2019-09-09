@@ -25,7 +25,7 @@ class NotificationSettingsViewController: UITableViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        SettingsAPI.findPushNotificationSettings { [weak self] (result, error) in
+        SettingsAPI.findPushNotification() { [weak self] (result, error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)
@@ -34,8 +34,8 @@ class NotificationSettingsViewController: UITableViewController {
                 weakSelf.comment = result.comment
                 weakSelf.friendRequest = result.friendRequest
                 weakSelf.message = result.message
-                weakSelf.groupMessage = result.groupMessage
-                weakSelf.groupInvitation = result.groupInvitation
+                weakSelf.channelMessage = result.channelMessage
+                weakSelf.invitation = result.invitation
                 weakSelf.showMessage = result.showMessage
             }
         }
@@ -52,9 +52,9 @@ class NotificationSettingsViewController: UITableViewController {
         } else if indexPath.section == Section.message.rawValue {
             self.message = value
         } else if indexPath.section == Section.groupMessage.rawValue {
-            self.groupMessage = value
+            self.channelMessage = value
         } else if indexPath.section == Section.groupInvitation.rawValue {
-            self.groupInvitation = value
+            self.invitation = value
         } else if indexPath.section == Section.showMessage.rawValue {
             self.showMessage = value
         }
@@ -64,11 +64,11 @@ class NotificationSettingsViewController: UITableViewController {
             comment: self.comment,
             friendRequest: self.friendRequest,
             message: self.message,
-            groupMessage: self.groupMessage,
-            groupInvitation: self.groupInvitation,
+            channelMessage: self.channelMessage,
+            invitation: self.invitation,
             showMessage: self.showMessage)
-
-        SettingsAPI.updatePushNotificationSettings(body: body) { [weak self] (error) in
+        
+        SettingsAPI.updatePushNotification(body: body) { [weak self] (error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)
@@ -81,9 +81,9 @@ class NotificationSettingsViewController: UITableViewController {
                 } else if indexPath.section == Section.message.rawValue {
                     weakSelf.message = !value
                 } else if indexPath.section == Section.groupMessage.rawValue {
-                    weakSelf.groupMessage = !value
+                    weakSelf.channelMessage = !value
                 } else if indexPath.section == Section.groupInvitation.rawValue {
-                    weakSelf.groupInvitation = !value
+                    weakSelf.invitation = !value
                 } else if indexPath.section == Section.showMessage.rawValue {
                     weakSelf.showMessage = !value
                 }
@@ -140,7 +140,7 @@ class NotificationSettingsViewController: UITableViewController {
         }
     }
     
-    var groupMessage: Bool = false {
+    var channelMessage: Bool = false {
         willSet {
             if newValue {
                 groupMessageOffCell?.accessoryType = .none
@@ -152,7 +152,7 @@ class NotificationSettingsViewController: UITableViewController {
         }
     }
     
-    var groupInvitation: Bool = false {
+    var invitation: Bool = false {
         willSet {
             if newValue {
                 groupInvitationOffCell?.accessoryType = .none

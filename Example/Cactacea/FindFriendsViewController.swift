@@ -20,16 +20,16 @@ class FindFriendsViewController: UIViewController {
 
     private let disposeBag = DisposeBag()
 
-    lazy private var pager = Pager<Account>(tableView, pageFooterView)
+    lazy private var pager = Pager<User>(tableView, pageFooterView)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.pager.fetchBlock =  { [weak self] (paginator, first) -> Observable<[Account]> in
+        self.pager.fetchBlock =  { [weak self] (paginator, first) -> Observable<[User]> in
             guard let weakSelf = self else { return Observable.empty() }
-            let accountName = weakSelf.searchBar.text
+            let userName = weakSelf.searchBar.text
             let next = first ? nil : paginator.items.last?.next
-            return SessionAPI.findAccounts(accountName: accountName,
+            return SessionAPI.findUsers(userName: userName,
                                             since: next,
                                             offset: nil,
                                             count: nil)
@@ -49,7 +49,7 @@ extension FindFriendsViewController: UISearchBarDelegate {
         return true
     }
 
-    private func fetch(accountName: String?) -> Observable<[Account]> {
+    private func fetch(userName: String?) -> Observable<[User]> {
         return self.pager.fetch(first: true)
     }
     
@@ -76,8 +76,8 @@ extension FindFriendsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         if let cell = cell as? FindFriendsCell  {
-            let account = self.pager.items[indexPath.row]
-            cell.account = account
+            let user = self.pager.items[indexPath.row]
+            cell.user = user
         }
         return cell
     }

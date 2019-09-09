@@ -23,7 +23,7 @@ class MainController: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if Session.authentication == nil {
+        if Session.user == nil {
             // wait until MainTabBarController is inside UI
             DispatchQueue.main.async {
                 self.showSignIn()

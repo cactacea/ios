@@ -15,11 +15,11 @@ open class PutSessionProfileBody: Codable {
     public var displayName: String
     /** Profile URL. */
     public var web: String?
-    /** Account birthday. */
+    /** User birthday. */
     public var birthday: Int64?
-    /** Account address. */
+    /** User address. */
     public var location: String?
-    /** Account bio. */
+    /** User bio. */
     public var bio: String?
 
 

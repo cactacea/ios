@@ -12,7 +12,7 @@ import AVFoundation
 
 protocol FeedCellDelegate {
     func tappedFeed(feed: Feed)
-    func tappedProfile(account: Account)
+    func tappedProfile(user: User)
 }
 
 class FeedCell: UITableViewCell {
@@ -39,9 +39,9 @@ class FeedCell: UITableViewCell {
             updateLike()
         }
     }
-    var account: Account? {
+    var user: User? {
         get {
-            return feed?.account
+            return feed?.user
         }
     }
     
@@ -67,8 +67,8 @@ class FeedCell: UITableViewCell {
             }
         }
         
-        nameLabel.text = account?.accountName
-        if let smallImageURL = account?.profileImageUrl {
+        nameLabel.text = user?.userName
+        if let smallImageURL = user?.profileImageUrl {
             let urlRequest = Session.request(url: smallImageURL)
             profileImageView.af_setImage(withURLRequest: urlRequest, placeholderImage: UIImage(named: "placeholder_profile"), imageTransition: .crossDissolve(0.2))
         }
@@ -78,7 +78,7 @@ class FeedCell: UITableViewCell {
     
     func updateLike() {
         guard let feed = feed else { return }
-        let imageName = feed.likedAt == nil ? "like_unselected" : "like_selected"
+        let imageName = feed.liked ? "like_unselected" : "like_selected"
         likeImageView.image = UIImage(named: imageName)
         if feed.likeCount != 0 {
             likeCountButton.setTitle("\(feed.likeCount) likes", for: UIControl.State.normal)
@@ -118,21 +118,21 @@ class FeedCell: UITableViewCell {
     
     
     @objc func tappedName() {
-        if let account = account {
-            delegate?.tappedProfile(account: account)
+        if let user = user {
+            delegate?.tappedProfile(user: user)
         }
     }
     
     @objc func tappedLike() {
         guard let feed = feed else { return }
-        if let _ = feed.likedAt {
+        if feed.liked {
             FeedLikesAPI.unlikeFeed(id: feed.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
                 } else {
                     feed.likeCount = feed.likeCount - 1
-                    feed.likedAt = nil
+                    feed.liked = false
                     weakSelf.updateLike()
                 }
             }
@@ -143,7 +143,7 @@ class FeedCell: UITableViewCell {
                     Session.showError(error)
                 } else {
                     feed.likeCount = feed.likeCount + 1
-                    feed.likedAt = 0
+                    feed.liked = true
                     weakSelf.updateLike()
                 }
             }

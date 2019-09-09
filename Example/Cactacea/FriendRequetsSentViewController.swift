@@ -25,14 +25,14 @@ class FriendRequestsSentViewController: UIViewController {
         self.pager.fetchBlock =  { [weak self] (paginator, first) -> Observable<[FriendRequest]> in
             guard let _ = self else { return Observable.empty() }
             let next = first ? nil : paginator.items.last?.next
-            return SessionAPI.findFriendRequests(received: false, since: next, offset: nil, count: nil)
+            return SessionAPI.findSessionFriendRequests (received: false, since: next, offset: nil, count: nil)
         }
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let _ = Session.authentication {
+        if let _ = Session.user {
             self.pager.fetchFirst()
         }
     }

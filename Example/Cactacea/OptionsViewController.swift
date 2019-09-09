@@ -20,7 +20,7 @@ class OptionsViewController: UITableViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         let logOutAction = UIAlertAction(title: "Log Out", style: .default) { (_) in
-            Session.authentication = nil
+            Session.user = nil
             if let vc = self.tabBarController as? MainController {
                 vc.showSignIn()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {

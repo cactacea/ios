@@ -13,20 +13,20 @@ import AlamofireImage
 
 class ContactCell: UITableViewCell {
     
-    @IBOutlet var accountNameLabel: UILabel!
+    @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
     
-    var account: Account? {
+    var user: User? {
         didSet {
-            updateAccount()
+            updateUser()
         }
     }
     
-    func updateAccount() {
-        guard let account = account else { return }
+    func updateUser() {
+        guard let user = user else { return }
         
-        accountNameLabel.text = account.accountName
-        if let smallImageURL = account.profileImageUrl {
+        userNameLabel.text = user.userName
+        if let smallImageURL = user.profileImageUrl {
             let urlRequest = Session.request(url: smallImageURL)
             profileImageView.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }

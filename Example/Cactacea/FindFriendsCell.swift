@@ -13,33 +13,33 @@ import AlamofireImage
 
 class FindFriendsCell: UITableViewCell {
     
-    @IBOutlet var accountNameLabel: UILabel!
+    @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var actionButton: UIButton!
 
-    var account: Account? {
+    var user: User? {
         didSet {
-            updateAccount()
+            updateUser()
             updateAddFriendButton()
         }
     }
 
-    func updateAccount() {
-        guard let account = account else { return }
+    func updateUser() {
+        guard let user = user else { return }
 
-        accountNameLabel.text = account.accountName
-        if let smallImageURL = account.profileImageUrl {
+        userNameLabel.text = user.userName
+        if let smallImageURL = user.profileImageUrl {
             let urlRequest = Session.request(url: smallImageURL)
             profileImageView.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }
     }
     
     func updateAddFriendButton() {
-        guard let account = account else { return }
+        guard let user = user else { return }
         
-        if account.isFriend {
+        if user.isFriend {
             actionButton.setTitle("Unfriend", for: .normal)
-        } else if account.friendRequestInProgress {
+        } else if user.friendRequestInProgress {
             actionButton.setTitle("Cancel", for: .normal)
         } else  {
             actionButton.setTitle("Request", for: .normal)
@@ -51,41 +51,41 @@ class FindFriendsCell: UITableViewCell {
     }
 
     @IBAction func tappedAddFriend(_ sender: Any) {
-        guard let account = account else { return }
+        guard let user = user else { return }
 
         actionButton.isEnabled = false
         actionButton.backgroundColor = UIColor.mainLightBlue
         actionButton.showsActivityIndicator = true
         actionButton.setTitle("", for: .normal)
         
-        if account.isFriend {
-            AccountsAPI.unfriend(id: account.id) { [weak self] (error) in
+        if user.isFriend {
+            UsersAPI.unfriend(id: user.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
                 } else {
-                    account.isFriend = false
+                    user.isFriend = false
                 }
                 weakSelf.updateAddFriendButton()
             }
-        } else if account.friendRequestInProgress {
-            AccountsAPI.unrequest(id: account.id) { [weak self] (error) in
+        } else if user.friendRequestInProgress {
+            UsersAPI.deleteRequest(id: user.id) { [weak self] (error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
                 } else {
-                    account.friendRequestInProgress = false
+                    user.friendRequestInProgress = false
                 }
                 weakSelf.updateAddFriendButton()
             }
             
         } else {
-            AccountsAPI.request(id: account.id) { [weak self] (result, error) in
+            UsersAPI.createRequest(id: user.id) { [weak self] (result, error) in
                 guard let weakSelf = self else { return }
                 if let error = error {
                     Session.showError(error)
                 } else if let _ = result {
-                    account.friendRequestInProgress = true
+                    user.friendRequestInProgress = true
                 }
                 weakSelf.updateAddFriendButton()
             }

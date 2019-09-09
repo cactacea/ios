@@ -25,9 +25,9 @@ class CommentCell: UITableViewCell {
     func updateView() {
         commentLabel.text = comment?.message
 
-        if let account = comment?.account {
-            nameLabel.text = account.accountName
-            if let smallImageURL = account.profileImageUrl {
+        if let user = comment?.user {
+            nameLabel.text = user.userName
+            if let smallImageURL = user.profileImageUrl {
                 let urlRequest = Session.request(url: smallImageURL)
                 profileImageView.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
             }

@@ -11,15 +11,17 @@ import Cactacea
 
 class Session {
     
-    static var authentication: Authentication? {
+    static var accessToken: String?
+
+    static var user: User? {
         didSet {
-            CactaceaAPI.customHeaders["X-AUTHORIZATION"] = authentication?.accessToken
+//            CactaceaAPI.customHeaders["X-AUTHORIZATION"] = user?.accessToken
         }
     }
     
     static var playerId: String? {
         didSet {
-            if let _ = Session.authentication {
+            if let _ = Session.user {
                 self.updateToken()
             }
         }
@@ -28,9 +30,9 @@ class Session {
     static var uuid: String = ""
 
     static func updateToken() {
-        if let _ = Session.authentication {
-            let body = PostDevicePushTokenBody(pushToken: self.playerId)
-            SettingsAPI.updatePushToken(body: body) { (error) in
+        if let _ = Session.user {
+            let body = PutDeviceBody(status: PutDeviceBody.Status.active, udid: Session.uuid, pushToken: self.playerId)
+            SettingsAPI.updateDeviceStatus(body: body) { (error) in
                 if let error = error {
                     Session.showError(error)
                 }

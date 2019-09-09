@@ -15,38 +15,38 @@ open class Message: Codable {
         case text = "text"
         case medium = "medium"
         case stamp = "stamp"
-        case groupinvitation = "groupInvitation"
-        case groupjoined = "groupJoined"
-        case groupleft = "groupLeft"
+        case invited = "invited"
+        case joined = "joined"
+        case _left = "left"
     }
     public var id: Int64
-    public var groupId: Int64
+    public var channelId: Int64
     public var messageType: MessageType
     public var message: String?
     public var medium: Medium?
-    public var account: Account
+    public var user: User
     public var unread: Bool
-    public var accountCount: Int64
-    public var readAccountCount: Int64
-    public var contentWarning: Bool
-    public var contentDeleted: Bool
+    public var userCount: Int64
+    public var readUserCount: Int64
+    public var warning: Bool
+    public var rejected: Bool
     public var postedAt: Int64
-    public var next: Int64?
+    public var next: Int64
 
 
     
-    public init(id: Int64, groupId: Int64, messageType: MessageType, message: String?, medium: Medium?, account: Account, unread: Bool, accountCount: Int64, readAccountCount: Int64, contentWarning: Bool, contentDeleted: Bool, postedAt: Int64, next: Int64?) {
+    public init(id: Int64, channelId: Int64, messageType: MessageType, message: String?, medium: Medium?, user: User, unread: Bool, userCount: Int64, readUserCount: Int64, warning: Bool, rejected: Bool, postedAt: Int64, next: Int64) {
         self.id = id
-        self.groupId = groupId
+        self.channelId = channelId
         self.messageType = messageType
         self.message = message
         self.medium = medium
-        self.account = account
+        self.user = user
         self.unread = unread
-        self.accountCount = accountCount
-        self.readAccountCount = readAccountCount
-        self.contentWarning = contentWarning
-        self.contentDeleted = contentDeleted
+        self.userCount = userCount
+        self.readUserCount = readUserCount
+        self.warning = warning
+        self.rejected = rejected
         self.postedAt = postedAt
         self.next = next
     }
@@ -59,18 +59,18 @@ open class Message: Codable {
         var container = encoder.container(keyedBy: String.self)
 
         try container.encode(id, forKey: "id")
-        try container.encode(groupId, forKey: "groupId")
+        try container.encode(channelId, forKey: "channelId")
         try container.encode(messageType, forKey: "messageType")
         try container.encodeIfPresent(message, forKey: "message")
         try container.encodeIfPresent(medium, forKey: "medium")
-        try container.encode(account, forKey: "account")
+        try container.encode(user, forKey: "user")
         try container.encode(unread, forKey: "unread")
-        try container.encode(accountCount, forKey: "accountCount")
-        try container.encode(readAccountCount, forKey: "readAccountCount")
-        try container.encode(contentWarning, forKey: "contentWarning")
-        try container.encode(contentDeleted, forKey: "contentDeleted")
+        try container.encode(userCount, forKey: "userCount")
+        try container.encode(readUserCount, forKey: "readUserCount")
+        try container.encode(warning, forKey: "warning")
+        try container.encode(rejected, forKey: "rejected")
         try container.encode(postedAt, forKey: "postedAt")
-        try container.encodeIfPresent(next, forKey: "next")
+        try container.encode(next, forKey: "next")
     }
 
     // Decodable protocol methods
@@ -79,18 +79,18 @@ open class Message: Codable {
         let container = try decoder.container(keyedBy: String.self)
 
         id = try container.decode(Int64.self, forKey: "id")
-        groupId = try container.decode(Int64.self, forKey: "groupId")
+        channelId = try container.decode(Int64.self, forKey: "channelId")
         messageType = try container.decode(MessageType.self, forKey: "messageType")
         message = try container.decodeIfPresent(String.self, forKey: "message")
         medium = try container.decodeIfPresent(Medium.self, forKey: "medium")
-        account = try container.decode(Account.self, forKey: "account")
+        user = try container.decode(User.self, forKey: "user")
         unread = try container.decode(Bool.self, forKey: "unread")
-        accountCount = try container.decode(Int64.self, forKey: "accountCount")
-        readAccountCount = try container.decode(Int64.self, forKey: "readAccountCount")
-        contentWarning = try container.decode(Bool.self, forKey: "contentWarning")
-        contentDeleted = try container.decode(Bool.self, forKey: "contentDeleted")
+        userCount = try container.decode(Int64.self, forKey: "userCount")
+        readUserCount = try container.decode(Int64.self, forKey: "readUserCount")
+        warning = try container.decode(Bool.self, forKey: "warning")
+        rejected = try container.decode(Bool.self, forKey: "rejected")
         postedAt = try container.decode(Int64.self, forKey: "postedAt")
-        next = try container.decodeIfPresent(Int64.self, forKey: "next")
+        next = try container.decode(Int64.self, forKey: "next")
     }
 }
 

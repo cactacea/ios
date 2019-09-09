@@ -13,10 +13,11 @@ import RxSwift
 class SignUpViewController: UIViewController {
     
     @IBOutlet var profileImageButton: UIButton!
-    @IBOutlet var accountNameTextField: UITextField!
+    @IBOutlet var userNameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var signUpButton: UIButton!
-
+    @IBOutlet weak var signInButton: UIButton!
+    
     private var profileImage: UIImage?
 
     override func viewDidLoad() {
@@ -25,21 +26,22 @@ class SignUpViewController: UIViewController {
     }
     
     @objc func tabOnView(sender: UIView) {
-        accountNameTextField.resignFirstResponder()
+        userNameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
 
     private func resetInputFields() {
-        accountNameTextField.resignFirstResponder()
+        userNameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
-        self.accountNameTextField.isUserInteractionEnabled = true
+        self.userNameTextField.isUserInteractionEnabled = true
         self.passwordTextField.isUserInteractionEnabled = true
+        self.signInButton.isUserInteractionEnabled = true
         self.signUpButton.isEnabled = true
         self.signUpButton.backgroundColor = UIColor.mainBlue
     }
 
     @IBAction func textFieldChanged(_ sender: Any) {
-        let isFormValid = accountNameTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
+        let isFormValid = userNameTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
         if isFormValid {
             signUpButton.isEnabled = true
             signUpButton.backgroundColor = UIColor.mainBlue
@@ -57,19 +59,19 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
-        guard let accountName = accountNameTextField.text, let password = passwordTextField.text else { return }
-//        let udid = UUID().uuidString
+        guard let userName = userNameTextField.text, let password = passwordTextField.text else { return }
 
-        accountNameTextField.isUserInteractionEnabled = false
+        userNameTextField.isUserInteractionEnabled = false
         passwordTextField.isUserInteractionEnabled = false
+        signInButton.isUserInteractionEnabled = false
         
         signUpButton.isEnabled = false
         signUpButton.backgroundColor = UIColor.mainLightBlue
         signUpButton.showsActivityIndicator = true
         signUpButton.setTitle("", for: .normal)
         
-        let request = PostSignUpBody(accountName: accountName, password: password, udid: Session.uuid)
-        SessionsAPI.signUp(body: request) { [weak self] (result, error) in
+        let request = PostSignUpBody(authType: PostSignUpBody.AuthType.username, identifier: userName, password: password)
+        SessionsAPI.signUp(body: request) { [weak self] (error) in
             guard let weakSelf = self else { return }
             weakSelf.signUpButton.showsActivityIndicator = false
             weakSelf.signUpButton.setTitle("Signup", for: .normal)
@@ -77,9 +79,11 @@ class SignUpViewController: UIViewController {
                 Session.showError(error)
                 weakSelf.resetInputFields()
             } else {
-                Session.authentication = result
-                weakSelf.updateProfileImage()
-                weakSelf.dismiss(animated: true, completion: nil)
+                SessionAPI.findSession(completion: { (user, error) in
+                    Session.user = user
+                    weakSelf.updateProfileImage()
+                    weakSelf.dismiss(animated: true, completion: nil)
+                })
             }
         }
     }

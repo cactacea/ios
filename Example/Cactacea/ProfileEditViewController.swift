@@ -19,7 +19,7 @@ class ProfileEditViewController: UITableViewController {
     @IBOutlet weak var locationTextFiled: UITextField!
     @IBOutlet weak var bioTextView: UITextView!
 
-    var account: Account? = Session.authentication?.account
+    var user: User? = Session.user
     
     
     override func viewDidLoad() {
@@ -37,31 +37,31 @@ class ProfileEditViewController: UITableViewController {
     }
     
     func fetchCurrentUser() {
-        if let authentication = Session.authentication {
-            self.navigationItem.title = authentication.account.accountName
-            SessionAPI.findSession() { [weak self] (account, _) in
+        if let user = Session.user {
+            self.navigationItem.title = user.userName
+            SessionAPI.findSession() { [weak self] (user, _) in
                 guard let weakSelf = self else { return }
-                guard let account = account else { return }
-                authentication.account = account
+                guard let user = user else { return }
+                Session.user = user
                 weakSelf.refreshProfile()
             }
         }
     }
     
     func refreshProfile() {
-        if let authentication = Session.authentication {
-            self.displayNameTextFiled.text = authentication.account.displayName
-            self.webTextFiled.text = authentication.account.web
-//            self.birthdayTextFiled.text = authentication.account.birthday
-            self.locationTextFiled.text = authentication.account.location
-            self.bioTextView.text = authentication.account.bio
+        if let user = Session.user {
+            self.displayNameTextFiled.text = user.displayName
+            self.webTextFiled.text = user.web
+//            self.birthdayTextFiled.text = user.birthday
+            self.locationTextFiled.text = user.location
+            self.bioTextView.text = user.bio
         }
     }
     
     @IBAction func tapSave(_ sender: Any) {
 
-        if let authentication = Session.authentication {
-            let displayName = self.displayNameTextFiled.text ?? authentication.account.displayName
+        if let user = Session.user {
+            let displayName = self.displayNameTextFiled.text ?? user.displayName
             let body = PutSessionProfileBody(
                 displayName: displayName,
                 web: self.webTextFiled.text,
@@ -87,10 +87,10 @@ extension ProfileEditViewController: UITextFieldDelegate {
         if textField == self.displayNameTextFiled {
             if let text = textField.text {
                 if text.isEmpty {
-                    textField.text = Session.authentication?.account.displayName
+                    textField.text = Session.user?.displayName
                 }
             } else {
-                textField.text = Session.authentication?.account.displayName
+                textField.text = Session.user?.displayName
             }
         }
         textField.resignFirstResponder()

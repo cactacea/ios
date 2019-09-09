@@ -23,7 +23,7 @@ open class PutFeedBody: Codable {
     public var mediumIds: [Int64]?
     /** Tags of feed. */
     public var tags: [String]?
-    /** Group privacy type. */
+    /** Channel privacy type. */
     public var privacyType: PrivacyType
     /** Content warning. */
     public var contentWarning: Bool

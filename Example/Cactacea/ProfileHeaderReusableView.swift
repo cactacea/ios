@@ -15,11 +15,11 @@ class ProfileHeaderReusableView: UICollectionReusableView {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var postsCountLabel: UILabel!
-    @IBOutlet weak var followingCountLabel: UILabel!
+    @IBOutlet weak var followCountLabel: UILabel!
     @IBOutlet weak var followersCountLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!
     
-    var account: Account! {
+    var user: User! {
         didSet {
             updateView()
         }
@@ -31,18 +31,18 @@ class ProfileHeaderReusableView: UICollectionReusableView {
     }
     
     func updateView() {
-        self.nameLabel.text = account.accountName
+        self.nameLabel.text = user.userName
         
-        if let smallImageURL = account.profileImageUrl {
+        if let smallImageURL = user.profileImageUrl {
             let urlRequest = Session.request(url: smallImageURL)
             profileImage.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }
         
-        self.postsCountLabel.text = "\(account.feedCount)"
-        self.followingCountLabel.text = "\(account.followingCount)"
-        self.followersCountLabel.text = "\(account.followerCount)"
+        self.postsCountLabel.text = "\(user.feedCount)"
+        self.followCountLabel.text = "\(user.followCount)"
+        self.followersCountLabel.text = "\(user.followerCount)"
         
-        if account.following {
+        if user.follow {
             configureUnFollowButton()
         } else {
             configureFollowButton()
@@ -53,7 +53,7 @@ class ProfileHeaderReusableView: UICollectionReusableView {
         self.nameLabel.text = ""
         self.postsCountLabel.text = ""
         self.followersCountLabel.text = ""
-        self.followingCountLabel.text = ""
+        self.followCountLabel.text = ""
     }
     
     func configureFollowButton() {
@@ -81,25 +81,25 @@ class ProfileHeaderReusableView: UICollectionReusableView {
     }
     
     @objc func tappedFollow() {
-        AccountsAPI.followAccount(id: account.id) { [weak self] (error) in
+        UsersAPI.followUser(id: user.id) { [weak self] (error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)
             } else {
                 weakSelf.configureUnFollowButton()
-                weakSelf.account.following = true
+                weakSelf.user.follow = true
             }
         }
     }
     
     @objc func tappedUnfollow() {
-        AccountsAPI.unfollowAccount(id: account.id) { [weak self] (error) in
+        UsersAPI.unfollowUser(id: user.id) { [weak self] (error) in
             guard let weakSelf = self else { return }
             if let error = error {
                 Session.showError(error)
             } else {
                 weakSelf.configureFollowButton()
-                weakSelf.account.following = false
+                weakSelf.user.follow = false
             }
         }
     }

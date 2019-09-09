@@ -8,7 +8,7 @@
 
 import UIKit
 import MessageKit
-import MessageInputBar
+//import MessageInputBar
 import Cactacea
 import SwiftDate
 import MapKit
@@ -27,10 +27,10 @@ extension ChatViewController: WebSocketDelegate {
     }
     
     func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
-        if let session = Session.authentication?.account {
+        if let session = Session.user {
             do {
                 let chatMessage = try JSONDecoder().decode(ChatMessage.self, from: text.data(using: .utf8)!)
-                if let message = chatMessage.message, session.id != message.account.id {
+                if let message = chatMessage.message, session.id != message.user.id {
                     insertMessage(message)
                 }
             } catch let error {
@@ -50,7 +50,7 @@ extension ChatViewController: WebSocketDelegate {
     
 }
 
-class ChatViewController: MessagesViewController, MessagesDataSource {
+class ChatViewController: MessagesViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -58,8 +58,8 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     
     let socket = WebSocket(url: URL(string: "ws://10.0.1.3:14000")!)
     
-    var account: Account?
-    var group: Group?
+    var user: User?
+    var channel: Channel?
     
     var messageList: [Message] = []
     
@@ -77,7 +77,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         socket.delegate = self
         socket.connect()
         
-        if let accessToken = Session.authentication?.accessToken {
+        if let accessToken = Session.accessToken {
             self.sendCommand(name: "connect", value: accessToken)
         }
 
@@ -86,13 +86,13 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
 //            UserDefaults.standard.set(true, forKey: "Text Messages")
 //        }
         
-        if let account = account {
-            self.title = account.displayName
+        if let user = user {
+            self.title = user.displayName
             
-            AccountsAPI.findAccountGroup(id: account.id) { [weak self] (result, error) in
+            UsersAPI.findUserChannel(id: user.id) { [weak self] (result, error) in
                 guard let weakSelf = self else { return }
                 if let result = result {
-                    weakSelf.group = result
+                    weakSelf.channel = result
                     weakSelf.loadFirstMessages()
                     weakSelf.sendCommand(name: "join", value: String(result.id))
                 } else if let error = error {
@@ -130,7 +130,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     }
     
     func loadFirstMessages() {
-        if let group = group {
+        if let group = channel {
             MessagesAPI.findMessages(id: group.id, ascending: true, since: nil, offset: nil, count: 20) { [weak self] (result, error) in
                 guard let weakSelf = self else { return }
                 if let messages = result {
@@ -146,7 +146,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     
     @objc
     func loadMoreMessages() {
-        if let group = group {
+        if let group = channel {
             MessagesAPI.findMessages(id: group.id, ascending: false, since: self.messageList.first?.id, offset: nil, count: 20) { [weak self] (result, error) in
                 guard let weakSelf = self else { return }
                 if let messages = result {
@@ -213,22 +213,32 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
     }
     
-    // MARK: - MessagesDataSource
     
-    func currentSender() -> Sender {
-        if let account = Session.authentication?.account {
-            return Sender(id: String(account.id), displayName: account.displayName)
+
+}
+
+extension ChatViewController: MessagesDataSource {
+
+    // MARK: - MessagesDataSource
+
+    func currentSender() -> SenderType {
+        if let user = Session.user {
+            return Sender(id: String(user.id), displayName: user.displayName)
         }
         fatalError("Session not found")
     }
-    
-    func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
-        return messageList.count
+
+    func isFromCurrentSender(message: MessageType) -> Bool {
+        return message.sender.senderId == currentSender().senderId
     }
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         let message = messageList[indexPath.section]
         return message
+    }
+    
+    func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
+        return messageList.count
     }
     
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
@@ -238,16 +248,28 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         return nil
     }
     
+    func cellBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        return nil
+    }
+    
     func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         let name = message.sender.displayName
         return NSAttributedString(string: name, attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption1)])
     }
     
     func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        
         let dateString = formatter.string(from: message.sentDate)
         return NSAttributedString(string: dateString, attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption2)])
     }
+    
+//    func customCell(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UICollectionViewCell {
+//        fatalError(MessageKitError.customDataUnresolvedCell)
+//    }
+    
+    func typingIndicator(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UICollectionViewCell {
+        return messagesCollectionView.dequeueReusableCell(TypingIndicatorCell.self, for: indexPath)
+    }
+
     
 }
 
@@ -313,11 +335,11 @@ extension ChatViewController: MessageInputBarDelegate {
     
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
         
-        if let group = group {
+        if let channel = channel {
             for component in inputBar.inputTextView.components {
                 
                 if let str = component as? String {
-                    let body = PostTextBody(groupId: group.id, message: str)
+                    let body = PostTextBody(channelId: channel.id, message: str)
                     MessagesAPI.postText(body: body) { [weak self] (result, error) in
                         guard let weakSelf = self else { return }
                         if let result = result {

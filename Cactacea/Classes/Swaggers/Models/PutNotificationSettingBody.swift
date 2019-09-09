@@ -19,22 +19,22 @@ open class PutNotificationSettingBody: Codable {
     public var friendRequest: Bool
     /** Notice new message arrived. */
     public var message: Bool
-    /** Notice new group message arrived. */
-    public var groupMessage: Bool
-    /** Notice new group groupInvitation arrived. */
-    public var groupInvitation: Bool
+    /** Notice new channel message arrived. */
+    public var channelMessage: Bool
+    /** Notice new invitation arrived. */
+    public var invitation: Bool
     /** Show messages text on notification. */
     public var showMessage: Bool
 
 
     
-    public init(feed: Bool, comment: Bool, friendRequest: Bool, message: Bool, groupMessage: Bool, groupInvitation: Bool, showMessage: Bool) {
+    public init(feed: Bool, comment: Bool, friendRequest: Bool, message: Bool, channelMessage: Bool, invitation: Bool, showMessage: Bool) {
         self.feed = feed
         self.comment = comment
         self.friendRequest = friendRequest
         self.message = message
-        self.groupMessage = groupMessage
-        self.groupInvitation = groupInvitation
+        self.channelMessage = channelMessage
+        self.invitation = invitation
         self.showMessage = showMessage
     }
     
@@ -49,8 +49,8 @@ open class PutNotificationSettingBody: Codable {
         try container.encode(comment, forKey: "comment")
         try container.encode(friendRequest, forKey: "friendRequest")
         try container.encode(message, forKey: "message")
-        try container.encode(groupMessage, forKey: "groupMessage")
-        try container.encode(groupInvitation, forKey: "groupInvitation")
+        try container.encode(channelMessage, forKey: "channelMessage")
+        try container.encode(invitation, forKey: "invitation")
         try container.encode(showMessage, forKey: "showMessage")
     }
 
@@ -63,8 +63,8 @@ open class PutNotificationSettingBody: Codable {
         comment = try container.decode(Bool.self, forKey: "comment")
         friendRequest = try container.decode(Bool.self, forKey: "friendRequest")
         message = try container.decode(Bool.self, forKey: "message")
-        groupMessage = try container.decode(Bool.self, forKey: "groupMessage")
-        groupInvitation = try container.decode(Bool.self, forKey: "groupInvitation")
+        channelMessage = try container.decode(Bool.self, forKey: "channelMessage")
+        invitation = try container.decode(Bool.self, forKey: "invitation")
         showMessage = try container.decode(Bool.self, forKey: "showMessage")
     }
 }
