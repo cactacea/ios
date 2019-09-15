@@ -3,15 +3,42 @@ PODS:
   - Alamofire (4.7.3)
   - AlamofireImage (3.4.1):
     - Alamofire (~> 4.7)
-  - Cactacea (19.9.2):
+  - AppAuth (1.2.0):
+    - AppAuth/Core (= 1.2.0)
+    - AppAuth/ExternalUserAgent (= 1.2.0)
+  - AppAuth/Core (1.2.0)
+  - AppAuth/ExternalUserAgent (1.2.0)
+  - Cactacea (19.9.4):
     - Alamofire (~> 4.7.3)
     - RxSwift (~> 4.4)
+  - FBSDKCoreKit (5.5.0):
+    - FBSDKCoreKit/Basics (= 5.5.0)
+    - FBSDKCoreKit/Core (= 5.5.0)
+  - FBSDKCoreKit/Basics (5.5.0)
+  - FBSDKCoreKit/Core (5.5.0):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (5.5.0):
+    - FBSDKCoreKit (~> 5.0)
+  - FBSDKShareKit (5.5.0):
+    - FBSDKCoreKit (~> 5.0)
+  - GoogleSignIn (5.0.0):
+    - AppAuth (~> 1.1)
+    - GTMAppAuth (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GTMAppAuth (1.0.0):
+    - AppAuth/Core (~> 1.0)
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.2.2):
+    - GTMSessionFetcher/Full (= 1.2.2)
+  - GTMSessionFetcher/Core (1.2.2)
+  - GTMSessionFetcher/Full (1.2.2):
+    - GTMSessionFetcher/Core (= 1.2.2)
   - InputBarAccessoryView (4.2.2)
   - KeychainAccess (3.1.2)
   - MessageKit (3.0.0):
     - InputBarAccessoryView (~> 4.2.2)
-  - Nimble (8.0.2)
-  - OneSignal (2.10.2)
+  - Nimble (8.0.4)
+  - OneSignal (2.11.0)
   - PryntTrimmerView (3.0.0)
   - Quick (2.0.0)
   - RxAtomic (4.4.2)
@@ -31,6 +58,10 @@ DEPENDENCIES:
   - Alamofire (~> 4.7.3)
   - AlamofireImage
   - Cactacea (from `../`)
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
+  - GoogleSignIn
   - KeychainAccess (~> 3.1.2)
   - MessageKit
   - Nimble (~> 8.0.1)
@@ -47,6 +78,13 @@ SPEC REPOS:
     - ActiveLabel
     - Alamofire
     - AlamofireImage
+    - AppAuth
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
+    - GoogleSignIn
+    - GTMAppAuth
+    - GTMSessionFetcher
     - InputBarAccessoryView
     - KeychainAccess
     - MessageKit
@@ -70,12 +108,19 @@ SPEC CHECKSUMS:
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
-  Cactacea: f48a120bfd8df9b793508ea58398ae551a7a49ad
+  AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
+  Cactacea: 8662b18bdfeb6b72a800059c6ec330f75609cd24
+  FBSDKCoreKit: 7ade9cfea30eef2f6cf105a1aa904f89ea68fb7d
+  FBSDKLoginKit: bb28062f24e79590c44ba03297ca9bea4b6436d2
+  FBSDKShareKit: 6316a2dcd2fbc419c87281aa4c50ad0b6ed431e7
+  GoogleSignIn: a62edd0516721d2a3db1259a5681b91f9b41c06a
+  GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
+  GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   InputBarAccessoryView: 2b937602598e2fab3149f37f51dd7ad795653812
   KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
   MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
-  Nimble: 622629381bda1dd5678162f21f1368cec7cbba60
-  OneSignal: 338d72b6fa63e38c4c877295e34575d3f43497ee
+  Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
+  OneSignal: 1e2ed98358f87cb755e7262412ddb2949b8e5c55
   PryntTrimmerView: 53ac64053c7ce63cb3e27f54090f52da0734891d
   Quick: ce1276c7c27ba2da3cb2fd0cde053c3648b3b22d
   RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
@@ -86,6 +131,6 @@ SPEC CHECKSUMS:
   SwiftDate: 8d4f14bf1ef68e95094511504856547bf9e3e1a6
   YPImagePicker: 8039f89ad79281545fa868486f32d9bf5d65ede1
 
-PODFILE CHECKSUM: a9873e8a40784d458df48adea29681d1a5e85aba
+PODFILE CHECKSUM: 53b72ee88f89eff0863d36bcf5ead616491c4bc7
 
 COCOAPODS: 1.7.3

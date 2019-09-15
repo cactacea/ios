@@ -26,7 +26,7 @@ class ProfilePhotoCell: UICollectionViewCell {
     
     func updateView() {
         if let url = post?.mediums.first?.thumbnailUrl {
-            let urlRequest = Session.request(url: url)
+            let urlRequest = URLRequest.request(url: url)
             photo.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }
         

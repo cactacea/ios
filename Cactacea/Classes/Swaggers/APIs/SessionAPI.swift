@@ -499,16 +499,25 @@ open class SessionAPI {
     }
 
     /**
+     * enum for parameter feedType
+     */
+    public enum FeedType_findSessionFeeds: String { 
+        case posted = "posted"
+        case received = "received"
+    }
+
+    /**
      Find session feeds
      
      - parameter since: (query) Filters feeds which started on since or later. (optional)
      - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter feedPrivacyType: (query) Feed privacy type. By default the value is everyone. (optional)
+     - parameter feedPrivacyType: (query) Feed privacy type. (optional)
+     - parameter feedType: (query) Posted feeds or received feeds. By default the value is received. (optional)
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findSessionFeeds(since: Int64? = nil, offset: Int64? = nil, feedPrivacyType: FeedPrivacyType_findSessionFeeds? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
-        findSessionFeedsWithRequestBuilder(since: since, offset: offset, feedPrivacyType: feedPrivacyType, count: count).execute { (response, error) -> Void in
+    open class func findSessionFeeds(since: Int64? = nil, offset: Int64? = nil, feedPrivacyType: FeedPrivacyType_findSessionFeeds? = nil, feedType: FeedType_findSessionFeeds? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
+        findSessionFeedsWithRequestBuilder(since: since, offset: offset, feedPrivacyType: feedPrivacyType, feedType: feedType, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -518,13 +527,14 @@ open class SessionAPI {
      
      - parameter since: (query) Filters feeds which started on since or later. (optional)
      - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter feedPrivacyType: (query) Feed privacy type. By default the value is everyone. (optional)
+     - parameter feedPrivacyType: (query) Feed privacy type. (optional)
+     - parameter feedType: (query) Posted feeds or received feeds. By default the value is received. (optional)
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - returns: Observable<[Feed]>
      */
-    open class func findSessionFeeds(since: Int64? = nil, offset: Int64? = nil, feedPrivacyType: FeedPrivacyType_findSessionFeeds? = nil, count: Int64? = nil) -> Observable<[Feed]> {
+    open class func findSessionFeeds(since: Int64? = nil, offset: Int64? = nil, feedPrivacyType: FeedPrivacyType_findSessionFeeds? = nil, feedType: FeedType_findSessionFeeds? = nil, count: Int64? = nil) -> Observable<[Feed]> {
         return Observable.create { observer -> Disposable in
-            findSessionFeeds(since: since, offset: offset, feedPrivacyType: feedPrivacyType, count: count) { data, error in
+            findSessionFeeds(since: since, offset: offset, feedPrivacyType: feedPrivacyType, feedType: feedType, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -655,12 +665,13 @@ open class SessionAPI {
      
      - parameter since: (query) Filters feeds which started on since or later. (optional)
      - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter feedPrivacyType: (query) Feed privacy type. By default the value is everyone. (optional)
+     - parameter feedPrivacyType: (query) Feed privacy type. (optional)
+     - parameter feedType: (query) Posted feeds or received feeds. By default the value is received. (optional)
      - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
 
      - returns: RequestBuilder<[Feed]> 
      */
-    open class func findSessionFeedsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, feedPrivacyType: FeedPrivacyType_findSessionFeeds? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
+    open class func findSessionFeedsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, feedPrivacyType: FeedPrivacyType_findSessionFeeds? = nil, feedType: FeedType_findSessionFeeds? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
         let path = "/session/feeds"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -670,6 +681,7 @@ open class SessionAPI {
             "since": since, 
             "offset": offset, 
             "feedPrivacyType": feedPrivacyType?.rawValue, 
+            "feedType": feedType?.rawValue, 
             "count": count
         ])
         
@@ -1979,10 +1991,11 @@ open class SessionAPI {
     /**
      Register user
      
+     - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func registerSession(completion: @escaping ((_ data: User?,_ error: Error?) -> Void)) {
-        registerSessionWithRequestBuilder().execute { (response, error) -> Void in
+    open class func registerSession(body: PostSessionBody, completion: @escaping ((_ data: User?,_ error: Error?) -> Void)) {
+        registerSessionWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -1990,11 +2003,12 @@ open class SessionAPI {
     /**
      Register user
      
+     - parameter body: (body)  
      - returns: Observable<User>
      */
-    open class func registerSession() -> Observable<User> {
+    open class func registerSession(body: PostSessionBody) -> Observable<User> {
         return Observable.create { observer -> Disposable in
-            registerSession() { data, error in
+            registerSession(body: body) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -2033,20 +2047,22 @@ open class SessionAPI {
   "followerCount" : 1,
   "muted" : true
 }}]
+     
+     - parameter body: (body)  
 
      - returns: RequestBuilder<User> 
      */
-    open class func registerSessionWithRequestBuilder() -> RequestBuilder<User> {
+    open class func registerSessionWithRequestBuilder(body: PostSessionBody) -> RequestBuilder<User> {
         let path = "/session"
         let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
         let url = NSURLComponents(string: URLString)
 
 
         let requestBuilder: RequestBuilder<User>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**

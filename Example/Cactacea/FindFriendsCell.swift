@@ -29,7 +29,7 @@ class FindFriendsCell: UITableViewCell {
 
         userNameLabel.text = user.userName
         if let smallImageURL = user.profileImageUrl {
-            let urlRequest = Session.request(url: smallImageURL)
+            let urlRequest = URLRequest.request(url: smallImageURL)
             profileImageView.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }
     }

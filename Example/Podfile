@@ -15,7 +15,13 @@ target 'Cactacea_Example' do
   pod 'SwiftDate'
   pod 'Starscream'
   pod 'OneSignal', '>= 2.6.2', '< 3.0'
-
+  
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
+  pod 'FBSDKShareKit'
+  
+  pod 'GoogleSignIn'
+  
   target 'Cactacea_Tests' do
     inherit! :search_paths
 

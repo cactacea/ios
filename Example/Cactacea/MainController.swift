@@ -23,14 +23,14 @@ class MainController: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if Session.user == nil {
-            // wait until MainTabBarController is inside UI
-            DispatchQueue.main.async {
-                self.showSignIn()
+        SessionAPI.findSession(completion: { [weak self] (user, error) in
+            guard let weakSelf = self else { return }
+            if let error = error {
+                weakSelf.showError(error)
+            } else {
+                Session.user = user
             }
-        } else {
-            Session.updateToken()
-        }
+        })
     }
     
     func showSignIn() {

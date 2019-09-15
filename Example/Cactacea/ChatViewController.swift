@@ -77,7 +77,7 @@ class ChatViewController: MessagesViewController {
         socket.delegate = self
         socket.connect()
         
-        if let accessToken = Session.accessToken {
+        if let accessToken = Session.token {
             self.sendCommand(name: "connect", value: accessToken)
         }
 

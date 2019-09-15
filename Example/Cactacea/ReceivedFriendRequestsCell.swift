@@ -29,7 +29,7 @@ class ReceivedFriendRequestsCell: UITableViewCell {
 
         userNameLabel.text = friendRequest.user.userName
         if let smallImageURL = friendRequest.user.profileImageUrl {
-            let urlRequest = Session.request(url: smallImageURL)
+            let urlRequest = URLRequest.request(url: smallImageURL)
             profileImageView.af_setImage(withURLRequest: urlRequest, imageTransition: .crossDissolve(0.2))
         }
         acceptButton.isHidden = false

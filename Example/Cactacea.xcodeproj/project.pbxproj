@@ -45,6 +45,9 @@
 		8232367B21CF3A300086F4CB /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232367921CF3A300086F4CB /* UIViewController+Extensions.swift */; };
 		8232368121CF3A690086F4CB /* Settings+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232368021CF3A680086F4CB /* Settings+UserDefaults.swift */; };
 		8232368521CF3E220086F4CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8232368421CF3E220086F4CB /* Assets.xcassets */; };
+		823E1579232A623D005ABA3B /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823E1578232A623D005ABA3B /* URLRequest+Extension.swift */; };
+		823E157B232A626E005ABA3B /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823E157A232A626E005ABA3B /* UIViewController+Extension.swift */; };
+		823E157D232A628D005ABA3B /* Error+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823E157C232A628D005ABA3B /* Error+Extension.swift */; };
 		8246C6EE221120230048C3F8 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8246C6ED221120230048C3F8 /* NotificationService.swift */; };
 		8246C6F2221120230048C3F8 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8246C6EB221120230048C3F8 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		824BC48D21BCEDF30094841A /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC48C21BCEDF30094841A /* OptionsViewController.swift */; };
@@ -52,6 +55,7 @@
 		824BC49221BD24E80094841A /* MyProfileHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49121BD24E80094841A /* MyProfileHeaderReusableView.swift */; };
 		824BC49421BD2DD00094841A /* ProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49321BD2DD00094841A /* ProfilePhotoCell.swift */; };
 		824BC49621BD3F8A0094841A /* AccountEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824BC49521BD3F8A0094841A /* AccountEditViewController.swift */; };
+		8255F9EA232B246E00BE2612 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8255F9E9232B246E00BE2612 /* Device.swift */; };
 		82968E0521C61EF30023A11E /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82968E0421C61EF30023A11E /* FollowersViewController.swift */; };
 		82968E0721C61F000023A11E /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82968E0621C61F000023A11E /* FollowerCell.swift */; };
 		82968E0A21C62A4C0023A11E /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82968E0921C62A4C0023A11E /* FriendsViewController.swift */; };
@@ -72,6 +76,7 @@
 		82AE929421C69D4B00B34F50 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AE929321C69D4B00B34F50 /* NotificationSettingsViewController.swift */; };
 		82C4F39223252DDF00984FBB /* BlocksViewControlller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C4F39123252DDF00984FBB /* BlocksViewControlller.swift */; };
 		82D4F2DC21EB224000F6BF5B /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D4F2DB21EB224000F6BF5B /* ChatMessage.swift */; };
+		82E92E9F232A00BC0058421C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E92E9E232A00BC0058421C /* RegisterViewController.swift */; };
 		A30072B50BFA31CA9C144705 /* Pods_Cactacea_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E62A8AEF46FEDBB34C8B0FF /* Pods_Cactacea_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -154,6 +159,9 @@
 		8232367921CF3A300086F4CB /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		8232368021CF3A680086F4CB /* Settings+UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Settings+UserDefaults.swift"; sourceTree = "<group>"; };
 		8232368421CF3E220086F4CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		823E1578232A623D005ABA3B /* URLRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extension.swift"; sourceTree = "<group>"; };
+		823E157A232A626E005ABA3B /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		823E157C232A628D005ABA3B /* Error+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Extension.swift"; sourceTree = "<group>"; };
 		8246C6EB221120230048C3F8 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8246C6ED221120230048C3F8 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		8246C6EF221120230048C3F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -163,6 +171,7 @@
 		824BC49121BD24E80094841A /* MyProfileHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileHeaderReusableView.swift; sourceTree = "<group>"; };
 		824BC49321BD2DD00094841A /* ProfilePhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoCell.swift; sourceTree = "<group>"; };
 		824BC49521BD3F8A0094841A /* AccountEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountEditViewController.swift; sourceTree = "<group>"; };
+		8255F9E9232B246E00BE2612 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		82968E0421C61EF30023A11E /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
 		82968E0621C61F000023A11E /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		82968E0921C62A4C0023A11E /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +192,7 @@
 		82AE929321C69D4B00B34F50 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
 		82C4F39123252DDF00984FBB /* BlocksViewControlller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlocksViewControlller.swift; sourceTree = "<group>"; };
 		82D4F2DB21EB224000F6BF5B /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		82E92E9E232A00BC0058421C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8C3BD379CA48ADD2A72E8FCF /* Pods-Cactacea_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A1C9CEFA1F069BCA9720392 /* Pods-Cactacea_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		A2BE60797CBD5595B288348F /* Pods-Cactacea_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cactacea_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -477,6 +487,7 @@
 				829CF04521AD5E4000D5B5EB /* Extensions */,
 				829857C521C5F14800D4773D /* RequestBuilder.swift */,
 				820FE83621AC0CE0001097F5 /* Session.swift */,
+				8255F9E9232B246E00BE2612 /* Device.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -505,6 +516,9 @@
 				821B279921D26D0300F4F42E /* Date+Extension.swift */,
 				821B279B21D26D1B00F4F42E /* UIColor+Extension.swift */,
 				821B279D21D26D4600F4F42E /* NSNotification+Extension.swift */,
+				823E1578232A623D005ABA3B /* URLRequest+Extension.swift */,
+				823E157A232A626E005ABA3B /* UIViewController+Extension.swift */,
+				823E157C232A628D005ABA3B /* Error+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -523,6 +537,7 @@
 				820FE83921AC0E6C001097F5 /* MainController.swift */,
 				820FE83D21AC0F11001097F5 /* SignInViewController.swift */,
 				820FE83B21AC0EEC001097F5 /* SignUpViewController.swift */,
+				82E92E9E232A00BC0058421C /* RegisterViewController.swift */,
 			);
 			name = Top;
 			sourceTree = "<group>";
@@ -575,6 +590,7 @@
 				607FACCE1AFB9204008FA782 /* Resources */,
 				D2194CEEDE91D559001FDC87 /* [CP] Embed Pods Frameworks */,
 				8246C6F6221120230048C3F8 /* Embed App Extensions */,
+				BE00663CBB099F504680880A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -752,6 +768,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cactacea_Tests/Pods-Cactacea_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BE00663CBB099F504680880A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cactacea_Example/Pods-Cactacea_Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D0BF220F6C34F30F3873D227 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -784,7 +818,13 @@
 				"${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/Cactacea/Cactacea.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/InputBarAccessoryView/InputBarAccessoryView.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework",
@@ -802,7 +842,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActiveLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cactacea.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InputBarAccessoryView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageKit.framework",
@@ -849,6 +895,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8255F9EA232B246E00BE2612 /* Device.swift in Sources */,
+				823E157B232A626E005ABA3B /* UIViewController+Extension.swift in Sources */,
 				820EE92D21C5BD9700B1CDE2 /* FriendRequetsSentViewController.swift in Sources */,
 				821B278C21D26BBC00F4F42E /* Message+Extension.swift in Sources */,
 				8209B07921CBDE98003C5D2B /* ProfileEditViewController.swift in Sources */,
@@ -882,6 +930,7 @@
 				82112B7F21BB5A0B00F2C54B /* FeedsViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				821B278E21D26C1300F4F42E /* Medium+Extension.swift in Sources */,
+				823E157D232A628D005ABA3B /* Error+Extension.swift in Sources */,
 				820FE84021AC0F45001097F5 /* ContactViewController.swift in Sources */,
 				821B279221D26C6800F4F42E /* UIAlertController+Extension.swift in Sources */,
 				820EE92A21C5502100B1CDE2 /* Pager.swift in Sources */,
@@ -891,6 +940,7 @@
 				820EE92F21C5BDB000B1CDE2 /* FriendRequetsSentCell.swift in Sources */,
 				820FE83721AC0CE0001097F5 /* Session.swift in Sources */,
 				82AD416721C08EC60023EF6C /* ContactCell.swift in Sources */,
+				82E92E9F232A00BC0058421C /* RegisterViewController.swift in Sources */,
 				8232367A21CF3A300086F4CB /* UIColor+Extensions.swift in Sources */,
 				82AE928D21C6824500B34F50 /* ProfileViewController.swift in Sources */,
 				82968E0A21C62A4C0023A11E /* FriendsViewController.swift in Sources */,
@@ -903,6 +953,7 @@
 				82968E0C21C62A5A0023A11E /* FriendCell.swift in Sources */,
 				821B279E21D26D4600F4F42E /* NSNotification+Extension.swift in Sources */,
 				820FE83C21AC0EEC001097F5 /* SignUpViewController.swift in Sources */,
+				823E1579232A623D005ABA3B /* URLRequest+Extension.swift in Sources */,
 				82C4F39223252DDF00984FBB /* BlocksViewControlller.swift in Sources */,
 				829CF05421B565A000D5B5EB /* FindFriendsViewController.swift in Sources */,
 			);
@@ -1009,6 +1060,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1056,6 +1108,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;

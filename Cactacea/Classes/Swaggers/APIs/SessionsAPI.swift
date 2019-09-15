@@ -13,26 +13,26 @@ import RxSwift
 
 open class SessionsAPI {
     /**
-     Sign in
+     Reject token
      
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func signIn(body: PostSignInBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        signInWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func rejectEmail(body: PostRejectTokenBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        rejectEmailWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
 
     /**
-     Sign in
+     Reject token
      
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func signIn(body: PostSignInBody) -> Observable<Void> {
+    open class func rejectEmail(body: PostRejectTokenBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            signIn(body: body) { error in
+            rejectEmail(body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -45,15 +45,15 @@ open class SessionsAPI {
     }
 
     /**
-     Sign in
-     - POST /signin
+     Reject token
+     - POST /reject
      
      - parameter body: (body)  
 
      - returns: RequestBuilder<Void> 
      */
-    open class func signInWithRequestBuilder(body: PostSignInBody) -> RequestBuilder<Void> {
-        let path = "/signin"
+    open class func rejectEmailWithRequestBuilder(body: PostRejectTokenBody) -> RequestBuilder<Void> {
+        let path = "/reject"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
@@ -66,14 +66,72 @@ open class SessionsAPI {
     }
 
     /**
+     Sign in
+     
+     - parameter body: (body)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func signIn(body: PostSignInBody, completion: @escaping ((_ data: SessionToken?,_ error: Error?) -> Void)) {
+        signInWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+    /**
+     Sign in
+     
+     - parameter body: (body)  
+     - returns: Observable<SessionToken>
+     */
+    open class func signIn(body: PostSignInBody) -> Observable<SessionToken> {
+        return Observable.create { observer -> Disposable in
+            signIn(body: body) { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Sign in
+     - POST /signin
+     - examples: [{contentType=application/json, example={
+  "identifier" : "identifier",
+  "tokenString" : "tokenString",
+  "userId" : 0.80082819046101150206595775671303272247314453125
+}}]
+     
+     - parameter body: (body)  
+
+     - returns: RequestBuilder<SessionToken> 
+     */
+    open class func signInWithRequestBuilder(body: PostSignInBody) -> RequestBuilder<SessionToken> {
+        let path = "/signin"
+        let URLString = CactaceaAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<SessionToken>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
      Sign up
      
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func signUp(body: PostSignUpBody, completion: @escaping ((_ error: Error?) -> Void)) {
+    open class func signUp(body: PostSignUpBody, completion: @escaping ((_ data: SessionToken?,_ error: Error?) -> Void)) {
         signUpWithRequestBuilder(body: body).execute { (response, error) -> Void in
-            completion(error);
+            completion(response?.body, error);
         }
     }
 
@@ -81,11 +139,131 @@ open class SessionsAPI {
      Sign up
      
      - parameter body: (body)  
+     - returns: Observable<SessionToken>
+     */
+    open class func signUp(body: PostSignUpBody) -> Observable<SessionToken> {
+        return Observable.create { observer -> Disposable in
+            signUp(body: body) { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Sign up
+     - POST /signup
+     - examples: [{contentType=application/json, example={
+  "identifier" : "identifier",
+  "tokenString" : "tokenString",
+  "userId" : 0.80082819046101150206595775671303272247314453125
+}}]
+     
+     - parameter body: (body)  
+
+     - returns: RequestBuilder<SessionToken> 
+     */
+    open class func signUpWithRequestBuilder(body: PostSignUpBody) -> RequestBuilder<SessionToken> {
+        let path = "/signup"
+        let URLString = CactaceaAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<SessionToken>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Sign up
+     
+     - parameter provider: (path) Provider type. 
+     - parameter body: (body)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func socialSignUp(provider: String, body: PostSocialSignupBody, completion: @escaping ((_ data: SessionToken?,_ error: Error?) -> Void)) {
+        socialSignUpWithRequestBuilder(provider: provider, body: body).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+    /**
+     Sign up
+     
+     - parameter provider: (path) Provider type. 
+     - parameter body: (body)  
+     - returns: Observable<SessionToken>
+     */
+    open class func socialSignUp(provider: String, body: PostSocialSignupBody) -> Observable<SessionToken> {
+        return Observable.create { observer -> Disposable in
+            socialSignUp(provider: provider, body: body) { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Sign up
+     - POST /signup/{provider}
+     - examples: [{contentType=application/json, example={
+  "identifier" : "identifier",
+  "tokenString" : "tokenString",
+  "userId" : 0.80082819046101150206595775671303272247314453125
+}}]
+     
+     - parameter provider: (path) Provider type. 
+     - parameter body: (body)  
+
+     - returns: RequestBuilder<SessionToken> 
+     */
+    open class func socialSignUpWithRequestBuilder(provider: String, body: PostSocialSignupBody) -> RequestBuilder<SessionToken> {
+        var path = "/signup/{provider}"
+        path = path.replacingOccurrences(of: "{provider}", with: "\(provider)", options: .literal, range: nil)
+        let URLString = CactaceaAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<SessionToken>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Verify token
+     
+     - parameter body: (body)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func verifyEmail(body: PostVerifyTokenBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        verifyEmailWithRequestBuilder(body: body).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+    /**
+     Verify token
+     
+     - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func signUp(body: PostSignUpBody) -> Observable<Void> {
+    open class func verifyEmail(body: PostVerifyTokenBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            signUp(body: body) { error in
+            verifyEmail(body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -98,15 +276,15 @@ open class SessionsAPI {
     }
 
     /**
-     Sign up
-     - POST /signup
+     Verify token
+     - POST /verify
      
      - parameter body: (body)  
 
      - returns: RequestBuilder<Void> 
      */
-    open class func signUpWithRequestBuilder(body: PostSignUpBody) -> RequestBuilder<Void> {
-        let path = "/signup"
+    open class func verifyEmailWithRequestBuilder(body: PostVerifyTokenBody) -> RequestBuilder<Void> {
+        let path = "/verify"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 

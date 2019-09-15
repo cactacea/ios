@@ -10,40 +10,44 @@ import UIKit
 import Cactacea
 import KeychainAccess
 import OneSignal
-import Cactacea
+import FBSDKCoreKit
+import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, OSSubscriptionObserver {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
-//        let keychain = Keychain(service: "io.github.cactace")
-//        Session.accessToken = keychain["access_token"]
-//        CactaceaAPI.basePath = "http://backend.cactacea.io"
-//        CactaceaAPI.requestBuilderFactory = CactaceaRequestBuilderFactory()
-        
-//        NSUUID().UUIDString
-        
-        
-        if let uuid = UserDefaults.standard.string(forKey: "uuid"){
-            Session.uuid = uuid
-        } else {
-            let uuid = UUID().uuidString
-            UserDefaults.standard.setValue(uuid, forKey: "uuid")
-            Session.uuid = uuid
+        if url.scheme == "fb445141022875322" {
+            return ApplicationDelegate.shared.application(app, open: url, options: options)
+        }else{
+            return GIDSignIn.sharedInstance().handle(url)
         }
         
+    }
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // Override point for customization after application launch.
+
+        // facebook
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        // google
+        // Initialize sign-in
+        GIDSignIn.sharedInstance().clientID = "345074977927-m2s730rpl4uh3do11iupenqo7hbp3lcc.apps.googleusercontent.com"
+
+        // cactacea
         CactaceaAPI.basePath = "http://10.0.1.4:9000"
         CactaceaAPI.customHeaders["x-api-key"] = "78290547-ddd6-4cf2-8fe4-7dd241da3061"
         CactaceaAPI.customHeaders["Content-Type"] = "application/json"
-
+        
+        Session.initialize()
+        
+        // onesignal
         let notificationReceivedBlock: OSHandleNotificationReceivedBlock = { notification in
-            
             print("Received Notification: \(String(describing: notification!.payload.notificationID))")
         }
         
@@ -83,17 +87,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, OSSubscriptionObserver {
         return true
     }
     
-    // After you add the observer on didFinishLaunching, this method will be called when the notification subscription property changes.
-    func onOSSubscriptionChanged(_ stateChanges: OSSubscriptionStateChanges!) {
-        if !stateChanges.from.subscribed && stateChanges.to.subscribed {
-            print("Subscribed for OneSignal push notifications!")
-        }
-        print("SubscriptionStateChange: \n\(String(describing: stateChanges))")
-        
-        //The player id is inside stateChanges. But be careful, this value can be nil if the user has not granted you permission to send notifications.
-        Session.playerId = stateChanges.to.userId
-    }
-    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -110,12 +103,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, OSSubscriptionObserver {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        AppEvents.activateApp()
+        
+        Device.updateToken(status: PutDeviceBody.Status.active)
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
+        Device.updateToken(status: PutDeviceBody.Status.inactive)
+
     }
 
+
+}
+
+// onesignal
+extension AppDelegate : OSSubscriptionObserver  {
+    
+    // After you add the observer on didFinishLaunching, this method will be called when the notification subscription property changes.
+    func onOSSubscriptionChanged(_ stateChanges: OSSubscriptionStateChanges!) {
+        if !stateChanges.from.subscribed && stateChanges.to.subscribed {
+            print("Subscribed for OneSignal push notifications!")
+        }
+        print("SubscriptionStateChange: \n\(String(describing: stateChanges))")
+        
+        //The player id is inside stateChanges. But be careful, this value can be nil if the user has not granted you permission to send notifications.
+        Session.playerId = stateChanges.to.userId
+    }
+    
 
 }
 

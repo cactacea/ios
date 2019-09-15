@@ -18,8 +18,8 @@ open class PasswordAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func recover(body: PostRecoverBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        recoverWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func recoverPassword(body: PostRecoverPasswordBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        recoverPasswordWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -30,9 +30,9 @@ open class PasswordAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func recover(body: PostRecoverBody) -> Observable<Void> {
+    open class func recoverPassword(body: PostRecoverPasswordBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            recover(body: body) { error in
+            recoverPassword(body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -52,7 +52,7 @@ open class PasswordAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func recoverWithRequestBuilder(body: PostRecoverBody) -> RequestBuilder<Void> {
+    open class func recoverPasswordWithRequestBuilder(body: PostRecoverPasswordBody) -> RequestBuilder<Void> {
         let path = "/password/recover"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
@@ -71,8 +71,8 @@ open class PasswordAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func reset(body: PostResetBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        resetWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func resetPassword(body: PostResetPasswordBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        resetPasswordWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -83,9 +83,9 @@ open class PasswordAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func reset(body: PostResetBody) -> Observable<Void> {
+    open class func resetPassword(body: PostResetPasswordBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            reset(body: body) { error in
+            resetPassword(body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -105,7 +105,7 @@ open class PasswordAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func resetWithRequestBuilder(body: PostResetBody) -> RequestBuilder<Void> {
+    open class func resetPasswordWithRequestBuilder(body: PostResetPasswordBody) -> RequestBuilder<Void> {
         let path = "/password/reset"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)

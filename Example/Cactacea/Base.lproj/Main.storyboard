@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cSR-Ez-xnn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="saS-Qk-Maf">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -36,7 +36,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pc1-yS-KHb">
-                                <rect key="frame" x="40" y="254" width="334" height="140"/>
+                                <rect key="frame" x="40" y="254" width="334" height="190"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TaR-HI-cmd">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
@@ -76,9 +76,13 @@
                                             <action selector="loginButtonTapped" destination="vXZ-lx-hvc" eventType="touchUpInside" id="azs-Z8-geH"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpp-IQ-CQp">
+                                        <rect key="frame" x="0.0" y="150" width="334" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="140" id="PL3-Gn-he5"/>
+                                    <constraint firstAttribute="height" constant="190" id="PL3-Gn-he5"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Chb-fU-wiD">
@@ -129,12 +133,16 @@
                         <outlet property="loginButton" destination="Xyx-mI-Vv3" id="CY9-CZ-P57"/>
                         <outlet property="passwordTextField" destination="UR7-9x-7oQ" id="n9h-5I-2YK"/>
                         <outlet property="signUpButton" destination="Chb-fU-wiD" id="jYb-Zd-MaG"/>
+                        <outlet property="stackView" destination="pc1-yS-KHb" id="SGe-7H-4yx"/>
+                        <outlet property="stackViewHeightConstaint" destination="PL3-Gn-he5" id="AzK-74-0LU"/>
                         <outlet property="userNameTextField" destination="TaR-HI-cmd" id="wtF-RS-tes"/>
+                        <segue destination="cSR-Ez-xnn" kind="presentation" identifier="Top" id="mMj-gn-gPx"/>
+                        <segue destination="5FC-WB-aFs" kind="show" identifier="Register" id="WvJ-cn-Blf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1586.4000000000001" y="-2438.423645320197"/>
+            <point key="canvasLocation" x="1585.5072463768117" y="-2438.8392857142858"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="7xJ-ya-ter">
@@ -254,12 +262,13 @@
                         <outlet property="signInButton" destination="aaa-7a-BLS" id="tMh-1j-1tW"/>
                         <outlet property="signUpButton" destination="rQk-tV-B0G" id="g4j-oy-J63"/>
                         <outlet property="userNameTextField" destination="Vef-oA-Xyn" id="xeW-B8-MRV"/>
+                        <segue destination="cSR-Ez-xnn" kind="presentation" identifier="Top" id="JcO-Yr-f0b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hh5-iI-mcg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wph-ZD-x30" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2514.4000000000001" y="-2439.1625615763546"/>
+            <point key="canvasLocation" x="2513.04347826087" y="-2439.5089285714284"/>
         </scene>
         <!--Profile-->
         <scene sceneID="A58-GO-gDv">
@@ -661,7 +670,6 @@
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="saS-Qk-Maf" kind="presentation" identifier="signIn" id="ugf-4u-13r"/>
                         <segue destination="YXI-YD-gsY" kind="relationship" relationship="viewControllers" id="A7f-dN-gzH"/>
                         <segue destination="wbS-Kp-lBx" kind="relationship" relationship="viewControllers" id="xyP-L2-7jX"/>
                         <segue destination="8Qx-4K-KhG" kind="relationship" relationship="viewControllers" id="S4O-GH-qca"/>
@@ -3004,7 +3012,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ecd-Qq-jzs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5378" y="582"/>
+            <point key="canvasLocation" x="3874" y="1174"/>
         </scene>
         <!--Profile Edit-->
         <scene sceneID="5jB-Ht-48C">
@@ -3213,6 +3221,88 @@
             </objects>
             <point key="canvasLocation" x="3471" y="3171"/>
         </scene>
+        <!--Register View Controller-->
+        <scene sceneID="UNS-vt-0Vu">
+            <objects>
+                <viewController id="5FC-WB-aFs" customClass="RegisterViewController" customModule="Cactacea_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sC6-Lp-mIe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0v-da-wqn">
+                                <rect key="frame" x="118" y="84" width="178" height="140"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="140" id="A1h-tz-sz6"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="plus_photo"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="70"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="profileImageButtonTapped:" destination="5FC-WB-aFs" eventType="touchUpInside" id="ptB-OO-BUR"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="197-Ic-EAa">
+                                <rect key="frame" x="40" y="244" width="334" height="90"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VTc-SR-OqN">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.029999999999999999" colorSpace="calibratedRGB"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet"/>
+                                        <connections>
+                                            <action selector="textFieldChanged:" destination="5FC-WB-aFs" eventType="editingChanged" id="9aU-G1-oEi"/>
+                                            <outlet property="delegate" destination="sC6-Lp-mIe" id="ZVN-pm-88p"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ve8-V4-iwD">
+                                        <rect key="frame" x="0.0" y="50" width="334" height="40"/>
+                                        <color key="backgroundColor" red="0.58431372550000005" green="0.80000000000000004" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal" title="Register">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="signUpButtonTapped:" destination="5FC-WB-aFs" eventType="touchUpInside" id="9KA-X5-xk5"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="Qzd-wH-Va9"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ls9-Fc-6dl" firstAttribute="trailing" secondItem="197-Ic-EAa" secondAttribute="trailing" constant="40" id="27L-77-9cl"/>
+                            <constraint firstItem="M0v-da-wqn" firstAttribute="centerX" secondItem="197-Ic-EAa" secondAttribute="centerX" id="I1g-5M-Dkp"/>
+                            <constraint firstItem="197-Ic-EAa" firstAttribute="leading" secondItem="ls9-Fc-6dl" secondAttribute="leading" constant="40" id="RVx-y9-icK"/>
+                            <constraint firstItem="M0v-da-wqn" firstAttribute="top" secondItem="ls9-Fc-6dl" secondAttribute="top" constant="40" id="gkE-go-o0f"/>
+                            <constraint firstItem="M0v-da-wqn" firstAttribute="leading" secondItem="ls9-Fc-6dl" secondAttribute="leading" constant="118" id="k3c-gP-X6n"/>
+                            <constraint firstItem="197-Ic-EAa" firstAttribute="top" secondItem="M0v-da-wqn" secondAttribute="bottom" constant="20" id="rlP-u1-AzC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ls9-Fc-6dl"/>
+                    </view>
+                    <connections>
+                        <outlet property="profileImageButton" destination="M0v-da-wqn" id="2wz-4z-UTJ"/>
+                        <outlet property="registerButton" destination="ve8-V4-iwD" id="Iej-IW-OQO"/>
+                        <outlet property="userNameTextField" destination="VTc-SR-OqN" id="L2i-o2-Pio"/>
+                        <segue destination="cSR-Ez-xnn" kind="presentation" identifier="Top" id="PfO-VZ-P8g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sQM-4V-CZg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3390" y="-2440"/>
+        </scene>
     </scenes>
     <resources>
         <image name="comment" width="22" height="19"/>
@@ -3232,9 +3322,10 @@
         <image name="send2" width="22" height="19.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YU1-1K-59i"/>
+        <segue reference="F3O-hv-AFY"/>
         <segue reference="5RU-RG-o00"/>
         <segue reference="tSg-C5-lzU"/>
+        <segue reference="PfO-VZ-P8g"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>
