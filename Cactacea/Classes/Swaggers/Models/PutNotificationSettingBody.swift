@@ -11,8 +11,8 @@ import Foundation
 
 open class PutNotificationSettingBody: Codable {
 
-    /** Notice new follower feed arrived. */
-    public var feed: Bool
+    /** Notice new follower tweet arrived. */
+    public var tweet: Bool
     /** Notice new comment arrived. */
     public var comment: Bool
     /** Notice new friend request arrived. */
@@ -28,8 +28,8 @@ open class PutNotificationSettingBody: Codable {
 
 
     
-    public init(feed: Bool, comment: Bool, friendRequest: Bool, message: Bool, channelMessage: Bool, invitation: Bool, showMessage: Bool) {
-        self.feed = feed
+    public init(tweet: Bool, comment: Bool, friendRequest: Bool, message: Bool, channelMessage: Bool, invitation: Bool, showMessage: Bool) {
+        self.tweet = tweet
         self.comment = comment
         self.friendRequest = friendRequest
         self.message = message
@@ -45,7 +45,7 @@ open class PutNotificationSettingBody: Codable {
 
         var container = encoder.container(keyedBy: String.self)
 
-        try container.encode(feed, forKey: "feed")
+        try container.encode(tweet, forKey: "tweet")
         try container.encode(comment, forKey: "comment")
         try container.encode(friendRequest, forKey: "friendRequest")
         try container.encode(message, forKey: "message")
@@ -59,7 +59,7 @@ open class PutNotificationSettingBody: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: String.self)
 
-        feed = try container.decode(Bool.self, forKey: "feed")
+        tweet = try container.decode(Bool.self, forKey: "tweet")
         comment = try container.decode(Bool.self, forKey: "comment")
         friendRequest = try container.decode(Bool.self, forKey: "friendRequest")
         message = try container.decode(Bool.self, forKey: "message")

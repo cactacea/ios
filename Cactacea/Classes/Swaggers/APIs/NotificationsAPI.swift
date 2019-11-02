@@ -13,7 +13,7 @@ import RxSwift
 
 open class NotificationsAPI {
     /**
-     Search notifications
+     Search informations
      
      - parameter body: (body)  
      - parameter since: (query) Filters notifications which started on since or later. (optional)
@@ -21,24 +21,24 @@ open class NotificationsAPI {
      - parameter count: (query) Maximum number of notifications returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findNotifications(body: GetNotificationsBody, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Notification]?,_ error: Error?) -> Void)) {
-        findNotificationsWithRequestBuilder(body: body, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+    open class func findInformations(body: GetNotificationsBody, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Information]?,_ error: Error?) -> Void)) {
+        findInformationsWithRequestBuilder(body: body, since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
 
     /**
-     Search notifications
+     Search informations
      
      - parameter body: (body)  
      - parameter since: (query) Filters notifications which started on since or later. (optional)
      - parameter offset: (query) The offset of notifications. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of notifications returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<[Notification]>
+     - returns: Observable<[Information]>
      */
-    open class func findNotifications(body: GetNotificationsBody, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Notification]> {
+    open class func findInformations(body: GetNotificationsBody, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Information]> {
         return Observable.create { observer -> Disposable in
-            findNotifications(body: body, since: since, offset: offset, count: count) { data, error in
+            findInformations(body: body, since: since, offset: offset, count: count) { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -51,23 +51,23 @@ open class NotificationsAPI {
     }
 
     /**
-     Search notifications
-     - GET /notifications
+     Search informations
+     - GET /informations
      - examples: [{contentType=application/json, example=[ {
   "next" : 5,
   "contentId" : 6.02745618307040320615897144307382404804229736328125,
   "id" : 0.80082819046101150206595775671303272247314453125,
-  "notificationType" : "operator",
   "message" : "message",
   "notifiedAt" : 1,
+  "informationType" : "operator",
   "url" : "url"
 }, {
   "next" : 5,
   "contentId" : 6.02745618307040320615897144307382404804229736328125,
   "id" : 0.80082819046101150206595775671303272247314453125,
-  "notificationType" : "operator",
   "message" : "message",
   "notifiedAt" : 1,
+  "informationType" : "operator",
   "url" : "url"
 } ]}]
      
@@ -76,10 +76,10 @@ open class NotificationsAPI {
      - parameter offset: (query) The offset of notifications. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of notifications returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
 
-     - returns: RequestBuilder<[Notification]> 
+     - returns: RequestBuilder<[Information]> 
      */
-    open class func findNotificationsWithRequestBuilder(body: GetNotificationsBody, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Notification]> {
-        let path = "/notifications"
+    open class func findInformationsWithRequestBuilder(body: GetNotificationsBody, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Information]> {
+        let path = "/informations"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
 
@@ -91,7 +91,7 @@ open class NotificationsAPI {
         ])
         
 
-        let requestBuilder: RequestBuilder<[Notification]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<[Information]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }

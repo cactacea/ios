@@ -17,8 +17,8 @@ open class SettingsAPI {
      
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findPushNotification(completion: @escaping ((_ data: PushNotificationSetting?,_ error: Error?) -> Void)) {
-        findPushNotificationWithRequestBuilder().execute { (response, error) -> Void in
+    open class func findNotification(completion: @escaping ((_ data: NotificationSetting?,_ error: Error?) -> Void)) {
+        findNotificationWithRequestBuilder().execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
@@ -26,11 +26,11 @@ open class SettingsAPI {
     /**
      Get push notification settings
      
-     - returns: Observable<PushNotificationSetting>
+     - returns: Observable<NotificationSetting>
      */
-    open class func findPushNotification() -> Observable<PushNotificationSetting> {
+    open class func findNotification() -> Observable<NotificationSetting> {
         return Observable.create { observer -> Disposable in
-            findPushNotification() { data, error in
+            findNotification() { data, error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -46,18 +46,18 @@ open class SettingsAPI {
      Get push notification settings
      - GET /session/push/notification
      - examples: [{contentType=application/json, example={
-  "feed" : true,
   "channelMessage" : true,
   "invitation" : true,
   "showMessage" : true,
   "comment" : true,
   "friendRequest" : true,
+  "tweet" : true,
   "message" : true
 }}]
 
-     - returns: RequestBuilder<PushNotificationSetting> 
+     - returns: RequestBuilder<NotificationSetting> 
      */
-    open class func findPushNotificationWithRequestBuilder() -> RequestBuilder<PushNotificationSetting> {
+    open class func findNotificationWithRequestBuilder() -> RequestBuilder<NotificationSetting> {
         let path = "/session/push/notification"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -65,7 +65,7 @@ open class SettingsAPI {
         let url = NSURLComponents(string: URLString)
 
 
-        let requestBuilder: RequestBuilder<PushNotificationSetting>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<NotificationSetting>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -129,8 +129,8 @@ open class SettingsAPI {
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func updatePushNotification(body: PutNotificationSettingBody, completion: @escaping ((_ error: Error?) -> Void)) {
-        updatePushNotificationWithRequestBuilder(body: body).execute { (response, error) -> Void in
+    open class func updateNotification(body: PutNotificationSettingBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        updateNotificationWithRequestBuilder(body: body).execute { (response, error) -> Void in
             completion(error);
         }
     }
@@ -141,9 +141,9 @@ open class SettingsAPI {
      - parameter body: (body)  
      - returns: Observable<Void>
      */
-    open class func updatePushNotification(body: PutNotificationSettingBody) -> Observable<Void> {
+    open class func updateNotification(body: PutNotificationSettingBody) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            updatePushNotification(body: body) { error in
+            updateNotification(body: body) { error in
                 if let error = error {
                     observer.on(.error(error))
                 } else {
@@ -163,7 +163,7 @@ open class SettingsAPI {
 
      - returns: RequestBuilder<Void> 
      */
-    open class func updatePushNotificationWithRequestBuilder(body: PutNotificationSettingBody) -> RequestBuilder<Void> {
+    open class func updateNotificationWithRequestBuilder(body: PutNotificationSettingBody) -> RequestBuilder<Void> {
         let path = "/session/push/notification"
         let URLString = CactaceaAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)

@@ -160,7 +160,7 @@ open class SessionAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -241,7 +241,7 @@ open class SessionAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -264,7 +264,7 @@ open class SessionAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -383,7 +383,7 @@ open class SessionAPI {
       "userStatus" : "normally",
       "displayName" : "displayName",
       "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-      "feedCount" : 5,
+      "tweetCount" : 5,
       "bio" : "bio",
       "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
       "userName" : "userName",
@@ -441,7 +441,7 @@ open class SessionAPI {
       "userStatus" : "normally",
       "displayName" : "displayName",
       "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-      "feedCount" : 5,
+      "tweetCount" : 5,
       "bio" : "bio",
       "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
       "userName" : "userName",
@@ -484,209 +484,6 @@ open class SessionAPI {
         
 
         let requestBuilder: RequestBuilder<[Channel]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-     * enum for parameter feedPrivacyType
-     */
-    public enum FeedPrivacyType_findSessionFeeds: String { 
-        case everyone = "everyone"
-        case followers = "followers"
-        case friends = "friends"
-        case _self = "self"
-    }
-
-    /**
-     * enum for parameter feedType
-     */
-    public enum FeedType_findSessionFeeds: String { 
-        case posted = "posted"
-        case received = "received"
-    }
-
-    /**
-     Find session feeds
-     
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter feedPrivacyType: (query) Feed privacy type. (optional)
-     - parameter feedType: (query) Posted feeds or received feeds. By default the value is received. (optional)
-     - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func findSessionFeeds(since: Int64? = nil, offset: Int64? = nil, feedPrivacyType: FeedPrivacyType_findSessionFeeds? = nil, feedType: FeedType_findSessionFeeds? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
-        findSessionFeedsWithRequestBuilder(since: since, offset: offset, feedPrivacyType: feedPrivacyType, feedType: feedType, count: count).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-    /**
-     Find session feeds
-     
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter feedPrivacyType: (query) Feed privacy type. (optional)
-     - parameter feedType: (query) Posted feeds or received feeds. By default the value is received. (optional)
-     - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<[Feed]>
-     */
-    open class func findSessionFeeds(since: Int64? = nil, offset: Int64? = nil, feedPrivacyType: FeedPrivacyType_findSessionFeeds? = nil, feedType: FeedType_findSessionFeeds? = nil, count: Int64? = nil) -> Observable<[Feed]> {
-        return Observable.create { observer -> Disposable in
-            findSessionFeeds(since: since, offset: offset, feedPrivacyType: feedPrivacyType, feedType: feedType, count: count) { data, error in
-                if let error = error {
-                    observer.on(.error(error))
-                } else {
-                    observer.on(.next(data!))
-                }
-                observer.on(.completed)
-            }
-            return Disposables.create()
-        }
-    }
-
-    /**
-     Find session feeds
-     - GET /session/feeds
-     - examples: [{contentType=application/json, example=[ {
-  "next" : 3,
-  "postedAt" : 9,
-  "rejected" : true,
-  "warning" : true,
-  "likeCount" : 2,
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "message" : "message",
-  "mediums" : [ {
-    "size" : 5,
-    "rejected" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "warning" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  }, {
-    "size" : 5,
-    "rejected" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "warning" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  } ],
-  "user" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 3,
-    "followCount" : 6,
-    "friendCount" : 5,
-    "userStatus" : "normally",
-    "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
-    "bio" : "bio",
-    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
-    "userName" : "userName",
-    "follow" : true,
-    "friendRequestInProgress" : true,
-    "blocked" : true,
-    "web" : "web",
-    "isFriend" : true,
-    "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1,
-    "muted" : true
-  },
-  "liked" : true,
-  "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
-}, {
-  "next" : 3,
-  "postedAt" : 9,
-  "rejected" : true,
-  "warning" : true,
-  "likeCount" : 2,
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "message" : "message",
-  "mediums" : [ {
-    "size" : 5,
-    "rejected" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "warning" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  }, {
-    "size" : 5,
-    "rejected" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "warning" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  } ],
-  "user" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 3,
-    "followCount" : 6,
-    "friendCount" : 5,
-    "userStatus" : "normally",
-    "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
-    "bio" : "bio",
-    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
-    "userName" : "userName",
-    "follow" : true,
-    "friendRequestInProgress" : true,
-    "blocked" : true,
-    "web" : "web",
-    "isFriend" : true,
-    "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1,
-    "muted" : true
-  },
-  "liked" : true,
-  "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
-} ]}]
-     
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter feedPrivacyType: (query) Feed privacy type. (optional)
-     - parameter feedType: (query) Posted feeds or received feeds. By default the value is received. (optional)
-     - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-
-     - returns: RequestBuilder<[Feed]> 
-     */
-    open class func findSessionFeedsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, feedPrivacyType: FeedPrivacyType_findSessionFeeds? = nil, feedType: FeedType_findSessionFeeds? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
-        let path = "/session/feeds"
-        let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "since": since, 
-            "offset": offset, 
-            "feedPrivacyType": feedPrivacyType?.rawValue, 
-            "feedType": feedType?.rawValue, 
-            "count": count
-        ])
-        
-
-        let requestBuilder: RequestBuilder<[Feed]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -740,7 +537,7 @@ open class SessionAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -763,7 +560,7 @@ open class SessionAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -855,7 +652,7 @@ open class SessionAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -878,7 +675,7 @@ open class SessionAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -974,7 +771,7 @@ open class SessionAPI {
     "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
+    "tweetCount" : 5,
     "bio" : "bio",
     "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
     "userName" : "userName",
@@ -1002,7 +799,7 @@ open class SessionAPI {
     "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
+    "tweetCount" : 5,
     "bio" : "bio",
     "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
     "userName" : "userName",
@@ -1095,7 +892,7 @@ open class SessionAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -1118,7 +915,7 @@ open class SessionAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -1237,7 +1034,7 @@ open class SessionAPI {
       "userStatus" : "normally",
       "displayName" : "displayName",
       "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-      "feedCount" : 5,
+      "tweetCount" : 5,
       "bio" : "bio",
       "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
       "userName" : "userName",
@@ -1295,7 +1092,7 @@ open class SessionAPI {
       "userStatus" : "normally",
       "displayName" : "displayName",
       "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-      "feedCount" : 5,
+      "tweetCount" : 5,
       "bio" : "bio",
       "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
       "userName" : "userName",
@@ -1420,7 +1217,7 @@ open class SessionAPI {
         "userStatus" : "normally",
         "displayName" : "displayName",
         "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-        "feedCount" : 5,
+        "tweetCount" : 5,
         "bio" : "bio",
         "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
         "userName" : "userName",
@@ -1451,7 +1248,7 @@ open class SessionAPI {
     "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
+    "tweetCount" : 5,
     "bio" : "bio",
     "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
     "userName" : "userName",
@@ -1507,7 +1304,7 @@ open class SessionAPI {
         "userStatus" : "normally",
         "displayName" : "displayName",
         "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-        "feedCount" : 5,
+        "tweetCount" : 5,
         "bio" : "bio",
         "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
         "userName" : "userName",
@@ -1538,7 +1335,7 @@ open class SessionAPI {
     "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
+    "tweetCount" : 5,
     "bio" : "bio",
     "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
     "userName" : "userName",
@@ -1582,28 +1379,28 @@ open class SessionAPI {
     }
 
     /**
-     Get feeds list session user set a like
+     Get tweets list session user set a like
      
      - parameter since: (query) Filters entries which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter offset: (query) The offset of tweets. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of tweets returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func findSessionLikes(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
+    open class func findSessionLikes(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Tweet]?,_ error: Error?) -> Void)) {
         findSessionLikesWithRequestBuilder(since: since, offset: offset, count: count).execute { (response, error) -> Void in
             completion(response?.body, error);
         }
     }
 
     /**
-     Get feeds list session user set a like
+     Get tweets list session user set a like
      
      - parameter since: (query) Filters entries which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<[Feed]>
+     - parameter offset: (query) The offset of tweets. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of tweets returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - returns: Observable<[Tweet]>
      */
-    open class func findSessionLikes(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Feed]> {
+    open class func findSessionLikes(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Tweet]> {
         return Observable.create { observer -> Disposable in
             findSessionLikes(since: since, offset: offset, count: count) { data, error in
                 if let error = error {
@@ -1618,7 +1415,7 @@ open class SessionAPI {
     }
 
     /**
-     Get feeds list session user set a like
+     Get tweets list session user set a like
      - GET /session/likes
      - examples: [{contentType=application/json, example=[ {
   "next" : 3,
@@ -1657,7 +1454,7 @@ open class SessionAPI {
     "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
+    "tweetCount" : 5,
     "bio" : "bio",
     "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
     "userName" : "userName",
@@ -1713,7 +1510,7 @@ open class SessionAPI {
     "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
+    "tweetCount" : 5,
     "bio" : "bio",
     "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
     "userName" : "userName",
@@ -1735,12 +1532,12 @@ open class SessionAPI {
 } ]}]
      
      - parameter since: (query) Filters entries which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter offset: (query) The offset of tweets. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of tweets returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
 
-     - returns: RequestBuilder<[Feed]> 
+     - returns: RequestBuilder<[Tweet]> 
      */
-    open class func findSessionLikesWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
+    open class func findSessionLikesWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Tweet]> {
         let path = "/session/likes"
         let URLString = CactaceaAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -1753,7 +1550,7 @@ open class SessionAPI {
         ])
         
 
-        let requestBuilder: RequestBuilder<[Feed]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<[Tweet]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -1807,7 +1604,7 @@ open class SessionAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -1830,7 +1627,7 @@ open class SessionAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -1869,6 +1666,209 @@ open class SessionAPI {
         
 
         let requestBuilder: RequestBuilder<[User]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     * enum for parameter tweetPrivacyType
+     */
+    public enum TweetPrivacyType_findSessionTweets: String { 
+        case everyone = "everyone"
+        case followers = "followers"
+        case friends = "friends"
+        case _self = "self"
+    }
+
+    /**
+     * enum for parameter tweetType
+     */
+    public enum TweetType_findSessionTweets: String { 
+        case posted = "posted"
+        case received = "received"
+    }
+
+    /**
+     Find session tweets
+     
+     - parameter since: (query) Filters tweets which started on since or later. (optional)
+     - parameter offset: (query) The offset of tweets. By default the value is 0. (optional)
+     - parameter tweetPrivacyType: (query) Tweet privacy type. (optional)
+     - parameter tweetType: (query) Posted tweets or received tweets. By default the value is received. (optional)
+     - parameter count: (query) Maximum number of tweets returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func findSessionTweets(since: Int64? = nil, offset: Int64? = nil, tweetPrivacyType: TweetPrivacyType_findSessionTweets? = nil, tweetType: TweetType_findSessionTweets? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Tweet]?,_ error: Error?) -> Void)) {
+        findSessionTweetsWithRequestBuilder(since: since, offset: offset, tweetPrivacyType: tweetPrivacyType, tweetType: tweetType, count: count).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+    /**
+     Find session tweets
+     
+     - parameter since: (query) Filters tweets which started on since or later. (optional)
+     - parameter offset: (query) The offset of tweets. By default the value is 0. (optional)
+     - parameter tweetPrivacyType: (query) Tweet privacy type. (optional)
+     - parameter tweetType: (query) Posted tweets or received tweets. By default the value is received. (optional)
+     - parameter count: (query) Maximum number of tweets returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - returns: Observable<[Tweet]>
+     */
+    open class func findSessionTweets(since: Int64? = nil, offset: Int64? = nil, tweetPrivacyType: TweetPrivacyType_findSessionTweets? = nil, tweetType: TweetType_findSessionTweets? = nil, count: Int64? = nil) -> Observable<[Tweet]> {
+        return Observable.create { observer -> Disposable in
+            findSessionTweets(since: since, offset: offset, tweetPrivacyType: tweetPrivacyType, tweetType: tweetType, count: count) { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Find session tweets
+     - GET /session/tweets
+     - examples: [{contentType=application/json, example=[ {
+  "next" : 3,
+  "postedAt" : 9,
+  "rejected" : true,
+  "warning" : true,
+  "likeCount" : 2,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : "message",
+  "mediums" : [ {
+    "size" : 5,
+    "rejected" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "warning" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  }, {
+    "size" : 5,
+    "rejected" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "warning" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  } ],
+  "user" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 3,
+    "followCount" : 6,
+    "friendCount" : 5,
+    "userStatus" : "normally",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "tweetCount" : 5,
+    "bio" : "bio",
+    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+    "userName" : "userName",
+    "follow" : true,
+    "friendRequestInProgress" : true,
+    "blocked" : true,
+    "web" : "web",
+    "isFriend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1,
+    "muted" : true
+  },
+  "liked" : true,
+  "tags" : [ "tags", "tags" ],
+  "commentCount" : 7
+}, {
+  "next" : 3,
+  "postedAt" : 9,
+  "rejected" : true,
+  "warning" : true,
+  "likeCount" : 2,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : "message",
+  "mediums" : [ {
+    "size" : 5,
+    "rejected" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "warning" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  }, {
+    "size" : 5,
+    "rejected" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "warning" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  } ],
+  "user" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 3,
+    "followCount" : 6,
+    "friendCount" : 5,
+    "userStatus" : "normally",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "tweetCount" : 5,
+    "bio" : "bio",
+    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+    "userName" : "userName",
+    "follow" : true,
+    "friendRequestInProgress" : true,
+    "blocked" : true,
+    "web" : "web",
+    "isFriend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1,
+    "muted" : true
+  },
+  "liked" : true,
+  "tags" : [ "tags", "tags" ],
+  "commentCount" : 7
+} ]}]
+     
+     - parameter since: (query) Filters tweets which started on since or later. (optional)
+     - parameter offset: (query) The offset of tweets. By default the value is 0. (optional)
+     - parameter tweetPrivacyType: (query) Tweet privacy type. (optional)
+     - parameter tweetType: (query) Posted tweets or received tweets. By default the value is received. (optional)
+     - parameter count: (query) Maximum number of tweets returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+
+     - returns: RequestBuilder<[Tweet]> 
+     */
+    open class func findSessionTweetsWithRequestBuilder(since: Int64? = nil, offset: Int64? = nil, tweetPrivacyType: TweetPrivacyType_findSessionTweets? = nil, tweetType: TweetType_findSessionTweets? = nil, count: Int64? = nil) -> RequestBuilder<[Tweet]> {
+        let path = "/session/tweets"
+        let URLString = CactaceaAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "since": since, 
+            "offset": offset, 
+            "tweetPrivacyType": tweetPrivacyType?.rawValue, 
+            "tweetType": tweetType?.rawValue, 
+            "count": count
+        ])
+        
+
+        let requestBuilder: RequestBuilder<[Tweet]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -1922,7 +1922,7 @@ open class SessionAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -1945,7 +1945,7 @@ open class SessionAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -1986,6 +1986,63 @@ open class SessionAPI {
         let requestBuilder: RequestBuilder<[User]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     link an social account
+     
+     - parameter provider: (path) Provider type. 
+     - parameter body: (body)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func linkSocialAccount(provider: String, body: PostSocialLinkBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        linkSocialAccountWithRequestBuilder(provider: provider, body: body).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+    /**
+     link an social account
+     
+     - parameter provider: (path) Provider type. 
+     - parameter body: (body)  
+     - returns: Observable<Void>
+     */
+    open class func linkSocialAccount(provider: String, body: PostSocialLinkBody) -> Observable<Void> {
+        return Observable.create { observer -> Disposable in
+            linkSocialAccount(provider: provider, body: body) { error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(()))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     link an social account
+     - POST /session/{provider}/link
+     
+     - parameter provider: (path) Provider type. 
+     - parameter body: (body)  
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func linkSocialAccountWithRequestBuilder(provider: String, body: PostSocialLinkBody) -> RequestBuilder<Void> {
+        var path = "/session/{provider}/link"
+        path = path.replacingOccurrences(of: "{provider}", with: "\(provider)", options: .literal, range: nil)
+        let URLString = CactaceaAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<Void>.Type = CactaceaAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
@@ -2031,7 +2088,7 @@ open class SessionAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -2112,6 +2169,63 @@ open class SessionAPI {
         let requestBuilder: RequestBuilder<Void>.Type = CactaceaAPI.requestBuilderFactory.getNonDecodableBuilder()
 
         return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     unlink an social account
+     
+     - parameter provider: (path) Provider type. 
+     - parameter body: (body)  
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func unlinkSocialAccount(provider: String, body: PostSocialLinkBody, completion: @escaping ((_ error: Error?) -> Void)) {
+        unlinkSocialAccountWithRequestBuilder(provider: provider, body: body).execute { (response, error) -> Void in
+            completion(error);
+        }
+    }
+
+    /**
+     unlink an social account
+     
+     - parameter provider: (path) Provider type. 
+     - parameter body: (body)  
+     - returns: Observable<Void>
+     */
+    open class func unlinkSocialAccount(provider: String, body: PostSocialLinkBody) -> Observable<Void> {
+        return Observable.create { observer -> Disposable in
+            unlinkSocialAccount(provider: provider, body: body) { error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(()))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     unlink an social account
+     - DELETE /session/{provider}/link
+     
+     - parameter provider: (path) Provider type. 
+     - parameter body: (body)  
+
+     - returns: RequestBuilder<Void> 
+     */
+    open class func unlinkSocialAccountWithRequestBuilder(provider: String, body: PostSocialLinkBody) -> RequestBuilder<Void> {
+        var path = "/session/{provider}/link"
+        path = path.replacingOccurrences(of: "{provider}", with: "\(provider)", options: .literal, range: nil)
+        let URLString = CactaceaAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: body)
+
+        let url = NSURLComponents(string: URLString)
+
+
+        let requestBuilder: RequestBuilder<Void>.Type = CactaceaAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**

@@ -11,7 +11,7 @@ import Foundation
 
 open class PostCommentBody: Codable {
 
-    /** Feed Identifier. */
+    /** Tweet Identifier. */
     public var id: Int64
     /** Reply comment identifier. */
     public var replyId: Int64?

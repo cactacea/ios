@@ -104,7 +104,6 @@ open class CommentsAPI {
      - examples: [{contentType=application/json, example={
   "next" : 2,
   "postedAt" : 5,
-  "feedId" : 1.46581298050294517310021547018550336360931396484375,
   "rejected" : true,
   "replyId" : 6.02745618307040320615897144307382404804229736328125,
   "warning" : true,
@@ -119,7 +118,7 @@ open class CommentsAPI {
     "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
+    "tweetCount" : 5,
     "bio" : "bio",
     "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
     "userName" : "userName",
@@ -134,7 +133,8 @@ open class CommentsAPI {
     "profileImageUrl" : "profileImageUrl",
     "followerCount" : 1,
     "muted" : true
-  }
+  },
+  "tweetId" : 1.46581298050294517310021547018550336360931396484375
 }}]
      
      - parameter id: (path) Comment Identifier. 
@@ -158,7 +158,7 @@ open class CommentsAPI {
     /**
      Search comments
      
-     - parameter id: (query) Feed identifier. 
+     - parameter id: (query) Tweet identifier. 
      - parameter since: (query) Filters comments which started on since or later. (optional)
      - parameter offset: (query) The offset of comments. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of comments returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
@@ -173,7 +173,7 @@ open class CommentsAPI {
     /**
      Search comments
      
-     - parameter id: (query) Feed identifier. 
+     - parameter id: (query) Tweet identifier. 
      - parameter since: (query) Filters comments which started on since or later. (optional)
      - parameter offset: (query) The offset of comments. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of comments returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
@@ -199,7 +199,6 @@ open class CommentsAPI {
      - examples: [{contentType=application/json, example=[ {
   "next" : 2,
   "postedAt" : 5,
-  "feedId" : 1.46581298050294517310021547018550336360931396484375,
   "rejected" : true,
   "replyId" : 6.02745618307040320615897144307382404804229736328125,
   "warning" : true,
@@ -214,7 +213,7 @@ open class CommentsAPI {
     "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
+    "tweetCount" : 5,
     "bio" : "bio",
     "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
     "userName" : "userName",
@@ -229,11 +228,11 @@ open class CommentsAPI {
     "profileImageUrl" : "profileImageUrl",
     "followerCount" : 1,
     "muted" : true
-  }
+  },
+  "tweetId" : 1.46581298050294517310021547018550336360931396484375
 }, {
   "next" : 2,
   "postedAt" : 5,
-  "feedId" : 1.46581298050294517310021547018550336360931396484375,
   "rejected" : true,
   "replyId" : 6.02745618307040320615897144307382404804229736328125,
   "warning" : true,
@@ -248,7 +247,7 @@ open class CommentsAPI {
     "userStatus" : "normally",
     "displayName" : "displayName",
     "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
+    "tweetCount" : 5,
     "bio" : "bio",
     "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
     "userName" : "userName",
@@ -263,10 +262,11 @@ open class CommentsAPI {
     "profileImageUrl" : "profileImageUrl",
     "followerCount" : 1,
     "muted" : true
-  }
+  },
+  "tweetId" : 1.46581298050294517310021547018550336360931396484375
 } ]}]
      
-     - parameter id: (query) Feed identifier. 
+     - parameter id: (query) Tweet identifier. 
      - parameter since: (query) Filters comments which started on since or later. (optional)
      - parameter offset: (query) The offset of comments. By default the value is 0. (optional)
      - parameter count: (query) Maximum number of comments returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
@@ -293,7 +293,7 @@ open class CommentsAPI {
     }
 
     /**
-     Create a comment on a feed
+     Create a comment on a tweet
      
      - parameter body: (body)  
      - parameter completion: completion handler to receive the data and the error objects
@@ -305,7 +305,7 @@ open class CommentsAPI {
     }
 
     /**
-     Create a comment on a feed
+     Create a comment on a tweet
      
      - parameter body: (body)  
      - returns: Observable<CommentCreated>
@@ -325,7 +325,7 @@ open class CommentsAPI {
     }
 
     /**
-     Create a comment on a feed
+     Create a comment on a tweet
      - POST /comments
      - examples: [{contentType=application/json, example={
   "id" : 0.80082819046101150206595775671303272247314453125

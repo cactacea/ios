@@ -13,7 +13,7 @@ open class Comment: Codable {
 
     public var id: Int64
     public var replyId: Int64?
-    public var feedId: Int64
+    public var tweetId: Int64
     public var message: String
     public var user: User
     public var likeCount: Int64
@@ -24,10 +24,10 @@ open class Comment: Codable {
 
 
     
-    public init(id: Int64, replyId: Int64?, feedId: Int64, message: String, user: User, likeCount: Int64, warning: Bool, rejected: Bool, postedAt: Int64, next: Int64) {
+    public init(id: Int64, replyId: Int64?, tweetId: Int64, message: String, user: User, likeCount: Int64, warning: Bool, rejected: Bool, postedAt: Int64, next: Int64) {
         self.id = id
         self.replyId = replyId
-        self.feedId = feedId
+        self.tweetId = tweetId
         self.message = message
         self.user = user
         self.likeCount = likeCount
@@ -46,7 +46,7 @@ open class Comment: Codable {
 
         try container.encode(id, forKey: "id")
         try container.encodeIfPresent(replyId, forKey: "replyId")
-        try container.encode(feedId, forKey: "feedId")
+        try container.encode(tweetId, forKey: "tweetId")
         try container.encode(message, forKey: "message")
         try container.encode(user, forKey: "user")
         try container.encode(likeCount, forKey: "likeCount")
@@ -63,7 +63,7 @@ open class Comment: Codable {
 
         id = try container.decode(Int64.self, forKey: "id")
         replyId = try container.decodeIfPresent(Int64.self, forKey: "replyId")
-        feedId = try container.decode(Int64.self, forKey: "feedId")
+        tweetId = try container.decode(Int64.self, forKey: "tweetId")
         message = try container.decode(String.self, forKey: "message")
         user = try container.decode(User.self, forKey: "user")
         likeCount = try container.decode(Int64.self, forKey: "likeCount")

@@ -286,7 +286,7 @@ open class UsersAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -309,7 +309,7 @@ open class UsersAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -397,7 +397,7 @@ open class UsersAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -504,7 +504,7 @@ open class UsersAPI {
       "userStatus" : "normally",
       "displayName" : "displayName",
       "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-      "feedCount" : 5,
+      "tweetCount" : 5,
       "bio" : "bio",
       "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
       "userName" : "userName",
@@ -623,7 +623,7 @@ open class UsersAPI {
       "userStatus" : "normally",
       "displayName" : "displayName",
       "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-      "feedCount" : 5,
+      "tweetCount" : 5,
       "bio" : "bio",
       "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
       "userName" : "userName",
@@ -681,7 +681,7 @@ open class UsersAPI {
       "userStatus" : "normally",
       "displayName" : "displayName",
       "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-      "feedCount" : 5,
+      "tweetCount" : 5,
       "bio" : "bio",
       "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
       "userName" : "userName",
@@ -726,368 +726,6 @@ open class UsersAPI {
         
 
         let requestBuilder: RequestBuilder<[Channel]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-     Get feeds list an user posted
-     
-     - parameter id: (path) User Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func findUserFeeds(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
-        findUserFeedsWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-    /**
-     Get feeds list an user posted
-     
-     - parameter id: (path) User Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<[Feed]>
-     */
-    open class func findUserFeeds(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Feed]> {
-        return Observable.create { observer -> Disposable in
-            findUserFeeds(id: id, since: since, offset: offset, count: count) { data, error in
-                if let error = error {
-                    observer.on(.error(error))
-                } else {
-                    observer.on(.next(data!))
-                }
-                observer.on(.completed)
-            }
-            return Disposables.create()
-        }
-    }
-
-    /**
-     Get feeds list an user posted
-     - GET /users/{id}/feeds
-     - examples: [{contentType=application/json, example=[ {
-  "next" : 3,
-  "postedAt" : 9,
-  "rejected" : true,
-  "warning" : true,
-  "likeCount" : 2,
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "message" : "message",
-  "mediums" : [ {
-    "size" : 5,
-    "rejected" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "warning" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  }, {
-    "size" : 5,
-    "rejected" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "warning" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  } ],
-  "user" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 3,
-    "followCount" : 6,
-    "friendCount" : 5,
-    "userStatus" : "normally",
-    "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
-    "bio" : "bio",
-    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
-    "userName" : "userName",
-    "follow" : true,
-    "friendRequestInProgress" : true,
-    "blocked" : true,
-    "web" : "web",
-    "isFriend" : true,
-    "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1,
-    "muted" : true
-  },
-  "liked" : true,
-  "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
-}, {
-  "next" : 3,
-  "postedAt" : 9,
-  "rejected" : true,
-  "warning" : true,
-  "likeCount" : 2,
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "message" : "message",
-  "mediums" : [ {
-    "size" : 5,
-    "rejected" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "warning" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  }, {
-    "size" : 5,
-    "rejected" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "warning" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  } ],
-  "user" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 3,
-    "followCount" : 6,
-    "friendCount" : 5,
-    "userStatus" : "normally",
-    "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
-    "bio" : "bio",
-    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
-    "userName" : "userName",
-    "follow" : true,
-    "friendRequestInProgress" : true,
-    "blocked" : true,
-    "web" : "web",
-    "isFriend" : true,
-    "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1,
-    "muted" : true
-  },
-  "liked" : true,
-  "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
-} ]}]
-     
-     - parameter id: (path) User Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of feeds returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-
-     - returns: RequestBuilder<[Feed]> 
-     */
-    open class func findUserFeedsWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
-        var path = "/users/{id}/feeds"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "since": since, 
-            "offset": offset, 
-            "count": count
-        ])
-        
-
-        let requestBuilder: RequestBuilder<[Feed]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-     Get user's liked feeds
-     
-     - parameter id: (path) User Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - parameter completion: completion handler to receive the data and the error objects
-     */
-    open class func findUserFeedsLiked(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Feed]?,_ error: Error?) -> Void)) {
-        findUserFeedsLikedWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
-            completion(response?.body, error);
-        }
-    }
-
-    /**
-     Get user's liked feeds
-     
-     - parameter id: (path) User Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-     - returns: Observable<[Feed]>
-     */
-    open class func findUserFeedsLiked(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Feed]> {
-        return Observable.create { observer -> Disposable in
-            findUserFeedsLiked(id: id, since: since, offset: offset, count: count) { data, error in
-                if let error = error {
-                    observer.on(.error(error))
-                } else {
-                    observer.on(.next(data!))
-                }
-                observer.on(.completed)
-            }
-            return Disposables.create()
-        }
-    }
-
-    /**
-     Get user's liked feeds
-     - GET /users/{id}/likes
-     - examples: [{contentType=application/json, example=[ {
-  "next" : 3,
-  "postedAt" : 9,
-  "rejected" : true,
-  "warning" : true,
-  "likeCount" : 2,
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "message" : "message",
-  "mediums" : [ {
-    "size" : 5,
-    "rejected" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "warning" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  }, {
-    "size" : 5,
-    "rejected" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "warning" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  } ],
-  "user" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 3,
-    "followCount" : 6,
-    "friendCount" : 5,
-    "userStatus" : "normally",
-    "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
-    "bio" : "bio",
-    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
-    "userName" : "userName",
-    "follow" : true,
-    "friendRequestInProgress" : true,
-    "blocked" : true,
-    "web" : "web",
-    "isFriend" : true,
-    "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1,
-    "muted" : true
-  },
-  "liked" : true,
-  "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
-}, {
-  "next" : 3,
-  "postedAt" : 9,
-  "rejected" : true,
-  "warning" : true,
-  "likeCount" : 2,
-  "id" : 0.80082819046101150206595775671303272247314453125,
-  "message" : "message",
-  "mediums" : [ {
-    "size" : 5,
-    "rejected" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "warning" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  }, {
-    "size" : 5,
-    "rejected" : true,
-    "width" : 1,
-    "mediumType" : "image",
-    "warning" : true,
-    "id" : 6.02745618307040320615897144307382404804229736328125,
-    "uri" : "uri",
-    "height" : 5,
-    "thumbnailUrl" : "thumbnailUrl"
-  } ],
-  "user" : {
-    "birthday" : 2.3021358869347654518833223846741020679473876953125,
-    "next" : 3,
-    "followCount" : 6,
-    "friendCount" : 5,
-    "userStatus" : "normally",
-    "displayName" : "displayName",
-    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-    "feedCount" : 5,
-    "bio" : "bio",
-    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
-    "userName" : "userName",
-    "follow" : true,
-    "friendRequestInProgress" : true,
-    "blocked" : true,
-    "web" : "web",
-    "isFriend" : true,
-    "location" : "location",
-    "id" : 0.80082819046101150206595775671303272247314453125,
-    "isFollower" : true,
-    "profileImageUrl" : "profileImageUrl",
-    "followerCount" : 1,
-    "muted" : true
-  },
-  "liked" : true,
-  "tags" : [ "tags", "tags" ],
-  "commentCount" : 7
-} ]}]
-     
-     - parameter id: (path) User Identifier. 
-     - parameter since: (query) Filters feeds which started on since or later. (optional)
-     - parameter offset: (query) The offset of feeds. By default the value is 0. (optional)
-     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
-
-     - returns: RequestBuilder<[Feed]> 
-     */
-    open class func findUserFeedsLikedWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Feed]> {
-        var path = "/users/{id}/likes"
-        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
-        let URLString = CactaceaAPI.basePath + path
-        let parameters: [String:Any]? = nil
-
-        let url = NSURLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
-            "since": since, 
-            "offset": offset, 
-            "count": count
-        ])
-        
-
-        let requestBuilder: RequestBuilder<[Feed]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
@@ -1143,7 +781,7 @@ open class UsersAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -1166,7 +804,7 @@ open class UsersAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -1262,7 +900,7 @@ open class UsersAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -1285,7 +923,7 @@ open class UsersAPI {
   "userStatus" : "normally",
   "displayName" : "displayName",
   "joinedAt" : 7.061401241503109105224211816675961017608642578125,
-  "feedCount" : 5,
+  "tweetCount" : 5,
   "bio" : "bio",
   "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
   "userName" : "userName",
@@ -1384,6 +1022,368 @@ open class UsersAPI {
 
 
         let requestBuilder: RequestBuilder<UserStatus>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get tweets list an user posted
+     
+     - parameter id: (path) User Identifier. 
+     - parameter since: (query) Filters tweets which started on since or later. (optional)
+     - parameter offset: (query) The offset of tweets. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of tweets returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func findUserTweets(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Tweet]?,_ error: Error?) -> Void)) {
+        findUserTweetsWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+    /**
+     Get tweets list an user posted
+     
+     - parameter id: (path) User Identifier. 
+     - parameter since: (query) Filters tweets which started on since or later. (optional)
+     - parameter offset: (query) The offset of tweets. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of tweets returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - returns: Observable<[Tweet]>
+     */
+    open class func findUserTweets(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Tweet]> {
+        return Observable.create { observer -> Disposable in
+            findUserTweets(id: id, since: since, offset: offset, count: count) { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Get tweets list an user posted
+     - GET /users/{id}/tweets
+     - examples: [{contentType=application/json, example=[ {
+  "next" : 3,
+  "postedAt" : 9,
+  "rejected" : true,
+  "warning" : true,
+  "likeCount" : 2,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : "message",
+  "mediums" : [ {
+    "size" : 5,
+    "rejected" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "warning" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  }, {
+    "size" : 5,
+    "rejected" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "warning" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  } ],
+  "user" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 3,
+    "followCount" : 6,
+    "friendCount" : 5,
+    "userStatus" : "normally",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "tweetCount" : 5,
+    "bio" : "bio",
+    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+    "userName" : "userName",
+    "follow" : true,
+    "friendRequestInProgress" : true,
+    "blocked" : true,
+    "web" : "web",
+    "isFriend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1,
+    "muted" : true
+  },
+  "liked" : true,
+  "tags" : [ "tags", "tags" ],
+  "commentCount" : 7
+}, {
+  "next" : 3,
+  "postedAt" : 9,
+  "rejected" : true,
+  "warning" : true,
+  "likeCount" : 2,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : "message",
+  "mediums" : [ {
+    "size" : 5,
+    "rejected" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "warning" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  }, {
+    "size" : 5,
+    "rejected" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "warning" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  } ],
+  "user" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 3,
+    "followCount" : 6,
+    "friendCount" : 5,
+    "userStatus" : "normally",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "tweetCount" : 5,
+    "bio" : "bio",
+    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+    "userName" : "userName",
+    "follow" : true,
+    "friendRequestInProgress" : true,
+    "blocked" : true,
+    "web" : "web",
+    "isFriend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1,
+    "muted" : true
+  },
+  "liked" : true,
+  "tags" : [ "tags", "tags" ],
+  "commentCount" : 7
+} ]}]
+     
+     - parameter id: (path) User Identifier. 
+     - parameter since: (query) Filters tweets which started on since or later. (optional)
+     - parameter offset: (query) The offset of tweets. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of tweets returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+
+     - returns: RequestBuilder<[Tweet]> 
+     */
+    open class func findUserTweetsWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Tweet]> {
+        var path = "/users/{id}/tweets"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = CactaceaAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "since": since, 
+            "offset": offset, 
+            "count": count
+        ])
+        
+
+        let requestBuilder: RequestBuilder<[Tweet]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get user's liked tweets
+     
+     - parameter id: (path) User Identifier. 
+     - parameter since: (query) Filters tweets which started on since or later. (optional)
+     - parameter offset: (query) The offset of tweets. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func findUserTweetsLiked(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil, completion: @escaping ((_ data: [Tweet]?,_ error: Error?) -> Void)) {
+        findUserTweetsLikedWithRequestBuilder(id: id, since: since, offset: offset, count: count).execute { (response, error) -> Void in
+            completion(response?.body, error);
+        }
+    }
+
+    /**
+     Get user's liked tweets
+     
+     - parameter id: (path) User Identifier. 
+     - parameter since: (query) Filters tweets which started on since or later. (optional)
+     - parameter offset: (query) The offset of tweets. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+     - returns: Observable<[Tweet]>
+     */
+    open class func findUserTweetsLiked(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> Observable<[Tweet]> {
+        return Observable.create { observer -> Disposable in
+            findUserTweetsLiked(id: id, since: since, offset: offset, count: count) { data, error in
+                if let error = error {
+                    observer.on(.error(error))
+                } else {
+                    observer.on(.next(data!))
+                }
+                observer.on(.completed)
+            }
+            return Disposables.create()
+        }
+    }
+
+    /**
+     Get user's liked tweets
+     - GET /users/{id}/likes
+     - examples: [{contentType=application/json, example=[ {
+  "next" : 3,
+  "postedAt" : 9,
+  "rejected" : true,
+  "warning" : true,
+  "likeCount" : 2,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : "message",
+  "mediums" : [ {
+    "size" : 5,
+    "rejected" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "warning" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  }, {
+    "size" : 5,
+    "rejected" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "warning" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  } ],
+  "user" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 3,
+    "followCount" : 6,
+    "friendCount" : 5,
+    "userStatus" : "normally",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "tweetCount" : 5,
+    "bio" : "bio",
+    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+    "userName" : "userName",
+    "follow" : true,
+    "friendRequestInProgress" : true,
+    "blocked" : true,
+    "web" : "web",
+    "isFriend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1,
+    "muted" : true
+  },
+  "liked" : true,
+  "tags" : [ "tags", "tags" ],
+  "commentCount" : 7
+}, {
+  "next" : 3,
+  "postedAt" : 9,
+  "rejected" : true,
+  "warning" : true,
+  "likeCount" : 2,
+  "id" : 0.80082819046101150206595775671303272247314453125,
+  "message" : "message",
+  "mediums" : [ {
+    "size" : 5,
+    "rejected" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "warning" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  }, {
+    "size" : 5,
+    "rejected" : true,
+    "width" : 1,
+    "mediumType" : "image",
+    "warning" : true,
+    "id" : 6.02745618307040320615897144307382404804229736328125,
+    "uri" : "uri",
+    "height" : 5,
+    "thumbnailUrl" : "thumbnailUrl"
+  } ],
+  "user" : {
+    "birthday" : 2.3021358869347654518833223846741020679473876953125,
+    "next" : 3,
+    "followCount" : 6,
+    "friendCount" : 5,
+    "userStatus" : "normally",
+    "displayName" : "displayName",
+    "joinedAt" : 7.061401241503109105224211816675961017608642578125,
+    "tweetCount" : 5,
+    "bio" : "bio",
+    "signedOutAt" : 9.301444243932575517419536481611430644989013671875,
+    "userName" : "userName",
+    "follow" : true,
+    "friendRequestInProgress" : true,
+    "blocked" : true,
+    "web" : "web",
+    "isFriend" : true,
+    "location" : "location",
+    "id" : 0.80082819046101150206595775671303272247314453125,
+    "isFollower" : true,
+    "profileImageUrl" : "profileImageUrl",
+    "followerCount" : 1,
+    "muted" : true
+  },
+  "liked" : true,
+  "tags" : [ "tags", "tags" ],
+  "commentCount" : 7
+} ]}]
+     
+     - parameter id: (path) User Identifier. 
+     - parameter since: (query) Filters tweets which started on since or later. (optional)
+     - parameter offset: (query) The offset of tweets. By default the value is 0. (optional)
+     - parameter count: (query) Maximum number of entries returned on one result page. By default the value is 20 entries. The page size can never be larger than 50. (optional)
+
+     - returns: RequestBuilder<[Tweet]> 
+     */
+    open class func findUserTweetsLikedWithRequestBuilder(id: Int64, since: Int64? = nil, offset: Int64? = nil, count: Int64? = nil) -> RequestBuilder<[Tweet]> {
+        var path = "/users/{id}/likes"
+        path = path.replacingOccurrences(of: "{id}", with: "\(id)", options: .literal, range: nil)
+        let URLString = CactaceaAPI.basePath + path
+        let parameters: [String:Any]? = nil
+
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "since": since, 
+            "offset": offset, 
+            "count": count
+        ])
+        
+
+        let requestBuilder: RequestBuilder<[Tweet]>.Type = CactaceaAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
